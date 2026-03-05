@@ -227,7 +227,7 @@ if(SERVER)then
 			org.stamina[1] = math.min(org.stamina[1], 50 / poison_potency)
 			org.o2[1] = math.min(org.o2[1], org.o2.range / poison_potency)
 			org.disorientation = math.max(org.disorientation, 10 * poison_potency)
-			org.pulse = math.max(org.pulse, 120 + 10 * poison_potency)
+			//org.pulse = math.max(org.pulse, 120 + 10 * poison_potency)
 		end
 
 		if((poison_start_time + (90 / poison_potency)) < CurTime())then
