@@ -113,7 +113,7 @@ function HGAddView(ply, origin, angles, velLen)
 		
 		camera_position_addition[1] = 0
 		camera_position_addition[2] = 0
-		camera_position_addition[3] = (math.sin(breathing_amount)) * 0.5
+		camera_position_addition[3] = (math.sin(breathing_amount + math.pi)) * 0.5
 
 		local anga2 = ply:GetBoneMatrix(ply:LookupBone("ValveBiped.Bip01_Spine")):GetAngles()---(-angles)
 		anga2:RotateAroundAxis(anga2:Right(), 90)
