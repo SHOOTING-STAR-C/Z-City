@@ -1146,7 +1146,7 @@ local IsValid = IsValid
 --//
 --\\ flashlight custom switch
 	hook.Add("PlayerSwitchFlashlight", "removeflashlights", function(ply, enabled)
-		if ply.PlayerClassName == "Combine" or ply.PlayerClassName == "furry" then return end --!! TODO: CLASS.NoFlashLight boolean
+		if ply.PlayerClassName == "Combine" or ply.PlayerClassName == "furry" then return false end --!! TODO: CLASS.NoFlashLight boolean
 
 		local wep = ply:GetActiveWeapon()
 
