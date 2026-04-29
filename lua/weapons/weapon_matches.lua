@@ -3,7 +3,7 @@ if SERVER then
 end
 
 if CLIENT then
-    SWEP.PrintName = "Match Box"
+    SWEP.PrintName = "火柴盒"
     SWEP.Slot = 3
     SWEP.SlotPos = 5
     SWEP.DrawAmmo = false

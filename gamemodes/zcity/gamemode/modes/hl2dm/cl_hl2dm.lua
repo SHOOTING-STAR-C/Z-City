@@ -10,9 +10,9 @@ end)
 
 local teams = {
 	[0] = {
-		objective = "Kill all combines and survive.",
-		name = "a Rebel",
-		name_refugee = "the Refugee",
+		objective = "击杀所有联合军并生存下来。",
+		name = "反抗军",
+		name_refugee = "难民",
 		color1 = Color(230,100,5),
 		color2 = Color(210,80,0),
 		color3 = Color(25, 110, 25),
@@ -20,10 +20,10 @@ local teams = {
 		color_subrole = Color(180, 15, 15),
 	},
 	[1] = {
-        objective = "Destroy all rebel forces.",
-        name = "a Combine Soldier",
-        name_elite = "the Elite Combine Soldier",
-        name_shotgunner = "the Combine Shotgunner",
+        objective = "消灭所有反抗军。",
+        name = "联合军士兵",
+        name_elite = "精英联合军士兵",
+        name_shotgunner = "联合军霰弹枪手",
         color1 = Color(0, 200, 220), -- самый
         color2 = Color(0, 180, 200),
         color3 = Color(180, 15, 15),
@@ -53,7 +53,7 @@ function MODE:HUDPaint()
     local role = lply:GetNWString("PlayerRole")
     local team_data = teams[team_id]
 
-    draw.SimpleText("ZBattle | Half-Life 2 Deathmatch", "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0, 162, 255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    draw.SimpleText("ZBattle | 半条命2死斗", "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0, 162, 255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 	--; Любимое ООП шарика
     local role_data = {
@@ -61,10 +61,10 @@ function MODE:HUDPaint()
         color = team_data.color1,
         objective = team_data.objective
     }
-    
+
     role_data.color.a = 255 * fade
 
-    draw.SimpleText("You are " .. role_data.name, "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.5, role_data.color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    draw.SimpleText("你是" .. role_data.name, "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.5, role_data.color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
     local objective_color = team_data.color2
 
@@ -77,7 +77,7 @@ function MODE:HUDPaint()
 		surface.SetDrawColor(255, 255, 255, math.random(175, 255) * fade / 2)
 		surface.DrawTexturedRect(sw * 0.25, sh * 0.44 - ScreenScale(15), sw / 2, ScreenScale(30))
 
-		draw.SimpleText("SOMEWHERE IN PLUVTOWN", "ZB_ScrappersLarge", sw / 2, sh * 0.44 - ScreenScale(2), Color(0, 0, 0, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText("普卢夫镇的某处", "ZB_ScrappersLarge", sw / 2, sh * 0.44 - ScreenScale(2), Color(0, 0, 0, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 end
 
@@ -91,7 +91,7 @@ hook.Add("radialOptions", "CMB_Airstrike", function()
 				net.Start("ZB_RequestAirStrike") 
 				net.SendToServer()
 			end,
-			"Request Airstrike"
+			"请求空袭"
 		}
 		hg.radialOptions[#hg.radialOptions + 1] = tbl
     end
@@ -163,7 +163,7 @@ CreateEndMenu = function()
 	--hmcdEndMenu:SetBackgroundColor(colGray)
 	hmcdEndMenu:MakePopup()
 	hmcdEndMenu:SetKeyboardInputEnabled(false)
-	hmcdEndMenu:ShowCloseButton(false)
+	hmcdEndMenu:Show关闭Button(false)
 
 	local closebutton = vgui.Create("DButton",hmcdEndMenu)
 	closebutton:SetPos(5,5)
@@ -172,7 +172,7 @@ CreateEndMenu = function()
 	
 	closebutton.DoClick = function()
 		if IsValid(hmcdEndMenu) then
-			hmcdEndMenu:Close()
+			hmcdEndMenu:关闭()
 			hmcdEndMenu = nil
 		end
 	end
@@ -182,9 +182,9 @@ CreateEndMenu = function()
         surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
 		surface.SetFont( "ZB_InterfaceMedium" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Close")
+		local lengthX, lengthY = surface.GetTextSize("关闭")
 		surface.SetTextPos( lengthX - lengthX/1.1, 4)
-		surface.DrawText("Close")
+		surface.DrawText("关闭")
 	end
 
     hmcdEndMenu.Paint = function(self,w,h)
@@ -192,9 +192,9 @@ CreateEndMenu = function()
 
 		surface.SetFont( "ZB_InterfaceMediumLarge" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Players:")
+		local lengthX, lengthY = surface.GetTextSize("玩家:")
 		surface.SetTextPos(w / 2 - lengthX/2,20)
-		surface.DrawText("Players:")
+		surface.DrawText("玩家:")
 
 		surface.SetDrawColor( 255, 0, 0, 128)
         surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
@@ -227,33 +227,33 @@ CreateEndMenu = function()
 
             local col = ply:GetPlayerColor():ToColor()
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
-			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "已离开..." )
 			
 			surface.SetTextColor(0,0,0,255)
 			surface.SetTextPos(w / 2 + 1,h/2 - lengthY/2 + 1)
-			surface.DrawText(ply:GetPlayerName() or "He quited...")
+			surface.DrawText(ply:GetPlayerName() or "已离开...")
 
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
 			surface.SetTextPos(w / 2,h/2 - lengthY/2)
-			surface.DrawText(ply:GetPlayerName() or "He quited...")
+			surface.DrawText(ply:GetPlayerName() or "已离开...")
 
             
 			local col = colSpect2
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "已离开..." )
 			surface.SetTextPos(15,h/2 - lengthY/2)
-			surface.DrawText((ply:Name() .. (not ply:Alive() and " - died" or "")) or "He quited...")
+			surface.DrawText((ply:Name() .. (not ply:Alive() and " - 死亡" or "")) or "已离开...")
 
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize( ply:Frags() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:Frags() or "已离开..." )
 			surface.SetTextPos(w - lengthX -15,h/2 - lengthY/2)
-			surface.DrawText(ply:Frags() or "He quited...")
+			surface.DrawText(ply:Frags() or "已离开...")
 		end
 
 		function but:DoClick()
-			if ply:IsBot() then chat.AddText(Color(255,0,0), "no, you can't") return end
+			if ply:IsBot() then chat.AddText(Color(255,0,0), "不行，你不能这样做") return end
 			gui.OpenURL("https://steamcommunity.com/profiles/"..ply:SteamID64())
 		end
 

@@ -3,7 +3,7 @@ if(SERVER)then
 end
 
 SWEP.Base = "weapon_base"
-SWEP.PrintName = "Walkie-talkie"
+SWEP.PrintName = "对讲机"
 SWEP.Instructions = "Use the walkie-talkie to communicate with other people in the 4km radius. Must be on the same frequency."
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
@@ -119,7 +119,7 @@ if SERVER then
 				if input:GetPos():DistToSqr(output:GetPos()) < 600000 and not output.organism.otrub and not input.organism.otrub then
 					return true
 				else
-                    input:ChatPrint("Walkie Talkie: " .. text)
+                    input:ChatPrint("对讲机: " .. text)
 
 					return false
 				end

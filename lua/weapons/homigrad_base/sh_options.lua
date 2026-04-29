@@ -14,7 +14,7 @@ if CLIENT then
 	    local wep = ply:GetActiveWeapon()
 	    local type_ = math.Round(args[1])
 	    if wep and ishgweapon(wep) and (wep:Clip1() == 0 or wep.AllwaysChangeAmmo) and wep:CanUse() and wep.AmmoTypes and wep.AmmoTypes[type_] then
-	        ply:ChatPrint("Changed ammotype to: " .. wep.AmmoTypes[type_][1])
+	        ply:ChatPrint("弹药类型已切换为: " .. wep.AmmoTypes[type_][1])
 	        net.Start("changeAmmoType")
 	        net.WriteEntity(wep)
 	        net.WriteInt(type_, 4)

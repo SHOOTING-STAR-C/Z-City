@@ -379,9 +379,9 @@ local function CreateRadialMenu(options_arg, bAutoClose)
 			local col = lply:GetPlayerColor():ToColor()
 			draw.SimpleText(lply:GetPlayerName(),"HomigradFontGigantoNormous",scrW * 0.02 * viewLerp,scrH * 0.04, col, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 			draw.SimpleText( ( (lply.role and lply.role.name) or ""),"HomigradFontGigantoNormous" ,scrW * 0.02 * viewLerp,scrH * 0.095, lply.role and lply.role.color or incoentCol, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-			local walkBtn = input.LookupBinding("+walk") or "BIND YOUR +WALK KEY PLEASE. WRITE \"bind alt +walk\" IN CONSOLE FOR THE LOVE OF GOD"
-			draw.SimpleText(walkBtn .. " | Misc", "HomigradFont", scrW * (0.981 + (0.04 * (1-viewLerp))),scrH * 0.9615, colBack, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
-			draw.SimpleText(walkBtn .. " | Misc", "HomigradFont", scrW * (0.98 + (0.04 * (1-viewLerp))),scrH * 0.96, colWhite, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+			local walkBtn = input.LookupBinding("+walk") or "请绑定 +walk 键，在控制台输入 bind alt +walk"
+			draw.SimpleText(walkBtn .. " | 杂项", "HomigradFont", scrW * (0.981 + (0.04 * (1-viewLerp))),scrH * 0.9615, colBack, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+			draw.SimpleText(walkBtn .. " | 杂项", "HomigradFont", scrW * (0.98 + (0.04 * (1-viewLerp))),scrH * 0.96, colWhite, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 		end
 	end
 end
@@ -524,7 +524,7 @@ end
 hook.Add("radialOptions", "77", function()
 	local organism = lply.organism or {}
 	if not organism.otrub and IsValid(lply:GetActiveWeapon()) and lply:GetActiveWeapon():GetClass() ~= "weapon_hands_sh" and lply:KeyDown(IN_WALK) then
-		local tbl = {dropWeapon, "Drop Weapon"}
+		local tbl = {dropWeapon, "丢弃武器"}
 		hg.radialOptions[#hg.radialOptions + 1] = tbl
 	end
 end)
@@ -539,8 +539,8 @@ local randomGestures = {
 	--"agree",
 	"becon",
 	{"point", function() RunConsoleCommand("hg_hand_gesture", "point") end},
-	{"fuck you", function() RunConsoleCommand("hg_hand_gesture", "fuckyou") end},
-	{"thumb_up", function() RunConsoleCommand("hg_hand_gesture" , "thumb_up") end},
+	{"竖中指", function() RunConsoleCommand("hg_hand_gesture", "fuckyou") end},
+	{"竖拇指", function() RunConsoleCommand("hg_hand_gesture" , "thumb_up") end},
 }
 
 concommand.Add("hg_randomgesture",function()
@@ -580,7 +580,7 @@ hook.Add("radialOptions", "7", function()
 				end
 				CreateRadialMenu(commands)
 			end
-		end, "Do Gesture\nRMB - Menu"}
+		end, "做手势\n右键 - 菜单"}
         hg.radialOptions[#hg.radialOptions + 1] = tbl
     end
 end)
@@ -742,11 +742,3 @@ hook.Add("HUDPaint","afflictionlist",function()
 	end--]]
 end)
 
--- Now playable :steamhappy:
--- No. fuc kyouy
-if game.SinglePlayer() then
-	hook.Add("HUDPaint","Exit the singleplayer",function()
-		draw.SimpleText("Z-City is not meant to be played in singleplayer, in map selection menu change SINGLEPLAYER (green button top right corner) to 2 players or any.", "HomigradFontMedium", ScrW() / 2,ScrH() / 2, nil, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-		draw.SimpleText("A lot of stuff won't work and we won't provide any fixes to singleplayer EVER", "HomigradFontMedium", ScrW() / 2,ScrH() * 7 / 12, nil,TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-	end)
-end

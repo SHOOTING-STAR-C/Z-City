@@ -59,10 +59,10 @@ function MODE:HUDPaint()
     
 
     local isEventer = EventersList[LocalPlayer():SteamID()]
-    local Rolename = isEventer and "Eventer" or GetGlobalString("ZB_EventRole","Player")
+    local Rolename = isEventer and "活动组织者" or GetGlobalString("ZB_EventRole","玩家")
     local ColorRole = isEventer and eventer.color1 or fighter.color1
     ColorRole.a = 255 * fade
-    draw.SimpleText("You are a "..Rolename , "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.5, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    draw.SimpleText("你是"..Rolename , "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.5, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
     local Objective = GetGlobalString("ZB_EventObjective","")
     local ColorObj = isEventer and eventer.color1 or fighter.color1
@@ -147,14 +147,14 @@ CreateEndMenu = function()
         surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
 		surface.SetFont( "ZB_InterfaceMedium" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Close")
+		local lengthX, lengthY = surface.GetTextSize("关闭")
 		surface.SetTextPos( lengthX - lengthX/1.1, 4)
-		surface.DrawText("Close")
+		surface.DrawText("关闭")
 	end
 
     hmcdEndMenu.PaintOver = function(self,w,h)
 
-		local txt = (wonply and wonply:GetPlayerName() or "Nobody").." won!"
+		local txt = (wonply and wonply:GetPlayerName() or "无人").." 获胜！"
 		surface.SetFont( "ZB_InterfaceMediumLarge" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
 		local lengthX, lengthY = surface.GetTextSize(txt)
@@ -184,33 +184,33 @@ CreateEndMenu = function()
 
             local col = ply:GetPlayerColor():ToColor()
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
-			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "已离开..." )
 			
 			surface.SetTextColor(0,0,0,255)
 			surface.SetTextPos(w / 2 + 1,h/2 - lengthY/2 + 1)
-			surface.DrawText(ply:GetPlayerName() or "He quited...")
+			surface.DrawText(ply:GetPlayerName() or "已离开...")
 
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
 			surface.SetTextPos(w / 2,h/2 - lengthY/2)
-			surface.DrawText(ply:GetPlayerName() or "He quited...")
+			surface.DrawText(ply:GetPlayerName() or "已离开...")
 
             
 			local col = colSpect2
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "已离开..." )
 			surface.SetTextPos(15,h/2 - lengthY/2)
-			surface.DrawText((ply:Name() .. (not ply:Alive() and " - died" or "")) or "He quited...")
+			surface.DrawText((ply:Name() .. (not ply:Alive() and " - 死亡" or "")) or "已离开...")
 
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize( ply:Frags() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:Frags() or "已离开..." )
 			surface.SetTextPos(w - lengthX -15,h/2 - lengthY/2)
-			surface.DrawText(ply:Frags() or "He quited...")
+			surface.DrawText(ply:Frags() or "已离开...")
 		end
 
 		function but:DoClick()
-			if ply:IsBot() then chat.AddText(Color(255,0,0), "no, you can't") return end
+			if ply:IsBot() then chat.AddText(Color(255,0,0), "不行，你不能这样做") return end
 			gui.OpenURL("https://steamcommunity.com/profiles/"..ply:SteamID64())
 		end
 
@@ -248,7 +248,7 @@ local function CreateLootPollingMenu()
     
     Dynamic = 0
     LootPollingMenu = vgui.Create("ZFrame")
-    LootPollingMenu:SetTitle("Event Loot Manager")
+    LootPollingMenu:SetTitle("活动战利品管理器")
     LootPollingMenu:SetSize(700, 550)
     LootPollingMenu:Center()
     LootPollingMenu:MakePopup()
@@ -265,7 +265,7 @@ local function CreateLootPollingMenu()
         
         surface.SetFont("ZB_InterfaceMedium")
         surface.SetTextColor(textColor.r, textColor.g, textColor.b, textColor.a)
-        local text = "Event Loot Settings - " .. serverName
+        local text = "活动战利品设置 - " .. serverName
         local textW, textH = surface.GetTextSize(text)
         surface.SetTextPos(w/2 - textW/2, 10)
         surface.DrawText(text)
@@ -275,8 +275,8 @@ local function CreateLootPollingMenu()
     itemList:SetPos(20, 50)
     itemList:SetSize(660, 300)
     itemList:SetMultiSelect(false)
-    itemList:AddColumn("Weight").Width = 80
-    itemList:AddColumn("Item Class").Width = 580
+    itemList:AddColumn("权重").Width = 80
+    itemList:AddColumn("物品类别").Width = 580
     
     itemList.Paint = function(self, w, h)
         surface.SetDrawColor(30, 30, 40, 200)
@@ -328,31 +328,31 @@ local function CreateLootPollingMenu()
     
     local weightLabel = vgui.Create("DLabel", controlPanel)
     weightLabel:SetPos(15, 10)
-    weightLabel:SetText("Weight (Chance):")
+    weightLabel:SetText("权重 (概率):")
     weightLabel:SetTextColor(textColor)
     weightLabel:SizeToContents()
-    
+
     local weightEntry = vgui.Create("DNumberWang", controlPanel)
     weightEntry:SetPos(15, 35)
     weightEntry:SetSize(60, 25)
     weightEntry:SetMinMax(1, 100)
     weightEntry:SetValue(5)
-    
+
     local classLabel = vgui.Create("DLabel", controlPanel)
     classLabel:SetPos(90, 10)
-    classLabel:SetText("Item Class:")
+    classLabel:SetText("物品类别:")
     classLabel:SetTextColor(textColor)
     classLabel:SizeToContents()
-    
+
     local classEntry = vgui.Create("DTextEntry", controlPanel)
     classEntry:SetPos(90, 35)
     classEntry:SetSize(380, 25)
-    classEntry:SetPlaceholderText("weapon_name or prop_physics")
-    
+    classEntry:SetPlaceholderText("武器名称 或 prop_physics")
+
     local addButton = vgui.Create("DButton", controlPanel)
     addButton:SetPos(480, 35)
     addButton:SetSize(100, 25)
-    addButton:SetText("Add Item")
+    addButton:SetText("添加物品")
     addButton:SetTextColor(textColor)
     addButton.Paint = function(self, w, h)
         if self:IsHovered() then
@@ -361,41 +361,41 @@ local function CreateLootPollingMenu()
             surface.SetDrawColor(themeColor.r, themeColor.g, themeColor.b, 150)
         end
         surface.DrawRect(0, 0, w, h)
-        
+
         surface.SetDrawColor(accentColor.r, accentColor.g, accentColor.b, 200)
         surface.DrawOutlinedRect(0, 0, w, h, 1)
     end
-    
+
     addButton.DoClick = function()
         local weight = weightEntry:GetValue()
         local class = classEntry:GetValue()
-        
+
         if weight <= 0 or class == "" then
-            notification.AddLegacy("Please specify weight and item class", NOTIFY_ERROR, 3)
+            notification.AddLegacy("请指定权重和物品类别", NOTIFY_ERROR, 3)
             return
         end
-        
+
         net.Start("event_loot_add")
         net.WriteTable({
             weight = weight,
             class = class
         })
         net.SendToServer()
-        
+
         surface.PlaySound("buttons/button14.wav")
     end
-    
+
     local buttonPanel = vgui.Create("DPanel", LootPollingMenu)
     buttonPanel:SetPos(20, 460)
     buttonPanel:SetSize(660, 70)
     buttonPanel.Paint = function(self, w, h)
         surface.SetDrawColor(30, 30, 40, 200)
         surface.DrawRect(0, 0, w, h)
-        
+
         surface.SetDrawColor(accentColor.r, accentColor.g, accentColor.b, 100)
         surface.DrawOutlinedRect(0, 0, w, h, 1)
     end
-    
+
     local createButton = function(parent, x, y, w, h, text, color, hoverColor, clickFunc)
         local btn = vgui.Create("DButton", parent)
         btn:SetPos(x, y)
@@ -409,7 +409,7 @@ local function CreateLootPollingMenu()
                 surface.SetDrawColor(color.r, color.g, color.b, 150)
             end
             surface.DrawRect(0, 0, width, height)
-            
+
             surface.SetDrawColor(hoverColor.r, hoverColor.g, hoverColor.b, 200)
             surface.DrawOutlinedRect(0, 0, width, height, 1)
         end
@@ -419,90 +419,90 @@ local function CreateLootPollingMenu()
         end
         return btn
     end
-    
-    local removeButton = createButton(buttonPanel, 15, 20, 140, 30, "Remove Selected", 
+
+    local removeButton = createButton(buttonPanel, 15, 20, 140, 30, "移除选中",
         Color(180, 10, 10), Color(220, 30, 30),
         function()
             local selected = itemList:GetSelectedLine()
             if not selected then return end
-            
+
             local line = itemList:GetLine(selected)
             if not line or not line.ItemIndex then return end
-            
+
             net.Start("event_loot_remove")
             net.WriteUInt(line.ItemIndex, 16)
             net.SendToServer()
         end
     )
-    
-    local resetButton = createButton(buttonPanel, 505, 20, 140, 30, "Reset All", 
+
+    local resetButton = createButton(buttonPanel, 505, 20, 140, 30, "重置全部",
         Color(180, 10, 10), Color(220, 30, 30),
         function()
             if not LocalPlayer():IsAdmin() and not EventersList[LocalPlayer():SteamID()] then return end
-            
+
             Derma_Query(
-                "Are you sure you want to reset the entire loot table?",
-                "Confirmation",
-                "Yes", function()
+                "你确定要重置整个战利品表吗？",
+                "确认",
+                "是", function()
                     RunConsoleCommand("zb_event_loot_reset")
                 end,
-                "No", function() end
+                "否", function() end
             )
         end
     )
-    
-    local specialButton = createButton(buttonPanel, 165, 20, 160, 30, "Select from List", 
+
+    local specialButton = createButton(buttonPanel, 165, 20, 160, 30, "从列表选择",
         Color(80, 80, 160), Color(100, 100, 190),
         function()
             local menu = DermaMenu()
             menu:SetSkin("Default")
-            
-            local weaponSubMenu = menu:AddSubMenu("Weapons")
-            weaponSubMenu:AddOption("Pistol (USP)", function() classEntry:SetValue("weapon_hk_usp") end)
-            weaponSubMenu:AddOption("Revolver", function() classEntry:SetValue("weapon_revolver357") end)
-            weaponSubMenu:AddOption("Desert Eagle", function() classEntry:SetValue("weapon_deagle") end)
-            weaponSubMenu:AddOption("Shotgun", function() classEntry:SetValue("weapon_remington870") end)
+
+            local weaponSubMenu = menu:AddSubMenu("武器")
+            weaponSubMenu:AddOption("手枪 (USP)", function() classEntry:SetValue("weapon_hk_usp") end)
+            weaponSubMenu:AddOption("左轮手枪", function() classEntry:SetValue("weapon_revolver357") end)
+            weaponSubMenu:AddOption("沙漠之鹰", function() classEntry:SetValue("weapon_deagle") end)
+            weaponSubMenu:AddOption("霰弹枪", function() classEntry:SetValue("weapon_remington870") end)
             weaponSubMenu:AddOption("MP5", function() classEntry:SetValue("weapon_mp5") end)
             weaponSubMenu:AddOption("AKM", function() classEntry:SetValue("weapon_akm") end)
-            weaponSubMenu:AddOption("Sniper Rifle", function() classEntry:SetValue("weapon_m98b") end)
-            
-            local meleeSubMenu = menu:AddSubMenu("Melee")
-            meleeSubMenu:AddOption("Lead Pipe", function() classEntry:SetValue("weapon_leadpipe") end)
-            meleeSubMenu:AddOption("Crowbar", function() classEntry:SetValue("weapon_hg_crowbar") end)
-            meleeSubMenu:AddOption("Axe", function() classEntry:SetValue("weapon_hg_axe") end)
-            meleeSubMenu:AddOption("Machete", function() classEntry:SetValue("weapon_hatchet") end)
-            
-            local explosiveSubMenu = menu:AddSubMenu("Explosives")
-            explosiveSubMenu:AddOption("Molotov Cocktail", function() classEntry:SetValue("weapon_hg_molotov_tpik") end)
-            explosiveSubMenu:AddOption("Grenade", function() classEntry:SetValue("weapon_hg_f1_tpik") end)
+            weaponSubMenu:AddOption("狙击步枪", function() classEntry:SetValue("weapon_m98b") end)
+
+            local meleeSubMenu = menu:AddSubMenu("近战")
+            meleeSubMenu:AddOption("铅管", function() classEntry:SetValue("weapon_leadpipe") end)
+            meleeSubMenu:AddOption("撬棍", function() classEntry:SetValue("weapon_hg_crowbar") end)
+            meleeSubMenu:AddOption("斧头", function() classEntry:SetValue("weapon_hg_axe") end)
+            meleeSubMenu:AddOption("砍刀", function() classEntry:SetValue("weapon_hatchet") end)
+
+            local explosiveSubMenu = menu:AddSubMenu("爆炸物")
+            explosiveSubMenu:AddOption("燃烧瓶", function() classEntry:SetValue("weapon_hg_molotov_tpik") end)
+            explosiveSubMenu:AddOption("手榴弹", function() classEntry:SetValue("weapon_hg_f1_tpik") end)
             explosiveSubMenu:AddOption("RPG", function() classEntry:SetValue("weapon_hg_rpg") end)
-            
-            local armorSubMenu = menu:AddSubMenu("Armor")
-            armorSubMenu:AddOption("Vest", function() classEntry:SetValue("ent_armor_vest3") end)
-            armorSubMenu:AddOption("Helmet", function() classEntry:SetValue("ent_armor_helmet1") end)
-            
-            local specialSubMenu = menu:AddSubMenu("Special Items")
-            specialSubMenu:AddOption("Ammo (Random)", function() classEntry:SetValue("*ammo*") end)
-            
+
+            local armorSubMenu = menu:AddSubMenu("护甲")
+            armorSubMenu:AddOption("防弹背心", function() classEntry:SetValue("ent_armor_vest3") end)
+            armorSubMenu:AddOption("头盔", function() classEntry:SetValue("ent_armor_helmet1") end)
+
+            local specialSubMenu = menu:AddSubMenu("特殊物品")
+            specialSubMenu:AddOption("弹药 (随机)", function() classEntry:SetValue("*ammo*") end)
+
             menu:Open()
         end
     )
-    
-    local healButton = createButton(buttonPanel, 335, 20, 160, 30, "Medical", 
+
+    local healButton = createButton(buttonPanel, 335, 20, 160, 30, "医疗",
         Color(80, 160, 80), Color(100, 190, 100),
         function()
             local menu = DermaMenu()
             menu:SetSkin("Default")
-            menu:AddOption("Medkit", function() classEntry:SetValue("weapon_medkit_sh") end)
-            menu:AddOption("Bandages", function() classEntry:SetValue("weapon_bandage_sh") end)
-            menu:AddOption("Painkillers", function() classEntry:SetValue("weapon_painkillers") end)
+            menu:AddOption("医疗包", function() classEntry:SetValue("weapon_medkit_sh") end)
+            menu:AddOption("绷带", function() classEntry:SetValue("weapon_bandage_sh") end)
+            menu:AddOption("止痛药", function() classEntry:SetValue("weapon_painkillers") end)
             menu:Open()
         end
     )
-    
+
     local infoLabel = vgui.Create("DLabel", LootPollingMenu)
     infoLabel:SetPos(350, 535)
-    infoLabel:SetText("Loot table is automatically saved")
+    infoLabel:SetText("战利品表会自动保存")
     infoLabel:SetTextColor(Color(180, 180, 180))
     infoLabel:SizeToContents()
     

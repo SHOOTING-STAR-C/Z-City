@@ -52,7 +52,7 @@ hook.Add("HUDPaint", "HMCD_SubRoles_Abilities", function()
 	if(ply:Alive())then
 		if(ply.isTraitor)then
 			if(ply.SubRole == "traitor_infiltrator" or ply.SubRole == "traitor_infiltrator_soe")then
-				local text = "(HOLD)[ALT + E] Break Neck"
+				local text = "(按住)[ALT + E] 扭断脖子"
 				local tw, th = surface.GetTextSize(text)
 				local cx, cy = trace.HitPos:ToScreen().x, trace.HitPos:ToScreen().y
 				cy = cy + y_offset
@@ -72,7 +72,7 @@ hook.Add("HUDPaint", "HMCD_SubRoles_Abilities", function()
 				
 				if(IsValid(aim_ent))then
 					if(aim_ent:IsRagdoll())then
-						local text = "[ALT + R] Exchange Appearances"
+						local text = "[ALT + R] 交换外观"
 						local tw, th = surface.GetTextSize(text)
 						local cx, cy = trace.HitPos:ToScreen().x, trace.HitPos:ToScreen().y
 						
@@ -85,7 +85,7 @@ hook.Add("HUDPaint", "HMCD_SubRoles_Abilities", function()
 			
 			if(ply.SubRole == "traitor_assasin" or ply.SubRole == "traitor_assasin_soe" or ply.PlayerClassName == "sc_infiltrator")then
 				local aim_ent, other_ply, trace = MODE.GetPlayerTraceToOther(ply, nil, MODE.DisarmReach)
-				local text = "(HOLD)[ALT + E] Disarm"
+				local text = "(按住)[ALT + E] 解除武装"
 				local tw, th = surface.GetTextSize(text)
 				local cx, cy = trace.HitPos:ToScreen().x, trace.HitPos:ToScreen().y
 				cy = cy + y_offset
@@ -318,7 +318,7 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
     surface.DrawOutlinedRect(x, y, traitor_panel.width, height, 2)
     
 
-    local title = is_main and "MAIN TRAITOR" or "TRAITOR'S ASSISTANT"
+    local title = is_main and "主叛徒" or "叛徒助手"
     draw.SimpleText(title, "TraitorPanelTitle", x + traitor_panel.width/2, y + 15, 
                     traitor_panel.colors.title, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     
@@ -327,11 +327,11 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
     surface.DrawLine(x + 15, y + 30, x + traitor_panel.width - 15, y + 30)
     
 
-    draw.SimpleText("Press F4 to toggle panel", "TraitorPanelText", x + traitor_panel.width/2, y + 42, 
+    draw.SimpleText("按 F4 切换面板", "TraitorPanelText", x + traitor_panel.width/2, y + 42, 
                     Color(180, 180, 180, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     
     local word_y = y + 65
-    draw.SimpleText("Secret Words:", "TraitorPanelText", x + traitor_panel.width/2, word_y, 
+    draw.SimpleText("暗号:", "TraitorPanelText", x + traitor_panel.width/2, word_y, 
                     Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     
     word_y = word_y + 25
@@ -362,7 +362,7 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
         end
         
         if has_assistants then
-            draw.SimpleText("Your Assistants:", "TraitorPanelText", x + traitor_panel.width/2, assist_y, 
+            draw.SimpleText("你的助手:", "TraitorPanelText", x + traitor_panel.width/2, assist_y, 
                             Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             
             assist_y = assist_y + 25   
@@ -409,7 +409,7 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
                 local display_color = is_alive and color or Color(150, 150, 150)
                 display_color = Color(display_color.r, display_color.g, display_color.b, alpha)
                 
-                local status = is_alive and "" or " [DEAD]"
+                local status = is_alive and "" or " [死亡]"
 
 
                 local display_name = name
@@ -449,7 +449,7 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
             end
         else
 
-            draw.SimpleText("No assistants available", "TraitorPanelText", x + traitor_panel.width/2, assist_y, 
+            draw.SimpleText("没有可用助手", "TraitorPanelText", x + traitor_panel.width/2, assist_y, 
                             Color(150, 150, 150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
     else

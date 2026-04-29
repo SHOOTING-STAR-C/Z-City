@@ -304,11 +304,11 @@ properties.Add( "lobotomize", {
         ent = hg.RagdollOwner(ent) or ent
         
         ent.organism.brain = ent.organism.brain + 0.05
-        ply:ChatPrint("Lobotomized brain to "..math.Round(ent.organism.brain * 100).."%")
+        ply:ChatPrint("脑叶切除至 "..math.Round(ent.organism.brain * 100).."%")
         print(tostring(ply:Nick() or ply) .." has lobotomized ".. tostring(ent:Nick() or ent))
 
         if ent.organism.brain >= 0.25 and ent.organism.brain < 0.3 then
-            ply:ChatPrint("Consciousness loss on the next lobotomization!")
+            ply:ChatPrint("下次脑叶切除将失去意识！")
         end
     end 
 } )

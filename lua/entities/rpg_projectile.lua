@@ -292,7 +292,7 @@ function ENT:Use(ply)
         if not self.ExtractStarted then
             self.ExtractStarted = true
             self.ExtractingPlayer = ply
-            ply:ChatPrint("In progress")
+            ply:ChatPrint("进行中")
             
             local dots = ""
             timer.Create("RPGExtractDots_" .. self:EntIndex(), 1, 6, function()
@@ -310,7 +310,7 @@ function ENT:Use(ply)
                 end
                 
                 dots = dots .. "."
-                ply:ChatPrint("In progress" .. dots)
+                ply:ChatPrint("进行中" .. dots)
                 
                 if dots == "......" then
                     timer.Remove("RPGExtractDots_" .. self:EntIndex())

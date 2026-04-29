@@ -110,10 +110,10 @@ local escapee = Color(237, 192, 80)
 local red = Color(255, 0, 0)
 
 local winText = {
-	[0] = "Nobody won!",
-	[1] = "Pathowogen wins!",
-	[2] = "Survivors win!",
-	[3] = "Contractor wins!"
+	[0] = "无人获胜！",
+	[1] = "病原体获胜！",
+	[2] = "幸存者获胜！",
+	[3] = "承包商获胜！"
 }
 
 local winColor = {
@@ -133,8 +133,8 @@ function PANEL:Paint(w, h)
 	surface.DrawOutlinedRect(0, 0, w, h, 4)
 
 	DisableClipping(true)
-		draw.SimpleText("Status Report:", "ZB_UWUEnd2", w / 2 + 1, 0 - ScreenScale(10) + 1, shadow2, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-		draw.GlowingText("Status Report:", "ZB_UWUEnd2", w / 2, 0 - ScreenScale(10), ColorAlpha(red, 255), ColorAlpha(red, 235), ColorAlpha(red, 10), TEXT_ALIGN_CENTER)
+		draw.SimpleText("状态报告:", "ZB_UWUEnd2", w / 2 + 1, 0 - ScreenScale(10) + 1, shadow2, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.GlowingText("状态报告:", "ZB_UWUEnd2", w / 2, 0 - ScreenScale(10), ColorAlpha(red, 255), ColorAlpha(red, 235), ColorAlpha(red, 10), TEXT_ALIGN_CENTER)
 	DisableClipping(false)
 
 	local count = 0

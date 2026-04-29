@@ -5,10 +5,10 @@ local red_select = Color(192,0,0)
 DISCORD_URL = "https://discord.gg/475EmEdTgH"
 
 local Selects = {
-    {Title = "Disconnect", Func = function(luaMenu) RunConsoleCommand("disconnect") end},
-    {Title = "Main Menu", Func = function(luaMenu) gui.ActivateGameUI() luaMenu:Close() end},
+    {Title = "断开连接", Func = function(luaMenu) RunConsoleCommand("disconnect") end},
+    {Title = "主菜单", Func = function(luaMenu) gui.ActivateGameUI() luaMenu:Close() end},
     {Title = "Discord", Func = function(luaMenu) luaMenu:Close() gui.OpenURL(DISCORD_URL)  end},
-    {Title = "Traitor Role",
+    {Title = "叛徒角色",
     GamemodeOnly = true,
     CreatedFunc = function(self, parent, luaMenu)
         local btn = vgui.Create( "DLabel", self )
@@ -70,14 +70,14 @@ local Selects = {
         
     end,
     },
-    {Title = "Achievements", Func = function(luaMenu,pp) 
+    {Title = "成就", Func = function(luaMenu,pp) 
         hg.DrawAchievmentsMenu(pp)
     end},
-    {Title = "Settings", Func = function(luaMenu,pp) 
+    {Title = "设置", Func = function(luaMenu,pp) 
         hg.DrawSettings(pp) 
     end},
-    {Title = "Appearance", Func = function(luaMenu,pp) hg.CreateApperanceMenu(pp) end},
-    {Title = "Return", Func = function(luaMenu) luaMenu:Close() end},
+    {Title = "外观", Func = function(luaMenu,pp) hg.CreateApperanceMenu(pp) end},
+    {Title = "返回", Func = function(luaMenu) luaMenu:Close() end},
 }
 
 local splasheh = {
@@ -211,7 +211,7 @@ function PANEL:Init()
     zteam:DockMargin(ScreenScale(10), 0, 0, 0)
     zteam:SetFont("ZCity_Tiny")
     zteam:SetTextColor(clr_gray)
-    zteam:SetText("Authors: uzelezz, Sadsalat, \nMr.Point, Zac90, Deka, Mannytko")
+    zteam:SetText("作者: uzelezz, Sadsalat, \nMr.Point, Zac90, Deka, Mannytko")
     zteam:SetContentAlignment(4)
     zteam:SizeToContents()
 end

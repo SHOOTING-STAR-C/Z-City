@@ -3,7 +3,7 @@ local MODE = MODE
 
 MODE.base = "hmcd"
 
-MODE.PrintName = "Homicide2"
+MODE.PrintName = "杀人游戏2"
 MODE.name = "fear"
 MODE.Events = MODE.Events or {}
 MODE.StartedEvents = MODE.StartedEvents or {}

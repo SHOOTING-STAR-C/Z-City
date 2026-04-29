@@ -118,7 +118,7 @@ hook.Add( "Initialize", "LoadMapPoints", zb.CreateMapDir )
 -- pointData = { pos = Vector(), ang = Angle() } // Таблица пойнта
 COMMANDS.pointnew = {function(ply,args)
     if not args[1] then
-        ply:ChatPrint("Usage: !pointnew <pointGroup>")
+        ply:ChatPrint("用法: !pointnew <点位组>")
         return
     end
     local ang = ply:EyeAngles()
@@ -136,7 +136,7 @@ end,1,"Creates a new point on the map\nArgs - pointGroup"}
 
 COMMANDS.pointset = {function(ply,args)
     if not args[1] or not args[2] then
-        ply:ChatPrint("Usage: !pointset <pointGroup> <pointNumber>")
+        ply:ChatPrint("用法: !pointset <点位组> <点位编号>")
         return
     end
 
@@ -148,7 +148,7 @@ end,1,"Sets a point on the map\nArgs - pointGroup, pointNumber"}
 
 COMMANDS.pointremove = {function(ply,args)
     if not args[1] then
-        ply:ChatPrint("Usage: !pointremove <pointGroup> <pointNumber|*>\nUse * to remove all points")
+        ply:ChatPrint("用法: !pointremove <点位组> <点位编号|*>\n使用 * 删除所有点位")
         return
     end
 
@@ -166,7 +166,7 @@ function zb.SendPointsToPly(ply, shouldprint)
     net.Send(ply)
 
     if shouldprint then
-        ply:ChatPrint("Points: Points transferred")
+        ply:ChatPrint("点位: 点位已转移")
     end
 end
 
@@ -190,7 +190,7 @@ function zb.SendSpecificPointsToPly(ply, pointGroup, shouldprint)
         net.Send(ply)
         
         if shouldprint then
-            ply:ChatPrint("Points: Points transferred")
+            ply:ChatPrint("点位: 点位已转移")
         end
     else
         net.Broadcast()
@@ -227,7 +227,7 @@ function zb.TranslatePointsToVectors(tbl)
 end
 
 net.Receive("zb_getallpoints",function(len,ply)
-    if not ply:IsAdmin() then ply:ChatPrint("Points: Access denied") return end
+    if not ply:IsAdmin() then ply:ChatPrint("点位: 权限不足") return end
 
     zb.SendPointsToPly(ply, true)
 end)

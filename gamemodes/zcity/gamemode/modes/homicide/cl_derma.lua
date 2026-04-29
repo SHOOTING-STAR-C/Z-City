@@ -39,7 +39,7 @@ local PANEL = {}
 function PANEL:Construct()
 	self:SetSkin(hg.GetMainSkin())
 	
-	self.Title = self.Title or "No title"
+	self.Title = self.Title or "无标题"
 	local width, height = self:GetSize()
 	local dock_bottom = 5
 	
@@ -188,7 +188,7 @@ function PANEL:Construct()
 	local button_ready = vgui.Create("DButton", self)
 	button_ready:Dock(FILL)
 	button_ready:SetSkin(hg.GetMainSkin())
-	button_ready:SetText("APPLY")
+	button_ready:SetText("应用")
 	button_ready.DoClick = function(sel)
 		//if(sel.Clicked)then
 			if(IsValid(VGUI_HMCD_RolePanelList))then

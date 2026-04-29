@@ -1,6 +1,6 @@
 
 MODE.name = "coop"
-MODE.PrintName = "CO-OP"
+MODE.PrintName = "合作模式"
 MODE.randomSpawns = false
 
 MODE.ROUND_TIME = 9000
@@ -152,7 +152,7 @@ function hg.ClearMapsTable()
 end
 
 COMMANDS.clearmaps = {function(ply)
-    ply:ChatPrint("Completed maps cleared!")
+    ply:ChatPrint("已通关地图记录已清除！")
     hg.ClearMapsTable()
 end, 1}
 

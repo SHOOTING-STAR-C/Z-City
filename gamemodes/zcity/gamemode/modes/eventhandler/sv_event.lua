@@ -1,7 +1,7 @@
 local MODE = MODE
 
 MODE.name = "event"
-MODE.PrintName = "Event"
+MODE.PrintName = "事件"
 MODE.LootSpawn = false
 MODE.GuiltDisabled = true
 MODE.randomSpawns = true
@@ -284,7 +284,7 @@ net.Receive("event_loot_add", function(len, ply)
     net.WriteTable(MODE.CustomLootTable[1][2])
     net.Send(recipients)
     
-    ply:ChatPrint("Added item: " .. itemData.class .. " with weight " .. itemData.weight)
+    ply:ChatPrint("已添加物品: " .. itemData.class .. " 权重 " .. itemData.weight)
 end)
 
 net.Receive("event_loot_remove", function(len, ply)
@@ -310,7 +310,7 @@ net.Receive("event_loot_remove", function(len, ply)
     net.WriteTable(MODE.CustomLootTable[1][2])
     net.Send(recipients)
     
-    ply:ChatPrint("Removed item: " .. removedItem)
+    ply:ChatPrint("已移除物品: " .. removedItem)
 end)
 
 concommand.Add("zb_event_loot_reset", function(ply, _, _, _)
@@ -333,19 +333,19 @@ concommand.Add("zb_event_loot_reset", function(ply, _, _, _)
     net.WriteTable(MODE.CustomLootTable[1][2])
     net.Send(recipients)
     
-    ply:ChatPrint("Loot table has been reset")
+    ply:ChatPrint("战利品表已重置")
 end)
 
 concommand.Add("zb_event_loot_save", function(ply, _, _, _)
     if not ply:IsAdmin() then return end
     
     MODE:SaveLootTable()
-    ply:ChatPrint("Loot table saved for server: " .. serverIdentifier)
+    ply:ChatPrint("战利品表已保存到服务器: " .. serverIdentifier)
 end)
 
 concommand.Add("zb_event_lootpoll", function(ply, _, _, _)
     if not ply:IsAdmin() and not MODE.EventersList[ply:SteamID()] then
-        ply:ChatPrint("You don't have access to this command")
+        ply:ChatPrint("你没有权限使用此命令")
         return
     end
     
@@ -373,7 +373,7 @@ concommand.Add("zb_event_endlogic", function(ply, _, _, args)
     local logicType = tonumber(args) or 2
     logicType = math.Clamp(logicType, 1, 3)
     MODE.EndLogicType = logicType
-    ply:ChatPrint("Event end logic set to: " .. logicType)
+    ply:ChatPrint("事件结束逻辑设置为: " .. logicType)
 end)
 
 concommand.Add("zb_event_loot", function(ply, _, _, args)
@@ -393,7 +393,7 @@ concommand.Add("zb_event_loot", function(ply, _, _, args)
         timer.Remove("EventLootSpawnTimer")
     end
     
-    ply:ChatPrint("Event loot " .. (enabled and "enabled" or "disabled"))
+    ply:ChatPrint("事件战利品 " .. (enabled and "已启用" or "已禁用"))
 end)
 
 hook.Add("PlayerInitialSpawn", "ZB_EventLootSync", function(ply)
@@ -438,7 +438,7 @@ concommand.Add("zb_event_eventer_add", function(ply, _, _, args)
     
     if IsValid(target) then
         MODE.EventersList[target:SteamID()] = true
-        ply:ChatPrint("Added " .. target:Nick() .. " as an eventer")
+        ply:ChatPrint("已将 " .. target:Nick() .. " 添加为活动参与者")
         
         if zb.ROUND_PLAYING then
             zb.GiveRole(target, "Eventer", Color(50, 200, 50))
@@ -460,7 +460,7 @@ concommand.Add("zb_event_eventer_remove", function(ply, _, _, args)
     
     if IsValid(target) then
         MODE.EventersList[target:SteamID()] = nil
-        ply:ChatPrint("Removed " .. target:Nick() .. " as an eventer")
+        ply:ChatPrint("已将 " .. target:Nick() .. " 移除活动参与者身份")
         
         if zb.ROUND_PLAYING then
             zb.GiveRole(target, GetGlobalString("ZB_EventRole","Player"), Color(190,15,15))
@@ -481,9 +481,9 @@ concommand.Add("zb_event_end", function(ply, _, _, _)
     
     if zb.ROUND_PLAYING then
         MODE:EndRound()
-        ply:ChatPrint("Ending the event round...")
+        ply:ChatPrint("正在结束事件回合...")
     else
-        ply:ChatPrint("No event round is currently active.")
+        ply:ChatPrint("当前没有活跃的事件回合。")
     end
 end)
 

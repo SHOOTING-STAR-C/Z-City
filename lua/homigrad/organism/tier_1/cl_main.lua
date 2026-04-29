@@ -192,7 +192,7 @@ hook.Add("radialOptions", "DislocatedJoint", function()
 				lply.tried_fixing_limb = CurTime() + 0.5
 				RunConsoleCommand("hg_fixdislocation", 1, 0)
             end,
-            "Fix dislocation (leg)"
+            "复位脱臼 (腿)"
         }
         hg.radialOptions[#hg.radialOptions + 1] = tbl
 	else
@@ -204,7 +204,7 @@ hook.Add("radialOptions", "DislocatedJoint", function()
 					lply.tried_fixing_limb = CurTime() + 0.5
 					RunConsoleCommand("hg_fixdislocation", 1, 1)
 				end,
-				"Fix "..ent:GetPlayerName().."'s dislocation (leg)"
+				"帮 "..ent:GetPlayerName().." 复位脱臼 (腿)"
 			}
 			hg.radialOptions[#hg.radialOptions + 1] = tbl
 		end
@@ -223,7 +223,7 @@ hook.Add("radialOptions", "DislocatedJoint2", function()
 				lply.tried_fixing_limb = CurTime() + 0.5
 				RunConsoleCommand("hg_fixdislocation", 2, 0)
             end,
-            "Fix dislocation (arm)"
+            "复位脱臼 (手臂)"
         }
         hg.radialOptions[#hg.radialOptions + 1] = tbl
 	else
@@ -235,7 +235,7 @@ hook.Add("radialOptions", "DislocatedJoint2", function()
 					lply.tried_fixing_limb = CurTime() + 0.5
 					RunConsoleCommand("hg_fixdislocation", 2, 1)
 				end,
-				"Fix "..ent:GetPlayerName().."'s dislocation (arm)"
+				"帮 "..ent:GetPlayerName().." 复位脱臼 (手臂)"
 			}
 			hg.radialOptions[#hg.radialOptions + 1] = tbl
 		end
@@ -254,7 +254,7 @@ hook.Add("radialOptions", "DislocatedJaw", function()
 				lply.tried_fixing_limb = CurTime() + 0.5
 				RunConsoleCommand("hg_fixdislocation", 3, 0)
             end,
-            "Fix dislocation (jaw)"
+            "复位脱臼 (下巴)"
         }
         hg.radialOptions[#hg.radialOptions + 1] = tbl
 	else
@@ -266,7 +266,7 @@ hook.Add("radialOptions", "DislocatedJaw", function()
 					lply.tried_fixing_limb = CurTime() + 0.5
 					RunConsoleCommand("hg_fixdislocation", 3, 1)
 				end,
-				"Fix "..ent:GetPlayerName().."'s dislocation (jaw)"
+				"帮 "..ent:GetPlayerName().." 复位脱臼 (下巴)"
 			}
 			hg.radialOptions[#hg.radialOptions + 1] = tbl
 		end

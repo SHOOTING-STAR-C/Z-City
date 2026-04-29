@@ -11,7 +11,7 @@ zb.Points.HMCD_TDM_T = zb.Points.HMCD_TDM_T or {}
 zb.Points.HMCD_TDM_T.Color = Color(150,95,0)
 zb.Points.HMCD_TDM_T.Name = "HMCD_TDM_T"
 
-MODE.PrintName = "Team Deathmatch"
+MODE.PrintName = "团队死斗"
 
 --[[
     ["weapon_hk_usp"] = {

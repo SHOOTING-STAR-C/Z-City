@@ -1,5 +1,5 @@
 MODE.name = "riot"
-MODE.PrintName = "Riot"
+MODE.PrintName = "暴动"
 
 MODE.OverideSpawnPos = true
 MODE.LootSpawn = false

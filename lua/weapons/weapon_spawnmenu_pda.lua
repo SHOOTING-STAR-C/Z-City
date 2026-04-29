@@ -1,7 +1,7 @@
 -- Сообщение всем скриптхукерам, ну вы это хоть оставляйте тех кто это кодил. Уважайте чужой труд!
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik1_base"
-SWEP.PrintName = "Tablet"
+SWEP.PrintName = "平板电脑"
 SWEP.Instructions = ""
 SWEP.Category = "Weapons - Other"
 SWEP.Instructions = "Just a tablet"

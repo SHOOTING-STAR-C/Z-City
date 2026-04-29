@@ -232,7 +232,7 @@ function CLASS.On(self, data)
 
     local mdl_key = appearance.AModel
     if not rebel_models[mdl_key] then
-        self:ChatPrint("zcity/appearance.json have invalid variables.. Setting random Appearance")
+        self:ChatPrint("zcity/appearance.json 包含无效变量.. 正在设置随机外观")
         appearance = hg.Appearance.GetRandomAppearance()
         mdl_key = appearance.AModel
     end

@@ -12,8 +12,8 @@ end)
 
 local teams = {
 	[1] = {
-		objective = "Defend your base from the attack of the combines.",
-		name = "a Refugee",
+		objective = "保卫你的基地，抵御联合军的进攻。",
+		name = "难民",
 		color1 = Color(240,109,1),
 		color2 = Color(190,95,0)
 	},
@@ -42,7 +42,7 @@ function MODE:HUDPaint()
 		local time = string.FormattedTime(NextWave_Time - CurTime())
 		time.s = (time.s < 10 and "0" or "")..time.s
 		time.m = (time.m < 10 and "0" or "")..time.m
-		draw.SimpleText( "Next wave in ".. time.m ..":" .. time.s, "ZB_HomicideMedium", sw * 0.5, sh * (0.9 + timePos), Color(87,146,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText( "下一波敌人将于 ".. time.m ..":" .. time.s .." 后到达", "ZB_HomicideMedium", sw * 0.5, sh * (0.9 + timePos), Color(87,146,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
     if zb.ROUND_START + 8.5 < CurTime() then return end
@@ -50,12 +50,12 @@ function MODE:HUDPaint()
 	if not lply:Alive() then return end
     local fade = math.Clamp(zb.ROUND_START + 8 - CurTime(), 0, 1)
 	local team_ = lply:Team()
-    draw.SimpleText("ZBattle | HL2 Base Defense", "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0,162,255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-	
-    local playerRole = lply:GetNWString("PlayerRole", "Refugee") 
+    draw.SimpleText("ZBattle | 半条命2基地防御", "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0,162,255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+    local playerRole = lply:GetNWString("PlayerRole", "难民")
     local roleColor = teams[team_].color1
     roleColor.a = 255 * fade
-    draw.SimpleText("You are a " .. playerRole, "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.5, roleColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    draw.SimpleText("你是" .. playerRole, "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.5, roleColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
     local objective = teams[team_].objective
     local objectiveColor = teams[team_].color2
@@ -67,7 +67,7 @@ function MODE:HUDPaint()
 		surface.SetDrawColor(255, 255, 255, math.random(175, 255) * fade / 2)
 		surface.DrawTexturedRect(sw * 0.25, sh * 0.44 - ScreenScale(15), sw / 2, ScreenScale(30))
 
-		draw.SimpleText("SOMEWHERE IN PLUVTOWN", "ZB_ScrappersLarge", sw / 2, sh * 0.44 - ScreenScale(2), Color(0, 0, 0, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText("普卢夫镇的某处", "ZB_ScrappersLarge", sw / 2, sh * 0.44 - ScreenScale(2), Color(0, 0, 0, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 end
 
@@ -178,18 +178,18 @@ CreateEndMenu = function()
         surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
 		surface.SetFont( "ZB_InterfaceMedium" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Close")
+		local lengthX, lengthY = surface.GetTextSize("关闭")
 		surface.SetTextPos( lengthX - lengthX/1.1, 4)
-		surface.DrawText("Close")
+		surface.DrawText("关闭")
 	end
 
     hmcdEndMenu.PaintOver = function(self,w,h)
 
 		surface.SetFont( "ZB_InterfaceMediumLarge" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Players:")
+		local lengthX, lengthY = surface.GetTextSize("玩家:")
 		surface.SetTextPos(w / 2 - lengthX/2,20)
-		surface.DrawText("Players:")
+		surface.DrawText("玩家:")
 	end
 
 	local DScrollPanel = vgui.Create("DScrollPanel", hmcdEndMenu)
@@ -213,33 +213,33 @@ CreateEndMenu = function()
 
             local col = ply:GetPlayerColor():ToColor()
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
-			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "已离开..." )
 			
 			surface.SetTextColor(0,0,0,255)
 			surface.SetTextPos(w / 2 + 1,h/2 - lengthY/2 + 1)
-			surface.DrawText(ply:GetPlayerName() or "He quited...")
+			surface.DrawText(ply:GetPlayerName() or "已离开...")
 
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
 			surface.SetTextPos(w / 2,h/2 - lengthY/2)
-			surface.DrawText(ply:GetPlayerName() or "He quited...")
+			surface.DrawText(ply:GetPlayerName() or "已离开...")
 
             
 			local col = colSpect2
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "已离开..." )
 			surface.SetTextPos(15,h/2 - lengthY/2)
-			surface.DrawText((ply:Name() .. (not ply:Alive() and " - died" or "")) or "He quited...")
+			surface.DrawText((ply:Name() .. (not ply:Alive() and " - 死亡" or "")) or "已离开...")
 
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize( ply:Frags() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:Frags() or "已离开..." )
 			surface.SetTextPos(w - lengthX -15,h/2 - lengthY/2)
-			surface.DrawText(ply:Frags() or "He quited...")
+			surface.DrawText(ply:Frags() or "已离开...")
 		end
 
 		function but:DoClick()
-			if ply:IsBot() then chat.AddText(Color(255,0,0), "no, you can't") return end
+			if ply:IsBot() then chat.AddText(Color(255,0,0), "不行，你不能这样做") return end
 			gui.OpenURL("https://steamcommunity.com/profiles/"..ply:SteamID64())
 		end
 
@@ -261,7 +261,7 @@ function createSupportMenu()
     local frame = vgui.Create("ZFrame")
     frame:SetSize(400, 200)
     frame:Center()
-    frame:SetTitle("What do you want to order?")
+    frame:SetTitle("你想要订购什么？")
     frame:SetVisible(true)
     frame:SetDraggable(true)
     frame:ShowCloseButton(true)
@@ -280,13 +280,13 @@ function createSupportMenu()
         return button
     end
 
-    local armorButton = createButton("Armor", "Armor")
+    local armorButton = createButton("护甲", "Armor")
     armorButton:SetPos(50, 50)
 
-    local medsButton = createButton("Medications", "Medications")
+    local medsButton = createButton("药品", "Medications")
     medsButton:SetPos(150, 50)
 
-    local ammoButton = createButton("Ammunition", "Ammunition")
+    local ammoButton = createButton("弹药", "Ammunition")
     ammoButton:SetPos(250, 50)
 end
 
@@ -296,7 +296,7 @@ hook.Add("radialOptions", "CommanderSupportOptions", function()
     local organism = ply.organism or {}
 
     if ply:GetNWString("PlayerRole") == "Commander" and not organism.otrub then
-        local tbl = {createSupportMenu, "Request support"}
+        local tbl = {createSupportMenu, "请求支援"}
         hg.radialOptions[#hg.radialOptions + 1] = tbl
     end
 end)
@@ -530,8 +530,8 @@ local function CreateVoteMenu()
         surface.DrawLine(50, h - 150, w - 50, h - 150)
         
 
-        draw.SimpleText("SELECT GAME MODE", "Defense_Title", w / 2, 28, Color(230, 230, 230), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        draw.SimpleText("Vote for the current round mode", "Defense_Subtitle", w / 2, 55, Color(200, 200, 200), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("选择游戏模式", "Defense_Title", w / 2, 28, Color(230, 230, 230), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("为当前回合投票选择模式", "Defense_Subtitle", w / 2, 55, Color(200, 200, 200), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
     
 
@@ -549,8 +549,8 @@ local function CreateVoteMenu()
         end
         
         draw.RoundedBox(6, 0, 0, w, h, Color(40, 40, 40, 180))
-        draw.SimpleText("TIME LEFT:", "Defense_Stats", w / 2, 12, Color(200, 200, 200), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        draw.SimpleText(timeLeft .. " SEC", "Defense_Timer", w / 2, 32, timeColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("剩余时间:", "Defense_Stats", w / 2, 12, Color(200, 200, 200), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText(timeLeft .. " 秒", "Defense_Timer", w / 2, 32, timeColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
     
 
@@ -565,23 +565,23 @@ local function CreateVoteMenu()
         local zombiePercent = totalVotes > 0 and math.floor((voteResults[3] or 0) / totalVotes * 100) or 0
         
 
-        draw.SimpleText("Vote Statistics:", "Defense_Stats", 20, 20, Color(200, 200, 200), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-        draw.SimpleText("Total votes: " .. totalVotes, "Defense_Stats", w - 20, 20, Color(200, 200, 200), TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
-        
+        draw.SimpleText("投票统计:", "Defense_Stats", 20, 20, Color(200, 200, 200), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+        draw.SimpleText("总票数: " .. totalVotes, "Defense_Stats", w - 20, 20, Color(200, 200, 200), TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+
 
         draw.RoundedBox(5, 170, 15, 140, 40, Color(50, 100, 200, 150))
-        draw.SimpleText("Standard: " .. standardPercent .. "%", "Defense_Stats", 240, 33, Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        draw.SimpleText("(" .. (voteResults[1] or 0) .. " votes)", "Defense_SmallText", 240, 48, Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        
+        draw.SimpleText("标准: " .. standardPercent .. "%", "Defense_Stats", 240, 33, Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("(" .. (voteResults[1] or 0) .. " 票)", "Defense_SmallText", 240, 48, Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
 
         draw.RoundedBox(5, 370, 15, 140, 40, Color(200, 100, 50, 150))
-        draw.SimpleText("Extended: " .. extendedPercent .. "%", "Defense_Stats", 440, 33, Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        draw.SimpleText("(" .. (voteResults[2] or 0) .. " votes)", "Defense_SmallText", 440, 48, Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        
+        draw.SimpleText("扩展: " .. extendedPercent .. "%", "Defense_Stats", 440, 33, Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("(" .. (voteResults[2] or 0) .. " 票)", "Defense_SmallText", 440, 48, Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
 
         draw.RoundedBox(5, 570, 15, 140, 40, Color(50, 200, 50, 150))
-        draw.SimpleText("Zombie: " .. zombiePercent .. "%", "Defense_Stats", 640, 33, Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        draw.SimpleText("(" .. (voteResults[3] or 0) .. " votes)", "Defense_SmallText", 640, 48, Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("僵尸: " .. zombiePercent .. "%", "Defense_Stats", 640, 33, Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("(" .. (voteResults[3] or 0) .. " 票)", "Defense_SmallText", 640, 48, Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
     
 
@@ -594,38 +594,38 @@ local function CreateVoteMenu()
     
     local modeDescriptions = {
         [1] = {
-            title = "Standard Mode",
-            shortDesc = "Classic 6 waves of combine attacks",
-            longDesc = "Old Classic.",
+            title = "标准模式",
+            shortDesc = "经典6波联合军进攻",
+            longDesc = "经典模式。",
             color = Color(50, 100, 200),
             features = {
-                "• 6 waves of combine soldiers with increasing difficulty",
-                "• Regular enemy types: Metropolice and Combine Soldiers",
-                "• Final wave includes elite Combine Soldiers",
-                "• Recommended for new players and standard gameplay"
+                "• 6波难度递增的联合军士兵",
+                "• 常规敌人类型：国民护卫队和联合军士兵",
+                "• 最后一波包含精英联合军士兵",
+                "• 推荐新手玩家和常规游戏"
             }
         },
         [2] = {
-            title = "Extended Mode",
-            shortDesc = "12 waves with bosses and special enemies",
-            longDesc = "Challenge for veteran players! 12 waves of relentless bloodshed and brutality.",
+            title = "扩展模式",
+            shortDesc = "12波包含Boss和特殊敌人",
+            longDesc = "老兵玩家的挑战！12波无情的血腥与残暴。",
             color = Color(200, 100, 50),
             features = {
-                "• 12 waves of intensive combat",
-                "• Special boss waves",
-                "• Much harder than Standard mode - for experienced players",
-                "• Includes turrets, manhacks and other special enemy types"
+                "• 12波高强度战斗",
+                "• 特殊Boss波次",
+                "• 比标准模式难得多 - 适合有经验的玩家",
+                "• 包含炮塔、飞锯和其他特殊敌人类型"
             }
         },
         [3] = {
-            title = "Zombie Mode",
-            shortDesc = "6 waves of zombie apocalypse",
-            longDesc = "A unique mode replacing combines with various zombie types. ",
+            title = "僵尸模式",
+            shortDesc = "6波僵尸末日",
+            longDesc = "用各种僵尸类型替代联合军的独特模式。",
             color = Color(50, 200, 50),
             features = {
-                "• 6 waves of zombie hordes",
-                "• Unique challenge compared to Combine enemies",
-                "• More enemies compared to Standard mode"
+                "• 6波僵尸大军",
+                "• 与联合军敌人相比的独特挑战",
+                "• 比标准模式更多的敌人"
             }
         }
     }
@@ -694,7 +694,7 @@ local function CreateVoteMenu()
             
             if isDisabled then
                 draw.RoundedBox(4, w - 180, 10, 170, 30, Color(40, 40, 40, 180))
-                draw.SimpleText("IN DEVELOPMENT", "Defense_Stats", w - 95, 25, Color(255, 70, 70), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                draw.SimpleText("开发中", "Defense_Stats", w - 95, 25, Color(255, 70, 70), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             else
                 draw.RoundedBox(4, w - 70, 10, 60, 30, Color(40, 40, 40, 180))
                 draw.SimpleText(percent .. "%", "Defense_Stats", w - 40, 25, Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -706,7 +706,7 @@ local function CreateVoteMenu()
             
 
             if self.SelectedFrac > 0 and not isDisabled then
-                draw.SimpleText("SELECTED", "Defense_SmallText", w - 120, 50, Color(255, 255, 255, 255 * self.SelectedFrac), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                draw.SimpleText("已选择", "Defense_SmallText", w - 120, 50, Color(255, 255, 255, 255 * self.SelectedFrac), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             end
         end
         
@@ -761,7 +761,7 @@ local function CreateVoteMenu()
             
 
             if isDisabled then
-                draw.SimpleText("This mode is currently under development and will be available soon!", 
+                draw.SimpleText("此模式正在开发中，即将推出！",
                                "Defense_SmallText", w/2, h-20, Color(255, 100, 100), TEXT_ALIGN_CENTER)
             end
         end
@@ -833,22 +833,22 @@ MODE.HUDPaint = function(self)
         local description = ""
         
         if currentSubMode == "STANDARD" then
-            modeName = "Standard Mode"
+            modeName = "标准模式"
             modeColor = Color(50, 150, 255)
-            description = "Classic 6 waves of combine attacks"
+            description = "经典6波联合军进攻"
         elseif currentSubMode == "EXTENDED" then
-            modeName = "Extended Mode"
+            modeName = "扩展模式"
             modeColor = Color(255, 150, 50)
-            description = "12 waves with bosses and special enemies"
+            description = "12波包含Boss和特殊敌人"
         elseif currentSubMode == "ZOMBIE" then
-            modeName = "Zombie Mode"
+            modeName = "僵尸模式"
             modeColor = Color(50, 255, 50)
-            description = "6 waves of zombie apocalypse"
+            description = "6波僵尸末日"
         end
-        
+
         modeColor.a = alpha
-        
-        local text = "Selected mode: " .. modeName
+
+        local text = "已选择模式: " .. modeName
         
         draw.SimpleText(text, "Defense_Title", ScrW() * 0.5, ScrH() * 0.3, modeColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         draw.SimpleText(description, "Defense_Subtitle", ScrW() * 0.5, ScrH() * 0.35, Color(255, 255, 255, alpha), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -997,14 +997,14 @@ local function DrawBossIncomingBanner()
     local textY = y + headerHeight / 2
     
 
-    draw.SimpleText("BOSS INCOMING", "ZB_HomicideMediumLarge", centerX + 2, textY + 2, shadowColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-    
+    draw.SimpleText("BOSS来袭", "ZB_HomicideMediumLarge", centerX + 2, textY + 2, shadowColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-    draw.SimpleText("BOSS INCOMING", "ZB_HomicideMediumLarge", centerX, textY, textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-    
+
+    draw.SimpleText("BOSS来袭", "ZB_HomicideMediumLarge", centerX, textY, textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
 
     local infoY = y + headerHeight + (scaledHeight - headerHeight) / 2
-    draw.SimpleText("Prepare for a powerful enemy!", "ZB_HomicideMedium", centerX, infoY, textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    draw.SimpleText("准备迎接强大的敌人！", "ZB_HomicideMedium", centerX, infoY, textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     
 
     local barHeight = scaledHeight * 0.04

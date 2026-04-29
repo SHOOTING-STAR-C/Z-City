@@ -25,7 +25,7 @@ if CLIENT then
     net.Receive("ZB_NotifyRoundListChange", function()
         local playerName = net.ReadString()
         
-        chat.AddText(Color(180, 180, 255), playerName, Color(255, 255, 255), " has modified the game mode queue")
+        chat.AddText(Color(180, 180, 255), playerName, Color(255, 255, 255), " 修改了游戏模式队列")
         
         net.Start("ZB_RequestRoundList")
         net.SendToServer()
@@ -156,7 +156,7 @@ if CLIENT then
         queuePanelInstance = queuePanel
         
         local titleLabel = vgui.Create("DLabel", queuePanel)
-        titleLabel:SetText("Game Mode Queue")
+        titleLabel:SetText("游戏模式队列")
         titleLabel:SetFont("DermaLarge")
         titleLabel:SetTextColor(Color(255, 200, 0))
         titleLabel:Dock(TOP)
@@ -168,7 +168,7 @@ if CLIENT then
         queueScroll:DockMargin(5, 5, 5, 5)
         
         local saveBtn = vgui.Create("DButton", queuePanel)
-        saveBtn:SetText("Apply Queue")
+        saveBtn:SetText("应用队列")
         saveBtn:Dock(BOTTOM)
         saveBtn:DockMargin(5, 5, 5, 5)
         saveBtn:SetTall(30)
@@ -181,14 +181,14 @@ if CLIENT then
                     net.WriteBool(true)
                 net.SendToServer()
                 
-                chat.AddText(Color(0, 255, 0), "Game mode queue has been set!")
+                chat.AddText(Color(0, 255, 0), "游戏模式队列已设置！")
             //else
                 //chat.AddText(Color(255, 0, 0), "Game mode queue is empty!")
             //end
         end
         
         local clearBtn = vgui.Create("DButton", queuePanel)
-        clearBtn:SetText("Clear Queue")
+        clearBtn:SetText("清空队列")
         clearBtn:Dock(BOTTOM)
         clearBtn:DockMargin(5, 5, 5, 5)
         clearBtn:SetTall(30)
@@ -201,7 +201,7 @@ if CLIENT then
                 net.WriteBool(false)
             net.SendToServer()*/
             
-            chat.AddText(Color(255, 165, 0), "Game mode queue cleared!")
+            chat.AddText(Color(255, 165, 0), "游戏模式队列已清空！")
         end
         
         function queuePanel:QueueUpdate()
@@ -209,7 +209,7 @@ if CLIENT then
             
             if zb.nextround and zb.nextround ~= "" then
                 local nextRoundLabel = vgui.Create("DLabel", queueScroll)
-                nextRoundLabel:SetText("Next Mode: " .. zb.nextround)
+                nextRoundLabel:SetText("下一模式: " .. zb.nextround)
                 nextRoundLabel:SetFont("DermaDefaultBold")
                 nextRoundLabel:SetTextColor(Color(100, 255, 100))
                 nextRoundLabel:Dock(TOP)
@@ -243,7 +243,7 @@ if CLIENT then
         local frame = vgui.Create("ZFrame")
         frame:SetSize(700, 500)
         frame:Center()
-        frame:SetTitle("Game Mode Manager")
+        frame:SetTitle("游戏模式管理器")
         frame:MakePopup()
         
         selectedModes = {}
@@ -257,7 +257,7 @@ if CLIENT then
         StyleElement(leftPanel, Color(30, 30, 30, 200))
         
         local titleLabel = vgui.Create("DLabel", leftPanel)
-        titleLabel:SetText("Available Game Modes")
+        titleLabel:SetText("可用游戏模式")
         titleLabel:SetFont("DermaLarge")
         titleLabel:SetTextColor(Color(255, 200, 0))
         titleLabel:Dock(TOP)
@@ -265,7 +265,7 @@ if CLIENT then
         titleLabel:SetContentAlignment(5) 
         
         local searchBar = vgui.Create("DTextEntry", leftPanel)
-        searchBar:SetPlaceholderText("Search game modes...")
+        searchBar:SetPlaceholderText("搜索游戏模式...")
         searchBar:Dock(TOP)
         searchBar:DockMargin(5, 5, 5, 5)
         searchBar:SetTall(25)
@@ -308,7 +308,7 @@ if CLIENT then
             table.insert(modeItems, modeBtn)
             
             modeBtn:SetCursor("hand")
-            modeBtn:SetTooltip("Click to select/unselect mode")
+            modeBtn:SetTooltip("点击选择/取消选择模式")
             
             local inQueue = false
             for _, queuedModeKey in ipairs(zb.RoundList) do
@@ -328,17 +328,17 @@ if CLIENT then
 
             if mode.canlaunch == 1 then
                 indicator.IndiColor = Color(0,255,34)
-                indicator:SetTooltip("This mode can launch")
+                indicator:SetTooltip("此模式可以启动")
             end
 
             if inQueue then
                 indicator.IndiColor = Color(255, 155, 0, 255)
-                indicator:SetTooltip("This mode is already in queue")
+                indicator:SetTooltip("此模式已在队列中")
             end
      
             if mode.canlaunch == 0 then
                 indicator.IndiColor = Color(255,0,0,255)
-                indicator:SetTooltip("This mode can't launch")
+                indicator:SetTooltip("此模式无法启动")
             end
             
             if command == "setmode" or command == "setforcemode" then
@@ -346,7 +346,7 @@ if CLIENT then
                 selectBtn:SetSize(80, 26)
                 selectBtn:Dock(RIGHT)
                 selectBtn:DockMargin(5, 7, 5, 7)
-                selectBtn:SetText("Select")
+                selectBtn:SetText("选择")
                 selectBtn.DoClick = function()
                     net.Start("AdminSetGameMode")
                     net.WriteString(command)
@@ -366,7 +366,7 @@ if CLIENT then
         StyleElement(batchPanel, Color(40, 40, 40, 200))
         
         local batchTitle = vgui.Create("DLabel", batchPanel)
-        batchTitle:SetText("Batch Operations")
+        batchTitle:SetText("批量操作")
         batchTitle:SetFont("DermaDefaultBold")
         batchTitle:SetTextColor(Color(255, 255, 255))
         batchTitle:Dock(TOP)
@@ -374,7 +374,7 @@ if CLIENT then
         batchTitle:SetContentAlignment(5)
         
         local addToQueueBtn = vgui.Create("DButton", batchPanel)
-        addToQueueBtn:SetText("Add Selected to Beginning of Queue")
+        addToQueueBtn:SetText("将选中模式添加到队列开头")
         addToQueueBtn:Dock(TOP)
         addToQueueBtn:DockMargin(5, 0, 5, 5)
         addToQueueBtn:SetTall(26)
@@ -401,19 +401,19 @@ if CLIENT then
                     net.WriteBool(false)
                 net.SendToServer()*/
                 
-                chat.AddText(Color(0, 255, 0), "Added " .. selectedCount .. " modes to beginning of queue!")
+                chat.AddText(Color(0, 255, 0), "已将 " .. selectedCount .. " 个模式添加到队列开头！")
                 
                 selectedModes = {}
                 for _, item in ipairs(modeItems) do
                     item.Selected = false
                 end
             else
-                chat.AddText(Color(255, 0, 0), "No modes selected!")
+                chat.AddText(Color(255, 0, 0), "未选择任何模式！")
             end
         end
         
         local addToEndBtn = vgui.Create("DButton", batchPanel)
-        addToEndBtn:SetText("Add Selected to End of Queue")
+        addToEndBtn:SetText("将选中模式添加到队列末尾")
         addToEndBtn:Dock(TOP)
         addToEndBtn:DockMargin(5, 0, 5, 0)
         addToEndBtn:SetTall(26)
@@ -435,7 +435,7 @@ if CLIENT then
                     net.WriteBool(false)
                 net.SendToServer()*/
                 
-                chat.AddText(Color(0, 255, 0), "Added " .. selectedCount .. " modes to end of queue!")
+                chat.AddText(Color(0, 255, 0), "已将 " .. selectedCount .. " 个模式添加到队列末尾！")
                 
 
                 selectedModes = {}
@@ -443,12 +443,12 @@ if CLIENT then
                     item.Selected = false
                 end
             else
-                chat.AddText(Color(255, 0, 0), "No modes selected!")
+                chat.AddText(Color(255, 0, 0), "未选择任何模式！")
             end
         end
         
         local refreshBtn = vgui.Create("DButton", leftPanel)
-        refreshBtn:SetText("Refresh Data")
+        refreshBtn:SetText("刷新数据")
         refreshBtn:Dock(BOTTOM)
         refreshBtn:DockMargin(5, 5, 5, 5)
         refreshBtn:SetTall(30)
@@ -482,11 +482,11 @@ if CLIENT then
         local frame = isMenuOpen
         frame:SetSize(300, 210)
         frame:Center()
-        frame:SetTitle("Admin Panel")
+        frame:SetTitle("管理员面板")
         frame:MakePopup()
 
         local setModeBtn = vgui.Create("DButton", frame)
-        setModeBtn:SetText("Set Next Mode")
+        setModeBtn:SetText("设置下一模式")
         setModeBtn:Dock(TOP)
         setModeBtn:DockMargin(5, 10, 5, 2)
         setModeBtn:SetSize(300, 40)
@@ -496,7 +496,7 @@ if CLIENT then
         end
 
         local setForceModeBtn = vgui.Create("DButton", frame)
-        setForceModeBtn:SetText("Set Auto Next Mode")
+        setForceModeBtn:SetText("设置自动下一模式")
         setForceModeBtn:Dock(TOP)
         setForceModeBtn:DockMargin(5, 2, 5, 2)
         setForceModeBtn:SetSize(300, 40)
@@ -506,7 +506,7 @@ if CLIENT then
         end
         
         local queueModeBtn = vgui.Create("DButton", frame)
-        queueModeBtn:SetText("Manage Game Mode Queue")
+        queueModeBtn:SetText("管理游戏模式队列")
         queueModeBtn:Dock(TOP)
         queueModeBtn:DockMargin(5, 2, 5, 2)
         queueModeBtn:SetSize(300, 40)
@@ -516,7 +516,7 @@ if CLIENT then
         end
 
         local endRoundBtn = vgui.Create("DButton", frame)
-        endRoundBtn:SetText("End Round")
+        endRoundBtn:SetText("结束回合")
         endRoundBtn:Dock(TOP)
         endRoundBtn:DockMargin(5, 2, 5, 2)
         endRoundBtn:SetSize(300, 40)

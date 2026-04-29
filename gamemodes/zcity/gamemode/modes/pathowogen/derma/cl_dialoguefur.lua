@@ -132,7 +132,7 @@ function PANEL:Paint(w, h)
 		surface.DrawTexturedRect(-ScreenScale(4) - 1, -ScreenScale(4), w * 0.3 + ScreenScale(8) + 1, h + ScreenScale(8))
 	DisableClipping(false)
 
-	draw.GlowingText("Specimen #0", "ZB_PathowogenDialogueTitle", w * 0.31, 0 - ScreenScale(1), ColorAlpha(red, 255), ColorAlpha(red, 235), ColorAlpha(red, 10), TEXT_ALIGN_LEFT)
+	draw.GlowingText("样本 #0", "ZB_PathowogenDialogueTitle", w * 0.31, 0 - ScreenScale(1), ColorAlpha(red, 255), ColorAlpha(red, 235), ColorAlpha(red, 10), TEXT_ALIGN_LEFT)
 
 	surface.SetDrawColor(255, 255, 255, self.appearAlpha * 4)
 	surface.DrawRect(0, 0, w, h)

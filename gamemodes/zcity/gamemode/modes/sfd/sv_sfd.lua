@@ -1,7 +1,7 @@
 local MODE = MODE
 
 MODE.name = "superfighters"
-MODE.PrintName = "Superfighters 3D"
+MODE.PrintName = "超级格斗3D"
 MODE.LootSpawn = true
 MODE.GuiltDisabled = true
 MODE.randomSpawns = true

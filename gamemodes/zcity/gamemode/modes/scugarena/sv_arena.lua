@@ -1,7 +1,7 @@
 local MODE = MODE
 
 MODE.name = "scugarena"
-MODE.PrintName = "Slug Arena"
+MODE.PrintName = "蛞蝓竞技场"
 MODE.LootSpawn = false
 MODE.GuiltDisabled = true
 MODE.randomSpawns = true

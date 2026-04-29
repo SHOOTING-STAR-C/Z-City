@@ -224,7 +224,7 @@ end)
 
 hook.Add('CanPlayerSuicide','Swarm',function(p) 
 	if(p.SwarmPerc>10 and p.Swm)then
-		p:ChatPrint("You can't.")
+		p:ChatPrint("你不能这样做。")
 		return false
 	end
 end)

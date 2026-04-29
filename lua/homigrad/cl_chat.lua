@@ -96,7 +96,7 @@ end)
 
 	hook.Add("ModifyMessageBuffer", "ChatWhisper", function(buffer, speaker)
 		if IsValid(speaker) and speaker.ChatWhisper then
-			buffer[#buffer + 1] = "<color=150,150,150>[whisper]</color> "
+			buffer[#buffer + 1] = "<color=150,150,150>[耳语]</color> "
 		end
 	end)
 --//

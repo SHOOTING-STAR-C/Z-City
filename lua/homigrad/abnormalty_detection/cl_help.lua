@@ -289,7 +289,7 @@ function ABNORMALTIESHELP:OpenStats(Recipe)
 	frame.Desc:SetSize(size[1]-90,size[2]-100)
 
 	frame.Prev = vgui.Create("DButton",frame)
-	frame.Prev:SetText("<--Prev")
+	frame.Prev:SetText("<--上一页")
 	frame.Prev:SetPos(0, 0)
 	frame.Prev:SetSize(50, 20)
 	frame.Prev.DoClick = function()
@@ -306,7 +306,7 @@ function ABNORMALTIESHELP:OpenStats(Recipe)
 	end
 
 	frame.Next = vgui.Create("DButton",frame)
-	frame.Next:SetText("Next-->")
+	frame.Next:SetText("下一页-->")
 	frame.Next:SetPos(70, 0)
 	frame.Next:SetSize(50, 20)
 	frame.Next.DoClick = function()

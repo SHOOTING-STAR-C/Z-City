@@ -1,7 +1,7 @@
 local MODE = MODE
 
 MODE.name = "pathowogen"
-MODE.PrintName = "Pathowogen :3"
+MODE.PrintName = "病原体 :3"
 
 zb = zb or {}
 zb.Points = zb.Points or {}

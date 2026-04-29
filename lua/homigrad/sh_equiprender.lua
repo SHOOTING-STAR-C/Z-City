@@ -415,7 +415,7 @@ if CLIENT then
 	
 		if not organism.otrub and table.Count(tbl) > 0 and lply:KeyDown(IN_WALK) then
 			hg.radialOptions = hg.radialOptions or {}
-			local newEntry = {equipmentMenu, "Drop Equipment"}
+			local newEntry = {equipmentMenu, "丢弃装备"}
 			hg.radialOptions[#hg.radialOptions + 1] = newEntry
 		end
 	end)
@@ -525,7 +525,7 @@ if CLIENT then
 		lbl:DockMargin(10,0,0,10)
 
 		lbl.Paint = function(self, w, h)
-			draw.SimpleText("LMB - Drop equipment", "ZCity_Tiny", w * 0.5, h * 0.5, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			draw.SimpleText("左键 - 丢弃装备", "ZCity_Tiny", w * 0.5, h * 0.5, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		end
 
 		local scroll = vgui.Create("DScrollPanel",frame)
@@ -607,7 +607,7 @@ if CLIENT then
 		if ply:Alive() and not organism.otrub then
 			local tbl = {function(mouseClick)
 				RunConsoleCommand("hg_enable_nvg")
-			end, ply:GetNWBool("NVG_Enabled", false) and "Disable NVG" or "Enable NVG"}
+			end, ply:GetNWBool("NVG_Enabled", false) and "关闭夜视仪" or "开启夜视仪"}
 			hg.radialOptions[#hg.radialOptions + 1] = tbl
 		end
 	end)

@@ -1,5 +1,5 @@
 MODE.name = "hl2dm"
-MODE.PrintName = "Half-Life 2 Deathmatch"
+MODE.PrintName = "半条命2死斗"
 
 MODE.Chance = 0.05
 
@@ -248,7 +248,7 @@ net.Receive("ZB_RequestAirStrike", function(len, ply)
         local normal = ply:GetEyeTrace().HitNormal
         AirStrike(pos, normal, ply)
     else
-        ply:ChatPrint("Access denied.")
+        ply:ChatPrint("权限不足。")
     end
 end)
 

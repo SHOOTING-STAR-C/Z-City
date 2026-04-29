@@ -135,8 +135,8 @@ function MODE:PostDrawTranslucentRenderables(depth, skybox, skybox2)
 	local scale = (zb.traitorExtract and math.max(LocalPlayer():GetPos():DistToSqr(pos) / 100000000, 0.05)) or 0.05
 
 	cam.Start3D2D( pos + UpVector, angle, scale)
-		draw.SimpleText("[Extraction]", "ZB_ScrappersHumongous", 10, 10, color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-		draw.SimpleText("[Extraction]", "ZB_ScrappersHumongous", 0, 0, ExtractionColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText("[撤离点]", "ZB_ScrappersHumongous", 10, 10, color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText("[撤离点]", "ZB_ScrappersHumongous", 0, 0, ExtractionColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	cam.End3D2D()
 
 	if zb.traitorExtract then
@@ -152,8 +152,8 @@ function MODE:HUDPaint()
 	if extraction then
 		local time = math.ceil(extraction - CurTime())
 		if time > 0 then
-			draw.SimpleText("Extracting in: " .. time, "ZB_ScrappersMedium", sw * 0.01 + 2, sh * 0.97 + 2, color_black, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-			draw.SimpleText("Extracting in: " .. time, "ZB_ScrappersMedium", sw * 0.01, sh * 0.97, ExtractionColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+			draw.SimpleText("撤离倒计时:" .. time, "ZB_ScrappersMedium", sw * 0.01 + 2, sh * 0.97 + 2, color_black, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+			draw.SimpleText("撤离倒计时:" .. time, "ZB_ScrappersMedium", sw * 0.01, sh * 0.97, ExtractionColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 		end
 	end
 end

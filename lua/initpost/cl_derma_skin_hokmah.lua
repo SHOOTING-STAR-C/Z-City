@@ -8,7 +8,7 @@
 --; Adapted from Helix
 
 --local hg_coolvetica = ConVarExists("hg_coolvetica") and GetConVar("hg_coolvetica") or CreateClientConVar("hg_coolvetica", "0", true, false, "changes every text to coolvetica because its good", 0, 1)
-local hg_font = ConVarExists("hg_font") and GetConVar("hg_font") or CreateClientConVar("hg_font", "Bahnschrift", true, false, "change every text font to selected because ui customization is cool")
+local hg_font = ConVarExists("hg_font") and GetConVar("hg_font") or CreateClientConVar("hg_font", "Bahnschrift", true, false, "将每个文本字体更改为选定的，因为UI自定义很酷")
 local font = function() -- hg_coolvetica:GetBool() and "Coolvetica" or "Bahnschrift"
     local usefont = "Bahnschrift"
 
@@ -27,7 +27,7 @@ local gradientLeft = surface.GetTextureID("vgui/gradient-l")
 local defaultBackgroundColor = Color(30, 30, 30, 200)
 
 local SKIN = {}
-derma.DefineSkin("Hokmah", "Hokmah skin.", SKIN)
+derma.DefineSkin("Hokmah", "Hokmah皮肤。", SKIN)
 
 SKIN.fontCategory = "ZCity_Fixed_Medium_Light"
 SKIN.fontCategoryBlur = "ZCity_Fixed_Medium_Light_Blur"
@@ -229,11 +229,11 @@ function SKIN:PaintButton(panel)
 			if(!panel.IsOn(panel))then
 				surface.SetDrawColor(165, 165, 165, 255)
 				
-				text = panel.TextOn or "Switch On"
+				text = panel.TextOn or "开启"
 			else
 				surface.SetDrawColor(130, 130, 130, 255)
 				
-				text = panel.TextOff or "Switch Off"
+				text = panel.TextOff or "关闭"
 				draw_on = true
 			end
 			

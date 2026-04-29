@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_base"
-SWEP.PrintName = "Suit"
-SWEP.Instructions = "A simple costume, along with a mask, can help hide your identity, your clothes will stay in the suitcase in the future you can put them back on."
+SWEP.PrintName = "防护服"
+SWEP.Instructions = "一套简单的服装，加上面具，可以帮助隐藏你的身份，你的衣服会留在手提箱里，以后你可以重新穿上。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
@@ -42,14 +42,14 @@ SWEP.AvailableCostumes = {
     {
         Name = "Ghostface",
         Model = "models/distac/player/ghostface.mdl",
-        Description = "Classic horror movie villain costume",
+        Description = "经典恐怖电影反派服装",
         Color = Color(255, 0, 0),
         ttachments = {}
     },
     {
         Name = "Jason Voorhees",
         Model = "models/eu_homicide/mkx_jajon.mdl",
-        Description = "Stop fucking in my lake!",
+        Description = "别在我的湖里乱搞！",
         Color = Color(255, 255, 255),
         Attachments = {}
     }
@@ -123,7 +123,7 @@ if CLIENT then
 	local color_white = Color(255, 255, 255)
     function SWEP:OpenCostumeMenu()
         if self.IsCostumeActive then
-            notification.AddLegacy("You must remove your current costume first!", NOTIFY_ERROR, 3)
+            notification.AddLegacy("你必须先脱下当前的服装！", NOTIFY_ERROR, 3)
             --surface.PlaySound("buttons/button10.wav")
             return
         end
@@ -139,7 +139,7 @@ if CLIENT then
         self.CostumeMenu = vgui.Create("ZFrame")
         self.CostumeMenu:SetSize(menuW, menuH)
         self.CostumeMenu:Center()
-        self.CostumeMenu:SetTitle("Costume Selection")
+        self.CostumeMenu:SetTitle("服装选择")
         self.CostumeMenu:SetDraggable(true)
         self.CostumeMenu:ShowCloseButton(true)
         self.CostumeMenu:MakePopup()
@@ -209,7 +209,7 @@ if CLIENT then
             local selectButton = vgui.Create("DButton", costumePanel)
             selectButton:SetSize(100, 30) 
             selectButton:SetPos(85, 295) 
-            selectButton:SetText("Select")
+            selectButton:SetText("选择")
             selectButton:SetFont(font)
             
             selectButton.Paint = function(self, w, h)

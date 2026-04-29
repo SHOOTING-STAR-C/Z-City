@@ -1,7 +1,7 @@
 SWEP.Base = "weapon_m4super"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
-SWEP.PrintName = "Tranquilizer gun"
+SWEP.PrintName = "镇静枪"
 SWEP.Instructions = "A Tranquilizer gun (or tranq gun) is a handheld firearm whose ammunition is non-lethal, and used to knock enemies unconscious."
 SWEP.Category = "Weapons - Pistols"
 SWEP.Slot = 2

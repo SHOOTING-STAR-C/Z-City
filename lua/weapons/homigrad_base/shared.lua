@@ -104,7 +104,7 @@ PrecacheParticleSystem("smoke_trail_wild")
 local vector_full = Vector(1, 1, 1)
 
 if CLIENT then
-	SWEP.HowToUseInstructions = "<font=ZCity_Tiny>"..string.upper( (input.LookupBinding("+use") or "BIND YOUR +USE KEY PLEASE. WRITE \"bind e +use\" IN CONSOLE FOR THE LOVE OF GOD") ).." to pickup</font>"
+	SWEP.HowToUseInstructions = "<font=ZCity_Tiny>"..string.upper( (input.LookupBinding("+use") or "请绑定你的 +使用 键。在控制台输入 \"bind e +use\"，拜托了") ).." to pickup</font>"
 end
 SWEP.StartAtt = {}
 function SWEP:Initialize()
@@ -287,7 +287,7 @@ function SWEP:OnRemove()
 	end
 end
 
-local hg_aimtoshoot = ConVarExists("hg_aimtoshoot") and GetConVar("hg_aimtoshoot") or CreateConVar("hg_aimtoshoot", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Toggle DarkRP-like shooting system (aim to shoot)", 0, 1)
+local hg_aimtoshoot = ConVarExists("hg_aimtoshoot") and GetConVar("hg_aimtoshoot") or CreateConVar("hg_aimtoshoot", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "切换类似DarkRP的射击系统（瞄准射击）", 0, 1)
 
 local owner
 local CurTime = CurTime
@@ -332,11 +332,11 @@ function SWEP:IsLocal2()
 	return CLIENT and self:GetOwner() == LocalPlayer() and LocalPlayer() == GetViewEntity()
 end
 
-local hg_quietshots = GetConVar("hg_quietshots") or CreateClientConVar("hg_quietshots", "0", true, false, "Toggle quieter gun sounds", 0, 1)
-local hg_gunshotvolume = GetConVar("hg_gunshotvolume") or CreateClientConVar("hg_gunshotvolume", "1", true, false, "Modify volume of gun sounds", 0, 1)
-local hg_oldsights = CreateConVar("hg_oldsights", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable camera wobble when aiming")
-local hg_coolcamera = ConVarExists("hg_coolcamera") and GetConVar("hg_coolcamera") or CreateConVar("hg_coolcamera", 0, FCVAR_ARCHIVE + FCVAR_REPLICATED, "Cool camera movement", 0, 5)
-local hg_coolcameralerpmult = ConVarExists("hg_coolcameralerpmult") and GetConVar("hg_coolcameralerpmult") or CreateConVar("hg_coolcameralerpmult", 1, FCVAR_ARCHIVE + FCVAR_REPLICATED, "Cool camera movement lerp multiplier", 0, 5)
+local hg_quietshots = GetConVar("hg_quietshots") or CreateClientConVar("hg_quietshots", "0", true, false, "切换更安静的枪声", 0, 1)
+local hg_gunshotvolume = GetConVar("hg_gunshotvolume") or CreateClientConVar("hg_gunshotvolume", "1", true, false, "调整枪声音量", 0, 1)
+local hg_oldsights = CreateConVar("hg_oldsights", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "瞄准时禁用相机晃动")
+local hg_coolcamera = ConVarExists("hg_coolcamera") and GetConVar("hg_coolcamera") or CreateConVar("hg_coolcamera", 0, FCVAR_ARCHIVE + FCVAR_REPLICATED, "酷炫相机移动", 0, 5)
+local hg_coolcameralerpmult = ConVarExists("hg_coolcameralerpmult") and GetConVar("hg_coolcameralerpmult") or CreateConVar("hg_coolcameralerpmult", 1, FCVAR_ARCHIVE + FCVAR_REPLICATED, "酷炫相机移动插值倍率", 0, 5)
 
 if CLIENT then
 	EmitSound = hg.EmitSound
@@ -345,8 +345,8 @@ if CLIENT then
 		EmitSound = hg.EmitSound
 	end)
 end
-local hg_gopro = ConVarExists("hg_gopro") and GetConVar("hg_gopro") or CreateClientConVar("hg_gopro", "0", true, false, "Toggle GoPro-like first-person camera view", 0, 1)
-local hg_distortedsounds = ConVarExists("hg_distortedsounds") and GetConVar("hg_distortedsounds") or CreateClientConVar("hg_distortedsounds", "0", true, false, "Toggle distorted sounds for the gunshots", 0, 1)
+local hg_gopro = ConVarExists("hg_gopro") and GetConVar("hg_gopro") or CreateClientConVar("hg_gopro", "0", true, false, "切换类似GoPro的第一人称视角", 0, 1)
+local hg_distortedsounds = ConVarExists("hg_distortedsounds") and GetConVar("hg_distortedsounds") or CreateClientConVar("hg_distortedsounds", "0", true, false, "切换枪声失真效果", 0, 1)
 
 local math_random = math.random
 function SWEP:PlaySnd(snd, server, chan, vol, pitch, entity, tripleaffirmative)
@@ -438,11 +438,11 @@ local weapons_Get = weapons.Get
 if SERVER then util.AddNetworkString("hgwep shoot") end
 
 local CantDoIt = {
-	"But... There's so much to live for!",
+	"但是... 还有这么多值得活下去的东西！",
 	"I... I can't do it...",
-	"There must be another way. This is not it!",
-	"I... Cannot bring myself to do this.",
-	"What am i even doing? I can't do this."
+	"一定有别的办法。这不是！",
+	"我... 无法让自己这样做。",
+	"我在做什么？我做不到。"
 }
 --qol lmao
 function SWEP:CanPrimaryAttack()
@@ -602,7 +602,7 @@ if SERVER then
 		net.Send(ply)
 	end)
 
-	hg_shoot_tinnitus = ConVarExists("hg_shoot_tinnitus") and GetConVar("hg_shoot_tinnitus") or CreateConVar("hg_shoot_tinnitus","0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Toggle shooting tinnitus")
+	hg_shoot_tinnitus = ConVarExists("hg_shoot_tinnitus") and GetConVar("hg_shoot_tinnitus") or CreateConVar("hg_shoot_tinnitus","0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "切换射击耳鸣效果")
 	SetGlobalBool("hg_shoot_tinnitus",hg_shoot_tinnitus:GetBool())
 
 	cvars.AddChangeCallback("hg_shoot_tinnitus", function(convar_name, value_old, value_new)
@@ -621,7 +621,7 @@ else
 	end)
 end
 
-local hg_highpitchgunfire = ConVarExists("hg_highpitchgunfire") and GetConVar("hg_highpitchgunfire") or CreateClientConVar("hg_highpitchgunfire", "0", true, false, "Toggle high pitched gunfire sounds inside buildings", 0, 1)
+local hg_highpitchgunfire = ConVarExists("hg_highpitchgunfire") and GetConVar("hg_highpitchgunfire") or CreateClientConVar("hg_highpitchgunfire", "0", true, false, "切换室内高音调枪声", 0, 1)
 
 function SWEP:EmitShoot()
 	if SERVER then return end
@@ -750,8 +750,8 @@ if CLIENT then
 		antialias = true
 	})
 
-	dynamicmags = CreateClientConVar("hg_dynamic_mags", "0", true, false, "Enables dynamic ammo show when shooting",0,1)
-	instructions = CreateClientConVar("hg_instructions","1", true, false, "Enables gun instructions",0,1)
+	dynamicmags = CreateClientConVar("hg_dynamic_mags", "0", true, false, "射击时启用动态弹药显示",0,1)
+	instructions = CreateClientConVar("hg_instructions","1", true, false, "启用枪械说明",0,1)
 end
 
 function SWEP:DrawHUDAdd()
@@ -875,10 +875,10 @@ if CLIENT then
 			if ammoLongCheck > 4 then
 				local text = (
 					(clip > clipsize - (self.OpenBolt and 0 or 1) - 1) and "Full" or 
-					(clip <= clipsize and clip > clipsize/1.5 ) and "~ Full" or 
-					(clip <= clipsize/1.5 and clip > clipsize/3.5) and "~ Half" or 
-					(clip <= clipsize/3.5 and clip != 0 ) and "~ Almost Empty" or 
-					(clip == 0 and "Empty")
+					(clip <= clipsize and clip > clipsize/1.5 ) and "~ 满弹" or 
+					(clip <= clipsize/1.5 and clip > clipsize/3.5) and "~ 半弹" or 
+					(clip <= clipsize/3.5 and clip != 0 ) and "~ 几乎空仓" or 
+					(clip == 0 and "空仓")
 				)
 				coloruse.r = 0
 				coloruse.g = 0
@@ -1115,7 +1115,7 @@ if SERVER then
 	end)
 end
 
-local hg_slings = ConVarExists("hg_slings") and GetConVar("hg_slings") or CreateConVar("hg_slings", 0, FCVAR_SERVER_CAN_EXECUTE + FCVAR_ARCHIVE, "Toggle sling system", 0, 1)
+local hg_slings = ConVarExists("hg_slings") and GetConVar("hg_slings") or CreateConVar("hg_slings", 0, FCVAR_SERVER_CAN_EXECUTE + FCVAR_ARCHIVE, "切换枪带系统", 0, 1)
 
 local vpang1 = Angle(1, -1.5, 2) / 2
 local bashvpang = Angle(-10, 0, 0)

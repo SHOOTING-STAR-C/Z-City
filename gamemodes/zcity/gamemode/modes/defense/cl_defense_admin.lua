@@ -95,13 +95,13 @@ function CreateAdminWaveMenu(subMode, currentWave, totalWaves, isActive)
         surface.SetDrawColor(ADMIN_MENU.PRIMARY_COLOR)
         surface.DrawOutlinedRect(0, 0, w, h, 2)
         
-        draw.SimpleText("DEBUG", "Defense_AdminTitle", w/2, 25, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        
+        draw.SimpleText("调试", "Defense_AdminTitle", w/2, 25, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-        local status = isActive and "Active" or "Prepare"
-        draw.SimpleText("Wave now: " .. currentWave .. " / " .. totalWaves, "Defense_AdminText", w/2, 70, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER)
-        draw.SimpleText("Sub-Mode: " .. subMode, "Defense_AdminText", w/2, 95, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER)
-        draw.SimpleText("Status: " .. status, "Defense_AdminText", w/2, 120, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER)
+
+        local status = isActive and "进行中" or "准备中"
+        draw.SimpleText("当前波次: " .. currentWave .. " / " .. totalWaves, "Defense_AdminText", w/2, 70, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER)
+        draw.SimpleText("子模式: " .. subMode, "Defense_AdminText", w/2, 95, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER)
+        draw.SimpleText("状态: " .. status, "Defense_AdminText", w/2, 120, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER)
     end
     
 
@@ -150,7 +150,7 @@ function CreateAdminWaveMenu(subMode, currentWave, totalWaves, isActive)
             surface.SetDrawColor(ADMIN_MENU.PRIMARY_COLOR)
             surface.DrawOutlinedRect(0, 0, w, h, 1)
             
-            draw.SimpleText("Волна " .. i, "Defense_AdminText", w/2, h/2, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            draw.SimpleText("波次 " .. i, "Defense_AdminText", w/2, h/2, ADMIN_MENU.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
         
         waveBtn.DoClick = function()
@@ -170,7 +170,7 @@ function CreateAdminWaveMenu(subMode, currentWave, totalWaves, isActive)
     infoPanel.Paint = function(self, w, h)
         surface.SetDrawColor(30, 30, 30)
         surface.DrawRect(0, 0, w, h)
-        draw.SimpleText("Нажмите на номер волны чтобы перейти к ней", "Defense_AdminInfo", w/2, h/2, Color(200, 200, 200), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("点击波次编号以跳转到该波次", "Defense_AdminInfo", w/2, h/2, Color(200, 200, 200), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
 end
 

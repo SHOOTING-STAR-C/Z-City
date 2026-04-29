@@ -18,19 +18,19 @@ zb.Points.DEFENSE_POINT.Name = "DEFENSE_POINT"
 
 MODE.SUBMODES = {
     STANDARD = {
-        name = "Standard",
+        name = "标准",
         description = "Classic 6 waves of combine attacks",
         waves = 6,
         enemy_type = "combine"
     },
     EXTENDED = {
-        name = "Extended",
+        name = "扩展",
         description = "Extended mode: 12 waves with bosses and special enemies",
         waves = 12,
         enemy_type = "combine"
     },
     ZOMBIE = {
-        name = "Zombie",
+        name = "僵尸",
         description = "6 waves of zombie apocalypse",
         waves = 6,
         enemy_type = "zombie"

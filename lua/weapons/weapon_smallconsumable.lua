@@ -1,6 +1,6 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bigconsumable"
-SWEP.PrintName = "Small consumable"
+SWEP.PrintName = "小消耗品"
 SWEP.Instructions = "A snack is always useful, regardless of the situation. Having a snack and waiting and regaining your well-being."
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true

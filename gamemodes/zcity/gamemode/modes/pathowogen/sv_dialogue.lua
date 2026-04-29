@@ -1,90 +1,90 @@
 MODE.FirstCasualtyCommander = {
-	"I've just detected the first assimilation. The threat is real. Be cautious.",
-	"One already down, don't let them make you the next one. Stay sharp.",
-	"I lost tracking from one of you, most likely assimilated. Stay alert.",
-	"One of you just got assimilated. You could be next, stay vigilant and don't let them get you."
+	"我刚刚检测到第一次同化。威胁是真实的。保持警惕。",
+	"已经倒下一个了，别让他们把你也变成下一个。保持警觉。",
+	"我失去了你们其中一人的追踪信号，很可能已经被同化。保持警惕。",
+	"你们其中一人刚刚被同化了。你可能是下一个，保持警惕，别让他们抓到你。"
 }
 
 MODE.HalfWayCommander = {
-	"There's only half of you left now. Stay together.",
-	"Half of you are either dead or assimilated now. May God help you all.",
-	"The pathowogen is already halfway there. Stay safe, and check your corners.",
-	"It doesn't look good, half of you are now infected. Fuck.",
+	"现在只剩一半人了。待在一起。",
+	"你们中一半人已经死亡或被同化了。愿上帝保佑你们。",
+	"病原体已经蔓延了一半。注意安全，检查你的角落。",
+	"情况不妙，你们中一半已经被感染了。操。",
 }
 
 MODE.HalfWayHeliCommander = {
-	"There's only half of you left now. The extraction helicopter is on it's way now. ETA: 4-5 minutes.",
-	"Half of you are either dead or assimilated now. The extraction helicopter is coming, hang in there!",
-	"The pathowogen is already halfway there. I got the extraction helicopter ready, just stay human a little longer!",
-	"It doesn't look good, half of you are now infected. The extraction heli is now en route, fend off those creatures for a little longer.",
+	"现在只剩一半人了。撤离直升机正在路上。预计到达时间：4-5分钟。",
+	"你们中一半人已经死亡或被同化了。撤离直升机正在赶来，坚持住！",
+	"病原体已经蔓延了一半。我已经准备好了撤离直升机，再坚持保持人性一会儿！",
+	"情况不妙，你们中一半已经被感染了。撤离直升机正在路上，再抵挡那些怪物一会儿。",
 }
 
 MODE.HalfWayExtractCommander = {
-	"There's only half of you left now. The extraction squad is on it's way now. ETA: 2-3 minutes.",
-	"Half of you are either dead or assimilated now. The extraction squad is coming, hang in there!",
-	"The pathowogen is already halfway there. I got the extraction squad on it's way, just stay human a little longer!",
-	"It doesn't look good, half of you are now infected. The extraction squad is now en route, fend off those creatures for a little longer.",
+	"现在只剩一半人了。撤离小队正在路上。预计到达时间：2-3分钟。",
+	"你们中一半人已经死亡或被同化了。撤离小队正在赶来，坚持住！",
+	"病原体已经蔓延了一半。我已经让撤离小队上路了，再坚持保持人性一会儿！",
+	"情况不妙，你们中一半已经被感染了。撤离小队正在路上，再抵挡那些怪物一会儿。",
 }
 
 MODE.ThreeLeftCommander = {
-	"There's only three of you now. Cover each other's backs.",
-	"Only three survivors left, including you. I hope you're ready for what's coming.",
-	"Only a trio of you is left, God help you guys.",
-	"You, and two others are still alive. Try to stick together."
+	"现在只剩你们三个人了。互相掩护。",
+	"包括你在内只剩三个幸存者了。希望你为即将到来的事情做好了准备。",
+	"只剩你们三人小组了，愿上帝保佑你们。",
+	"你和另外两人还活着。尽量待在一起。"
 }
 
 MODE.ThreeLeftHeliCommander = {
-	"There's only three of you now. The helicopter should be here any minute now.",
-	"Only three survivors left, including you. I hope you're ready for extraction.",
-	"Only a trio of you is left, standy for the helicopter.",
-	"You, and two others are still alive. Stick together, the extraction helicopter is coming."
+	"现在只剩你们三个人了。直升机应该随时会到。",
+	"包括你在内只剩三个幸存者了。希望你为撤离做好了准备。",
+	"只剩你们三人小组了，准备迎接直升机。",
+	"你和另外两人还活着。待在一起，撤离直升机正在赶来。"
 }
 
 MODE.TwoLeftCommander = {
-	"There's only two of you in this god forsaken place now.",
-	"You're a duo now. Fuck!",
-	"Only you left. And some other guy. God help you.",
-	"Only two of you guys are left. Don't let the despair get to you, fight till the last breath!"
+	"现在只剩你们两个在这个被上帝遗弃的地方了。",
+	"你们现在是一对儿了。操！",
+	"只剩你了。还有另一个人。愿上帝保佑你们。",
+	"只剩你们两个了。别让绝望吞噬你，战斗到最后一刻！"
 }
 
 MODE.OneLeftCommander = {
-	"You're the only one left. May god have mercy on your soul.",
-	"You're the sole survivor. Quite possibly not. You fought well.",
-	"Only you and me now, huh? Glad i'm not the one down there.",
-	"You're the last one. I'm sorry, soldier."
+	"你是唯一剩下的人了。愿上帝怜悯你的灵魂。",
+	"你是唯一的幸存者。也许还不是。你战斗得很好。",
+	"现在只有你和我在这里了，是吧？幸好我不是在下面那个。",
+	"你是最后一个了。对不起，士兵。"
 }
 
 MODE.FirstCasualtyContractor = {
-	"First kill.",
-	"One already down, stay focused.",
-	"One dead survivor.",
-	"Someone is dead now. Assimilated or shot, it doesn't matter. Continue."
+	"第一个击杀。",
+	"已经倒下一个了，保持专注。",
+	"一个幸存者死亡。",
+	"有人死了。被同化还是被射杀，这不重要。继续。"
 }
 
 MODE.HalfWayContractor = {
-	"You've made it to the half survivors. Impressive.",
-	"About half of your enemies are now dead. Just keeping you informed.",
-	"Half of 'em dead already. Good job operative, continue your mission.",
-	"Good job operative, about half of the survivors are now dead.",
+	"你已经干掉了半数幸存者。令人印象深刻。",
+	"大约一半的敌人已经死亡。只是通知你一下。",
+	"已经死了一半了。干得好特工，继续你的任务。",
+	"干得好特工，大约一半的幸存者已经死亡。",
 }
 
 MODE.ThreeLeftContractor = {
-	"There's only two more survivors left. Finish what you started.",
-	"Only two more to go. You know what to do.",
-	"Only 2 survivors left. Good job, you're almost there.",
-	"You, and two other survivors are what's left. Find 'em, and kill 'em."
+	"只剩两个幸存者了。完成你开始的任务。",
+	"只剩两个了。你知道该怎么做。",
+	"只剩2个幸存者了。干得好，你快成功了。",
+	"你和另外两个幸存者是剩下的全部。找到他们，杀了他们。"
 }
 
 MODE.TwoLeftContractor = {
-	"There's now only a single survivor. Finish him.",
-	"Only one survivor to go now. Don't mess it up.",
-	"Find and kill the last one. Your extraction awaits.",
-	"One enemy left. Find him."
+	"现在只剩一个幸存者了。解决他。",
+	"只剩一个幸存者了。别搞砸了。",
+	"找到并杀死最后一个。你的撤离在等着你。",
+	"一个敌人剩下。找到他。"
 }
 
 MODE.OneLeftContractor = {
-	"You're the only one left in this massacre. Mission complete. Proceed to your extraction point.",
-	"You've got them all. Mission complete. Get to the extraction point.",
-	"Operative, you're the last one alive. Mission complete. Get to the extraction point.",
-	"Operative, your mission is a success. Proceed to the extraction point."
+	"你是这场屠杀中唯一剩下的人了。任务完成。前往你的撤离点。",
+	"你把他们都干掉了。任务完成。前往撤离点。",
+	"特工，你是最后一个活着的人。任务完成。前往撤离点。",
+	"特工，你的任务成功了。前往撤离点。"
 }

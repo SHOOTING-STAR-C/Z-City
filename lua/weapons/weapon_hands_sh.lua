@@ -539,7 +539,7 @@ if SERVER then
 	SWEP.AutoSwitchTo = false
 	SWEP.AutoSwitchFrom = false
 else
-	SWEP.PrintName = "Hands"
+	SWEP.PrintName = "双手"
 	SWEP.Slot = 0
 	SWEP.SlotPos = 1
 	SWEP.DrawAmmo = false
@@ -926,32 +926,32 @@ function SWEP:ApplyForce()
 				if not ply2.noHead and ply2.organism then
 
 					if ply2.organism.CantCheckPulse then
-						--ply:ChatPrint("The armor is too thick to feel the pulse.")
+						--ply:ChatPrint("护甲太厚，无法感受到脉搏。")
 					elseif ((bone == "ValveBiped.Bip01_L_Hand") or (bone == "ValveBiped.Bip01_R_Hand") or (bone == "ValveBiped.Bip01_Head1")) then
 						local org = ply2.organism
 
 						if org.heartstop then
-							--ply:ChatPrint("No pulse.")
+							--ply:ChatPrint("没有脉搏。")
 						else
 							--ply:ChatPrint(org.pulse < 20 and "Barely can feel the pulse." or (org.pulse <= 50 and "Low pulse.") or (org.pulse <= 90 and "Normal pulse.") or "High pulse.")
 						end
 
 						if (org.last_heartbeat + 60) > CurTime() then
-							ply:ChatPrint("The body is still warm.")
+							ply:ChatPrint("尸体还有余温。")
 						else
 							ply:ChatPrint((org.last_heartbeat + 180) < CurTime() and "The body has been here for awhile." or "The body is slightly warm")
 						end
 
 						if org.blood < 3500 then
 							//if org.blood < 1000 then
-								//ply:ChatPrint("The skin looks almost white.")
+								//ply:ChatPrint("皮肤看起来几乎全白。")
 							//else
-								ply:ChatPrint("The skin is pale.")
+								ply:ChatPrint("皮肤苍白。")
 							//end
 						end
 
 						if org.bleed > 0 then
-							ply:ChatPrint("The body is bleeding "..((org.bleed > 10 and "profusely.") or (org.bleed > 5 and "moderately.") or "slightly."))
+							ply:ChatPrint("尸体正在"..((org.bleed > 10 and "大量出血。") or (org.bleed > 5 and "中度出血。") or "轻微出血。"))
 						end
 
 						//org.bulletwounds = 0
@@ -962,40 +962,40 @@ function SWEP:ApplyForce()
 						//org.explosionwounds = 0
 
 						if org.bulletwounds > 0 then
-							ply:ChatPrint("You notice "..org.bulletwounds.." bullet wounds on this body.")
+							ply:ChatPrint("你注意到这具尸体有"..org.bulletwounds.."处枪伤。")
 						end
 
 						if org.stabwounds > 0 then
-							ply:ChatPrint("You notice "..org.stabwounds.." stab wounds on this body.")//28 STAB WOUNDS. YOU WOULDNT LEAVE HIM A CHANCE, HUH?
+							ply:ChatPrint("你注意到这具尸体有"..org.stabwounds.."处刺伤。")//28 STAB WOUNDS. YOU WOULDNT LEAVE HIM A CHANCE, HUH?
 						end
 
 						if org.slashwounds > 0 then
-							ply:ChatPrint("You notice "..org.slashwounds.." slashes on this body.")
+							ply:ChatPrint("你注意到这具尸体有"..org.slashwounds.."处割伤。")
 						end
 
 						if org.bruises > 0 then
-							ply:ChatPrint("You notice "..org.bruises.." bruises on this body.")
+							ply:ChatPrint("你注意到这具尸体有"..org.bruises.."处淤青。")
 						end
 
 						if org.burns > 0 then
-							ply:ChatPrint("The body was burned.")
+							ply:ChatPrint("尸体被烧伤。")
 						end
 
 						if org.explosionwounds > 0 then
-							ply:ChatPrint("The body appears to have blast trauma.")
+							ply:ChatPrint("尸体似乎有爆炸创伤。")
 						end
 
 						if (bone == "ValveBiped.Bip01_Head1") then
 							if (org.o2.curregen == 0 or not org.alive or org.holdingbreath) then
-								--ply:ChatPrint("Not breathing.")
+								--ply:ChatPrint("没有呼吸。")
 							else
-								--ply:ChatPrint("Breathing.")
+								--ply:ChatPrint("有呼吸。")
 							end
 
 							--ply:ChatPrint(org.otrub and "No reaction." or "Reaction present.")
 
 							if org.isPly and not org.otrub then
-								org.owner:ChatPrint("You were checked for reaction.")
+								org.owner:ChatPrint("有人检查了你的反应。")
 							end
 						end
 					end
@@ -1028,7 +1028,7 @@ function SWEP:ApplyForce()
 				if org and bone == "ValveBiped.Bip01_Spine2" and trace.Hit then
 					if self.firstTimePrint then
 						if not ply2.noHead then
-							ply:ChatPrint("You are beginning to perform CPR.")
+							ply:ChatPrint("你正在开始心肺复苏。")
 						else
 							ply:Notify("I dont think CPR would help here...", 10)
 						end

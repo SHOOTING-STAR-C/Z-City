@@ -1,9 +1,9 @@
 include("shared.lua")
 SWEP.Category = "ZCity Other"
-SWEP.PrintName = "Cool Hands"
+SWEP.PrintName = "酷手"
 SWEP.AdminOnly = true
 SWEP.Spawnable = true --// Use this hands if you like it more.. - Mannytko
-SWEP.Instructions = "LMB - raise fists\nRELOAD - lower fists\n\nIn the raised state:\nLMB - strike\nRMB - block\n\nIn the lowered state: RMB - raise the object, RMB+R - check the pulse (when used on someone's head or hand)\n\nWhen holding the object: RELOAD - fix the object in air, E - spin the object in the air."
+SWEP.Instructions = "左键 - 举起拳头\n装填键 - 放下拳头\n\n举起状态:\n左键 - 击打\n右键 - 格挡\n\n放下状态: 右键 - 举起物体, 右键+装填键 - 检查脉搏（在他人头部或手部使用时）\n\n持物时: 装填键 - 将物体固定在空中, E键 - 在空中旋转物体。"
 SWEP.blockinganim = 0
 SWEP.animtime = 0
 SWEP.Slot = 0
@@ -70,61 +70,61 @@ function SWEP:DrawHUD()
 
 		surface.SetFont("HomigradFontLarge")
 		surface.SetTextColor(255, 255, 255, lerpalpha)
-		local txt = "Afflictions shown for "..ent:GetPlayerName()..":"
+		local txt = "显示 "..ent:GetPlayerName().." 的异常状态："
 		local w1, h1 = surface.GetTextSize(txt)
 		surface.SetTextPos(scrw * 0.05, scrh * 0.95 - h - h1)
 		surface.DrawText(txt)
 
 		if org.blood and org.blood < 4000 then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, (4000 - org.blood) / 4000, hg.afflictions.pale, lerpalpha, "Pale skin")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, (4000 - org.blood) / 4000, hg.afflictions.pale, lerpalpha, "苍白")
 
 			add_x = add_x + w + add
 		end
 
 		if org.bleed and org.bleed > 0.1 then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, math.min(org.bleed / 10, 1), hg.afflictions.bleeding, lerpalpha, "Bleeding")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, math.min(org.bleed / 10, 1), hg.afflictions.bleeding, lerpalpha, "出血")
 
 			add_x = add_x + w + add
 		end
 
 		if org.disorientation and org.disorientation > 0.1 and ent == owner then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, math.min(org.disorientation / 2, 1), hg.afflictions.concussion, lerpalpha, "Concussion")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, math.min(org.disorientation / 2, 1), hg.afflictions.concussion, lerpalpha, "脑震荡")
 
 			add_x = add_x + w + add
 		end
 
 		if org.rleg and org.rleg > 0 then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, org.rleg, org.rleg > 0.999 and hg.afflictions.lfracture or hg.afflictions.lblunt, lerpalpha, org.rleg > 0.999 and "Right leg fracture" or "Right leg blunt trauma")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, org.rleg, org.rleg > 0.999 and hg.afflictions.lfracture or hg.afflictions.lblunt, lerpalpha, org.rleg > 0.999 and "右腿骨折" or "右腿钝伤")
 
 			add_x = add_x + w + add
 		end
 
 		if org.lleg and org.lleg > 0 then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, org.lleg, org.lleg > 0.999 and hg.afflictions.lfracture or hg.afflictions.lblunt, lerpalpha, org.lleg > 0.999 and "Left leg fracture" or "Left leg blunt trauma")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, org.lleg, org.lleg > 0.999 and hg.afflictions.lfracture or hg.afflictions.lblunt, lerpalpha, org.lleg > 0.999 and "左腿骨折" or "左腿钝伤")
 
 			add_x = add_x + w + add
 		end
 
 		if org.rarm and org.rarm > 0 then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, org.rarm, org.rarm > 0.999 and hg.afflictions.afracture or hg.afflictions.ablunt, lerpalpha, org.rarm > 0.999 and "Right arm fracture" or "Right arm blunt trauma")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, org.rarm, org.rarm > 0.999 and hg.afflictions.afracture or hg.afflictions.ablunt, lerpalpha, org.rarm > 0.999 and "右臂骨折" or "右臂钝伤")
 
 			add_x = add_x + w + add
 		end
 
 		if org.larm and org.larm > 0 then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, org.larm, org.larm > 0.999 and hg.afflictions.afracture or hg.afflictions.ablunt, lerpalpha, org.larm > 0.999 and "Left arm fracture" or "Left arm blunt trauma")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, org.larm, org.larm > 0.999 and hg.afflictions.afracture or hg.afflictions.ablunt, lerpalpha, org.larm > 0.999 and "左臂骨折" or "左臂钝伤")
 
 			add_x = add_x + w + add
 		end
 
 		if org.pain and org.pain > 20 and not org.otrub then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, (org.pain - 20) / 30, hg.afflictions.pain, lerpalpha, "Pain")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, (org.pain - 20) / 30, hg.afflictions.pain, lerpalpha, "疼痛")
 
 			add_x = add_x + w + add
 		end
 
 		if org.o2 and org.o2[1] < 5 then
-			hg.DrawAffliction(posx + add_x, posy - h, w, h, (5 - org.o2[1]) / 5, hg.afflictions.lung_failure, lerpalpha, "Lung failure")
+			hg.DrawAffliction(posx + add_x, posy - h, w, h, (5 - org.o2[1]) / 5, hg.afflictions.lung_failure, lerpalpha, "肺衰竭")
 
 			add_x = add_x + w + add
 		end
@@ -135,7 +135,7 @@ function SWEP:DrawHUD()
 			surface.SetFont("HomigradFontLarge")
 			surface.SetTextColor(255, 255, 255, lerpalpha)
 			surface.SetTextPos(scrw * 0.05, scrh * 0.95 - h)
-			surface.DrawText("No afflictions.")
+			surface.DrawText("无异常状态。")
 		end
 	end
 end

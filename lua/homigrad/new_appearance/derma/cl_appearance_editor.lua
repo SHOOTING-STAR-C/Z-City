@@ -544,7 +544,7 @@ function PANEL:PostInit()
         local presetName = presetNameEntry:GetValue()
         if presetName == "" or #presetName < 2 then
             surface.PlaySound("buttons/button10.wav")
-            notification.AddLegacy("Enter a preset name (min 2 chars)", NOTIFY_ERROR, 3)
+            notification.AddLegacy("输入预设名称（最少2个字符）", NOTIFY_ERROR, 3)
             return
         end
         
@@ -552,7 +552,7 @@ function PANEL:PostInit()
         
         SavePreset(presetName, main.AppearanceTable)
         surface.PlaySound("buttons/button14.wav")
-        notification.AddLegacy("Preset '" .. presetName .. "' saved!", NOTIFY_GENERIC, 3)
+        notification.AddLegacy("预设 '" .. presetName .. "' 已保存！", NOTIFY_GENERIC, 3)
     end
 
     local loadPresetBtn = vgui.Create("DButton", presetsPanel)
@@ -572,7 +572,7 @@ function PANEL:PostInit()
         local presetList = GetPresetList()
         if #presetList == 0 then
             surface.PlaySound("buttons/button10.wav")
-            notification.AddLegacy("No presets saved yet!", NOTIFY_ERROR, 3)
+            notification.AddLegacy("还没有保存的预设！", NOTIFY_ERROR, 3)
             return
         end
         
@@ -618,10 +618,10 @@ function PANEL:PostInit()
                     modelSelector:SetText(loadedPreset.AModel or "Male 01")
                     presetNameEntry:SetText(presetName)
                     surface.PlaySound("buttons/button14.wav")
-                    notification.AddLegacy("Preset '" .. presetName .. "' loaded!", NOTIFY_GENERIC, 3)
+                    notification.AddLegacy("预设 '" .. presetName .. "' 已加载！", NOTIFY_GENERIC, 3)
                 else
                     surface.PlaySound("buttons/button10.wav")
-                    notification.AddLegacy("Failed to load preset!", NOTIFY_ERROR, 3)
+                    notification.AddLegacy("加载预设失败！", NOTIFY_ERROR, 3)
                 end
                 presetMenu:Close()
             end
@@ -631,7 +631,7 @@ function PANEL:PostInit()
                 confirmMenu:AddOption("Delete '" .. presetName .. "'", function()
                     DeletePreset(presetName)
                     surface.PlaySound("buttons/button15.wav")
-                    notification.AddLegacy("Preset deleted!", NOTIFY_HINT, 2)
+                    notification.AddLegacy("预设已删除！", NOTIFY_HINT, 2)
                     presetBtn:Remove()
                 end):SetIcon("icon16/cross.png")
                 confirmMenu:Open()
@@ -655,17 +655,17 @@ function PANEL:PostInit()
         local presetName = presetNameEntry:GetValue()
         if presetName == "" then
             surface.PlaySound("buttons/button10.wav")
-            notification.AddLegacy("Enter preset name to delete", NOTIFY_ERROR, 3)
+            notification.AddLegacy("输入要删除的预设名称", NOTIFY_ERROR, 3)
             return
         end
         
         if DeletePreset(presetName) then
             surface.PlaySound("buttons/button15.wav")
-            notification.AddLegacy("Preset '" .. presetName .. "' deleted!", NOTIFY_HINT, 3)
+            notification.AddLegacy("预设 '" .. presetName .. "' 已删除！", NOTIFY_HINT, 3)
             presetNameEntry:SetText("")
         else
             surface.PlaySound("buttons/button10.wav")
-            notification.AddLegacy("Preset not found!", NOTIFY_ERROR, 3)
+            notification.AddLegacy("未找到预设！", NOTIFY_ERROR, 3)
         end
     end
 
@@ -673,7 +673,7 @@ function PANEL:PostInit()
     presetNameEntry:Dock(FILL)
     presetNameEntry:SetSize(ScreenScale(80), ScreenScale(20))
     presetNameEntry:SetFont("ZCity_Tiny")
-    presetNameEntry:SetPlaceholderText("Preset name...")
+    presetNameEntry:SetPlaceholderText("预设名称...")
     presetNameEntry:SetContentAlignment(5)
     presetNameEntry:DockMargin(5,0,0,0)
     function presetNameEntry:Paint(w, h)

@@ -8,8 +8,8 @@
 
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_base"
-SWEP.PrintName = "Cyanide Capsule"
-SWEP.InstructionsBasic = "Potassium cyanide powder in a capsule\nToxic (time to incapacitation ~90 seconds from 140mg)\nSugary drinks will decompose KCN upon consumption\nNOT to be mixed with food or applied to bandages, you don't want to kill anyone with it do you?"	--; TODO Mansion tea cup
+SWEP.PrintName = "氰化物胶囊"
+SWEP.InstructionsBasic = "胶囊中的氰化钾粉末\n剧毒（140mg约90秒内致 incapacitation）\n含糖饮料会在摄入后分解KCN\n不要与食物混合或涂抹在绷带上，你不想用它杀人吧？"	--; TODO Mansion tea cup
 SWEP.Instructions = SWEP.InstructionsBasic
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
@@ -70,7 +70,7 @@ function SWEP:MarkupUpdate()
 		self.Instructions = self.InstructionsBasic .. "\n\nIt's empty."
 		self.InfoMarkup = nil
 	else
-		self.Instructions = self.InstructionsBasic .. "\n\n" .. self:GetUsesLeft() * 140 .. " mg left"
+		self.Instructions = self.InstructionsBasic .. "\n\n" .. self:GetUsesLeft() * 140 .. " 毫克"
 		self.InfoMarkup = nil
 	end
 end
@@ -140,8 +140,8 @@ if CLIENT then
 		local toScreen = tr.HitPos:ToScreen()
 
 		if(IsValid(tr.Entity) and self:CanPoison(tr.Entity))then
-			draw.SimpleText("Poison "..(tr.Entity.PrintName or "Consumable"), "HomigradFont", toScreen.x + 3, toScreen.y + 27, color_black, TEXT_ALIGN_CENTER)
-			draw.SimpleText("Poison "..(tr.Entity.PrintName or "Consumable"), "HomigradFont", toScreen.x, toScreen.y + 25, colred, TEXT_ALIGN_CENTER)
+			draw.SimpleText("下毒 "..(tr.Entity.PrintName or "消耗品"), "HomigradFont", toScreen.x + 3, toScreen.y + 27, color_black, TEXT_ALIGN_CENTER)
+			draw.SimpleText("下毒 "..(tr.Entity.PrintName or "消耗品"), "HomigradFont", toScreen.x, toScreen.y + 25, colred, TEXT_ALIGN_CENTER)
 			surface.SetDrawColor(195,0,0,155)
 			surface.DrawRect(toScreen.x-2.5, toScreen.y-2.5, 5, 5)
 		else
@@ -164,7 +164,7 @@ function SWEP:DoPoison(ent)
 
 	ent.ConsumePoisoned_KCN = (ent.ConsumePoisoned_KCN or 0) + 1
 	
-	owner:ChatPrint((ent.PrintName or "Item").." was poisoned!")
+	owner:ChatPrint((ent.PrintName or "物品").." 已被下毒！")
 
 	self:SetUsesLeft(math.max(self:GetUsesLeft(0) - 1, 0))
 end
@@ -244,7 +244,7 @@ function SWEP:PrimaryAttack()
 	if self:GetNextPrimaryFire() > CurTime() then return end
 	if SERVER then
 		if(self:GetUsesLeft() == 0)then
-			self:GetOwner():ChatPrint("The capsule is empty.")
+			self:GetOwner():ChatPrint("胶囊是空的。")
 			self:SetNextPrimaryFire(CurTime() + 0.8)
 
 			return

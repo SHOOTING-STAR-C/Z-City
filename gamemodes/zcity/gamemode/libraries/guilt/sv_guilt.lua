@@ -142,7 +142,7 @@ hook.Add("HomigradDamage", "GuiltReg", function(ply, dmgInfo, hitgroup, ent, har
     local amt = harm / maxharm
     
     if amt > 0.2 or newharm / maxharm > 0.8 then
-        --print("Player "..Attacker:Name().." harmed player "..(Victim:IsPlayer() and Victim:Name() or (tostring(Victim))).." with "..harm.." points.")
+        --print("玩家 "..Attacker:Name().." harmed player "..(Victim:IsPlayer() and Victim:Name() or (tostring(Victim))).." with "..harm.." points.")
         --print("They contributed a total of "..math.Round(newharm / maxharm * 100, 0).."% of "..(Victim:IsPlayer() and Victim:Name() or (tostring(Victim))).."'s death")
     end
 
@@ -162,10 +162,10 @@ hook.Add("HomigradDamage", "GuiltReg", function(ply, dmgInfo, hitgroup, ent, har
     }
 
     if hg_developer:GetBool() then
-        Attacker:ChatPrint("This harm done is: "..math.Round(harm,3))
-        Attacker:ChatPrint("Overall amt done is: "..math.Round(amt,3))
-        Attacker:ChatPrint("Overall harm done is: "..math.Round(newharm,3))
-        Attacker:ChatPrint("Guilt done is: "..math.Round(amt * 60,3))
+        Attacker:ChatPrint("本次造成的伤害: "..math.Round(harm,3))
+        Attacker:ChatPrint("总伤害量: "..math.Round(amt,3))
+        Attacker:ChatPrint("总伤害: "..math.Round(newharm,3))
+        Attacker:ChatPrint("罪恶值: "..math.Round(amt * 60,3))
         Attacker:ChatPrint(" ")
     end
 
@@ -233,7 +233,7 @@ hook.Add("HomigradDamage", "GuiltReg", function(ply, dmgInfo, hitgroup, ent, har
 		-- 	Attacker:Ban(30, true)
 		-- end
 
-        PrintMessage(HUD_PRINTTALK, "Player "..Attacker:Name().." has been banned for 30 minutes for RDMing in a team based gamemode.")
+        PrintMessage(HUD_PRINTTALK, "玩家 "..Attacker:Name().." 因在团队模式中恶意击杀被禁赛30分钟。")
     end
 
     Attacker:SetNetVar("Karma", Attacker.Karma)
@@ -262,7 +262,7 @@ hook.Add("HomigradDamage", "GuiltReg", function(ply, dmgInfo, hitgroup, ent, har
 			-- 	Attacker:Ban(60, true)
 			-- end
             
-            PrintMessage(HUD_PRINTTALK, "Player "..name.." has been banned for "..time.." minutes for having too low karma.")
+            PrintMessage(HUD_PRINTTALK, "玩家 "..name.." 因因果值过低被禁赛 "..time.." 分钟。")
         end)
     end
 end)
@@ -339,7 +339,7 @@ hook.Add("Org Think", "Its_Karma_Bro",function(owner, org, timeValue)
             ply:Notify(seizuremsgs[math.random(#seizuremsgs)], 16, "seizure", 1, function()
                 if !IsValid(ply) then return end
                 
-                ply:ChatPrint("You are experiencing an epileptic seizure.")
+                ply:ChatPrint("你正在经历癫痫发作。")
             end)
 
             org.start_shaking = org.start_shaking or (CurTime() + time)
@@ -441,7 +441,7 @@ end)
 
 hook.Add("Player Spawn", "GuiltKnown",function(ply)
     if ply.Karma then
-        ply:ChatPrint("Your current karma is "..tostring(math.Round(ply.Karma)).."")
+        ply:ChatPrint("你当前的因果值是 "..tostring(math.Round(ply.Karma)).."")
     end
 end)
 

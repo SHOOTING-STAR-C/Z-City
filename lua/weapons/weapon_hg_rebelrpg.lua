@@ -1,7 +1,7 @@
 SWEP.Base = "homigrad_base"
 SWEP.Spawnable = true
 SWEP.AdminOnly = true
-SWEP.PrintName = "Rebel RPG"
+SWEP.PrintName = "反抗军RPG"
 SWEP.Author = "Degtyarev plant"
 SWEP.Instructions = "The Rebellion RPG is a portable unguided shoulder-launched anti-tank rocket launcher."
 SWEP.Category = "Weapons - Grenade Launchers"

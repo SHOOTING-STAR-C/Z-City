@@ -1,7 +1,7 @@
 SWEP.Base = "homigrad_base"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
-SWEP.PrintName = "Homemade Crossbow"
+SWEP.PrintName = "自制弩"
 SWEP.Author = "Unknown"
 SWEP.Instructions = "A rather weighty homemade crossbow that shoots red-hot armature.\nHas very high damage"
 SWEP.Category = "Weapons - Other"

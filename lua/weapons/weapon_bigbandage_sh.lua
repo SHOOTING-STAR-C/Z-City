@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 
 SWEP.Base = "weapon_bandage_sh"
-SWEP.PrintName = "Big bandage"
+SWEP.PrintName = "大绷带"
 SWEP.Instructions = "A wad of gauze bandage, can help stop light bleeding. Since the bandage is not in its packaging, there is little chance that it is sterilized. RMB to use on someone else."
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

@@ -8,13 +8,13 @@ util.AddNetworkString("defense_admin_wave_skip")
 
 concommand.Add("defense_waves_admin", function(ply, cmd, args)
     if not HasAccess(ply) then
-        ply:ChatPrint("nuh uh")
+        ply:ChatPrint("不行")
         return
     end
     
     local MODE = CurrentRound()
     if not MODE or MODE.name ~= "defense" then
-        ply:ChatPrint("nope")
+        ply:ChatPrint("不行")
         return
     end
     
@@ -42,13 +42,13 @@ net.Receive("defense_admin_wave_skip", function(len, ply)
     
 
     if targetWave < 1 or targetWave > MODE.TotalWaves then
-        ply:ChatPrint("wha?")
+        ply:ChatPrint("什么？")
         return
     end
     
 
     for _, player in player.Iterator() do
-        player:ChatPrint("Fatass " .. ply:Nick() .. " switch wave to " .. targetWave)
+        player:ChatPrint("肥仔 " .. ply:Nick() .. " 将波次切换到 " .. targetWave)
     end
     
 

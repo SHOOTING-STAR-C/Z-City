@@ -110,11 +110,11 @@ hook.Add("HUDPaint","FUCKINGSAMENAMEUSEDINHOOKFUCKME",function()
 	
 	surface.SetFont("HomigradFont")
 	surface.SetTextColor(255, 255, 255, 255)
-	local txt = "Spectating player: "..spect:Name()
+	local txt = "正在观战: "..spect:Name()
 	local w, h = surface.GetTextSize(txt)
 	surface.SetTextPos(ScrW() / 2 - w / 2, ScrH() / 8 * 7)
 	surface.DrawText(txt)
-	local txt = "In-game name: "..spect:GetPlayerName()
+	local txt = "游戏内名称: "..spect:GetPlayerName()
 	local w, h = surface.GetTextSize(txt)
 	surface.SetTextPos(ScrW() / 2 - w / 2, ScrH() / 8 * 7 + h)
 	surface.DrawText(txt)
@@ -439,7 +439,7 @@ local function OpenPlayerSoundSettings(selfa, ply)
 	
 	if not hg.playerInfo[ply:SteamID()] or not istable(hg.playerInfo[ply:SteamID()]) then addToPlayerInfo(ply, false, 1) end
 
-	local mute = Menu:AddOption( "Mute", function(self)
+	local mute = Menu:AddOption( "静音", function(self)
 		if hg.muteall || hg.mutespect then return end
 		
 		self:SetChecked(not ply:IsMuted())
@@ -525,7 +525,7 @@ function GM:ScoreboardShow()
 	local w, h = ScreenScale(30),ScreenScale(6)
 	muteallbut:SetPos(scoreBoardMenu:GetWide()-w*2.3,scoreBoardMenu:GetTall() - h * 1.5)
 	muteallbut:SetSize(w, h)
-	muteallbut:SetText("Mute all")
+	muteallbut:SetText("全员静音")
 	
 	muteallbut.Paint = function(self,w,h)
 		surface.SetDrawColor( not hg.muteall and 255 or 0, hg.muteall and 255 or 0, 0, 128)
@@ -558,7 +558,7 @@ function GM:ScoreboardShow()
 	local w, h = ScreenScale(30),ScreenScale(6)
 	mutespectbut:SetPos(scoreBoardMenu:GetWide()-w*1.2,scoreBoardMenu:GetTall() - h * 1.5)
 	mutespectbut:SetSize(w, h)
-	mutespectbut:SetText("Mute spectators")
+	mutespectbut:SetText("静音观战者")
 	
 	mutespectbut.Paint = function(self,w,h)
 		surface.SetDrawColor( not hg.mutespect and 255 or 0, hg.mutespect and 255 or 0, 0, 128)
@@ -611,15 +611,15 @@ function GM:ScoreboardShow()
 
 		surface.SetFont( "ZB_InterfaceMediumLarge" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Players:")
+		local lengthX, lengthY = surface.GetTextSize("玩家:")
 		surface.SetTextPos(w / 4 - lengthX/2,ScreenScale(25))
-		surface.DrawText("Players:")
+		surface.DrawText("玩家:")
 
 		surface.SetFont( "ZB_InterfaceMediumLarge" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Spectators:")
+		local lengthX, lengthY = surface.GetTextSize("观战者:")
 		surface.SetTextPos(w * 0.75 - lengthX/2,ScreenScale(25))
-		surface.DrawText("Spectators:")
+		surface.DrawText("观战者:")
 		tick = math.Round(1 / engine.ServerFrameTime())
 		local txt = "SV Tick: " .. tick
 		local lengthX, lengthY = surface.GetTextSize(txt)
@@ -646,9 +646,9 @@ function GM:ScoreboardShow()
 			surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
 			surface.SetFont( "ZB_InterfaceMedium" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize("Join")
+			local lengthX, lengthY = surface.GetTextSize("加入")
 			surface.SetTextPos( lengthX - lengthX/2, 2)
-			surface.DrawText("Join")
+			surface.DrawText("加入")
 		end
 	end
 
@@ -671,9 +671,9 @@ function GM:ScoreboardShow()
 			surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
 			surface.SetFont( "ZB_InterfaceMedium" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize("Join")
+			local lengthX, lengthY = surface.GetTextSize("加入")
 			surface.SetTextPos( lengthX - lengthX/2, 2)
-			surface.DrawText("Join")
+			surface.DrawText("加入")
 		end
 	end
 
@@ -724,29 +724,29 @@ function GM:ScoreboardShow()
 	
 			surface.SetFont("ZB_InterfaceMediumLarge")
 			surface.SetTextColor(col.r, col.g, col.b, col.a)
-			local lengthX, lengthY = surface.GetTextSize(ply:Name() or "He quited...")
+			local lengthX, lengthY = surface.GetTextSize(ply:Name() or "已离开...")
 			surface.SetTextPos(15, h / 2 - lengthY / 2)
-			surface.DrawText(ply:Name() or "He quited...")
+			surface.DrawText(ply:Name() or "已离开...")
 	
 			surface.SetFont("ZB_InterfaceMediumLarge")
 			surface.SetTextColor(col.r, col.g, col.b, col.a)
-			local lengthX, lengthY = surface.GetTextSize(ply:Ping() or "He quited...")
+			local lengthX, lengthY = surface.GetTextSize(ply:Ping() or "已离开...")
 			surface.SetTextPos(w - lengthX - 15, h / 2 - lengthY / 2)
-			surface.DrawText(ply:Ping() or "He quited...")
+			surface.DrawText(ply:Ping() or "已离开...")
 		end
 
 		function but:DoClick()
-			if ply:IsBot() then chat.AddText(Color(255,0,0), "no, you can't") return end
+			if ply:IsBot() then chat.AddText(Color(255,0,0), "不行，你不能这样做") return end
 			gui.OpenURL("https://steamcommunity.com/profiles/"..ply:SteamID64())
 		end
 
 		function but:DoRightClick()
-			--if ply:IsBot() then chat.AddText(Color(255,0,0), "no, you can't") return end
+			--if ply:IsBot() then chat.AddText(Color(255,0,0), "不行，你不能这样做") return end
 			local Menu = DermaMenu()
-			Menu:AddOption( "Account", function(self)
+			Menu:AddOption( "账户", function(self)
 				zb.Experience.AccountMenu( ply )
 			end)
-			Menu:AddOption( "Copy SteamID", function(self)
+			Menu:AddOption( "复制 SteamID", function(self)
 				SetClipboardText(ply:SteamID())
 			end)
 
@@ -800,29 +800,29 @@ function GM:ScoreboardShow()
 
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize( ply:Name() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:Name() or "已离开..." )
 			surface.SetTextPos(15,h/2 - lengthY/2)
-			surface.DrawText(ply:Name() or "He quited...")
+			surface.DrawText(ply:Name() or "已离开...")
 
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
-			local lengthX, lengthY = surface.GetTextSize( ply:Ping() or "He quited..." )
+			local lengthX, lengthY = surface.GetTextSize( ply:Ping() or "已离开..." )
 			surface.SetTextPos(w - lengthX -15,h/2 - lengthY/2)
-			surface.DrawText(ply:Ping() or "He quited...")
+			surface.DrawText(ply:Ping() or "已离开...")
 		end
 
 		function but:DoClick()
-			if ply:IsBot() then chat.AddText("That bot.") return end
+			if ply:IsBot() then chat.AddText("那是机器人。") return end
 			gui.OpenURL("https://steamcommunity.com/profiles/"..ply:SteamID64())
 		end
 
 		function but:DoRightClick()
-			--if ply:IsBot() then chat.AddText(Color(255,0,0), "no, you can't") return end
+			--if ply:IsBot() then chat.AddText(Color(255,0,0), "不行，你不能这样做") return end
 			local Menu = DermaMenu()
-			Menu:AddOption( "Account", function(self)
+			Menu:AddOption( "账户", function(self)
 				zb.Experience.AccountMenu( ply )
 			end)
-			Menu:AddOption( "Copy SteamID", function(self)
+			Menu:AddOption( "复制 SteamID", function(self)
 				SetClipboardText(ply:SteamID())
 			end)
 			--Menu:AddOption( "Medal", function(self) 
@@ -945,12 +945,12 @@ local snakeGameOpen = false
 
 concommand.Add("zb_snake", function() -- вот как здесь!
     if snakeGameOpen then
-        print("[Snake Game] Игра уже запущена!")
+        print("[贪吃蛇] 游戏已经在运行中！")
         return
     end
 
     local frame = vgui.Create("ZFrame")
-    frame:SetTitle("Snake Game")
+    frame:SetTitle("贪吃蛇")
     frame:SetSize(400, 400)
     frame:Center()
     frame:MakePopup()
@@ -1077,10 +1077,10 @@ concommand.Add("zb_snake", function() -- вот как здесь!
             drawSnake()
             drawFood()
         else
-            draw.SimpleText("Game Over! Press R to restart", "DermaDefault", w / 2, h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            draw.SimpleText("游戏结束！按 R 重新开始", "DermaDefault", w / 2, h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
 
-        draw.SimpleText("Score: " .. score, "DermaDefault", 10, 10, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+        draw.SimpleText("分数: " .. score, "DermaDefault", 10, 10, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
     end
 
 

@@ -1,6 +1,6 @@
 local MODE = MODE
 MODE.name = "hmcd"
-MODE.PrintName = "Homicide"
+MODE.PrintName = "杀人游戏"
 
 --\\
 MODE.TraitorExpectedAmtBits = 13
@@ -364,90 +364,90 @@ MODE.RoleChooseRoundTypes = {
 MODE.Roles = {}
 MODE.Roles.soe = {
 	traitor = {
-		name = "Traitor",
+		name = "叛徒",
 		color = Color(190,0,0)
 	},
 
 	gunner = {
-		name = "Innocent",
+		name = "平民",
 		color = Color(158,0,190)
 	},
 
 	innocent = {
-		name = "Innocent",
+		name = "平民",
 		color = Color(0,120,190)
 	},
 }
 
 MODE.Roles.standard = {
 	traitor = {
-		objective = "You've been preparing for this for a long time. Kill everyone.",
-		name = "Murderer",
+		objective = "你已经为此准备了很长时间。杀光所有人。",
+		name = "杀人犯",
 		color = Color(190,0,0)
 	},
 
 	gunner = {
-		name = "Bystander",
+		name = "旁观者",
 		color = Color(158,0,190)
 	},
 
 	innocent = {
-		name = "Bystander",
+		name = "旁观者",
 		color = Color(0,120,190)
 	},
 }
 
 MODE.Roles.wildwest = {
 	traitor = {
-		objective = "You've been preparing for this for a long time. Kill everyone.",
-		name = "Murderer",
+		objective = "你已经为此准备了很长时间。杀光所有人。",
+		name = "杀人犯",
 		color = Color(190,0,0)
 	},
 
 	gunner = {
-		name = "Bystander",
+		name = "旁观者",
 		color = Color(159,85,0)
 	},
 
 	innocent = {
-		name = "Bystander",
+		name = "旁观者",
 		color = Color(159,85,0)
 	},
 }
 
 MODE.Roles.gunfreezone = {
 	traitor = {
-		name = "Murderer",
+		name = "杀人犯",
 		color = Color(190,0,0)
 	},
 
 	gunner = {
-		name = "Innocent",
+		name = "平民",
 		color = Color(0,120,190)
 	},
 
 	innocent = {
-		name = "Innocent",
+		name = "平民",
 		color = Color(0,120,190)
 	},
 }
 
 MODE.Roles.supermario = {
 	traitor = {
-		objective = "You're the evil Mario! Jump around and take down everyone.",
-		name = "Traitor Mario",
+		objective = "你是邪恶的马里奥！跳来跳去，打倒所有人。",
+		name = "叛徒马里奥",
 		color = Color(190,0,0)
 	},
 
 	gunner = {
-		objective = "You're the hero Mario! Use your jumping ability to stop the traitor.",
-		name = "Hero Mario",
+		objective = "你是英雄马里奥！利用你的跳跃能力阻止叛徒。",
+		name = "英雄马里奥",
 		color = Color(158,0,190)
 	},
 
 	innocent = {
-		objective = "You're a bystander Mario, survive and avoid the traitor's traps!",
-		name = "Innocent Mario",
+		objective = "你是旁观者马里奥，生存下来并避开叛徒的陷阱！",
+		name = "平民马里奥",
 		color = Color(0,120,190)
 	},
 }

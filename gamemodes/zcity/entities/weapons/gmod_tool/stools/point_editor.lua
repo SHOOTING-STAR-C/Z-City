@@ -6,7 +6,7 @@ TOOL.ClientConVar["point"] = ""
 function TOOL:LeftClick(trace, attach)
 	local ply = self:GetOwner()
 	if not ply:IsAdmin() then
-		ply:ChatPrint("You are a furry")
+		ply:ChatPrint("你是个福瑞")
 		return false
 	end
 
@@ -34,7 +34,7 @@ end
 function TOOL:RightClick(trace)
 	local ply = self:GetOwner()
 	if not ply:IsAdmin() then
-		ply:ChatPrint("You are a furry")
+		ply:ChatPrint("你是个福瑞")
 		return false
 	end
 
@@ -104,13 +104,13 @@ end
 
 function TOOL.BuildCPanel(CPanel)
 	CPanel:AddControl("Header", {
-		Description = "LMB to add point,\nRMB to remove nearest point" -- ура удобный инструмент я в шоке!!
+		Description = "左键添加点位,\n右键删除最近的点位" -- ура удобный инструмент я в шоке!!
 	})
 
 	local dlist = vgui.Create("DListView")
 	dlist:Dock(TOP)
 	dlist:SetTall(ScreenScale(100))
-	dlist:AddColumn("Point Name")
+	dlist:AddColumn("点位名称")
 
 	for k, _ in SortedPairs(zb.Points) do
 		dlist:AddLine(k)

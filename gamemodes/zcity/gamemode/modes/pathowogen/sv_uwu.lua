@@ -1,5 +1,5 @@
 MODE.name = "pathowogen"
-MODE.PrintName = "Pathowogen :3"
+MODE.PrintName = "病原体 :3"
 MODE.start_time = 0
 MODE.end_time = 10
 
@@ -111,7 +111,7 @@ function MODE:FigureOutConsequences()
 end
 
 function MODE:EndRound()
-	PrintMessage(HUD_PRINTTALK, "Round ended.")
+	PrintMessage(HUD_PRINTTALK, "回合结束。")
 
 	for k, _ in pairs(self.saved.Timers or {}) do
 		timer.Remove(k)
@@ -411,7 +411,7 @@ end
 
 function MODE:CanPlayerSuicide(ply)
 	if IsValid(ply) and ply:IsPlayer() then
-		ply:ChatPrint("nuh uh!!!")
+		ply:ChatPrint("不行！！！")
 		return false
 	end
 end

@@ -449,7 +449,7 @@ end
 
 
 COMMANDS.forcertv = {function(ply, args)
-	if not ply:IsAdmin() then ply:ChatPrint("You don't have access") return end
+	if not ply:IsAdmin() then ply:ChatPrint("你没有权限") return end
 		zb.StartRTV(20)
 	end,
 	0
@@ -476,7 +476,7 @@ function zb.CheckRTVVotes(needPrint)
     if votes >= votesNeeded then
         if needPrint then
             for _, v in player.Iterator() do
-                v:ChatPrint("Enough votes to change the map. RTV will be on next round.")
+                v:ChatPrint("足够的票数来更换地图。RTV将在下一回合进行。")
             end
         end
         
@@ -496,7 +496,7 @@ local function rtv(ply, args)
     
     if rtvVotes[steamID] then
         rtvVotes[steamID] = nil
-        ply:ChatPrint("You canceled your vote for map change.")
+        ply:ChatPrint("你取消了更换地图的投票。")
         
         local votesNeeded = math.ceil(#player.GetAll() / 2)
         local votes = table.Count(rtvVotes)
@@ -516,7 +516,7 @@ local function rtv(ply, args)
         timer.Create("RTVTimeout", 1800, 1, function()
             if table.Count(rtvVotes) > 0 then
                 for _, v in pairs(player.GetAll()) do
-                    v:ChatPrint("Map change votes have been reset due to timeout (30 minutes).")
+                    v:ChatPrint("由于超时（30分钟），地图更换投票已重置。")
                 end
                 zb.ClearRTVVotes()
             end
@@ -532,8 +532,8 @@ local function rtv(ply, args)
     for _, v in player.Iterator() do
         if remaining != 0 then
             v:ChatPrint(
-                ply:Nick() .. " voted for map change. " .. 
-                remaining .. " more votes needed. Type !rtv again to cancel your vote."
+                ply:Nick() .. " 投票更换地图。" .. 
+                remaining .. " 还需要更多票。再次输入 !rtv 取消你的投票。"
             )
         end
     end

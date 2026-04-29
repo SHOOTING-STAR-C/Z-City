@@ -279,9 +279,9 @@ function CreateCommanderMenu()
         surface.SetDrawColor(COMMANDER_UI.PRIMARY_COLOR)
         surface.DrawOutlinedRect(0, 0, w, h, 2)
         
-        draw.SimpleText("COMMANDER SUPPLY REQUISITION", "CommanderTitle", w/2, 25, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("指挥官补给申请", "CommanderTitle", w/2, 25, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-        draw.SimpleText("Available Points: " .. points, "CommanderText", w - 120, 25, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+        draw.SimpleText("可用点数: " .. points, "CommanderText", w - 120, 25, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
     
 
@@ -337,10 +337,10 @@ function CreateCommanderMenu()
         surface.SetDrawColor(COMMANDER_UI.PRIMARY_COLOR)
         surface.DrawOutlinedRect(0, 0, w, h, 1)
         
-        draw.SimpleText("YOUR ORDER", "CommanderCategory", 10, 10, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_LEFT)
-        
+        draw.SimpleText("你的订单", "CommanderCategory", 10, 10, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_LEFT)
+
         local totalCost = CalculateCartCost()
-        draw.SimpleText("Total Cost: " .. totalCost .. " points", "CommanderText", w - 10, 10, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_RIGHT)
+        draw.SimpleText("总花费: " .. totalCost .. " 点数", "CommanderText", w - 10, 10, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_RIGHT)
     end
     
 
@@ -391,7 +391,7 @@ function CreateCommanderMenu()
                 end
                 
                 draw.SimpleText(item.name, "CommanderSmall", w/2 + 10, 15, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-                draw.SimpleText(item.price .. " pts x " .. (item.quantity or 1), "CommanderSmall", w/2 + 10, 35, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                draw.SimpleText(item.price .. " 点数 x " .. (item.quantity or 1), "CommanderSmall", w/2 + 10, 35, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             end
             
             local removeButton = vgui.Create("DButton", cartItem)
@@ -463,14 +463,14 @@ function CreateCommanderMenu()
         surface.SetDrawColor(COMMANDER_UI.TEXT_COLOR)
         surface.DrawOutlinedRect(0, 0, w, h, 1)
         
-        draw.SimpleText("PLACE ORDER", "CommanderText", w/2, h/2, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("下达订单", "CommanderText", w/2, h/2, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
     orderButton.DoClick = function()
         if #currentCart == 0 then return end
         
         local totalCost = CalculateCartCost()
         if totalCost > points then
-            chat.AddText(COMMANDER_UI.PRIMARY_COLOR, "Not enough supply points!")
+            chat.AddText(COMMANDER_UI.PRIMARY_COLOR, "补给点数不足！")
             surface.PlaySound("buttons/button10.wav")
             return
         end
@@ -526,7 +526,7 @@ function CreateCommanderMenu()
                 
 
                 draw.SimpleText(item.name, "CommanderText", 80, 20, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_LEFT)
-                draw.SimpleText(item.price .. " points", "CommanderText", w - 150, 20, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_RIGHT)
+                draw.SimpleText(item.price .. " 点数", "CommanderText", w - 150, 20, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_RIGHT)
                 
 
                 draw.SimpleText(item.desc, "CommanderSmall", 80, 45, COMMANDER_UI.TEXT_COLOR, TEXT_ALIGN_LEFT)
@@ -583,7 +583,7 @@ function CreateCommanderMenu()
             local addToCartBtn = vgui.Create("DButton", itemButton)
             addToCartBtn:SetSize(100, 25)
             addToCartBtn:SetPos(itemButton:GetWide() - 110, 15)
-            addToCartBtn:SetText("Add to Cart")
+            addToCartBtn:SetText("加入购物车")
             addToCartBtn:SetTextColor(COMMANDER_UI.TEXT_COLOR)
             addToCartBtn:DockMargin(5, 5, 5, 5)
             addToCartBtn.Paint = function(self, w, h)
@@ -601,7 +601,7 @@ function CreateCommanderMenu()
             
             addToCartBtn.DoClick = function()
                 if item.price * quantity > points then
-                    chat.AddText(COMMANDER_UI.PRIMARY_COLOR, "Not enough supply points for this item!")
+                    chat.AddText(COMMANDER_UI.PRIMARY_COLOR, "补给点数不足以购买此物品！")
                     surface.PlaySound("buttons/button10.wav")
                     return
                 end
@@ -706,7 +706,7 @@ hook.Add("radialOptions", "CommanderSupplyMenu", function()
                 net.Start("defense_commander_menu")
                 net.SendToServer()
             end,
-            "Order Supplies (" .. points .. " pts)"
+            "订购补给 (" .. points .. " 点数)"
         }
         hg.radialOptions[#hg.radialOptions + 1] = tbl
     end
@@ -723,13 +723,13 @@ local COMMANDER_HINT = {
     nextTypewriterTime = 0,
     iconPos = Vector(0, 0, 0),
     targetIconPos = Vector(0, 0, 0),
-    text = [[As a Commander, you are responsible for supporting your team!  
-    
-Use the Q-menu to order equipment and support for your soldiers.
+    text = [[作为指挥官，你有责任支援你的团队！
 
-You get supply points after each wave. Use them wisely!
+使用Q菜单为你的士兵订购装备和支援。
 
-Your team relies on your leadership and tactical decisions!]]
+每波结束后你会获得补给点数。明智地使用它们！
+
+你的团队依赖你的领导和战术决策！]]
 }
 
 

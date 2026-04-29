@@ -115,7 +115,7 @@ function zb:ShouldRoundEnd()
 		local boringround = (zb.ROUND_START + time) < CurTime()
 
 		if boringround and CurrentRound().BoringRoundFunction then
-			PrintMessage(HUD_PRINTTALK, "Stopping round because it was TOO boring.")
+			PrintMessage(HUD_PRINTTALK, "回合太无聊了，正在停止。")
 
 			CurrentRound():BoringRoundFunction()
 		end
@@ -259,9 +259,9 @@ end)
 
 COMMANDS.bigmap = {
 	function(ply, args)
-		if not ply:IsAdmin() then ply:ChatPrint("You don't have access") return end
+		if not ply:IsAdmin() then ply:ChatPrint("你没有权限") return end
 		ZBATTLE_BIGMAP = tonumber(args[1])
-		ply:ChatPrint("Distance for big map: " .. ZBATTLE_BIGMAP)
+		ply:ChatPrint("大地图距离: " .. ZBATTLE_BIGMAP)
 		zb.RerollChances()
 
 		file.CreateDir("zbattle")
@@ -272,7 +272,7 @@ COMMANDS.bigmap = {
 
 		file.Write("zbattle/mapsizes.json", util.TableToJSON(tbl))
 
-		ply:ChatPrint("Saved into a file")
+		ply:ChatPrint("已保存到文件")
 	end,
 	0
 }
@@ -642,7 +642,7 @@ net.Receive("AdminSetGameMode", function(len, ply)
 
 	if command == "setmode" then
 		NextRound(modeKey)
-		ply:ChatPrint("Game mode set to: " .. modeKey)
+		ply:ChatPrint("游戏模式已设置为: " .. modeKey)
 
 		if addToQueue then
 			table.insert(zb.QueuedModes, modeKey)
@@ -653,7 +653,7 @@ net.Receive("AdminSetGameMode", function(len, ply)
 	elseif command == "setforcemode" then
 		forcemode = modeKey
 		NextRound(forcemode)
-		ply:ChatPrint("Force mode set to: " .. modeKey)
+		ply:ChatPrint("强制模式已设置为: " .. modeKey)
 
 		if addToQueue then
 			table.insert(zb.QueuedModes, modeKey)
@@ -667,7 +667,7 @@ end)
 net.Receive("AdminEndRound", function(len, ply)
 	if not ply:IsAdmin() then return end
 
-	ply:ChatPrint("Round ended!")
+	ply:ChatPrint("回合已结束！")
 	zb:EndRound()
 end)
 
@@ -686,7 +686,7 @@ net.Receive("AdminSetGameQueue", function(len, ply)
 	zb.QueuedModes = modeQueue
 
 	if #modeQueue == 0 then
-		ply:ChatPrint("Game mode queue has been cleared")
+		ply:ChatPrint("游戏模式队列已清空")
 		zb.NotifyQueueModified(ply, "cleared")
 
 
@@ -695,7 +695,7 @@ net.Receive("AdminSetGameQueue", function(len, ply)
 			net.Send(zb.GetAllAdmins())
 		end)
 	else
-		ply:ChatPrint("Game mode queue set with " .. #modeQueue .. " modes")
+		ply:ChatPrint("游戏模式队列已设置，共 " .. #modeQueue .. " 个模式")
 		zb.NotifyQueueModified(ply, "updated")
 	end
 
@@ -746,7 +746,7 @@ end
 
 COMMANDS.setmode = {
 	function(ply, args)
-		if not ply:IsAdmin() then ply:ChatPrint("You don't have access") return end
+		if not ply:IsAdmin() then ply:ChatPrint("你没有权限") return end
 		if not args[1] or (not zb:GetMode(args[1]) and args[1]~="random") then return end
 		ply:ChatPrint(args[1])
 		NextRound(args[1])
@@ -756,7 +756,7 @@ COMMANDS.setmode = {
 
 COMMANDS.setforcemode = {
 	function(ply, args)
-		if not ply:IsAdmin() then ply:ChatPrint("You don't have access") return end
+		if not ply:IsAdmin() then ply:ChatPrint("你没有权限") return end
 		if not args[1] or (not zb:GetMode(args[1]) and args[1]~="random") then return end
 		ply:ChatPrint(args[1])
 		forcemode = args[1]
@@ -807,13 +807,13 @@ if SERVER then
 		local addToQueue = net.ReadBool() or false
 
 		if !(ply:IsSuperAdmin() or ply:IsAdmin()) and not zb.modes[modeKey]:CanLaunch() then
-			ply:ChatPrint("This mode can't launch (No points or Is blocked): " .. modeKey)
+			ply:ChatPrint("该模式无法启动（无点位或被阻止）: " .. modeKey)
 			return
 		end
 
 		if command == "setmode" then
 			NextRound(modeKey)
-			ply:ChatPrint("Game mode set to: " .. modeKey)
+			ply:ChatPrint("游戏模式已设置为: " .. modeKey)
 
 			if addToQueue then
 				table.insert(zb.QueuedModes, modeKey)
@@ -824,7 +824,7 @@ if SERVER then
 		elseif command == "setforcemode" then
 			forcemode = modeKey
 			NextRound(forcemode)
-			ply:ChatPrint("Force mode set to: " .. modeKey)
+			ply:ChatPrint("强制模式已设置为: " .. modeKey)
 
 			if addToQueue then
 				table.insert(zb.QueuedModes, modeKey)
@@ -850,7 +850,7 @@ if SERVER then
 		zb.QueuedModes = modeQueue
 
 		if #modeQueue == 0 then
-			ply:ChatPrint("Game mode queue has been cleared")
+			ply:ChatPrint("游戏模式队列已清空")
 			zb.NotifyQueueModified(ply, "cleared")
 
 
@@ -859,7 +859,7 @@ if SERVER then
 				net.Send(zb.GetAllAdmins())
 			end)
 		else
-			ply:ChatPrint("Game mode queue set with " .. #modeQueue .. " modes")
+			ply:ChatPrint("游戏模式队列已设置，共 " .. #modeQueue .. " 个模式")
 			zb.NotifyQueueModified(ply, "updated")
 		end
 

@@ -186,7 +186,7 @@ util.AddNetworkString( "tdm_buyitem" )
 local AttachmentPrice = 50
 net.Receive("tdm_buyitem",function(len,ply)
 	if !CurrentRound().buymenu then return end
-	if ((zb.ROUND_START or 0) + 40 < CurTime()) then ply:ChatPrint("Time's up!") return end
+	if ((zb.ROUND_START or 0) + 40 < CurTime()) then ply:ChatPrint("时间到！") return end
 	local tItem = net.ReadTable()
 	if not istable(tItem) then return end
 	local category = tItem[1]
@@ -199,8 +199,8 @@ net.Receive("tdm_buyitem",function(len,ply)
 	if not item then return end
 
 	if tItem[3] then
-		if not ply:HasWeapon(item.ItemClass) then ply:ChatPrint("You can't buy this attachment without a weapon.") return end
-		if ((ply:GetNWInt("TDM_Money",0) - AttachmentPrice) < 0) then ply:ChatPrint("Not enough money.") return end
+		if not ply:HasWeapon(item.ItemClass) then ply:ChatPrint("没有武器无法购买此配件。") return end
+		if ((ply:GetNWInt("TDM_Money",0) - AttachmentPrice) < 0) then ply:ChatPrint("金钱不足。") return end
 
 		local wep = ply:GetWeapon(item.ItemClass)
 		hg.AddAttachmentForce( ply,wep,tItem[3] )
@@ -210,7 +210,7 @@ net.Receive("tdm_buyitem",function(len,ply)
 		return
 	end
 
-	if ((ply:GetNWInt("TDM_Money",0) - item.Price) < 0) then ply:ChatPrint("Not enough money.") return end
+	if ((ply:GetNWInt("TDM_Money",0) - item.Price) < 0) then ply:ChatPrint("金钱不足。") return end
 	local ent = ply:Give(item.ItemClass)
 	
 	if ent.Use and IsValid(ent) then

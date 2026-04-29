@@ -1,6 +1,6 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik_base"
-SWEP.PrintName = "Handcuffs"
+SWEP.PrintName = "手铐"
 SWEP.Instructions = "Restraint devices designed to secure an individual's wrists in proximity to each other. For the rulers of order in the form of police helps to avoid unnecessary problems when transporting detainees. Sometimes they may not be enough."
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
@@ -140,7 +140,7 @@ function SWEP:Tie(tr)
 		if IsValid(ent) and IsValid(self) and IsValid(self:GetOwner()) and self:GetOwner():Alive() and self:GetOwner():GetPos():Distance(ent:GetPos()) < 500 then 
 			if IsValid(ent) and (ent:IsRagdoll() or (ent:IsPlayer() and ent:GetVelocity():Length() < 1)) and hg.RagdollOwner(ent) ~= self:GetOwner() then
 				--if ent.handcuffed then return end
-				self:GetOwner():ChatPrint("Threat handcuffed.")
+				self:GetOwner():ChatPrint("威胁已被铐住。")
 				
 				if ent:IsRagdoll() then handcuff(ent) end
 

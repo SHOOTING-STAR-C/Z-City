@@ -41,7 +41,7 @@ function PLUGIN.ShowTranslation(abnormalty)
 	-- Abnormalties_VGUI_AbnormaltyTimeEnd = CurTime() + 10
 	local count = 0
 	
-	chat.AddText(PLUGIN.MainColor, "I'm getting somewhere...")
+	chat.AddText(PLUGIN.MainColor, "我快要找到答案了...")
 	
 	for abnormalty_name, abnormalty_amt in pairs(abnormalty) do
 		chat.AddText(PLUGIN.MainColor, abnormalty_name, " - " .. abnormalty_amt)
@@ -50,12 +50,12 @@ function PLUGIN.ShowTranslation(abnormalty)
 	end
 	
 	if(count > 1)then
-		chat.AddText(PLUGIN.MainColor, "But there's still something I need to exclude...")
+		chat.AddText(PLUGIN.MainColor, "但还有些东西需要排除...")
 	elseif(count == 1)then
-		chat.AddText(PLUGIN.MainColor, "This is it... I found it!")
-		chat.AddText(PLUGIN.MainColor, "Now, it's just a matter of chanting it over and over again in one spot...")
+		chat.AddText(PLUGIN.MainColor, "就是它了... 我找到了！")
+		chat.AddText(PLUGIN.MainColor, "现在，只需要在一个地方反复念咒...")
 	elseif(count == 0)then
-		chat.AddText(PLUGIN.MainColor, "But... It's useless, I need to put meaning into words...")
+		chat.AddText(PLUGIN.MainColor, "但是... 没用，我需要将意义融入言语中...")
 	end
 end
 

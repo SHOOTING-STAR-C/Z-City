@@ -2,7 +2,7 @@ local MODE = MODE
 
 MODE.base = "tdm"
 
-MODE.PrintName = "Counter-Strike"
+MODE.PrintName = "反恐精英"
 MODE.name = "cstrike"
 
 zb.Points.BOMB_ZONE_A = zb.Points.BOMB_ZONE_A or {}

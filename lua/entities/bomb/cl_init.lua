@@ -296,9 +296,9 @@ CreateMenu = function(bomb)
         surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
 		surface.SetFont( "ZCity_Fixed_Medium" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Clear")
+		local lengthX, lengthY = surface.GetTextSize("清除")
 		surface.SetTextPos( w / 2 - lengthX / 2, h / 2 - lengthY / 2)
-		surface.DrawText("Clear")
+		surface.DrawText("清除")
 	end
 
 	local enterbut = vgui.Create("DButton",bombMenu)
@@ -317,7 +317,7 @@ CreateMenu = function(bomb)
 			bombMenu = nil
 		end
 		if #txt < 6 then
-			chat.AddText("The code must be of 6 numbers.")
+			chat.AddText("密码必须是6位数字。")
 			return 
 		end
 		surface.PlaySound("weapons/tfa_ins2_sr25_eft/m14_empty.wav")
@@ -333,9 +333,9 @@ CreateMenu = function(bomb)
         surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
 		surface.SetFont( "ZCity_Fixed_Medium" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("Enter")
+		local lengthX, lengthY = surface.GetTextSize("确认")
 		surface.SetTextPos( w / 2 - lengthX / 2, h / 2 - lengthY / 2)
-		surface.DrawText("Enter")
+		surface.DrawText("确认")
 	end
 
 	return bombMenu

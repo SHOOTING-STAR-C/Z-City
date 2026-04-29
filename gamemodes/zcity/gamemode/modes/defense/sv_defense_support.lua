@@ -122,7 +122,7 @@ local function CreateFallingAirdrop(items, requester)
             end
         else
             if IsValid(requester) then
-                requester:ChatPrint("Unable to find a suitable place for delivery. Try again later.")
+                requester:ChatPrint("找不到合适的投放地点。请稍后再试。")
             end
             return false
         end
@@ -196,9 +196,9 @@ local function CreateFallingAirdrop(items, requester)
             for _, player in player.Iterator() do
                 if player:Alive() and player:Team() ~= TEAM_SPECTATOR then
                     if IsValid(requester) then
-                        player:ChatPrint("Commander " .. requester:Nick() .. "'s supply drop has arrived!")
+                        player:ChatPrint("指挥官 " .. requester:Nick() .. " 的补给已到达！")
                     else
-                        player:ChatPrint("A supply drop has arrived!")
+                        player:ChatPrint("补给已到达！")
                     end
                 end
             end
@@ -245,7 +245,7 @@ local function SpawnSupportTeam(requester)
     
     if #spawnPoints < 2 then
         if IsValid(requester) then
-            requester:ChatPrint("Not enough space to deploy support team!")
+            requester:ChatPrint("没有足够的空间部署支援小队！")
         end
         return false
     end
@@ -317,12 +317,12 @@ local function SpawnSupportTeam(requester)
     end
     
     if successfulSpawns > 0 then
-        requester:ChatPrint("Support team deployed with " .. successfulSpawns .. " soldiers")
+        requester:ChatPrint("支援小队已部署，包含 " .. successfulSpawns .. " 名士兵")
         
 
         for _, player in player.Iterator() do
             if player:Alive() and player:Team() != TEAM_SPECTATOR and player != requester then
-                player:ChatPrint("Commander " .. requester:Nick() .. " has called in a support team!")
+                player:ChatPrint("指挥官 " .. requester:Nick() .. " 呼叫了支援小队！")
             end
         end
         
@@ -351,7 +351,7 @@ local function RespawnDeadPlayers(requester)
     
     if #deadPlayers == 0 then
         if IsValid(requester) then
-            requester:ChatPrint("No dead players to respawn!")
+            requester:ChatPrint("没有死亡的玩家可以重生！")
         end
         return false
     end
@@ -370,7 +370,7 @@ local function RespawnDeadPlayers(requester)
     local spawnPoints = MODE.GetUsualPlayerSpawnPoints and MODE:GetUsualPlayerSpawnPoints() or {}
     if not spawnPoints or #spawnPoints == 0 then
         if IsValid(requester) then
-            requester:ChatPrint("No spawn points available!")
+            requester:ChatPrint("没有可用的出生点！")
         end
         return false
     end
@@ -488,7 +488,7 @@ local function RespawnDeadPlayers(requester)
     if respawnedCount > 0 then
 
         for _, player in player.Iterator() do
-            player:ChatPrint("Commander " .. requester:Nick() .. " has called in reinforcements! " .. respawnedCount .. " players respawned!")
+            player:ChatPrint("指挥官 " .. requester:Nick() .. " 呼叫了增援！ " .. respawnedCount .. " 名玩家已重生！")
         end
         
 
@@ -535,12 +535,12 @@ net.Receive("RequestSupport", function(len, ply)
     if not MODE or MODE.name ~= "defense" then return end
 
     if CurTime() - lastSupportRequest < supportCooldown then
-        ply:ChatPrint("Wait a bit.")
+        ply:ChatPrint("等一下。")
         return
     end
 
     if ply.organism and ply.organism.otrub then
-        ply:ChatPrint("wtf")
+        ply:ChatPrint("什么鬼")
         return
     end
 
@@ -552,7 +552,7 @@ net.Receive("RequestSupport", function(len, ply)
     lastSupportRequest = CurTime()
 
     
-    ply:ChatPrint("Your order #" .. orderId .. " is on its way!")
+    ply:ChatPrint("你的订单 #" .. orderId .. " 正在运送中！")
 
     local delay = math.random(20, 40)
     local timerName = "airdrop_timer_" .. orderId
@@ -570,7 +570,7 @@ net.Receive("RequestSupport", function(len, ply)
             local success = CreateFallingAirdrop(items, ply)
             
             if not success and IsValid(ply) then
-                ply:ChatPrint("Failed to find a suitable drop location.")
+                ply:ChatPrint("找不到合适的投放地点。")
             end
         end)
     end

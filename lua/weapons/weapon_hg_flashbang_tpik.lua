@@ -1,6 +1,6 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_hg_grenade_tpik"
-SWEP.PrintName = "Flashbang"
+SWEP.PrintName = "闪光弹"
 SWEP.Instructions = 
 [[Flashbang is a non-lethal stun device, used by SWAT.
 
