@@ -4,7 +4,7 @@ end
 
 SWEP.Base = "weapon_base"
 SWEP.PrintName = "对讲机"
-SWEP.Instructions = "Use the walkie-talkie to communicate with other people in the 4km radius. Must be on the same frequency."
+SWEP.Instructions = "使用对讲机与4公里范围内的其他人通信。必须在同一频率。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
@@ -252,7 +252,7 @@ function SWEP:DrawWorldModel2()
 			draw.RoundedBox(3, 0 - width / 2, 0 - height / 2, width, height, self:GetIsOn() and bg_clr or bg_off_clr)
 			if self:GetIsOn() then
 				draw.SimpleText(Frequency, "Walkie-Talkie_Fixed-Font", 0, -15, walkietalkie_clr, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-				draw.SimpleText(self:GetOwner():IsSpeaking() and "Broadcasting" or "Reciving", "Walkie-Talkie_Fixed-SmallFont", 0, 40, walkietalkie_clr, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText(self:GetOwner():IsSpeaking() and "正在广播" or "正在接收", "Walkie-Talkie_Fixed-SmallFont", 0, 40, walkietalkie_clr, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			end
 		cam.End3D2D()
 
@@ -352,20 +352,20 @@ function SWEP:PrimaryAttack()
 			local tbl1 = {}
 			for i = 1, #self.Frequencies do
 				local station = math.Round(self.Frequencies[i], 1)
-				tbl1[#tbl1 + 1] = { function() RunConsoleCommand("hg_walkietalkie_adjust", station - self:GetHudFrequency() ) end, "Station " .. station .. "MHz" }
+				tbl1[#tbl1 + 1] = { function() RunConsoleCommand("hg_walkietalkie_adjust", station - self:GetHudFrequency() ) end, "频道 " .. station .. "MHz" }
 				hg.CreateRadialMenu(tbl1)
 			end
 			return -1
-		end, "Public stations"}
-		self:MenuAddAdjuster("Change 010.0 MHz", tbl, 010.0)
-		self:MenuAddAdjuster("Change 001.0 MHz", tbl, 001.0)
-		self:MenuAddAdjuster("Change 000.1 MHz", tbl, 000.1)
+		end, "公共频道"}
+		self:MenuAddAdjuster("调整 010.0 MHz", tbl, 010.0)
+		self:MenuAddAdjuster("调整 001.0 MHz", tbl, 001.0)
+		self:MenuAddAdjuster("调整 000.1 MHz", tbl, 000.1)
 	end
 
 	tbl[#tbl + 1] = {function()
 		RunConsoleCommand("+reload")
 		timer.Simple(0,function() RunConsoleCommand("-reload") end)
-	end, self:GetIsOn() and "Turn off Walkie-Talkie" or "Turn on Walkie-Talkie"}
+	end, self:GetIsOn() and "关闭对讲机" or "打开对讲机"}
 	hg.CreateRadialMenu(tbl)
 end
 

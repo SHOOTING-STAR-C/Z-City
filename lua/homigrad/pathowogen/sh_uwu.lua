@@ -93,18 +93,18 @@ if CLIENT then
 		damageSum = damageSum + org.brain * 10
 
 		if damageSum >= 10 then
-			Status = "CRITICAL"
+			Status = "严重受损"
 		elseif damageSum >= 7 then
-			Status = "Heavy damage"
+			Status = "重度损伤"
 		elseif damageSum >= 4 then
-			Status = "Moderate damage"
+			Status = "中度损伤"
 		elseif damageSum >= 2 then
-			Status = "Minor damage"
+			Status = "轻度损伤"
 		elseif damageSum > 0 then
-			Status = "Minimal damage"
+			Status = "轻微损伤"
 		end
 
-		DrawTextAndShadow("System status: " .. Status, "ZB_ProotOSMedium", sw * 0.01, sh * 0.96, bluewhite, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+		DrawTextAndShadow("系统状态: " .. Status, "ZB_ProotOSMedium", sw * 0.01, sh * 0.96, bluewhite, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 
 		local Emoticon = "OwO"
 

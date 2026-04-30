@@ -1,6 +1,6 @@
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "Weapon Sling"
+ENT.PrintName = "武器背带"
 ENT.Spawnable = true
 ENT.Category = "ZCity Other"
 ENT.Model = "models/tourniquet/tourniquet.mdl"

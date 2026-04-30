@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 ENT.Type = "anim"
 ENT.Base = "base_anim"
-ENT.PrintName = "Animated Model"
+ENT.PrintName = "动画模型"
 ENT.Category = "ZCity Other"
 ENT.Spawnable = false
 ENT.AdminOnly = true

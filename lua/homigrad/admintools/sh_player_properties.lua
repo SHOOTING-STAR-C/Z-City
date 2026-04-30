@@ -6,17 +6,17 @@ local function check(self, ent, ply)
     if ( ent:IsRagdoll() ) and pEnt and pEnt:IsPlayer() and pEnt:Alive() then return true end
 end
 properties.Add( "notify", {
-	MenuLabel = "Notify", -- Name to display on the context menu
+	MenuLabel = "通知", -- Name to display on the context menu
 	Order = 1, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/note_add.png", -- The icon to display next to the property
 
 	Filter = check,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_StringRequest(
-            "Notify ".. ent:GetPlayerName(), 
-            "Write a message",
+            "通知 ".. ent:GetPlayerName(),
+            "写一条消息",
             "",
-            function(text) 
+            function(text)
                 self:MsgStart()
                     net.WriteEntity( ent )
                     net.WriteString( text )
@@ -35,21 +35,21 @@ properties.Add( "notify", {
 
 		ent:Notify( text, 0 )
 		print(tostring(ply:Nick() or ply) .." has notfied ".. tostring(ent:Nick() or ent) .." with the following message; "..text)
-	end 
+	end
 } )
 
 properties.Add( "givegun", {
-	MenuLabel = "Give", -- Name to display on the context menu
+	MenuLabel = "给予", -- Name to display on the context menu
 	Order = 2, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/gun.png", -- The icon to display next to the property
 
 	Filter = check,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_StringRequest(
-            "Give ".. ent:GetPlayerName(), 
-            "Write a entity class name",
+            "给予 ".. ent:GetPlayerName(),
+            "输入实体类名",
             "",
-            function(text) 
+            function(text)
                 self:MsgStart()
                     net.WriteEntity( ent )
                     net.WriteString( text )
@@ -69,26 +69,26 @@ properties.Add( "givegun", {
         if not IsValid(spawned) then return end
         spawned:Use(ent)
 		print(tostring(ply:Nick() or ply) .." has given ".. tostring(ent:Nick() or ent) .." a SWEP; "..text)
-	end 
+	end
 } )
 
 properties.Add( "strip", {
-	MenuLabel = "Strip", -- Name to display on the context menu
+	MenuLabel = "清除武器", -- Name to display on the context menu
 	Order = 3, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/basket_delete.png", -- The icon to display next to the property
 
 	Filter = check,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_Query(
-            "The player will be stripped down to only their fists.",
-            "Are you sure?",
-            "Yes",
+            "该玩家将被清除所有武器，只保留拳头。",
+            "确定吗？",
+            "是",
             function()
                 self:MsgStart()
                     net.WriteEntity( ent )
                 self:MsgEnd()
             end,
-        	"No"
+        	"否"
         )
 
 	end,
@@ -105,22 +105,22 @@ properties.Add( "strip", {
 } )
 
 properties.Add( "fullstrip", {
-	MenuLabel = "Full Strip", -- Name to display on the context menu
+	MenuLabel = "完全清除", -- Name to display on the context menu
 	Order = 4, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/lorry_delete.png", -- The icon to display next to the property
 
 	Filter = check,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_Query(
-            "All weapons, including fists, will be stripped.",
-            "Are you sure?",
-            "Yes",
+            "所有武器，包括拳头，都将被清除。",
+            "确定吗？",
+            "是",
             function()
                 self:MsgStart()
                     net.WriteEntity( ent )
                 self:MsgEnd()
             end,
-        	"No"
+        	"否"
         )
 
 	end,
@@ -137,22 +137,22 @@ properties.Add( "fullstrip", {
 } )
 
 properties.Add( "reset_org", {
-	MenuLabel = "Reset organism", -- Name to display on the context menu
+	MenuLabel = "重置生理", -- Name to display on the context menu
 	Order = 5, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/heart_add.png", -- The icon to display next to the property
 
 	Filter = check,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_Query(
-            "Organism will be new like a respawn",
-            "Are you sure?",
+            "生理状态将恢复到重生时的状态",
+            "确定吗？",
             "Yes",
             function()
                 self:MsgStart()
                     net.WriteEntity( ent )
                 self:MsgEnd()
             end,
-        	"No"
+        	"否"
         )
 
 	end,
@@ -169,7 +169,7 @@ properties.Add( "reset_org", {
 } )
 
 properties.Add( "freeze", {
-	MenuLabel = "Freeze", -- Name to display on the context menu
+	MenuLabel = "冻结", -- Name to display on the context menu
 	Order = 6, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/control_pause_blue.png", -- The icon to display next to the property
 
@@ -177,7 +177,7 @@ properties.Add( "freeze", {
         if not ply:ZCTools_GetAccess() then return false end 
 	    if ( !IsValid( ent ) ) then return false end
         local pEnt = hg.RagdollOwner( ent ) or ent
-        self.MenuLabel = pEnt:IsPlayer() and pEnt:IsFrozen() and "Unfreeze" or "Freeze"
+        self.MenuLabel = pEnt:IsPlayer() and pEnt:IsFrozen() and "解冻" or "Freeze"
         self.MenuIcon = pEnt:IsPlayer() and pEnt:IsFrozen() and "icon16/control_pause.png" or "icon16/control_pause_blue.png"
 	    if ( ent:IsPlayer() ) then return true end
         if ( ent:IsRagdoll() ) and pEnt and pEnt:IsPlayer() and pEnt:Alive() then return true end
@@ -200,7 +200,7 @@ properties.Add( "freeze", {
 } )
 
 properties.Add( "snatch", {
-	MenuLabel = "Snatch", -- Name to display on the context menu
+	MenuLabel = "绑架", -- Name to display on the context menu
 	Order = 7, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/cross.png", -- The icon to display next to the property
 
@@ -211,15 +211,15 @@ properties.Add( "snatch", {
     end,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_Query(
-            "If no players are around, he will simply disappear.",
-            "Are you sure?",
+            "如果周围没有玩家，他将直接消失。",
+            "确定吗？",
             "Yes",
             function()
                 self:MsgStart()
                     net.WriteEntity( ent )
                 self:MsgEnd()
             end,
-        	"No"
+        	"否"
         )
 
 	end,
@@ -238,7 +238,7 @@ properties.Add( "snatch", {
 } )
 
 properties.Add( "ragdollize", {
-	MenuLabel = "Stun/Get up", -- Name to display on the context menu
+	MenuLabel = "击晕/起身", -- Name to display on the context menu
 	Order = 8, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/anchor.png", -- The icon to display next to the property
 
@@ -265,7 +265,7 @@ properties.Add( "ragdollize", {
 } )
 
 properties.Add( "vomit", {
-	MenuLabel = "Make vomit", -- Name to display on the context menu
+	MenuLabel = "催吐", -- Name to display on the context menu
 	Order = 9, -- The order to display this property relative to other properties
 	MenuIcon = "pluv/pluv51.png", -- The icon to display next to the property
 
@@ -287,7 +287,7 @@ properties.Add( "vomit", {
 } )
 
 properties.Add( "lobotomize", {
-	MenuLabel = "Lobotomize", -- Name to display on the context menu
+	MenuLabel = "脑叶切除", -- Name to display on the context menu
 	Order = 10, -- The order to display this property relative to other properties
 	MenuIcon = "pluv/pluv51.png", -- The icon to display next to the property
 
@@ -314,7 +314,7 @@ properties.Add( "lobotomize", {
 } )
 
 properties.Add("killsilent", {
-	MenuLabel = "Kill (Silent)",
+	MenuLabel = "击杀（无声）",
 	Order = 11,
 	MenuIcon = "icon16/cross.png",
 
@@ -335,7 +335,7 @@ properties.Add("killsilent", {
 })
 
 properties.Add("removeply", {
-	MenuLabel = "Remove",
+	MenuLabel = "移除",
 	Order = 12,
 	MenuIcon = "icon16/cross.png",
 
@@ -357,7 +357,7 @@ properties.Add("removeply", {
 })
 
 properties.Add( "setplayerclass", {
-	MenuLabel = "Set player class", -- Name to display on the context menu
+	MenuLabel = "设置职业", -- Name to display on the context menu
 	Order = 15, -- The order to display this property relative to other properties
 	MenuIcon = "vgui/entities/npc_nukude_proto_h", -- The icon to display next to the property
 
@@ -398,7 +398,7 @@ properties.Add( "setplayerclass", {
 } )
 
 properties.Add( "break_limb", {
-	MenuLabel = "Break Limb",
+	MenuLabel = "折断肢体",
 	Order = 13,
 	MenuIcon = "pluv/pluv51.png",
 
@@ -408,49 +408,49 @@ properties.Add( "break_limb", {
 
 		local submenu = option:AddSubMenu()
 
-		local neck = submenu:AddOption("Neck")
+		local neck = submenu:AddOption("颈部")
 		neck:SetRadio(true)
 		neck:SetChecked(ent.organism.larm > 0)
 		neck:SetIsCheckable(true)
 		neck.OnChecked = function(s, checked) self:BreakLimb(ent, 0) end
 
-		local larm = submenu:AddOption("Left Arm")
+		local larm = submenu:AddOption("左臂")
 		larm:SetRadio(true)
 		larm:SetChecked(ent.organism.larm > 0)
 		larm:SetIsCheckable(true)
 		larm.OnChecked = function(s, checked) self:BreakLimb(ent, 1) end
 
-		local rarm = submenu:AddOption("Right Arm")
+		local rarm = submenu:AddOption("右臂")
 		rarm:SetRadio(true)
 		rarm:SetChecked(ent.organism.rarm > 0)
 		rarm:SetIsCheckable(true)
 		rarm.OnChecked = function(s, checked) self:BreakLimb(ent, 2) end
 
-		local lleg = submenu:AddOption("Left Leg")
+		local lleg = submenu:AddOption("左腿")
 		lleg:SetRadio(true)
 		lleg:SetChecked(ent.organism.lleg > 0)
 		lleg:SetIsCheckable(true)
 		lleg.OnChecked = function(s, checked) self:BreakLimb(ent, 3) end
 
-		local rleg = submenu:AddOption("Right Leg")
+		local rleg = submenu:AddOption("右腿")
 		rleg:SetRadio(true)
 		rleg:SetChecked(ent.organism.rleg > 0)
 		rleg:SetIsCheckable(true)
 		rleg.OnChecked = function(s, checked) self:BreakLimb(ent, 4) end
 
-		local spine1 = submenu:AddOption("Spine 1")
+		local spine1 = submenu:AddOption("脊椎1")
 		spine1:SetRadio(true)
 		spine1:SetChecked(ent.organism.rleg > 0)
 		spine1:SetIsCheckable(true)
 		spine1.OnChecked = function(s, checked) self:BreakLimb(ent, 5) end
 
-		local spine2 = submenu:AddOption("Spine 2")
+		local spine2 = submenu:AddOption("脊椎2")
 		spine2:SetRadio(true)
 		spine2:SetChecked(ent.organism.rleg > 0)
 		spine2:SetIsCheckable(true)
 		spine2.OnChecked = function(s, checked) self:BreakLimb(ent, 6) end
 
-		local spine3 = submenu:AddOption("Spine 3")
+		local spine3 = submenu:AddOption("脊椎3")
 		spine3:SetRadio(true)
 		spine3:SetChecked(ent.organism.rleg > 0)
 		spine3:SetIsCheckable(true)
@@ -493,7 +493,7 @@ properties.Add( "break_limb", {
 } )
 
 properties.Add( "amputate_limb", {
-	MenuLabel = "Amputate Limb",
+	MenuLabel = "截肢",
 	Order = 14,
 	MenuIcon = "effects/arc9_eft/evil.png",
 
@@ -503,31 +503,31 @@ properties.Add( "amputate_limb", {
 
 		local submenu = option:AddSubMenu()
 
-		local head = submenu:AddOption("Head")
+		local head = submenu:AddOption("头部")
 		head:SetRadio(true)
 		head:SetChecked(ent.organism.larm > 0)
 		head:SetIsCheckable(true)
 		head.OnChecked = function(s, checked) self:AmputateLimb(ent, 0) end
 
-		local larm = submenu:AddOption("Left Arm")
+		local larm = submenu:AddOption("左臂")
 		larm:SetRadio(true)
 		larm:SetChecked(ent.organism.larm > 0)
 		larm:SetIsCheckable(true)
 		larm.OnChecked = function(s, checked) self:AmputateLimb(ent, 1) end
 
-		local rarm = submenu:AddOption("Right Arm")
+		local rarm = submenu:AddOption("右臂")
 		rarm:SetRadio(true)
 		rarm:SetChecked(ent.organism.rarm > 0)
 		rarm:SetIsCheckable(true)
 		rarm.OnChecked = function(s, checked) self:AmputateLimb(ent, 2) end
 
-		local lleg = submenu:AddOption("Left Leg")
+		local lleg = submenu:AddOption("左腿")
 		lleg:SetRadio(true)
 		lleg:SetChecked(ent.organism.lleg > 0)
 		lleg:SetIsCheckable(true)
 		lleg.OnChecked = function(s, checked) self:AmputateLimb(ent, 3) end
 
-		local rleg = submenu:AddOption("Right Leg")
+		local rleg = submenu:AddOption("右腿")
 		rleg:SetRadio(true)
 		rleg:SetChecked(ent.organism.rleg > 0)
 		rleg:SetIsCheckable(true)
@@ -573,7 +573,7 @@ local function doorCheck(self, ent, ply)
 end
 
 properties.Add( "door_toggle", {
-    MenuLabel = "Toggle Door",
+    MenuLabel = "开关门",
     Order = 7,
     MenuIcon = "icon16/door.png",
     Filter = doorCheck,
@@ -590,7 +590,7 @@ properties.Add( "door_toggle", {
 })
 
 properties.Add( "door_lock", {
-    MenuLabel = "Lock Door",
+    MenuLabel = "锁门",
     Order = 8,
     MenuIcon = "icon16/lock.png",
     Filter = doorCheck,
@@ -607,7 +607,7 @@ properties.Add( "door_lock", {
 })
 
 properties.Add( "door_unlock", {
-    MenuLabel = "Unlock Door",
+    MenuLabel = "解锁门",
     Order = 9,
     MenuIcon = "icon16/lock_open.png",
     Filter = doorCheck,
@@ -688,7 +688,7 @@ end
 hg.RespawnIntoBody = Respawn
 
 properties.Add( "respawn_ply_in_rag", {
-	MenuLabel = "Respawn Player", -- Name to display on the context menu
+	MenuLabel = "重生玩家", -- Name to display on the context menu
 	Order = 1, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/heart.png", -- The icon to display next to the property
 
@@ -721,7 +721,7 @@ properties.Add( "respawn_ply_in_rag", {
 } )
 
 properties.Add( "respawn_lply_in_rag", {
-	MenuLabel = "Spawn Self", -- Name to display on the context menu
+	MenuLabel = "自己重生", -- Name to display on the context menu
 	Order = 2, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/heart.png", -- The icon to display next to the property
 
@@ -734,8 +734,8 @@ properties.Add( "respawn_lply_in_rag", {
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
 
         Derma_Query(
-            "You will take over this body, and respawn as this character.",
-            "Are you sure?",
+            "你将占据这个身体，以这个角色重生。",
+            "确定吗？",
             "Yes",
             function()
                 self:MsgStart()
@@ -743,7 +743,7 @@ properties.Add( "respawn_lply_in_rag", {
                     net.WriteEntity( LocalPlayer() )
                 self:MsgEnd()
             end,
-        	"No"
+        	"否"
         )    
 	end,
 	Receive = function( self, length, ply ) -- The action to perform upon using the property ( Serverside )
@@ -758,7 +758,7 @@ properties.Add( "respawn_lply_in_rag", {
 } )
 
 properties.Add( "respawn_ragply_in_rag", {
-	MenuLabel = "Spawn RagOwner", -- Name to display on the context menu
+	MenuLabel = "重生布娃娃主人", -- Name to display on the context menu
 	Order = 3, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/heart.png", -- The icon to display next to the property
 
@@ -771,15 +771,15 @@ properties.Add( "respawn_ragply_in_rag", {
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
 
         Derma_Query(
-            "The Player of this ragdoll will be respawned into his body",
-            "Are you sure?",
+            "这个布娃娃的玩家将重生到自己的身体里",
+            "确定吗？",
             "Yes",
             function()
                 self:MsgStart()
                     net.WriteEntity( ent )
                 self:MsgEnd()
             end,
-        	"No"
+        	"否"
         )    
 	end,
 	Receive = function( self, length, ply ) -- The action to perform upon using the property ( Serverside )

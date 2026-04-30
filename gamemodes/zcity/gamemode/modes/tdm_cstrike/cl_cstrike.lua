@@ -19,7 +19,7 @@ function MODE:AddHudPaint()
                 surface.SetDrawColor(122,0,0,255)
                 surface.DrawRect(tscr.x - w / 2, 0, w, h * 2)
         
-                local txt = "You're on site!"
+                local txt = "你在包点内！"
                 surface.SetFont( "ZB_InterfaceMedium" )
                 surface.SetTextColor(color_white:Unpack())
                 local lx, ly = surface.GetTextSize(txt)
@@ -30,7 +30,7 @@ function MODE:AddHudPaint()
             surface.SetDrawColor(clr:Unpack())
             surface.DrawRect(tscr.x - w / 2, 0, w, h)
         
-            local txt = "SITE A: "..math.Round(pos:Distance(LocalPlayer():EyePos()) * 0.0254,0).." meters"
+            local txt = "A包点: "..math.Round(pos:Distance(LocalPlayer():EyePos()) * 0.0254,0).." 米"
             surface.SetFont( "ZB_InterfaceMedium" )
             surface.SetTextColor(color_white:Unpack())
             local lx, ly = surface.GetTextSize(txt)
@@ -51,7 +51,7 @@ function MODE:AddHudPaint()
                 surface.SetDrawColor(122,0,0,255)
                 surface.DrawRect(tscr.x - w / 2, 0, w, h * 2)
         
-                local txt = "You're on site!"
+                local txt = "你在包点内！"
                 surface.SetFont( "ZB_InterfaceMedium" )
                 surface.SetTextColor(color_white:Unpack())
                 local lx, ly = surface.GetTextSize(txt)
@@ -62,7 +62,7 @@ function MODE:AddHudPaint()
             surface.SetDrawColor(clr:Unpack())
             surface.DrawRect(tscr.x - w / 2, 0, w, h)
         
-            local txt = "SITE B: "..math.Round(pos:Distance(LocalPlayer():EyePos()) * 0.0254,0).." meters"
+            local txt = "B包点: "..math.Round(pos:Distance(LocalPlayer():EyePos()) * 0.0254,0).." 米"
             surface.SetFont( "ZB_InterfaceMedium" )
             surface.SetTextColor(color_white:Unpack())
             local lx, ly = surface.GetTextSize(txt)
@@ -82,7 +82,7 @@ function MODE:AddHudPaint()
         surface.SetDrawColor(clr:Unpack())
         surface.DrawRect(tscr.x - w * 1.15, 0, w * 1.15 * 2, h)
     
-        local txt = "HOSTAGE DELIVERY ZONE: "..math.Round(pos:Distance(LocalPlayer():EyePos()) * 0.0254,0).." meters"
+        local txt = "人质撤离区: "..math.Round(pos:Distance(LocalPlayer():EyePos()) * 0.0254,0).." 米"
         surface.SetFont( "ZB_InterfaceMedium" )
         surface.SetTextColor(color_white:Unpack())
         local lx, ly = surface.GetTextSize(txt)

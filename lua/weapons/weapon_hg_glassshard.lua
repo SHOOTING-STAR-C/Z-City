@@ -138,7 +138,7 @@ function SWEP:PrimaryAttackAdd(ent, trace)
 		local owner = self:GetOwner()
 
 		hg.organism.AddWoundManual(owner, dmg * 2, vector_origin, angle_zero,"ValveBiped.Bip01_R_Hand", CurTime() + (dmg * 220))
-        owner:Notify("This glass shard is cutting through my hand!..", 30)
+        owner:Notify("这玻璃碎片正在割伤我的手！..", 30)
 
 		if ent and math.random(1, self:IsEntSoft(ent) and 10 or 5) == 1 then
 			self:PrecacheGibs()
@@ -193,7 +193,7 @@ hook.Add("radialOptions","tape_shard",function()
 	local have_shard = ply:HasWeapon("weapon_hg_glassshard")
 
 	if have_tape and have_shard then
-		local tbl = {tapeShard, "Tape glass shard"}
+		local tbl = {tapeShard, "用胶带绑玻璃碎片"}
 		hg.radialOptions[#hg.radialOptions + 1] = tbl
 	end
 end)

@@ -1,7 +1,7 @@
 SWEP.Base = "homigrad_base"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
-SWEP.PrintName = "Desert Eagle"
+SWEP.PrintName = "沙漠之鹰"
 SWEP.Author = "Magnum Research/Israel Weapon Industries"
 SWEP.Instructions = "Pistol chambered in .50 Magnum"
 SWEP.Category = "Weapons - Pistols"

@@ -16,7 +16,7 @@
 --//
 
 PLUGIN.Name = "Physics Silk"
-PLUGIN.Description = "Шёлковые ленточки"
+PLUGIN.Description = "丝绸丝带"
 PLUGIN.Version = 1
 PLUGIN.SilkTable = PLUGIN.SilkTable or {}
 PLUGIN.SilkTableClient = PLUGIN.SilkTableClient or {}

@@ -1,7 +1,7 @@
 SWEP.Base = "homigrad_base"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
-SWEP.PrintName = "Makarov Pistol"
+SWEP.PrintName = "马卡洛夫手枪"
 SWEP.Author = "Izhevsk Mechanical Plant"
 SWEP.Instructions = "An semi-automatic Russian pistol chambered in 9x18mm"
 SWEP.Category = "Weapons - Pistols"

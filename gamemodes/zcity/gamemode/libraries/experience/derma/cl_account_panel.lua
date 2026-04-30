@@ -2,9 +2,9 @@
 local PANEL = {}
 
 local Statics = {
-    {"Kills", "Kills"},
-    {"Suicides", "Suicides"},
-    {"Deaths", "Deaths"},
+    {"击杀", "Kills"},
+    {"自杀", "Suicides"},
+    {"死亡", "Deaths"},
     --{"Victories being a traitor", "zb_hmcd_t_wins"},
    -- {"Neutralizings a traitor", "zb_hmcd_ino_t_kills"}
 }
@@ -26,7 +26,7 @@ function PANEL:Init()
     self.StatPanel = panel1
     function panel1:Paint() end
 
-    SInfo:AddSheet( "Statistics", panel1, "icon16/chart_bar.png" )
+    SInfo:AddSheet( "统计", panel1, "icon16/chart_bar.png" )
 
     --local panel1 = vgui.Create( "DPanel", SInfo )
     --function panel1:Paint() end

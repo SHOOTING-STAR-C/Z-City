@@ -48,7 +48,7 @@ local function getIconThing(i)
 end
 local colRed = Color(255, 0, 0, 255)
 local function OpenContainer( ent )
-    local name = "Container"
+    local name = "容器"
 	local sizeX, sizeY = ScrW() / 3, ScrH() / 2.5
 	zbContainerMenu = vgui.Create("DFrame")
 	zbContainerMenu.ent = ent
@@ -88,7 +88,7 @@ local function OpenContainer( ent )
 		surface.SetDrawColor(92,0,0,240)
 		surface.DrawRect(w / 2 - 100, 10,200,20)
 		draw.DrawText(name, "HomigradFontSmall", w / 2, 10, color_white, TEXT_ALIGN_CENTER)
-		draw.DrawText("R - Close", "HomigradFontSmall", w *0.012, h - h*0.055 , Color(255,255,255,15), TEXT_ALIGN_LEFT)
+		draw.DrawText("R - 关闭", "HomigradFontSmall", w *0.012, h - h*0.055 , Color(255,255,255,15), TEXT_ALIGN_LEFT)
 	end
 
 	function zbContainerMenu:Think()

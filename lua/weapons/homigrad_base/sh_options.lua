@@ -68,16 +68,16 @@ else
 end
 
 hg.postures = {
-    [0] = "Regular hold",
-    [1] = "Hipfire",
-    [2] = "Left shoulder",
-    [3] = "High ready",
-    [4] = "Low ready",
-    [5] = "Point shooting",
-    [6] = "Shooting from cover",
-    [7] = {"Gangsta",isPistolOnly = true},
-    [8] = {"One-handed",isPistolOnly = true},
-	[9] = "Somalian",
+    [0] = "常规持枪",
+    [1] = "腰射",
+    [2] = "左肩射击",
+    [3] = "高位戒备",
+    [4] = "低位戒备",
+    [5] = "指向射击",
+    [6] = "掩体射击",
+    [7] = {"黑帮持枪",isPistolOnly = true},
+    [8] = {"单手射击",isPistolOnly = true},
+	[9] = "索马里式",
 }
 
 if CLIENT then
@@ -173,7 +173,7 @@ if CLIENT then
 
 				return 0
 			end,
-			[2] = "Attachments Menu"
+			[2] = "配件菜单"
 		}
 
         if !IsValid(wep) or !ishgweapon(wep) then
@@ -210,19 +210,19 @@ if CLIENT then
 
                     return -1
                 end,
-                [2] = "Change Posture\nRMB - Menu"
+                [2] = "切换姿态\n右键 - 菜单"
             },
             [2] = {
                 [1] = function()
                     RunConsoleCommand("hg_change_posture", 0)
                 end,
-                [2] = "Reset Posture"
+                [2] = "复位姿态"
             },
 			[3] = attmenu,
         }
 
         if wep.GetDrum then
-            local tbl3 = {function() RunConsoleCommand("hg_rolldrum") end, "Roll Drum"}
+            local tbl3 = {function() RunConsoleCommand("hg_rolldrum") end, "转动弹鼓"}
             tbl[#tbl + 1] = tbl3
         
             --if wep:Clip1() > 0 then return end
@@ -239,7 +239,7 @@ if CLIENT then
                 function(mouseClick, val)
                     RunConsoleCommand("hg_insertbullet", val)
                 end,
-                "Load one bullet",
+                "装填一发子弹",
                 true,
                 drum1
             }
@@ -252,7 +252,7 @@ if CLIENT then
                 [1] = function()
                     RunConsoleCommand("hg_inspect")
                 end,
-                [2] = "Inspect" 
+                [2] = "检视" 
             }
         end
 
@@ -261,7 +261,7 @@ if CLIENT then
                 [1] = function()
                     RunConsoleCommand("hg_unload_ammo", 0)
                 end,
-                [2] = "Unload" 
+                [2] = "退弹"
             }
         elseif (wep:Clip1() == 0 or wep.AllwaysChangeAmmo) and wep.AmmoTypes and not wep.reload then
             local ammotypes = {}
@@ -274,7 +274,7 @@ if CLIENT then
                 function(mouseClick, chosen)
                     RunConsoleCommand("hg_change_ammotype", chosen) 
                 end,
-                "Change Ammo Type",
+                "切换弹药类型",
                 true,
                 ammotypes
             }
@@ -286,7 +286,7 @@ if CLIENT then
                 [1] = function()
                     RunConsoleCommand("hmcd_togglelaser")
                 end,
-                [2] = "Toggle Laser" 
+                [2] = "切换激光" 
             }
 		end
 
@@ -296,7 +296,7 @@ if CLIENT then
 
                 return -1
             end,
-            [2] = "Weapon Menu"
+            [2] = "武器菜单"
         }
     end)
 end

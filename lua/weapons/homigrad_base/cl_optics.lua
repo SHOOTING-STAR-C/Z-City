@@ -94,7 +94,7 @@ end
 lodset = false
 
 local hg_optimise_scopes = GetConVar("hg_optimise_scopes") or CreateClientConVar("hg_optimise_scopes", "1", true, false, "Enable this if scoping makes your fps cry (1 - lowers quality of props around you, 2 - \"disables\" main render)", 0, 2)
-local hg_show_hitposmuzzle = ConVarExists("hg_show_hitposmuzzle") and GetConVar("hg_show_hitposmuzzle") or CreateClientConVar("hg_show_hitposmuzzle", "0", false, false, "shows weapons crosshair, work only ведьма admin rank or sv_cheats 1")
+local hg_show_hitposmuzzle = ConVarExists("hg_show_hitposmuzzle") and GetConVar("hg_show_hitposmuzzle") or CreateClientConVar("hg_show_hitposmuzzle", "0", false, false, "显示武器准星，仅管理员或sv_cheats 1时有效")
 
 local angaddhuy = Angle(0,0,0)
 local scrw, scrh = ScrW(), ScrH() --retarded

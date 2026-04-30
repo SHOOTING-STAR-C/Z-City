@@ -251,7 +251,7 @@ module[2] = function(owner, org, timeValue)
 	if org.isPly and not org.otrub and o2.curregen < losing_oxy and org.analgesia <= 1.5 and !org.heartstop then
 		if mask_blevota then
 			if o2[1] < 15 then
-				org.owner:Notify("DROP THE FUCKING MASK", 25, "take_gasmask2", 0, nil, color_red2)
+				org.owner:Notify("快他妈把面具摘了！", 25, "take_gasmask2", 0, nil, color_red2)
 			else
 				org.owner:Notify(drop_mask[math.random(#drop_mask)], 15, "take_gasmask", 0)
 			end

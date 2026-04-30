@@ -521,13 +521,13 @@ if CLIENT then
             end
             old_hp_txt = hp_txt
 
-            draw.DrawText("% | BLOOD","CMBFontSmall",
+            draw.DrawText("% | 血液","CMBFontSmall",
                 pos[1]+size[1]*0.085+1,
                 pos[2]+(size[2]/1.8)+1,
                 col_bg,
                 TEXT_ALIGN_LEFT
             )
-            draw.DrawText("% | BLOOD","CMBFontSmall",
+            draw.DrawText("% | 血液","CMBFontSmall",
                 pos[1]+size[1]*0.085,
                 pos[2]+(size[2]/1.8),
                 is_red and color_hp2 or color_hp,
@@ -558,13 +558,13 @@ if CLIENT then
                 is_red and color_hp2 or color_hp,
                 TEXT_ALIGN_LEFT
             )
-            draw.DrawText("| HEART.B/MIN","CMBFontSmall",
+            draw.DrawText("| 心跳.次/分","CMBFontSmall",
                 pos[1]+size[1]*0.06 + 1 + 10,
                 pos[2]+(size[2]/2)+1,
                 col_bg,
                 TEXT_ALIGN_LEFT
             )
-            draw.DrawText("| HEART.B/MIN","CMBFontSmall",
+            draw.DrawText("| 心跳.次/分","CMBFontSmall",
                 pos[1]+size[1]*0.06 + 12,
                 pos[2]+(size[2]/2),
                 is_red and color_hp2 or color_hp,
@@ -595,13 +595,13 @@ if CLIENT then
                 is_red and color_hp2 or color_hp,
                 TEXT_ALIGN_LEFT
             )
-            draw.DrawText("| STAMINA","CMBFontSmall",
+            draw.DrawText("| 耐力","CMBFontSmall",
                 pos[1]+size[1]*0.065 + 1 + 10,
                 pos[2]+(size[2]/2)+1,
                 col_bg,
                 TEXT_ALIGN_LEFT
             )
-            draw.DrawText("| STAMINA","CMBFontSmall",
+            draw.DrawText("| 耐力","CMBFontSmall",
                 pos[1]+size[1]*0.065 + 12,
                 pos[2]+(size[2]/2),
                 is_red and color_hp2 or color_hp,
@@ -617,7 +617,7 @@ if CLIENT then
             local col_bg = bg_color
             col_bg.a = 225*silentlerp
             silentclr.a = 225*silentlerp
-            local txt = "SNEAK MODE"
+            local txt = "潜行模式"
             draw.DrawText(txt,"CMBFontSmall",
                 pos[1],
                 pos[2]+(size[2]/2),
@@ -667,13 +667,13 @@ if CLIENT then
             end
             old_ammo_txt = ammo_txt
 
-            draw.DrawText("AMMO","CMBFontSmall",
+            draw.DrawText("弹药","CMBFontSmall",
                 pos[1]+size[1]*0.085+1,
                 pos[2]+(size[2]/1.8)+1,
                 col_bg,
                 TEXT_ALIGN_LEFT
             )
-            draw.DrawText("AMMO","CMBFontSmall",
+            draw.DrawText("弹药","CMBFontSmall",
                 pos[1]+size[1]*0.085,
                 pos[2]+(size[2]/1.8),
                 is_red and color_ar2 or color_ar,

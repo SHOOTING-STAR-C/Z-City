@@ -13,6 +13,10 @@ sw["помощь"] = {help = 5, harm = -4}
 sw["щит"] = {shield = 2, harm = -2}
 sw["привет"] = {shield = 2, harm = -2, help = 2}
 sw["ноте"] = {ritual = 4}
+sw["复活"] = sw["жертва"]  -- sacrifice
+sw["污秽"] = sw["кровь"]  -- blood
+sw["死亡"] = sw["смерть"]  -- death
+
 
 sw["ritual"] = sw["ритуал"]
 sw["blood"] = sw["кровь"]

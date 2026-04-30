@@ -1,6 +1,6 @@
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "Radio"
+ENT.PrintName = "无线电台"
 ENT.Author = "Deka"
 ENT.Category = "ZCity Other" -- deka/uzelezz/salat - shit
 ENT.Spawnable = true

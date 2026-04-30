@@ -359,13 +359,13 @@ end
                                 RunConsoleCommand("hg_drop_clothes", id)
                                 return 0
                             end,
-                            [2] = "Drop:" .. " " .. Cloth.PrintName
+                            [2] = "丢弃:" .. " " .. Cloth.PrintName
                         }
                     end
                 end
                 hg.CreateRadialMenu(commands)
                 return -1
-            end, "Drop clothes"}
+            end", "丢弃衣服"}
             hg.radialOptions[#hg.radialOptions + 1] = tbl
         end
     end)

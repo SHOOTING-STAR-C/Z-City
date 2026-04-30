@@ -2,7 +2,7 @@ if SERVER then AddCSLuaFile() end
 ENT.Base = "projectile_base"
 ENT.Author = "Sadsalat"
 ENT.Category = "ZCity Other"
-ENT.PrintName = "RPG-7 Rocket"
+ENT.PrintName = "RPG-7火箭弹"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Model = "models/weapons/tfa_ins2/w_rpg7_projectile.mdl"

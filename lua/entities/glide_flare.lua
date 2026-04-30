@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 ENT.Type = "anim"
 ENT.Base = "base_anim"
-ENT.PrintName = "Flare Countermeasure"
+ENT.PrintName = "干扰弹"
 
 ENT.Spawnable = false
 ENT.AdminOnly = false

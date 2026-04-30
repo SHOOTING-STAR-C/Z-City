@@ -499,7 +499,7 @@ local function OpenBuyMenu()
 	end
 
 	local lbl = vgui.Create("DLabel", Frame)
-	lbl:SetText("Cash: $"..LocalPlayer():GetNWInt("TDM_Money",0))
+	lbl:SetText("现金: $"..LocalPlayer():GetNWInt("TDM_Money",0))
 	lbl:DockMargin(10,5,10,5)
 	lbl:Dock(BOTTOM)
 	lbl:SetTextColor(Color(61,173,61))

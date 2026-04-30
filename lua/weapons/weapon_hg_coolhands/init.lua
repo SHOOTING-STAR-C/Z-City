@@ -227,13 +227,13 @@ function SWEP:ApplyForce()
 						if org.heartstop then
 							ply:ChatPrint("没有脉搏。")
 						else
-							ply:ChatPrint(org.pulse < 20 and "Barely can feel the pulse." or (org.pulse <= 50 and "Low pulse.") or (org.pulse <= 90 and "Normal pulse.") or "High pulse.")
+							ply:ChatPrint(org.pulse < 20 and "几乎感觉不到脉搏。" or (org.pulse <= 50 and "脉搏微弱。") or (org.pulse <= 90 and "脉搏正常。") or "脉搏过快。")
 						end
 
 						if (org.last_heartbeat + 60) > CurTime() then
 							ply:ChatPrint("尸体还有余温。")
 						else
-							ply:ChatPrint((org.last_heartbeat + 180) < CurTime() and "The body has been here for awhile." or "The body is slightly warm")
+							ply:ChatPrint((org.last_heartbeat + 180) < CurTime() and "尸体已经在这儿有一段时间了。" or "尸体还有些温热")
 						end
 
 						if org.blood < 3500 then
@@ -286,7 +286,7 @@ function SWEP:ApplyForce()
 								ply:ChatPrint("有呼吸。")
 							end
 
-							ply:ChatPrint(org.otrub and "No reaction." or "Reaction present.")
+							ply:ChatPrint(org.otrub and "没有反应。" or "有反应。")
 
 							if org.isPly and not org.otrub then
 								org.owner:ChatPrint("有人检查了你的反应。")
@@ -296,7 +296,7 @@ function SWEP:ApplyForce()
 
 					self.Checking = math.min(self.Checking + FrameTime() * 2, 10)
 				else
-					ply:Notify("I dont think I need to check their vitals.", 10)
+					ply:Notify("我觉得没必要检查他们的生命体征。", 10)
 				end
 			end
 		end
@@ -323,7 +323,7 @@ function SWEP:ApplyForce()
 						if not ply2.noHead then
 							ply:ChatPrint("你正在开始心肺复苏。")
 						else
-							ply:Notify("I dont think CPR would help here...", 10)
+							ply:Notify("我觉得心肺复苏在这儿没用...", 10)
 						end
 					end
 

@@ -69,7 +69,7 @@ local function createButton(k,ent,size,Pan,mainpan)
         VPan:Dock(LEFT)
         VPan:SetSize( size/2, size*0.15 )
         VPan:DockMargin(0,size*0.65,0,0)
-        VPan:SetText( "View" )
+        VPan:SetText( "查看" )
         VPan:SetFont( "HomigradFontMedium" )
         function VPan:DoClick()
             mainpan.RPanel:SetModel( ent.MDL )
@@ -97,7 +97,7 @@ local function createButton(k,ent,size,Pan,mainpan)
         BPan:Dock(FILL)
         BPan:SetSize( size/2, size*0.15 )
         BPan:DockMargin(0,size*0.65,0,0)
-        BPan:SetText( LocalPlayer():PS_HasItem(ent.ID) and "SOLD" or ent.ISDONATE and "DONATE" or "Buy: "..ent.PRICE.." ZP" )
+        BPan:SetText( LocalPlayer():PS_HasItem(ent.ID) and "已拥有" or ent.ISDONATE and "捐赠" or "购买: "..ent.PRICE.." ZP" )
         BPan:SetFont( "HomigradFontMedium" )
         function BPan:DoClick()
             if ent.ISDONATE then
@@ -106,12 +106,12 @@ local function createButton(k,ent,size,Pan,mainpan)
             return end
             if self.InWait then return end
             if LocalPlayer():PS_HasItem(ent.ID) then 
-                self:SetText( LocalPlayer():PS_HasItem(ent.ID) and "SOLD" or "Buy: "..(ent.ISDONATE and "DONATE" or ent.PRICE.." ZP")  ) 
+                self:SetText( LocalPlayer():PS_HasItem(ent.ID) and "已拥有" or "购买: "..(ent.ISDONATE and "捐赠" or ent.PRICE.." ZP")  ) 
             return end
-            self:SetText( "Wait..." )
+            self:SetText( "等待中..." )
             self.InWait = true
             PLUGIN:SendNET("BuyItem",{ent.ID},function(data)
-                self:SetText( LocalPlayer():PS_HasItem(ent.ID) and "SOLD" or "Buy: "..(ent.ISDONATE and "DONATE" or ent.PRICE.." ZP")  )
+                self:SetText( LocalPlayer():PS_HasItem(ent.ID) and "已拥有" or "购买: "..(ent.ISDONATE and "捐赠" or ent.PRICE.." ZP")  )
                 mainpan:Update(data)
                 self.InWait = false
             end)
@@ -177,7 +177,7 @@ function PANEL:Init()
     UPan:SetSize(self:GetWide(),ScreenScale(30))
 
         local lbl = vgui.Create( "DLabel", UPan )
-        lbl:SetText( "Z-City Appearance Shop" )
+        lbl:SetText( "Z-City 外观商店" )
         lbl:SetFont( "HomigradFontGigantoNormous" )
         lbl:SetContentAlignment(9)
         
@@ -186,7 +186,7 @@ function PANEL:Init()
         lbl:SizeToContents()
 
         local lbl = vgui.Create( "DButton", UPan )
-        lbl:SetText( "Buy points" )
+        lbl:SetText( "购买点数" )
         lbl:SetFont( "HomigradFontLarge" )
         lbl:SetContentAlignment(5)
         

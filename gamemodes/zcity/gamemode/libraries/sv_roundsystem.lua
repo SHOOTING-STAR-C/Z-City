@@ -769,7 +769,7 @@ COMMANDS.setforcemode = {
 COMMANDS.endround = {
 	function(ply, args)
 		if not ply:IsAdmin() then
-			ply:ChatPrint("You don't have access")
+			ply:ChatPrint("你没有权限")
 			return
 		end
 	 	zb:EndRound()

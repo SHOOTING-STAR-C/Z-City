@@ -1110,7 +1110,7 @@ concommand.Add("zb_snake", function() -- вот как здесь!
     frame.OnClose = function()
         timer.Remove("SnakeGameTimer")
         snakeGameOpen = false  
-        print("[Snake Game] Игра закрыта.") -- НЕ РАБОТАЕТ
+        print("[贪吃蛇] 游戏已关闭。") -- НЕ РАБОТАЕТ
     end
 
 

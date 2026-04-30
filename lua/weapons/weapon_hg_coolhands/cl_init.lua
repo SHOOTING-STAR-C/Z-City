@@ -558,12 +558,12 @@ function SWEP:Think()
 	local owner = self:GetOwner()
 	-- if not self.changedName then
 		if owner.PlayerClassName == "sc_infiltrator" and self.PrintName ~= "CQC" then
-			self.PrintName = "CQC"
+			self.PrintName = "近战格斗"
 			self.WepSelectIcon = cqcicon
 		elseif owner.PlayerClassName == "furry" and self.PrintName ~= "Paws" then
-			self.PrintName = "Paws"
+			self.PrintName = "爪子"
 			self.WepSelectIcon = paw
-			self.Instructions = "LMB - raise paws\nRELOAD - lower paws\n\nIn the raised state:\nLMB - strike\nRMB - block\n\n<color=91,121,229>As a bearer of a pathowogen infection, you have new abilities.\n\nIn lowered state, hold RMB to grab uninfected prey, then hold LMB to assimilate them.\n\nYou can press LMB to lick your fellow mates, doing so helps them alleviate their pain.\n\n:3<color=180,180,180>"
+			self.Instructions = "左键 - 举起爪子\n换弹 - 放下爪子\n\n举起状态:\n左键 - 攻击\n右键 - 格挡\n\n<color=91,121,229>作为病原体携带者，你拥有新的能力。\n\n在放下状态，按住右键抓住未感染的猎物，然后按住左键同化他们。\n\n你可以按左键舔舐你的同伴，这样做可以帮助他们减轻疼痛。\n\n:3<color=180,180,180>"
 		else
 			self.PrintName = "Hands"
 		end

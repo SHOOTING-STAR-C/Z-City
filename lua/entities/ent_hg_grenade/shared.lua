@@ -6,7 +6,7 @@ ENT.Model = "models/props_junk/jlare.mdl"
 
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "Grenade"
+ENT.PrintName = "手雷"
 ENT.Spawnable = false
 ENT.Model = "models/pwb/weapons/w_f1_thrown.mdl"
 ENT.timeToBoom = 3

@@ -436,8 +436,8 @@ if CLIENT then
         draw.GlowingText( hpTxt, "HEVFontDefault", pos[1]+size[1]*0.08, pos[2]+(size[2]/2) - txtSizeY/2, color_hp, color_glow, nil, TEXT_ALIGN_RIGHT)
         oldHpTxt = hpTxt
 
-        draw.DrawText("Medicine","HEVFontSmall",pos[1]+size[1]*0.085+1,pos[2]+(size[2]/1.8)+1,color_bg,TEXT_ALIGN_LEFT)
-        draw.DrawText("Medicine","HEVFontSmall",pos[1]+size[1]*0.085,pos[2]+(size[2]/1.8),color_hp,TEXT_ALIGN_LEFT)
+        draw.DrawText("药品","HEVFontSmall",pos[1]+size[1]*0.085+1,pos[2]+(size[2]/1.8)+1,color_bg,TEXT_ALIGN_LEFT)
+        draw.DrawText("药品","HEVFontSmall",pos[1]+size[1]*0.085,pos[2]+(size[2]/1.8),color_hp,TEXT_ALIGN_LEFT)
         
         local armor = self:GetNetVar("HEVPower") or 0
         armorlerp = Lerp(FRT,armorlerp,armor > 1 and 1 or 0)
@@ -454,8 +454,8 @@ if CLIENT then
         color_glow_ar.a = math.Round( Lerp( FRT, color_glow_ar.a, oldArTxt ~= armorTxt and 255 or 0 ) ) 
         draw.GlowingText( armorTxt, "HEVFontDefault", pos[1]+size[1]*0.08, pos[2]+(size[2]/2) - txtSizeY/2, color_ar, color_glow_ar, nil, TEXT_ALIGN_RIGHT)
         oldArTxt = armorTxt
-        draw.DrawText("Armor","HEVFontSmall",pos[1]+size[1]*0.085+1,pos[2]+(size[2]/1.8)+1,color_bg,TEXT_ALIGN_LEFT)
-        draw.DrawText("Armor","HEVFontSmall",pos[1]+size[1]*0.085,pos[2]+(size[2]/1.8),color_ar,TEXT_ALIGN_LEFT)
+        draw.DrawText("护甲","HEVFontSmall",pos[1]+size[1]*0.085+1,pos[2]+(size[2]/1.8)+1,color_bg,TEXT_ALIGN_LEFT)
+        draw.DrawText("护甲","HEVFontSmall",pos[1]+size[1]*0.085,pos[2]+(size[2]/1.8),color_ar,TEXT_ALIGN_LEFT)
         -- Sights
         local wep = self:GetActiveWeapon()
         if IsValid(wep) then
@@ -493,8 +493,8 @@ if CLIENT then
             draw.GlowingText( ammoTxt, "HEVFontDefault", pos[1]+size[1]*0.08, pos[2]+(size[2]/2) - txtSizeY/2, color_ar, color_glow_ammo,nil, TEXT_ALIGN_RIGHT)
             oldAmmoTxt = ammoTxt
 
-            draw.DrawText( "Ammo", "HEVFontSmall",pos[1]+size[1]*0.085+1,pos[2]+(size[2]/1.8)+1,color_bg,TEXT_ALIGN_LEFT)
-            draw.DrawText( "Ammo", "HEVFontSmall",pos[1]+size[1]*0.085,pos[2]+(size[2]/1.8),color_ar,TEXT_ALIGN_LEFT)
+            draw.DrawText( "弹药", "HEVFontSmall",pos[1]+size[1]*0.085+1,pos[2]+(size[2]/1.8)+1,color_bg,TEXT_ALIGN_LEFT)
+            draw.DrawText( "弹药", "HEVFontSmall",pos[1]+size[1]*0.085,pos[2]+(size[2]/1.8),color_ar,TEXT_ALIGN_LEFT)
         end
         --Blood
         local pos, size = drawBGPanel(0.035,0.93)
@@ -512,8 +512,8 @@ if CLIENT then
         
         draw.DrawText(BloodTxt,"HEVFontSmall",pos[1]+size[1]*-0.09,pos[2]+(size[2]/2),color_bg,TEXT_ALIGN_LEFT)
         draw.DrawText(BloodTxt,"HEVFontSmall",pos[1]+size[1]*-0.09,pos[2]+(size[2]/2),color_bld,TEXT_ALIGN_LEFT)
-        draw.DrawText("Blood/Ml","HEVFontSmall",pos[1]+size[1]*0.085+1,pos[2]+(size[2]/2)+1,color_bg,TEXT_ALIGN_LEFT)
-        draw.DrawText("Blood/Ml","HEVFontSmall",pos[1]+size[1]*0.085,pos[2]+(size[2]/2),color_bld,TEXT_ALIGN_LEFT)
+        draw.DrawText("血液/毫升","HEVFontSmall",pos[1]+size[1]*0.085+1,pos[2]+(size[2]/2)+1,color_bg,TEXT_ALIGN_LEFT)
+        draw.DrawText("血液/毫升","HEVFontSmall",pos[1]+size[1]*0.085,pos[2]+(size[2]/2),color_bld,TEXT_ALIGN_LEFT)
     end
 
     local hevMat = Material("sprites/mat_jack_helmoverlay_r")
@@ -585,10 +585,10 @@ elseif SERVER then
     }
 
     local phrases = {
-        "Gordon Freeman has died. Now what?",
-        "He's dead. Who will lead the way now?",
-        "Gordon Freeman has failed his mission.",
-        "What an unfortunate end to such a good employee.",
+        "戈登·弗里曼已阵亡。现在该怎么办？",
+        "他已阵亡。现在谁来带路？",
+        "戈登·弗里曼未能完成任务。",
+        "如此优秀的员工竟落得这般不幸的结局。",
     }
 
     local hev_color = Color(255,125,0)
@@ -616,7 +616,7 @@ elseif SERVER then
             if org.brain > 0.1 then
                 org.mannitol = org.brain * 2
                 --ply, msg, delay, msgKey, showTime, func, clr)
-                ply:Notify("HEV suit has detected a traumatic brain injury. Injecting mannitol.",true,"mannitol_hev",0.5,function(ply)
+                ply:Notify("HEV 护甲检测到创伤性脑损伤。正在注射甘露醇。",true,"mannitol_hev",0.5,function(ply)
                     net.Start("HEV_DAMAGE")
                         net.WriteString("hl1/fvox/automedic_on.wav")
                     net.Send(ply)
@@ -631,7 +631,7 @@ elseif SERVER then
                 org.pneumothorax = 0
                 org.needle = 0
 
-                ply:Notify("HEV suit has detected pneumothorax. Repairing.", true, "needle_hev", 0.5, function(ply)
+                ply:Notify("HEV 护甲检测到气胸。正在修复。", true, "needle_hev", 0.5, function(ply)
                     net.Start("HEV_DAMAGE")
                         net.WriteString("hl1/fvox/automedic_on.wav")
                     net.Send(ply)
@@ -650,7 +650,7 @@ elseif SERVER then
                     ply.HEV.Morphine = ply.HEV.Morphine - administer
                     
                     if administer > 0.1 then
-                        ply:Notify("HEV suit has detected pain receptors almost reaching the threshold. Injecting morphine.", 10, "morphine_hev", 0.5,
+                        ply:Notify("HEV 护甲检测到疼痛受体接近阈值。正在注射吗啡。", 10, "morphine_hev", 0.5,
                         function(ply)
                             net.Start("HEV_DAMAGE")
                                 net.WriteString("hl1/fvox/morphine_shot.wav")
@@ -661,7 +661,7 @@ elseif SERVER then
             end
 
             if (org.CO > 10) or (org.COregen > 10) then
-                ply:Notify("HEV suit has detected a carbon monoxide presence in the organism. Neutralising.",60,"co_hev",0.5,function(ply)
+                ply:Notify("HEV 护甲检测到体内存在一氧化碳。正在中和。",60,"co_hev",0.5,function(ply)
                     net.Start("HEV_DAMAGE")
                         net.WriteString("hl1/fvox/automedic_on.wav")
                     net.Send(ply)
@@ -693,7 +693,7 @@ elseif SERVER then
                 end
 
                 if bonesfixed then
-                    ply:Notify("HEV suit has detected fractures. Repairing.",60,"bones_hev",0.5,function(ply)
+                    ply:Notify("HEV 护甲检测到骨折。正在修复。",60,"bones_hev",0.5,function(ply)
                         net.Start("HEV_DAMAGE")
                             net.WriteString("hl1/fvox/automedic_on.wav")
                         net.Send(ply)
@@ -739,7 +739,7 @@ elseif SERVER then
             end
 
             if (org.pulse < 40) or (org.blood < 3000) or (org.o2[1] < 10) then
-                ply:Notify("HEV suit has detected a critically low pulse. Epinephrine injected. Auto-pulse enabled. Plasma injected.", 60, "pulse_hev", 0.5, function(ply)
+                ply:Notify("HEV 护甲检测到脉搏过低。已注射肾上腺素。自动脉搏已启用。已注射血浆。", 60, "pulse_hev", 0.5, function(ply)
                     net.Start("HEV_DAMAGE")
                         net.WriteString("hl1/fvox/health_critical.wav")
                     net.Send(ply)

@@ -3032,13 +3032,13 @@ if CLIENT then
         local DLabel = vgui.Create( "DLabel", Frame )
         DLabel:SetPos( 10, 268 )
 		DLabel:SetTextColor(color_white)
-        DLabel:SetText( "LMB - Drop count\nRMB - Drop all" )
+        DLabel:SetText( "左键 - 丢弃指定数量\n右键 - 丢弃全部" )
 		DLabel:SetFont("HomigradFontVSmall")
         DLabel:SizeToContents()
         local DLabel = vgui.Create( "DLabel", Frame )
         DLabel:SetPos( 10, 252 )
 		DLabel:SetTextColor(color_white)
-        DLabel:SetText( "Count: " )
+        DLabel:SetText( "数量: " )
 		DLabel:SetFont("HomigradFontVSmall")
         DLabel:SizeToContents()
 		Frame:SlideDown(0.5)
@@ -3057,7 +3057,7 @@ if CLIENT then
 
 					return 0
 				end,
-				"Drop Ammo"
+				"丢弃弹药"
 			}
 		end
 	end)

@@ -258,11 +258,11 @@ MODE.Types.standard = {
 	ChanceFunction = function() return (zb.GetWorldSize() < ZBATTLE_BIGMAP) and (zb.ModesChances["standard"] or zb.modes["hmcd"].Types.standard.Chance) or 0 end,
 	LootTable = MODE.LootTableStandard,
 	Messages = {
-		[3] = "Everyone died.",
-		[1] = "The murderer has killed everyone.",
-		[0] = "The murderer was",
+		[3] = "所有人都死了。",
+		[1] = "凶手杀死了所有人。",
+		[0] = "凶手是",
 	},
-	Message = "The murderer was ",
+	Message = "凶手是 ",
 	TraitorLoot = function(ply)
 		ply:Give("weapon_buck200knife")
 		ply:Give("weapon_hg_type59_tpik")
@@ -334,11 +334,11 @@ MODE.Types.wildwest = {
 	ChanceFunction = function() return (zb.GetWorldSize() < ZBATTLE_BIGMAP) and (zb.ModesChances["wildwest"] or zb.modes["hmcd"].Types.wildwest.Chance) or 0 end,
 	LootTable = MODE.LootTableStandard,
 	Messages = {
-		[3] = "The dead silence fills the empty city...",
-		[1] = "The town has fallen into the hands of crime.",
-		[0] = "The law was settled once again. The bastard is",
+		[3] = "死寂笼罩着空荡的城镇...",
+		[1] = "城镇落入了犯罪之手。",
+		[0] = "正义再次得到伸张。这个混蛋是",
 	},
-	Message = "The criminal was ",
+	Message = "罪犯是 ",
 	TraitorLoot = function(ply)
 		ply:Give("weapon_sogknife")
 		ply:Give("weapon_hg_type59_tpik")
@@ -470,11 +470,11 @@ MODE.Types.gunfreezone = {
 	ChanceFunction = function() return (zb.GetWorldSize() < ZBATTLE_BIGMAP) and (zb.ModesChances["gunfreezone"] or zb.modes["hmcd"].Types.gunfreezone.Chance) or 0 end,
 	LootTable = MODE.LootTableStandard,
 	Messages = {
-		[3] = "Everyone died.",
-		[1] = "The murderer has killed everyone.",
-		[0] = "The murderer was",
+		[3] = "所有人都死了。",
+		[1] = "凶手杀死了所有人。",
+		[0] = "凶手是",
 	},
-	Message = "The murderer was ",
+	Message = "凶手是 ",
 	TraitorLoot = function(ply)
 		ply:Give("weapon_buck200knife")
 		ply:Give("weapon_hg_type59_tpik")
@@ -546,11 +546,11 @@ MODE.Types.soe = {
 	ChanceFunction = function() return (zb.GetWorldSize() >= ZBATTLE_BIGMAP) and (zb.ModesChances["soe"] or zb.modes["hmcd"].Types.soe.Chance) or 0 end,
 	LootTable = MODE.LootTable,
 	Messages = {
-		[3] = "Everyone died.",
-		[1] = "The traitor has killed everyone.",
-		[0] = "The traitor was",
+		[3] = "所有人都死了。",
+		[1] = "叛徒杀死了所有人。",
+		[0] = "叛徒是",
 	},
-	Message = "The traitor was ",
+	Message = "叛徒是 ",
 	TraitorLoot = function(ply)
 		local p22 = ply:Give("weapon_p22")
 		hg.AddAttachmentForce(ply,p22,"supressor4")
@@ -625,7 +625,7 @@ MODE.Types.soe = {
 		zb.GiveRole(ply, "National Guard", Color(55, 85, 0))
 		ply:SetNetVar("CurPluv", "pluvberet")
 	end,
-	PoliceText = "National guards have arrived.",
+	PoliceText = "国民警卫队已抵达。",
 	PoliceSound = "snd_jack_hmcd_heli2.mp3"
 }
 
@@ -1371,7 +1371,7 @@ function MODE:EndRound()
 		else
 			if traitor and IsValid(traitor) then
 				--local CheckAlive = #self:CheckAlivePlayers()[1]
-				PrintMessage(HUD_PRINTTALK, self.Types[self.Type].Messages[winner]..(winner == 0 and (traitor:Alive() and " neutralized." or " 被杀死。") or ""))
+				PrintMessage(HUD_PRINTTALK, self.Types[self.Type].Messages[winner]..(winner == 0 and (traitor:Alive() and " 被制服。" or " 被杀死。") or ""))
 				
 				timer.Simple(2, function()
 					PrintMessage(HUD_PRINTTALK, self.Types[self.Type].Message..traitor:Name())

@@ -38,7 +38,7 @@ if CLIENT then
 		if entss then return entss.PrintName end
 		if hg.armor and hg.armor[i] and hg.armor[i][thing] then return thing end
 		if hg.attachmentslaunguage and hg.attachmentslaunguage[thing] then return thing end
-		if i == "Money" then return "Money, " .. tostring(thing) .. "$" end
+		if i == "Money" then return "金钱, " .. tostring(thing) .. "$" end
 		return tostring(i)
 	end
 
@@ -167,13 +167,13 @@ if CLIENT then
 		inv["Armor"] = armor
 		if not inv then return end
 
-		local nameStr = "Unknown"
+		local nameStr = "未知"
 		if IsValid(ent) then
 			if (ent:IsPlayer() or ent:IsRagdoll()) then
 				nameStr = ent:GetPlayerName() or string.NiceName(ent:GetClass())
 			end
 		end
-		local name = nameStr .. "'s inventory" or "Container"
+		local name = nameStr .. " 的背包" or "容器"
 		local sizeX, sizeY = ScrW() / 3, ScrH() / 2.5
 		plyMenu = vgui.Create("ZFrame")
 		plyMenu.ent = ent
@@ -191,7 +191,7 @@ if CLIENT then
 		plyMenu.PaintOver = function(self, w, h)
 			draw.DrawText(name, "HomigradFontSmall", w / 2, 10, color_white, TEXT_ALIGN_CENTER)
 
-			draw.DrawText("R - Close | LMB - Take | RMB - Item menu", "HomigradFontSmall", w / 2, h - h*0.055 , clr_text, TEXT_ALIGN_CENTER)
+			draw.DrawText("R - 关闭 | 左键 - 拿取 | 右键 - 物品菜单", "HomigradFontSmall", w / 2, h - h*0.055 , clr_text, TEXT_ALIGN_CENTER)
 		end
 		function plyMenu:Think()
 			local ent = self.ent
@@ -251,7 +251,7 @@ if CLIENT then
 		end
 		local time = CurTime() + 3
 		function DScrollPanel:Paint(w, h)
-			txt = "Searching"
+			txt = "搜索中"
 			if time > 0 then
 				for i = 1, 3 - math.Round(time-CurTime(),0) do
 					txt = txt .. "."
@@ -309,7 +309,7 @@ if CLIENT then
 					
 					if not functions[tab](ply, ent, i, unpack(thing1)) then
 						local OptionsMenu = DermaMenu() 
-							OptionsMenu:AddOption( "You have item like this", function() end )
+							OptionsMenu:AddOption( "你已有此类物品", function() end )
 						OptionsMenu:Open()
 						return
 					end
@@ -334,7 +334,7 @@ if CLIENT then
 					
 					if not functions[tab](ply, ent, i, unpack(thing1)) then
 						local OptionsMenu = DermaMenu() 
-							OptionsMenu:AddOption( "You have item like this", function() end )
+							OptionsMenu:AddOption( "你已有此类物品", function() end )
 						OptionsMenu:Open()
 						return
 					end
@@ -346,7 +346,7 @@ if CLIENT then
 					grid.SoundKD = CurTime() + 0.2
 					--button:Remove()
 					local OptionsMenu = DermaMenu() 
-						OptionsMenu:AddOption( "Take", function() button:Remove() TakeItem(tab, i, thing, ent) end )
+						OptionsMenu:AddOption( "拿取", function() button:Remove() TakeItem(tab, i, thing, ent) end )
 					OptionsMenu:Open()
 					--timer.Simple(0.5 * math.max(ply:Ping() / 50,1),function()
 					--	--OpenInv(ent)

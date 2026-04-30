@@ -1,6 +1,6 @@
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "Flashlight"
+ENT.PrintName = "手电筒"
 ENT.Category = "ZCity Other"
 ENT.Spawnable = true
 ENT.Model = "models/runaway911/props/item/flashlight.mdl"

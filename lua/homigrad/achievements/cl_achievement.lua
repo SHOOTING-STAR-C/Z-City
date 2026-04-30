@@ -289,7 +289,7 @@ hook.Add("HUDPaint","hg_NewAchievement", function()
     for i = 1, #AchTable do
         local ach = AchTable[i]
         if not ach then continue end
-        local txt = "Achievement! "..ach.name
+        local txt = "成就解锁! "..ach.name
         ach.img = isstring(ach.img) and Material(ach.img) or ach.img
         local wt, _ = surface.GetTextSize(txt)
 

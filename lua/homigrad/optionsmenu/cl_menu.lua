@@ -41,15 +41,15 @@ function hg.AddOptionPanel( convarname, mode, optiondata, category )
     options[category][convarname] = {mode, optiondata}
 end
 
-hg.AddOptionPanel( "hg_potatopc", "switcher", {desc = "Enables weaker effects. Use for weak PCs"}, "optimization" )
-hg.AddOptionPanel( "hg_dynamic_mags", "switcher", {desc = "Enables the \"floating Ammo HUD\" feature"}, "other" )
-hg.AddOptionPanel( "hg_anims_draw_distance", "slider", {desc = "Changes the rendering distance of animations\nCan help increase FPS | 0 - inf",min = 0,max = 4096}, "optimization" )
-hg.AddOptionPanel( "hg_attachment_draw_distance", "slider", {desc = "Changes the rendering distance of attachments\nCan help increase FPS | 0 - inf",min = 0,max = 4096}, "optimization" )
-hg.AddOptionPanel( "hg_old_notificate", "switcher", {desc = "Enables old damage notifications (in chat)",min = 0,max = 4096}, "other" )
-hg.AddOptionPanel( "hg_weaponshotblur_enable", "switcher", {desc = "Enables blur when you are shooting the weapon",min = 0,max = 4096}, "other" )
-hg.AddOptionPanel( "hg_weaponshotblur_mul", "slider", {desc = "Multiplicates the blur that happens when you are shooting the weapon",min = 0,max = 1,decimals = 3}, "other" )
-hg.AddOptionPanel( "hg_maxsmoketrails", "slider", {desc = "Max amount of smoke trail effects (lags after 10)",min = 0,max = 30,decimals = 0}, "optimization" )
-hg.AddOptionPanel( "hg_optimise_scopes", "slider", {desc = "Enable this if scoping makes your fps cry (1 - lowers quality of props around you, 2 - \"disables\" main render)",min = 0,max = 2,decimals = 0}, "optimization" )
+hg.AddOptionPanel( "hg_potatopc", "switcher", {desc = "启用较弱的效果，适用于配置较低的电脑"}, "optimization" )
+hg.AddOptionPanel( "hg_dynamic_mags", "switcher", {desc = "启用\"浮动弹药HUD\"功能"}, "other" )
+hg.AddOptionPanel( "hg_anims_draw_distance", "slider", {desc = "更改动画渲染距离\n有助于提升帧数 | 0 - 无限",min = 0,max = 4096}, "optimization" )
+hg.AddOptionPanel( "hg_attachment_draw_distance", "slider", {desc = "更改配件渲染距离\n有助于提升帧数 | 0 - 无限",min = 0,max = 4096}, "optimization" )
+hg.AddOptionPanel( "hg_old_notificate", "switcher", {desc = "启用旧版伤害通知（聊天栏显示）",min = 0,max = 4096}, "other" )
+hg.AddOptionPanel( "hg_weaponshotblur_enable", "switcher", {desc = "启用射击时的模糊效果",min = 0,max = 4096}, "other" )
+hg.AddOptionPanel( "hg_weaponshotblur_mul", "slider", {desc = "射击模糊效果的倍率",min = 0,max = 1,decimals = 3}, "other" )
+hg.AddOptionPanel( "hg_maxsmoketrails", "slider", {desc = "烟雾轨迹效果的最大数量（超过10可能会卡顿）",min = 0,max = 30,decimals = 0}, "optimization" )
+hg.AddOptionPanel( "hg_optimise_scopes", "slider", {desc = "如果开镜导致帧数下降请启用（1 - 降低周围道具质量，2 - \"禁用\"主渲染）",min = 0,max = 2,decimals = 0}, "optimization" )
 
 local red = Color(75,25,25)
 local redselected = Color(150,0,0)
@@ -65,7 +65,7 @@ local function CreateOptionsMenu()
     local MainFrame = vgui.Create("ZFrame") -- The name of the panel we don't have to parent it.
     MainFrame:SetPos( posX, posY ) -- Set the position to 100x by 100y. 
     MainFrame:SetSize( sizeX, sizeY ) -- Set the size to 300x by 200y.
-    MainFrame:SetTitle( "ZCity options" ) -- Set the title in the top left to "Derma Frame".
+    MainFrame:SetTitle( "ZCity 选项" ) -- Set the title in the top left to "Derma Frame".
     MainFrame:MakePopup() -- Makes your mouse be able to move around.
     //function MainFrame:Paint( w, h )
     //    draw.RoundedBox( 0, 2.5, 2.5, w-5, h-5, Color( 0, 0, 0, 140) )
@@ -87,7 +87,7 @@ local function CreateOptionsMenu()
     local DLabel = vgui.Create( "DLabel", DScrollPanel )
     DLabel:Dock(TOP)
     DLabel:DockMargin(20,5,5,2.5)
-    DLabel:SetText( "Optimization" )
+    DLabel:SetText( "优化" )
 
     for k,v in pairs(options["optimization"]) do
        
@@ -97,7 +97,7 @@ local function CreateOptionsMenu()
     local DLabel = vgui.Create( "DLabel", DScrollPanel )
     DLabel:Dock(TOP)
     DLabel:DockMargin(20,15,5,2.5)
-    DLabel:SetText( "Other" )
+    DLabel:SetText( "其他" )
 
     for k,v in pairs(options["other"]) do
        

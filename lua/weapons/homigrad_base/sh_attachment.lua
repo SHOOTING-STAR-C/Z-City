@@ -3,7 +3,7 @@ local angFull = Angle(-30, 30, 30)
 local angZero = Angle(0, 0, 0)
 hg.attachments = hg.attachments or {}
 SWEP.availableAttachments = {}
-local hg_random_atts = ConVarExists("hg_random_atts") and GetConVar("hg_random_atts") or CreateConVar("hg_random_atts", 0, FCVAR_SERVER_CAN_EXECUTE, "Toggle random attachments on weapon spawn", 0, 1)
+local hg_random_atts = ConVarExists("hg_random_atts") and GetConVar("hg_random_atts") or CreateConVar("hg_random_atts", 0, FCVAR_SERVER_CAN_EXECUTE, "切换武器生成时的随机附件", 0, 1)
 function SWEP:ClearAttachments()
 	self.attachments = {
 		barrel = {},
@@ -135,7 +135,7 @@ end
 local angZero = Angle(0, 0, 0)
 local vecZero = Vector(0, 0, 0)
 local vecadd = Vector(0,0,0)
-local hg_attachment_draw_distance = ConVarExists("hg_attachment_draw_distance") and GetConVar("hg_attachment_draw_distance") or CreateClientConVar("hg_attachment_draw_distance", 0, true, nil, "distance to draw attachments", 0, 4096)
+local hg_attachment_draw_distance = ConVarExists("hg_attachment_draw_distance") and GetConVar("hg_attachment_draw_distance") or CreateClientConVar("hg_attachment_draw_distance", 0, true, nil, "绘制附件的距离", 0, 4096)
 
 function SWEP:DrawAttachments()
 	local owner = self:GetOwner()
@@ -765,7 +765,7 @@ if CLIENT then
 		lbl:DockMargin(10,0,0,10)
 
 		lbl.Paint = function(self, w, h)
-			draw.SimpleText("LMB - Add attachment | RMB - remove attachment", "ZCity_Tiny", w * 0.5, h * 0.5, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			draw.SimpleText("左键 - 添加附件 | 右键 - 移除附件", "ZCity_Tiny", w * 0.5, h * 0.5, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		end
 
 		local scroll = vgui.Create("DScrollPanel",frame)
@@ -803,14 +803,14 @@ if CLIENT then
 			for k, v in pairs(tblcpy) do
 				if !hg.attachmentslaunguage[v[1]] then continue end
 				local but = vgui.Create("DButton")
-				but:SetText( hg.attachmentslaunguage[v[1]]..(v[2] and " - on the weapon" or "") )
+				but:SetText( hg.attachmentslaunguage[v[1]]..(v[2] and " - 已装备" or "") )
 				but:SetFont("ZCity_Tiny")
 				but:Dock( TOP )
 				but:DockMargin( 0, 0, 0, 5 )
 				but:SetSize(0, ScreenScaleH(20))
 
 				local but2 = vgui.Create("DButton", but)
-				but2:SetText( "Drop" )
+				but2:SetText( "丢弃" )
 				but2:SetFont("ZCity_SuperTiny")
 				but2:Dock( RIGHT )
 

@@ -63,7 +63,7 @@ hook.Add("radialOptions", "ReloadOnFloor", function()
 			function()
 				RunConsoleCommand("hg_reloadfloorweapon")
 			end,
-			((isshotgun and lply:GetAmmoCount(ent.Primary.Ammo) <= 0 and not ent.drawBullet) and "Pump " or "Reload ") .. ent:GetPrintName()
+			((isshotgun and lply:GetAmmoCount(ent.Primary.Ammo) <= 0 and not ent.drawBullet) and "泵动 " or "装填 ") .. ent:GetPrintName()
 		}
 		hg.radialOptions[#hg.radialOptions + 1] = tbl
 	end
@@ -82,7 +82,7 @@ hook.Add("radialOptions", "PlaceBipod", function()
 			function()
 				RunConsoleCommand("hg_place_bipod")
 			end,
-			ent:IsResting() and "Pickup bipod" or "Place bipod"
+			ent:IsResting() and "收起两脚架" or "放置两脚架"
 		}
 		hg.radialOptions[#hg.radialOptions + 1] = tbl
 	end

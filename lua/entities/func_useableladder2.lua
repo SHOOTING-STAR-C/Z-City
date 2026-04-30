@@ -6,7 +6,7 @@ AddCSLuaFile()
 
 ENT.Type = "point"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "Ladder"
+ENT.PrintName = "梯子"
 ENT.Category = "ZCity Other"
 ENT.Spawnable = false
 ENT.AdminOnly = true

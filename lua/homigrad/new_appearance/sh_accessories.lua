@@ -839,7 +839,7 @@ hg.Accessories = {
         bPointShop = true,
         price = 2500,
         vpos = Vector(0,0,69),
-        name = "ОЧКИ С УСАМИ МЕМ"
+        name = "胡子墨镜"
     },
 
     ["glasses fmf"] = {

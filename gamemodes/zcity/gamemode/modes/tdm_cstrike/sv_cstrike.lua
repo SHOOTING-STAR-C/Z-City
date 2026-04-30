@@ -235,7 +235,7 @@ function MODE:EndRound()
                 end
                 
                 winner = maxTeam == 0 and 1 or 0
-                PrintMessage(HUD_PRINTTALK, (maxTeam == 0 and "Terrorists" or "反恐精英") .. " 已杀死人质")
+                PrintMessage(HUD_PRINTTALK, (maxTeam == 0 and "恐怖分子" or "反恐精英") .. " 已杀死人质")
             else
                 winner = 3
             end
@@ -255,9 +255,9 @@ function MODE:EndRound()
         end
     end
 
-    local winnerprt = (winner == 1 and "反恐精英") or (winner == 0 and "恐怖分子") or "Nobody"
-    
-    PrintMessage(HUD_PRINTTALK, winnerprt.." have won the round.")
+    local winnerprt = (winner == 1 and "反恐精英") or (winner == 0 and "恐怖分子") or "无人"
+
+    PrintMessage(HUD_PRINTTALK, winnerprt.." 赢得了回合。")
 
 	for k,ply in player.Iterator() do
 		if ply:Team() == winner then
@@ -313,9 +313,9 @@ function MODE:EndRound()
         end
 
         if winner then
-            local winnerprt = (winner == 1 and "反恐精英") or (winner == 0 and "恐怖分子") or "Nobody"
+            local winnerprt = (winner == 1 and "反恐精英") or (winner == 0 and "恐怖分子") or "无人"
             
-            PrintMessage(HUD_PRINTTALK, winnerprt.." have won the game.")
+            PrintMessage(HUD_PRINTTALK, winnerprt.." 赢得了比赛。")
         end
 
         zb.RoundsLeft = nil

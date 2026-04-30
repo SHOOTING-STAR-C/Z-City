@@ -5,5 +5,5 @@ function ENT:Draw()
 end
 
 function ENT:Initialize()
-	self.HudHintMarkup = markup.Parse("<font=ZCity_Tiny>Grenade\n<colour=200,0,0>RUN IDIOT!</colour></font>",450)
+	self.HudHintMarkup = markup.Parse("<font=ZCity_Tiny>手雷\n<colour=200,0,0>快跑!</colour></font>",450)
 end

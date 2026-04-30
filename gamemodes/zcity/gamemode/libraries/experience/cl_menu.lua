@@ -38,7 +38,7 @@ function EXP.Menu( ply )
     EXP.OpenedMenu:SetSize( ScrW()*0.2, ScrH()*0.5 )
     EXP.OpenedMenu:Center()
     EXP.OpenedMenu:MakePopup()
-    EXP.OpenedMenu:SetTitle("Medal")
+    EXP.OpenedMenu:SetTitle("勋章")
 
     EXP.OpenedMenu.Medal = vgui.Create( "ZB_ExpPanel", EXP.OpenedMenu )
     local ExpPanel = EXP.OpenedMenu.Medal

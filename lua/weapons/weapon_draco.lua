@@ -1,7 +1,7 @@
 SWEP.Base = "homigrad_base"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
-SWEP.PrintName = "Micro Draco"
+SWEP.PrintName = "微型德拉科"
 SWEP.Author = "ROMARM via Regia Autonomă pentru producţia de Tehnică Militară (RATMIL), Cugir"
 SWEP.Instructions = "Shortened DRACO-Pistol chambered in 7.62x39 mm\n\nALT+E to change stance (+walk,+use)"
 SWEP.Category = "Weapons - Pistols"

@@ -3,15 +3,15 @@ zb.Points = zb.Points or {}
 
 zb.Points.Example = zb.Points.Example or {}
 zb.Points.Example.Color = Color(255,255,0)
-zb.Points.Example.Name = "example point"
+zb.Points.Example.Name = "示例点位"
 
 zb.Points.Spawnpoint = zb.Points.Spawnpoint or {}
 zb.Points.Spawnpoint.Color = Color(250,250,250)
-zb.Points.Spawnpoint.Name = "Spawnpoint"
+zb.Points.Spawnpoint.Name = "出生点"
 
 zb.Points.RandomSpawns = zb.Points.RandomSpawns or {}
 zb.Points.RandomSpawns.Color = Color(122,122,0)
-zb.Points.RandomSpawns.Name = "RandomSpawns"
+zb.Points.RandomSpawns.Name = "随机出生点"
 
 if SERVER then
     util.AddNetworkString("zb_getallpoints")

@@ -2,7 +2,7 @@ if SERVER then AddCSLuaFile() end
 ENT.Base = "projectile_nonexplosive_base"
 ENT.Author = "Mannytko"
 ENT.Category = "ZCity Other"
-ENT.PrintName = "Arrow Projectile"
+ENT.PrintName = "箭矢弹"
 ENT.Spawnable = false
 ENT.AdminOnly = true
 ENT.Model = "models/z_city/nmrih/items/arrow/ammo_arrow_single.mdl"

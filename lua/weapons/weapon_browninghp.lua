@@ -1,7 +1,7 @@
 SWEP.Base = "homigrad_base"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
-SWEP.PrintName = "Browning Hi-Power"
+SWEP.PrintName = "勃朗宁大威力手枪"
 SWEP.Author = "Browning Arms Company"
 SWEP.Instructions = "The Browning Hi-Power is a single-action, semi-automatic pistol chambered in 9×19mm Parabellum and .40 S&W cartridges."
 SWEP.Category = "Weapons - Pistols"

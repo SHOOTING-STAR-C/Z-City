@@ -29,44 +29,44 @@ local function damageBone(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ric
 end
 
 local huyasd = {
-	["spine1"] = "I don't feel anything below my hips.",
-	["spine2"] = "I cant't feel or move anything below my torso.",
-	["spine3"] = "I can't move at all. I can barely even breathe.",
-	["skull"] = "My head is aching.",
+	["spine1"] = "我腰部以下没有知觉。",
+	["spine2"] = "我的躯干以下没有知觉，也无法移动。",
+	["spine3"] = "我完全动不了，几乎无法呼吸。",
+	["skull"] = "我的头很疼。",
 }
 
 local broke_arm = {
-	"AAAAH OH GOD, IT'S BROKEN! MY ARM! IT'S BROKEN!",
-	"FUCK MY FUCKING ARM IS BROKEN!",
-	"NONONO MY ARM IS BENT ALL WRONG!",
-	"IT'S.. MY ARM.. SNAPPED- I HEARD IT SNAP!",
-	"MY ARM IS NOT SUPPOSED TO BEND IN HALF!",
+	"啊！天哪，断了！我的手臂！断了！",
+	"操！我的手臂断了！",
+	"不不不，我的手臂弯得不成样子了！",
+	"我的手臂...折了-我听到了折断的声音！",
+	"我的手臂不应该被弯成两半！",
 }
 
 local dislocated_arm = {
-	"MY ARM- GOD, IT'S POPPED OUT OF THE SOCKET!",
-	"FUCK- THE SHOULDER'S JUST- HANGING LOOSE!",
-	"MY ARM..! IT'S DISLOCATED! I CAN SEE THE BULGE WHERE IT'S WRONG!",
-	"THE ARM'S JUST- DEAD WEIGHT- IT'S NOT ATTACHED RIGHT!",
-	"SHIT! I CAN FEEL THE BONE OUT OF PLACE!",
+	"我的手臂-天哪，它脱臼了！",
+	"操-肩膀就-那么松垮垮地挂着！",
+	"我的手臂..！脱臼了！我能看到鼓包！",
+	"这手臂就-像个死重-它没接对位置！",
+	"操！我能感觉到骨头错位了！",
 }
 
 local broke_leg = {
-	"MY LEG- FUCK, IT'S BROKEN- I HEARD THE SNAP!",
-	"FUCK! THE SHIN'S SNAPPED CLEAN THROUGH!",
-	"THE KNEE'S WRONG- THE WHOLE LEG'S TWISTED WRONG!",
-	"MY LEG..! IT'S JUST- HANGING BY MUSCLE AND SKIN!",
-	"THE PAIN'S SHOOTING UP TO MY HIP- FUCK, IT'S BAD!",
-	"I CAN'T MOVE MY FOOT- THE ANKLE'S BROKEN TOO!",
+	"我的腿-操，断了-我听到了咔嚓声！",
+	"操！胫骨完全折断了！",
+	"膝盖不对-整条腿都扭错了！",
+	"我的腿..！就-靠着肌肉和皮挂着！",
+	"疼痛直冲髋部-操，太糟糕了！",
+	"我动不了脚-脚踝也断了！",
 }
 
 local dislocated_leg = {
-	"MY LEG- FUCK, IT'S DISLOCATED AT THE KNEE!",
-	"I CAN SEE THE KNEECAP IN THE WRONG PLACE!",
-	"AGHH- THE HIP'S POPPED OUT- IT'S STUCK OUTWARD!",
-	"IT'S BENT BACKWARD- THE KNEE SHOULDN'T BEND THIS WAY!",
-	"FUCK! THE HIP'S DISLOCATED!",
-	"THE ANKLE'S TWISTED- BUT THE KNEE'S THE REAL PROBLEM!",
+	"我的腿-操，膝盖脱臼了！",
+	"我能看到膝盖骨在不该在的位置！",
+	"啊-髋部脱出来了-卡在外面了！",
+	"它向后弯了-膝盖不应该这么弯！",
+	"操！髋部脱臼了！",
+	"脚踝扭了-但膝盖才是真正的问题！",
 }
 
 local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
@@ -286,7 +286,7 @@ hook.Add("CanListenOthers", "CantHaveShitInDetroit", function(output, input, isC
 	if IsValid(output) and (output.organism.jaw == 1 or output.organism.jawdislocation) and output:Alive() and (output:IsSpeaking() or isChat) then
 		-- and !isChat and output:IsSpeaking()
 		output.organism.painadd = output.organism.painadd + 2 * (output:IsSpeaking() and 1 or (isChat and 5 or 0))
-		output:Notify("My jaw is really hurting when I speak.", 60, "painfromjawspeak", 0, nil, Color(255, 210, 210))
+		output:Notify("我说话的时候下巴真的很痛。", 60, "painfromjawspeak", 0, nil, Color(255, 210, 210))
 	end
 end)
 

@@ -235,7 +235,7 @@ MODE.TypeObjectives.gunfreezone = {
 MODE.TypeObjectives.suicidelunatic = {
 	traitor = {
 		objective = "我的兄弟，愿真主保佑，不要让他失望。",
-		name = " Shahid",
+		name = " 殉道者",
 		color1 = Color(190,0,0),
 		color2 = Color(190,0,0)
 	},
@@ -305,7 +305,7 @@ function MODE:HUDPaint()
 	
 	fade = Lerp(FrameTime()*1, fade, math.Clamp(StartTime + 5 - CurTime(),-2,2))
 
-	draw.SimpleText("杀人游戏 | " .. (MODE.TypeNames[MODE.Type] or "Unknown"), "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0,162,255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	draw.SimpleText("杀人游戏 | " .. (MODE.TypeNames[MODE.Type] or "未知"), "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0,162,255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 	local Rolename = ( lply.isTraitor and MODE.TypeObjectives[MODE.Type].traitor.name ) or ( lply.isGunner and MODE.TypeObjectives[MODE.Type].gunner.name ) or MODE.TypeObjectives[MODE.Type].innocent.name
 	local ColorRole = ( lply.isTraitor and MODE.TypeObjectives[MODE.Type].traitor.color1 ) or ( lply.isGunner and MODE.TypeObjectives[MODE.Type].gunner.color1 ) or MODE.TypeObjectives[MODE.Type].innocent.color1
@@ -388,12 +388,12 @@ function MODE:HUDPaint()
 	end
 
 	if(!lply.MainTraitor and lply.isTraitor)then
-		Objective = "You are equipped with nothing. Help other traitors win."
+		Objective = "你没有装备任何物品。帮助其他叛徒获胜。"
 	end
 
 	--; WARNING Traitor's objective is not lined up with SubRole's
 	if(!MODE.RoleEndedChosingState)then
-		Objective = "Round is starting..."
+		Objective = "回合即将开始..."
 	end
 
 	local ColorObj = ( lply.isTraitor and MODE.TypeObjectives[MODE.Type].traitor.color2 ) or ( lply.isGunner and MODE.TypeObjectives[MODE.Type].gunner.color2 ) or MODE.TypeObjectives[MODE.Type].innocent.color2 or Color(255,255,255)
@@ -544,9 +544,9 @@ CreateEndMenu = function(traitor)
 	hmcdEndMenu.PaintOver = function(self,w,h)
 		surface.SetFont( "ZB_InterfaceMediumLarge" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize(traitorName .. " was a traitor ("..traitorNick..")")
+		local lengthX, lengthY = surface.GetTextSize(traitorName .. " 是叛徒 ("..traitorNick..")")
 		surface.SetTextPos(w / 2 - lengthX / 2, 20)
-		surface.DrawText(traitorName .. " was a traitor ("..traitorNick..")")
+		surface.DrawText(traitorName .. " 是叛徒 ("..traitorNick..")")
 	end
 
 	-- PLAYERS

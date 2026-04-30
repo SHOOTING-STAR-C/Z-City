@@ -1,6 +1,6 @@
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "Bomb"
+ENT.PrintName = "炸弹"
 ENT.Category = "ZCity Other"
 ENT.Spawnable = true
 ENT.AdminOnly = true

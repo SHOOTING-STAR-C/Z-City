@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "Spoon"
+ENT.PrintName = "勺子"
 ENT.Spawnable = false
 ENT.Model = ""
 

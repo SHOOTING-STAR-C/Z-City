@@ -787,7 +787,7 @@ MODE.LootTable = {
 function MODE:CanPlayerEnterVehicle(ply, ent) -- damdn i forgot about the broken mode hooks lmao
 	if ply.PlayerClassName == "furry" then
 		if (ply.cantdrivecd or 0) < CurTime() then
-			ply:Notify("Uhh, idk how to drive.", 0, "idkdrive", 0)
+			ply:Notify("呃，我不会开车。", 0, "idkdrive", 0)
 			ply.cantdrivecd = CurTime() + 10
 		end
 

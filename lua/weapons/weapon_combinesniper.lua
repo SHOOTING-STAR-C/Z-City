@@ -1,7 +1,7 @@
 SWEP.Base = "homigrad_base"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
-SWEP.PrintName = "Combine Sniper Rifle"
+SWEP.PrintName = "联合军狙击步枪"
 SWEP.Author = "Universal Union"
 SWEP.Instructions = "A powerful combine semi-automatic sniper rifle. Fires the same pulse ammo, but the force of the bullet is much greater."
 SWEP.Category = "Weapons - Sniper Rifles"

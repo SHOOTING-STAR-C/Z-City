@@ -5,7 +5,7 @@ local function RagdollOwner(ent)
 end
 
 SWEP.Category = "ZCity Other"
-SWEP.Instructions = "LMB - raise fists\nRELOAD - lower fists\n\nIn the raised state:\nLMB - strike\nRMB - block\n\nIn the lowered state: RMB - raise the object, RMB+R - check the pulse (when used on someone's head or hand)\n\nWhen holding the object: RELOAD - fix the object in air, E - spin the object in the air."
+SWEP.Instructions = "左键 - 举起拳头\n换弹 - 放下拳头\n\n举起状态:\n左键 - 攻击\n右键 - 格挡\n\n放下状态: 右键 - 举起物体, 右键+R - 检查脉搏 (在头部或手部使用时)\n\n举起物体时: 换弹 - 固定物体在空中, E - 旋转物体在空中。"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.HoldType = "normal"
@@ -593,61 +593,61 @@ else
 
 			surface.SetFont("HomigradFontLarge")
 			surface.SetTextColor(255, 255, 255, lerpalpha)
-			local txt = "Afflictions shown for "..ent:GetPlayerName()..":"
+			local txt = "显示 "..ent:GetPlayerName().." 的伤病:"
 			local w1, h1 = surface.GetTextSize(txt)
 			surface.SetTextPos(scrw * 0.05, scrh * 0.95 - h - h1)
 			surface.DrawText(txt)
 
 			if org.blood and org.blood < 4000 then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, (4000 - org.blood) / 4000, hg.afflictions.pale, lerpalpha, "Pale skin")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, (4000 - org.blood) / 4000, hg.afflictions.pale, lerpalpha, "皮肤苍白")
 
 				add_x = add_x + w + add
 			end
 
 			if org.bleed and org.bleed > 0.1 then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, math.min(org.bleed / 10, 1), hg.afflictions.bleeding, lerpalpha, "Bleeding")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, math.min(org.bleed / 10, 1), hg.afflictions.bleeding, lerpalpha, "出血")
 
 				add_x = add_x + w + add
 			end
 
 			if org.disorientation and org.disorientation > 0.1 and ent == owner then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, math.min(org.disorientation / 2, 1), hg.afflictions.concussion, lerpalpha, "Concussion")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, math.min(org.disorientation / 2, 1), hg.afflictions.concussion, lerpalpha, "脑震荡")
 
 				add_x = add_x + w + add
 			end
 
 			if org.rleg and org.rleg > 0 then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, org.rleg, org.rleg > 0.999 and hg.afflictions.lfracture or hg.afflictions.lblunt, lerpalpha, org.rleg > 0.999 and "Right leg fracture" or "Right leg blunt trauma")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, org.rleg, org.rleg > 0.999 and hg.afflictions.lfracture or hg.afflictions.lblunt, lerpalpha, org.rleg > 0.999 and "右腿骨折" or "右腿钝伤")
 
 				add_x = add_x + w + add
 			end
 
 			if org.lleg and org.lleg > 0 then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, org.lleg, org.lleg > 0.999 and hg.afflictions.lfracture or hg.afflictions.lblunt, lerpalpha, org.lleg > 0.999 and "Left leg fracture" or "Left leg blunt trauma")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, org.lleg, org.lleg > 0.999 and hg.afflictions.lfracture or hg.afflictions.lblunt, lerpalpha, org.lleg > 0.999 and "左腿骨折" or "左腿钝伤")
 
 				add_x = add_x + w + add
 			end
 
 			if org.rarm and org.rarm > 0 then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, org.rarm, org.rarm > 0.999 and hg.afflictions.afracture or hg.afflictions.ablunt, lerpalpha, org.rarm > 0.999 and "Right arm fracture" or "Right arm blunt trauma")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, org.rarm, org.rarm > 0.999 and hg.afflictions.afracture or hg.afflictions.ablunt, lerpalpha, org.rarm > 0.999 and "右臂骨折" or "右臂钝伤")
 
 				add_x = add_x + w + add
 			end
 
 			if org.larm and org.larm > 0 then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, org.larm, org.larm > 0.999 and hg.afflictions.afracture or hg.afflictions.ablunt, lerpalpha, org.larm > 0.999 and "Left arm fracture" or "Left arm blunt trauma")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, org.larm, org.larm > 0.999 and hg.afflictions.afracture or hg.afflictions.ablunt, lerpalpha, org.larm > 0.999 and "左臂骨折" or "左臂钝伤")
 
 				add_x = add_x + w + add
 			end
 
 			if org.pain and org.pain > 20 and not org.otrub then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, (org.pain - 20) / 30, hg.afflictions.pain, lerpalpha, "Pain")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, (org.pain - 20) / 30, hg.afflictions.pain, lerpalpha, "疼痛")
 
 				add_x = add_x + w + add
 			end
 
 			if org.o2 and org.o2[1] < 5 then
-				hg.DrawAffliction(posx + add_x, posy - h, w, h, (5 - org.o2[1]) / 5, hg.afflictions.lung_failure, lerpalpha, "Lung failure")
+				hg.DrawAffliction(posx + add_x, posy - h, w, h, (5 - org.o2[1]) / 5, hg.afflictions.lung_failure, lerpalpha, "肺衰竭")
 
 				add_x = add_x + w + add
 			end
@@ -658,7 +658,7 @@ else
 				surface.SetFont("HomigradFontLarge")
 				surface.SetTextColor(255, 255, 255, lerpalpha)
 				surface.SetTextPos(scrw * 0.05, scrh * 0.95 - h)
-				surface.DrawText("No afflictions.")
+				surface.DrawText("无伤病。")
 			end
 		end
 	end
@@ -939,7 +939,7 @@ function SWEP:ApplyForce()
 						if (org.last_heartbeat + 60) > CurTime() then
 							ply:ChatPrint("尸体还有余温。")
 						else
-							ply:ChatPrint((org.last_heartbeat + 180) < CurTime() and "The body has been here for awhile." or "The body is slightly warm")
+							ply:ChatPrint((org.last_heartbeat + 180) < CurTime() and "尸体已经在这里有一段时间了。" or "尸体还有点温")
 						end
 
 						if org.blood < 3500 then
@@ -1002,7 +1002,7 @@ function SWEP:ApplyForce()
 
 					self.Checking = math.min(self.Checking + FrameTime() * 2, 10)
 				else
-					ply:Notify("I dont think I need to check their vitals.", 10)
+					ply:Notify("我觉得我不需要检查他们的生命体征。", 10)
 				end
 			end
 		end
@@ -1030,7 +1030,7 @@ function SWEP:ApplyForce()
 						if not ply2.noHead then
 							ply:ChatPrint("你正在开始心肺复苏。")
 						else
-							ply:Notify("I dont think CPR would help here...", 10)
+							ply:Notify("我觉得心肺复苏在这里没什么用...", 10)
 						end
 					end
 
@@ -1231,22 +1231,22 @@ end
 
 local customClassInfo = {
 	["sc_infiltrator"] = {
-		PrintName = "CQC",
+		PrintName = "近战格斗",
 		WepSelectIcon = Material("vgui/inventory/perk_quick_reload"),
 		handsDesc = "infiltrator",
-		Instructions = "beta test test beta"
+		Instructions = "测试 测试 测试"
 	},
 	["furry"] = {
-		PrintName = "Paws",
+		PrintName = "爪子",
 		WepSelectIcon = Material("zbattle/paw_hmcd.png"),
 		handsDesc = "furry",
-		Instructions = "LMB - raise paws\nRELOAD - lower paws\n\nIn the raised state:\nLMB - strike\nRMB - block\n\n<color=91,121,229>As a bearer of a pathowogen infection, you have new abilities.\n\nIn lowered state, hold RMB to grab uninfected prey, then hold LMB to assimilate them.\n\nYou can press LMB to lick your fellow mates, doing so helps them alleviate their pain.\n\n:3<color=180,180,180>"
+		Instructions = "左键 - 举起爪子\n换弹 - 放下爪子\n\n举起状态:\n左键 - 攻击\n右键 - 格挡\n\n<color=91,121,229>作为病原体携带者，你拥有新的能力。\n\n在放下状态，按住右键抓住未感染的猎物，然后按住左键同化他们。\n\n你可以按左键舔舐你的同伴，这样做可以帮助他们减轻疼痛。\n\n:3<color=180,180,180>"
 	},
 	["headcrabzombie"] = {
-		PrintName = "Claws",
+		PrintName = "利爪",
 		WepSelectIcon = Material("vgui/wep_jack_hmcd_zombhands"),
 		handsDesc = "zombie",
-		Instructions = "LMB - strike\nRMB - block/grab player\n\n<color=150,0,0>These are your zombified hands. They're no energy sword, but they still pack a wallop."
+		Instructions = "左键 - 攻击\n右键 - 格挡/抓住玩家\n\n<color=150,0,0>这是你被僵尸化的双手。虽然不是能量剑，但仍然很有威力。"
 	}
 }
 

@@ -776,7 +776,7 @@ hook.Add("HUDPaint","homigrad-wound-debug",function()
 			cam.End3D()
 			
 			draw.SimpleText("按 R 跳过", "HomigradFontBig", ScrW() / 3 * 2, ScrH() / 7, color_white)
-			draw.SimpleText("第 "..tostring(iter).." / "..tostring(#hg.hits).." 次命中 武器: "..inf.."  attacker: "..attacker, "HomigradFontBig", ScrW() / 3 * 2, ScrH() / 10, color_white)
+			draw.SimpleText("第 "..tostring(iter).." / "..tostring(#hg.hits).." 次命中 武器: "..inf.."  攻击者: "..attacker, "HomigradFontBig", ScrW() / 3 * 2, ScrH() / 10, color_white)
 			
 			local countedorgans = {}
 			local organs2 = {}

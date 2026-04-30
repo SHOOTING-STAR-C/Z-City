@@ -52,15 +52,15 @@ local BlurBackground = hg.BlurBackground
 
 local function harmdone(harm)
     if harm >= 9 then
-        return "killed you."
+        return "杀死了你。"
     elseif harm >= 5 then
-        return "basically killed you."
+        return "几乎杀死了你。"
     elseif harm >= 2 then
-        return "seriously injured you."
+        return "严重伤害了你。"
     elseif harm >= 1 then
-        return "mildly injured you."
+        return "轻微伤害了你。"
     else
-        return "damaged you a bit."
+        return "对你造成了少许伤害。"
     end
 end
 
@@ -78,7 +78,7 @@ hook.Add("HUDPaint","shownotification",function()
     if showstuff > CurTime() then
         local w, h = ScrW(), ScrH()
         local x, y = w / 2, h / 25 * 24
-        local txt = "Press F to open forgiveness menu."
+        local txt = "按 F 打开原谅菜单。"
         surface.SetFont( "HomigradFontBig" )
         surface.SetTextColor(255,255,255,255)
         local w, h = surface.GetTextSize(txt)
@@ -124,7 +124,7 @@ OpenMenu = function(tbl)
         surface.DrawOutlinedRect( 0, 0, w, h, 2.5 )
 
         local x, y = w / 2, h / 2
-        local txt = "Exit"
+        local txt = "退出"
         surface.SetFont("HomigradFont")
         surface.SetTextColor(255,255,255,255)
         local w, h = surface.GetTextSize(txt)
@@ -160,7 +160,7 @@ OpenMenu = function(tbl)
         but.ply = ply
         but.name = ply:Name()
         but.harm = harm
-        local txt = "Forgive "..but.name.."? You will forgive him "..math.Round(but.harm,1).." karma."
+        local txt = "原谅 "..but.name.."? 你将原谅他 "..math.Round(but.harm,1).." 业力值。"
         local clr = 255
         but.Paint = function(self,w,h)
             BlurBackground(self)

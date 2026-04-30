@@ -2,7 +2,7 @@ if SERVER then AddCSLuaFile() end
 ENT.Base = "projectile_nonexplosive_base"
 ENT.Author = "Sadsalat"
 ENT.Category = "ZCity Other"
-ENT.PrintName = "Crossbow Projectile"
+ENT.PrintName = "弩箭弹"
 ENT.Spawnable = false
 ENT.AdminOnly = true
 ENT.Model = "models/crossbow_bolt.mdl"

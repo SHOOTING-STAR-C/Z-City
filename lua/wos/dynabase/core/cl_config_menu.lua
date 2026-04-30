@@ -141,7 +141,7 @@ function wOS.DynaBase:OpenConfigMenu()
 	self.AnimMenu:SetSize( w*0.4, h*0.5 )
 	self.AnimMenu:Center()
 	self.AnimMenu:MakePopup()
-	self.AnimMenu:SetTitle( "wiltOS Dynamic Animation Manager" )
+	self.AnimMenu:SetTitle( "wiltOS 动态动画管理器" )
 	self.AnimMenu:ShowCloseButton( true )
 	self.AnimMenu:SetDraggable( true )
 	self.AnimMenu.OnClose = function( pan )
@@ -158,7 +158,7 @@ function wOS.DynaBase:OpenConfigMenu()
 	local scroll = vgui.Create("DScrollPanel", sheet )
 	scroll:SetSize(aw*0.9, ah*0.8)
 	local sw, sh = scroll:GetSize()
-	sheet:AddSheet( "Server Animations", scroll, "icon16/server.png" )
+	sheet:AddSheet( "服务器动画", scroll, "icon16/server.png" )
 
 	//placehold
 	local layout2 
@@ -286,7 +286,7 @@ function wOS.DynaBase:OpenConfigMenu()
 
 
 			local tx, th = draw.SimpleText( pan.RegisterName, "wOS.DynaBase.TitleFont", hh*0.1 + add_pad + iw + ww*0.01, hh*0.06, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP  )
-			tx, th = draw.SimpleText( pan.AddonTitle or "Local File", "wOS.DynaBase.DescFont", hh*0.1 + add_pad + iw + ww*0.01, hh*0.06 + th + hh*0.03, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP  )
+			tx, th = draw.SimpleText( pan.AddonTitle or "本地文件", "wOS.DynaBase.DescFont", hh*0.1 + add_pad + iw + ww*0.01, hh*0.06 + th + hh*0.03, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP  )
 				
 
 			surface.SetDrawColor( color_white )
@@ -309,7 +309,7 @@ function wOS.DynaBase:OpenConfigMenu()
 		url:SetFont( "wOS.DynaBase.URLFont" )
 		url:SetText( "" )
 		url.Paint = function( pan, ww, hh )
-			local txt = pan.URL or "No Workshop URL"
+			local txt = pan.URL or "无 Workshop 链接"
 			draw.SimpleText( txt, "wOS.DynaBase.URLFont", 0, hh*0.5, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
 		end
 		url:SetDisabled( true )
@@ -331,14 +331,14 @@ function wOS.DynaBase:OpenConfigMenu()
 		validated.UpdateCast = function( pan )
 			if !frame.Toggled then
 				pan:SetImage( "icon16/delete.png" )
-				icon:SetTooltip( "This item is currently disabled"  )
+				icon:SetTooltip( "此项目当前已禁用"  )
 			else
 				if data.ServerValid then
 					pan:SetImage( "icon16/accept.png" )
-					icon:SetTooltip( "This item is registered by the server and client"  )
+					icon:SetTooltip( "此项目已由服务器和客户端注册"  )
 				else
 					pan:SetImage( "icon16/error.png" )		
-					icon:SetTooltip( "This item is only registered by the client and may cause unpredictable issues"  )	
+					icon:SetTooltip( "此项目仅由客户端注册，可能导致不可预测的问题"  )	
 				end
 			end
 		end
@@ -356,10 +356,10 @@ function wOS.DynaBase:OpenConfigMenu()
 
 		if data.Type == WOS_DYNABASE.REANIMATION then
 			thetype:SetImage( reanim_mat )
-			thetype:SetTooltip( "This addon replaces existing animations" )	
+			thetype:SetTooltip( "此插件替换现有动画" )	
 		else
 			thetype:SetImage( extend_mat )
-			thetype:SetTooltip( "This addon includes new animations" )	
+			thetype:SetTooltip( "此插件包含新动画" )	
 		end
 
 		local div = vgui.Create("DPanel", dock_bar)
@@ -376,7 +376,7 @@ function wOS.DynaBase:OpenConfigMenu()
 		shared:SetImage( shared_mat )
 		shared:Dock( LEFT )
 		if data.Shared then
-			shared:SetTooltip( "Common / All Gender Animations" )
+			shared:SetTooltip( "通用/全性别动画" )
 		else
 			shared:SetColor(Color(135, 135, 135, 255))
 		end
@@ -387,7 +387,7 @@ function wOS.DynaBase:OpenConfigMenu()
 		maled:Dock( LEFT )
 		maled:SetImage( male_mat )
 		if data.Male then
-			maled:SetTooltip( "Male Animations" )
+			maled:SetTooltip( "男性动画" )
 		else
 			maled:SetColor(Color(125, 125, 125, 125))
 		end
@@ -398,7 +398,7 @@ function wOS.DynaBase:OpenConfigMenu()
 		femaled:Dock( LEFT )
 		femaled:SetImage( female_mat )
 		if data.Female then
-			femaled:SetTooltip( "Female Animations" )
+			femaled:SetTooltip( "女性动画" )
 		else
 			femaled:SetColor(Color(125, 125, 125, 125))
 		end
@@ -409,7 +409,7 @@ function wOS.DynaBase:OpenConfigMenu()
 		zombied:Dock( LEFT )
 		zombied:SetImage( zombie_mat )
 		if data.Zombie then
-			zombied:SetTooltip( "Zombie Animations" )
+			zombied:SetTooltip( "僵尸动画" )
 		else
 			zombied:SetColor(Color(125, 125, 125, 125))
 		end
@@ -450,18 +450,18 @@ function wOS.DynaBase:OpenConfigMenu()
 			local toggle = vgui.Create("DButton", dock_bar)
 			toggle:SetTall( fh*0.2 )
 			if frame.Toggled then
-				toggle:SetText( "Unmount Addon" )
+				toggle:SetText( "卸载插件" )
 			else
-				toggle:SetText( "Mount Addon" )
+				toggle:SetText( "挂载插件" )
 			end
 			toggle:SetWide( fw*0.15 )
 			toggle:Dock( LEFT )
 			toggle.DoClick = function( pan )
 				frame.Toggled = !frame.Toggled
 				if frame.Toggled then
-					pan:SetText( "Unmount Addon" )
+					pan:SetText( "卸载插件" )
 				else
-					pan:SetText( "Mount Addon" )
+					pan:SetText( "挂载插件" )
 				end
 				validated:UpdateCast()
 			end
@@ -480,17 +480,17 @@ function wOS.DynaBase:OpenConfigMenu()
 	-- 		draw.SimpleText( "SERVER HAS DISABLED LOCAL ANIMATION CONTENT", "wOS.DynaBase.TitleFont", ww/2, hh*0.4, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 	-- 		draw.SimpleText( "USE THE SERVER TAB FOR AVAILABILITY", "wOS.DynaBase.TitleFont", ww/2, hh*0.6, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )		
 	-- 	end
-	-- 	sheet:AddSheet( "User Animations", err, "icon16/user.png" )
+	-- 	sheet:AddSheet( "用户动画", err, "icon16/user.png" )
 	-- else
 
 	local core = vgui.Create( "DPanel", sheet )
 	core:SetSize(aw*0.9, ah*0.8)
-	sheet:AddSheet( "User Animations", core, "icon16/user.png" )
+	sheet:AddSheet( "用户动画", core, "icon16/user.png" )
 
 	local create_butt = vgui.Create( "DButton", core )
 	create_butt:SetSize( aw*0.9, ah*0.05 )
 	create_butt:Dock( TOP )
-	create_butt:SetText( "Create User Mount" )
+	create_butt:SetText( "创建用户挂载" )
 
 	local scroll2 = vgui.Create("DScrollPanel", core )
 	scroll2:SetSize(aw*0.9, ah*0.69)
@@ -576,7 +576,7 @@ function wOS.DynaBase:OpenConfigMenu()
 			validated.UpdateCast = function( pan )
 				if !frame.Toggled then
 					pan:SetImage( "icon16/delete.png" )
-					pan:SetTooltip( "This item is currently disabled"  )
+					pan:SetTooltip( "此项目当前已禁用"  )
 				else
 					pan:SetImage( "icon16/accept.png" )
 					pan:SetTooltip( "This item is currently enabled"  )
@@ -609,7 +609,7 @@ function wOS.DynaBase:OpenConfigMenu()
 			shared:Dock( LEFT )
 			if data.Shared then
 				table.insert( mdls, data.Shared )
-				shared:SetTooltip( "Common / All Gender Animations" )
+				shared:SetTooltip( "通用/全性别动画" )
 			else
 				shared:SetColor(Color(135, 135, 135, 255))
 			end
@@ -621,7 +621,7 @@ function wOS.DynaBase:OpenConfigMenu()
 			maled:SetImage( male_mat )
 			if data.Male then
 				table.insert( mdls, data.Male )
-				maled:SetTooltip( "Male Animations" )
+				maled:SetTooltip( "男性动画" )
 			else
 				maled:SetColor(Color(125, 125, 125, 125))
 			end
@@ -633,7 +633,7 @@ function wOS.DynaBase:OpenConfigMenu()
 			femaled:SetImage( female_mat )
 			if data.Female then
 				table.insert( mdls, data.Female )
-				femaled:SetTooltip( "Female Animations" )
+				femaled:SetTooltip( "女性动画" )
 			else
 				femaled:SetColor(Color(125, 125, 125, 125))
 			end
@@ -645,7 +645,7 @@ function wOS.DynaBase:OpenConfigMenu()
 			zombied:SetImage( zombie_mat )
 			if data.Zombie then
 				table.insert( mdls, data.Zombie )
-				zombied:SetTooltip( "Zombie Animations" )
+				zombied:SetTooltip( "僵尸动画" )
 			else
 				zombied:SetColor(Color(125, 125, 125, 125))
 			end
@@ -664,18 +664,18 @@ function wOS.DynaBase:OpenConfigMenu()
 			local toggle = vgui.Create("DButton", dock_bar)
 			toggle:SetTall( fh*0.2 )
 			if frame.Toggled then
-				toggle:SetText( "Unmount" )
+				toggle:SetText( "卸载" )
 			else
-				toggle:SetText( "Mount" )
+				toggle:SetText( "挂载" )
 			end
 			toggle:SetWide( fw*0.1 )
 			toggle:Dock( LEFT )
 			toggle.DoClick = function( pan )
 				frame.Toggled = !frame.Toggled
 				if frame.Toggled then
-					pan:SetText( "Unmount" )
+					pan:SetText( "卸载" )
 				else
-					pan:SetText( "Mount" )
+					pan:SetText( "挂载" )
 				end
 				validated:UpdateCast()
 			end
@@ -692,7 +692,7 @@ function wOS.DynaBase:OpenConfigMenu()
 			edit:SetTall( fh*0.2 )
 			edit:SetWide( fw*0.1 )
 			edit:Dock( LEFT )
-			edit:SetText(  "Edit" )
+			edit:SetText(  "编辑" )
 			edit.DoClick = function( pan )
 				if IsValid( pan.OverFrame ) then pan.OverFrame:Remove() pan.OverFrame = nil end
 				pan.OverFrame = vgui.Create( "DPanel" )
@@ -719,7 +719,7 @@ function wOS.DynaBase:OpenConfigMenu()
 			delete:SetTall( fh*0.2 )
 			delete:SetWide( fw*0.1 )
 			delete:Dock( LEFT )
-			delete:SetText(  "Delete" )
+			delete:SetText(  "删除" )
 			delete.DoClick = function( pan )
 				self:DeleteUserMount( name )
 				PopulateEntries()
@@ -751,12 +751,12 @@ function wOS.DynaBase:OpenConfigMenu()
 	scroll:SetSize(aw*0.9, ah*0.8)
 	scroll.ReloadAddons = function() PopulateEntries() end
 	local sw, sh = scroll:GetSize()
-	sheet:AddSheet( "Helper Functions", scroll, "icon16/heart.png" )
+	sheet:AddSheet( "辅助功能", scroll, "icon16/heart.png" )
 
 	local download_butt = vgui.Create( "DButton", scroll )
 	download_butt:SetSize( aw*0.9, ah*0.05 )
 	download_butt:Dock( TOP )
-	download_butt:SetText( "Convert Server to User Mounts (Will overwrite mounts with the same name!)" )
+	download_butt:SetText( "将服务器插件转换为用户挂载（将覆盖同名挂载！）" )
 	download_butt.DoClick = function(pan) 
 		for name, data in pairs( self:GetAllSources() ) do
 			if data.Core then continue end
@@ -764,7 +764,7 @@ function wOS.DynaBase:OpenConfigMenu()
 			self:CreateUserMount( data )
 		end
 		PopulateEntries()
-		chat.AddText( color_white, "[", Color( 0, 175, 255 ), "wOS-DynaBase", color_white, "] All registered server mounts have been added to your user mount list!" )
+		chat.AddText( color_white, "[", Color( 0, 175, 255 ), "wOS-DynaBase", color_white, "] 所有已注册的服务器挂载已添加到你的用户挂载列表！" )
 	end
 	hook.Call( "wOS.DynaBase.PopulateHelperFunctions", nil, scroll )
 
@@ -772,14 +772,14 @@ function wOS.DynaBase:OpenConfigMenu()
 	local savebutt = vgui.Create("DButton", self.AnimMenu )
 	savebutt:SetSize(aw*0.9, ah*0.04)
 	savebutt:SetPos( aw*0.05, ah*0.86 )
-	savebutt:SetText( "Save Animation Settings" )
+	savebutt:SetText( "保存动画设置" )
 	sheet.OnActiveTabChanged = function( pan, old, new )
 		local txt = new:GetText()
 		if txt:find( "User" ) then
-			savebutt:SetText( "Save User Settings" )
+			savebutt:SetText( "保存用户设置" )
 			savebutt:Show()
 		elseif txt:find( "Server" ) then
-			savebutt:SetText( "Save Server Settings" )
+			savebutt:SetText( "保存服务器设置" )
 			savebutt:Show()
 		else
 			savebutt:Hide()
@@ -810,7 +810,7 @@ function wOS.DynaBase:OpenConfigMenu()
 	local nobutt = vgui.Create("DButton", self.AnimMenu )
 	nobutt:SetSize(aw*0.9, ah*0.04)
 	nobutt:SetPos( aw*0.05, ah*0.91 )
-	nobutt:SetText( "Cancel" )
+	nobutt:SetText( "取消" )
 	nobutt.DoClick = function() self:OpenConfigMenu() end
-	//toggle:SetText( "Cancel" )
+	//toggle:SetText( "取消" )
 end
