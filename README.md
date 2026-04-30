@@ -1,26 +1,435 @@
 # Z-City
-Z-City is a GMod addon which modifies character damage and controls. Z-City also comes with its own weapon base and a gamemode
 
-https://github.com/uzelezz123/8bit_zcity - 8bit module (compiled version is in lua/bin)
+> 一个基于 Homigrad 框架的 Garry's Mod 插件/游戏模式，用深入的生理模拟系统替代了标准的 GMod 伤害机制。
 
-Optional Discord RPC module for clients:
-1. https://github.com/YuRaNnNzZZ/gmcl_steamrichpresencer/releases/tag/2023.07.20
-2. https://github.com/fluffy-servers/gmod-discord-rpc/releases/tag/1.2.1
+当前版本：**1.4.1**
 
-The current version in the repository is 1.4.0
+---
 
-## The numbers in the version number indicate:
-A.Bcc -> 1.000
-- A -> Global updates
-- B -> New mechanics, gameplay changes
-- c -> Fixes and other small things
+## 目录
 
-## Support us
-**Donation links:**
-- [Yoomoney](https://yoomoney.ru/fundraise/17GFEQH326Q.250101) 
-- [Boosty](https://boosty.to/sadsalat/donate)
+- [快速开始](#快速开始)
+- [依赖项](#依赖项)
+- [核心系统](#核心系统)
+- [游戏模式](#游戏模式)
+- [生理系统](#生理系统)
+- [移动速度](#移动速度)
+- [武器系统](#武器系统)
+- [管理工具](#管理工具)
+- [指令大全](#指令大全)
+- [键位绑定](#键位绑定)
+- [控制台变量](#控制台变量)
+- [技术参考](#技术参考)
 
-**Crypto**
-- USDT(TRC20): TYgpaZgHQr6qEgemhHzVvV7AQESiyhHpZD
-- BTC(BTC): bc1qa8pk9ag6xa5yav2mvlxkra8xk25lg3htgfqh5w
-- ETH(ERC20)* 0x72AdCCcCEB4E323C64bCF0955A779DD9298E9483
+---
+
+## 快速开始
+
+### 安装插件
+将整个仓库复制到 GMod 服务器的 `addons/` 文件夹。
+
+### 安装游戏模式
+将 `gamemodes/zcity/` 复制到 GMod 服务器的 `gamemodes/` 文件夹。
+
+### 启动说明
+启动**多人**监听服务器或专用服务器即可。
+
+---
+
+## 依赖项
+
+| 依赖 | 说明 |
+|------|------|
+| **ULX & ULib** | 插件启动时会检查，缺失时会打印警告。许多功能依赖它们 |
+| **8bit 模块** | 编译后的二进制文件位于 `lua/bin/`（如 `gmsv_eightbit_win64.dll`）。[源码仓库](https://github.com/uzelezz123/8bit_zcity) |
+| **Workshop 内容** | 通过 `lua/autorun/loader.lua` 中的 `resource.AddWorkshop` 强制下载五个 Workshop 插件 |
+| **Discord RPC**（可选） | 客户端二选一：[gmcl_steamrichpresencer](https://github.com/YuRaNnNzZZ/gmcl_steamrichpresencer/releases/tag/2023.07.20) 或 [gmod-discord-rpc](https://github.com/fluffy-servers/gmod-discord-rpc/releases/tag/1.2.1) |
+
+---
+
+## 核心系统
+
+### 生理/伤害系统
+Z-City 的核心玩法。用详细的生理模拟替代了标准 GMod 伤害机制：
+
+- **命中判定** — 身体部位到器官的映射，决定不同部位受击时会伤及哪些器官
+- **生理模拟** — 追踪每个玩家的完整生理状态：血容量、脉搏、疼痛、耐力、肺/肝功能、新陈代谢、体温、意识、断肢、骨折、伤口以及药物效果
+
+### 假死/布娃娃系统
+玩家不会进入标准 GMod 死亡状态，而是进入**假死**状态。身体会变成可拖拽、可搜刮、可复活的布娃娃。
+
+### 回合系统
+- `zb.ROUND_STATE` — `0` = 等待中，`1` = 进行中，`2` = 结束，`3` = 回合结束
+- `CurrentRound()` 返回当前激活的模式
+- `zb:RoundStart()` / `zb:EndRound()` 控制状态切换
+
+### 库存系统
+自定义库存系统，包含可安装到武器上的配件实体和护甲实体。
+
+### 网络系统
+基于 GMod net 消息构建的自定义 NetVar 系统，支持实体级别和全局级别的网络变量同步。
+
+### 地图点系统
+每张地图可配置的出生点和目标点，管理员可在游戏中通过 `zb_drawpoints 1` 可视化查看。
+
+---
+
+## 游戏模式
+
+所有模式位于 `gamemodes/zcity/gamemode/modes/`：
+
+| 模式 | 说明 |
+|------|------|
+| **TDM** | 团队死斗，反恐精英 vs 恐怖分子 |
+| **CS** | 类 CS 竞技模式 |
+| **Homicide** | 社交推理/叛徒模式，多种职业和技能 |
+| **Coop** | 带地图切换的协作战役 |
+| **Defense** | 波次防御模式，指挥官和职业系统 |
+| **DM** | 个人死斗 |
+| **HL2DM** | 半条命2死斗风格 |
+| **Riot** | 暴乱模式 |
+| **CriResp** | 特殊重生模式 |
+| **G Wars** | 帮派战争 |
+| **SFD** | 特殊死斗 |
+| **SCUG Arena** | 竞技场模式 |
+| **Pathowogen** | 特殊模式 |
+
+---
+
+## 生理系统
+
+### 生命体征
+
+| 体征 | 说明 |
+|------|------|
+| 血量 | 正常约 4000-5000，影响所有生理功能 |
+| 脉搏 | 反映心脏状态，失血或休克时变化 |
+| 疼痛 | 受伤累积，影响行动能力和速度 |
+| 耐力 | 影响奔跑和持续作战能力 |
+| 意识 | 降低到一定程度会昏迷 |
+| 体温 | 正常约 36-37°C，过高或过低都会带来负面效果 |
+
+### 伤害类型
+子弹伤、刺伤、割伤、瘀伤、烧伤、爆炸伤，各有不同的治疗效果。
+
+### 药物系统
+包含绷带、止痛药、吗啡、肾上腺素等多种医疗物品，可治疗不同类型的伤害。
+
+### 器官状态
+- **肺部** — 影响呼吸和耐力恢复
+- **肝脏** — 影响新陈代谢和毒素处理
+- **四肢** — 骨折/脱臼影响移动和行动
+- **骨盆** — 骨折后严重影响移动
+
+---
+
+## 移动速度
+
+### 基础速度
+
+| 状态 | 速度 |
+|------|------|
+| 跑步 | 350 |
+| 行走 | 100 |
+| 慢走 | 60 |
+| 蹲伏 | 60 |
+
+### 生理因素
+
+| 因素 | 效果 |
+|------|------|
+| 血量 | 越低越慢（线性衰减） |
+| 意识 | 降低 → 速度降低，最低 10% |
+| 耐力 | 越低越慢，默认最低 30% |
+| 疼痛 | 越高越慢 |
+| 休克 | 越高越慢，最低 25% |
+| 肾上腺素 | 最高提升 30% |
+| 体温 > 38°C | 每升 1°C 减 25%，最低 50% |
+| 体温 < 35°C | 每降 1°C 减 25%，最低 50% |
+| 去甲肾上腺素 | 每点 +200 速度 |
+| 狂怒 | 基础 400 + 25 × 等级 |
+
+### 骨骼伤害
+
+| 状态 | 效果 |
+|------|------|
+| 单腿骨折 | 速度降至 60% |
+| 双腿骨折 | 速度降至 36% |
+| 腿脱臼 | 速度降至 75% |
+| 骨盆骨折 | 速度降至 **40%** |
+| 固定 | 最低 25% |
+
+### 动作状态
+
+| 状态 | 效果 |
+|------|------|
+| 瞄准 | 降至慢走速度 |
+| 后退/侧移 | 额外减速惩罚 |
+| 空中移动 | 大幅减速 |
+| 呕吐中 | 速度降至 **25%** |
+| 搬运物品 | 根据质量减速，最低 50% |
+| 超战士 | 速度增益提升 5 倍 |
+
+---
+
+## 武器系统
+
+武器存放于 `lua/weapons/`，继承自多种基类：
+
+| 基类 | 用途 |
+|------|------|
+| `weapon_tpik_base` | 第三人称 IK 动画武器 |
+| `weapon_tpik1_base` | TPIK 变体 |
+| `weapon_hg_medicine_base` | 医疗物品（绷带、吗啡等） |
+| `weapon_melee` | 近战武器 |
+| `weapon_base` | 标准 GMod SWEP |
+
+真实枪械（AK-74、M4A1、沙漠之鹰等）使用 `weapon_tpik_base` 基类，支持：
+
+- 武器配件系统（瞄具、消音器、握把、激光等）
+- 弹药类型切换
+- 自定义装填动画
+- 后坐力和散布系统
+
+---
+
+## 管理工具
+
+管理员可通过 F1 菜单访问管理工具：
+
+- 玩家设置（血量、Strip、Freeze 等）
+- 物品发放
+- 玩家传送
+- 音乐播放
+- 计时器和屏幕提示
+- 地图标记
+- 无敌模式
+- 玩家复活
+
+---
+
+## 指令大全
+
+### 玩家指令
+
+| 指令 | 参数 | 说明 |
+|------|------|------|
+| `hg_options` | 无 | 打开选项菜单 |
+| `hg_menu` | 无 | 打开功能菜单 |
+| `suicide` | 无 | 自杀 |
+| `zs_playercolor` | `<R> <G> <B>` | 设置玩家颜色 |
+| `zs_modelscale` | `<0.5-1.5>` | 设置模型缩放 |
+| `zs_player_buymenu` | 无 | 打开购买菜单 |
+| `zs_playermenu` | 无 | 打开玩家菜单 |
+| `zs_quests` | 无 | 打开任务菜单 |
+| `DropMoney` | 无 | 丢弃金钱 |
+| `GiveMoney` | `<金额>` | 给予金钱 |
+| `charfall` | 无 | 角色摔倒 |
+| `standup` / `getup` | 无 | 起身 |
+
+### 武器指令
+
+| 指令 | 参数 | 说明 |
+|------|------|------|
+| `hg_change_posture` | `<0-9>` | 切换持枪姿态 |
+| `hg_unload_ammo` | 无 | 退弹 |
+| `hg_change_ammotype` | `<类型ID>` | 切换弹药类型 |
+| `hg_inspect` | 无 | 检视武器 |
+| `hg_rolldrum` | 无 | 转动弹鼓 |
+| `hg_insertbullet` | `<槽位>` | 装填一发子弹 |
+| `hg_get_attachments` | `<0/1>` | 打开配件菜单 |
+| `hmcd_togglelaser` | 无 | 切换激光 |
+| `sling_weapon` | 无 | 挂载武器到挂带 |
+| `sling_swap` | 无 | 交换主副武器 |
+| `dropweapon` | 无 | 丢弃当前武器 |
+
+#### 持枪姿态一览
+
+| ID | 名称 | 备注 |
+|----|------|------|
+| 0 | 常规持枪 | 默认姿态 |
+| 1 | 腰射 | 腰部射击 |
+| 2 | 左肩射击 | 从左肩探出 |
+| 3 | 高位戒备 | 枪口朝上 |
+| 4 | 低位戒备 | 枪口朝下 |
+| 5 | 指向射击 | 指向性射击 |
+| 6 | 掩体射击 | 利用掩体 |
+| 7 | 黑帮持枪 | 仅手枪 |
+| 8 | 单手射击 | 仅手枪 |
+| 9 | 索马里式 | 特殊持枪 |
+
+### 装备指令
+
+| 指令 | 说明 |
+|------|------|
+| `zs_equipmenu` | 打开装备菜单 |
+| `stripweapons` | 卸下所有武器 |
+| `zs_changeskin` | 切换角色皮肤 |
+| `inv` | 打开背包 |
+| `zcity_shop` | 打开商店 |
+| `zcity_craft` | 打开合成菜单 |
+| `zcity_backpack` | 打开背包 |
+| `zcity_trunk` | 打开后备箱 |
+| `hunger_eat` | 进食 |
+
+### 生理指令
+
+| 指令 | 说明 |
+|------|------|
+| `checkpulse` | 检查脉搏 |
+| `checkbp` | 检查血压 |
+| `checktemp` | 检查体温 |
+| `checkbreath` | 检查呼吸 |
+| `medevac` | 请求医疗撤离 |
+| `splint` | 固定骨折 |
+| `tourniquet` | 使用止血带 |
+
+### 假死指令
+
+| 指令 | 说明 |
+|------|------|
+| `drag` | 拖拽布娃娃/玩家 |
+| `drop_ragdoll` | 放下布娃娃 |
+
+### 管理员指令
+
+| 指令 | 参数 | 说明 |
+|------|------|------|
+| `hg_giveme` | `<武器名>` | 给予武器 |
+| `hg_strip` | `<玩家>` | 卸下目标所有物品 |
+| `hg_revive` | `<玩家>` | 复活目标 |
+| `hg_slay` | `<玩家>` | 杀死目标 |
+| `hg_freeze` / `hg_unfreeze` | `<玩家>` | 冻结/解冻 |
+| `hg_goto` | `<玩家>` | 传送到目标位置 |
+| `hg_bring` | `<玩家>` | 将目标传送到身边 |
+| `hg_ban` | `<玩家>` | 封禁 |
+| `hg_kick` | `<玩家>` | 踢出 |
+| `hg_mute` | `<玩家>` | 禁言 |
+| `zs_givemoney` | `<玩家> <金额>` | 给予金钱 |
+| `zs_setlevel` | `<玩家> <等级>` | 设置等级 |
+| `zb_drawpoints` | `<0/1>` | 显示地图点 |
+
+### Homicide 模式指令
+
+| 指令 | 说明 |
+|------|------|
+| `hg_traitor_shop` | 打开叛徒商店 |
+| `hg_traitor_radio` | 使用叛徒无线电 |
+| `hg_traitor_cam` | 使用叛徒摄像头 |
+
+### 调试指令
+
+| 指令 | 说明 |
+|------|------|
+| `hg_test` | 测试 |
+| `hg_reload_organism` | 重载生理系统 |
+| `hg_reload_modes` | 重载游戏模式 |
+| `hg_reload_inventory` | 重载库存系统 |
+| `hg_debug_hitbox` | 显示命中框调试 |
+| `stopsound` | 停止所有声音 |
+| `reload` | 重载当前武器/模组 |
+
+---
+
+## 键位绑定
+
+### 默认快捷键
+
+| 按键 | 功能 |
+|------|------|
+| `F1` | 功能/管理员菜单 |
+| `F2` | 购买菜单 |
+| `F3` | 装备菜单 |
+| `F4` | 角色/皮肤选择 |
+| `F5` | 任务菜单 |
+| `F6` | 商店 |
+| `F7` | 合成菜单 |
+| `Q` | 武器径向菜单 |
+| `C` | 打开背包 |
+| `E` | 互动/拾取 |
+| `R` | 关闭背包界面 |
+| `Z` | 语音菜单 |
+| `TAB` | 记分板 |
+
+### 特殊操作
+
+| 操作 | 功能 |
+|------|------|
+| 左键 | 背包中拿取物品 |
+| 右键 | 背包中打开物品操作菜单 |
+| 鼠标滚轮 | 观察者模式调整距离 |
+| 左键（观察者） | 抓取目标 |
+| 右键（观察者） | 冻结目标 |
+| `WALK` 键 | 切换慢走 |
+| `CTRL` | 蹲伏 |
+| `SHIFT` | 奔跑 |
+
+### 推荐绑定
+
+```lua
+-- 快速切换持枪姿态
+bind "1" "hg_change_posture 0"    // 常规持枪
+bind "2" "hg_change_posture 1"    // 腰射
+bind "3" "hg_change_posture 5"    // 指向射击
+bind "4" "hg_change_posture 3"    // 高位戒备
+
+-- 武器操作
+bind "x" "hg_unload_ammo"         // 退弹
+bind "g" "dropweapon"             // 丢弃武器
+bind "v" "hg_inspect"             // 检视武器
+```
+
+---
+
+## 控制台变量
+
+| ConVar | 默认值 | 说明 |
+|--------|--------|------|
+| `hg_potatopc` | 0 | 启用较弱的效果，适合低配电脑 |
+| `hg_dynamic_mags` | 1 | 浮动弹药 HUD |
+| `hg_anims_draw_distance` | 0 | 动画渲染距离（0=无限） |
+| `hg_attachment_draw_distance` | 0 | 配件渲染距离（0=无限） |
+| `hg_old_notificate` | 0 | 旧版伤害通知（聊天栏） |
+| `hg_weaponshotblur_enable` | 1 | 射击模糊效果 |
+| `hg_weaponshotblur_mul` | 0.5 | 射击模糊倍率 |
+| `hg_maxsmoketrails` | 10 | 烟雾轨迹最大数量 |
+| `hg_optimise_scopes` | 0 | 开镜优化（1=降低道具质量，2=禁用主渲染） |
+| `hg_movement_stamina_debuff` | 0.3 | 耐力惩罚最低倍率 |
+| `hg_draw_crosshair` | 1 | 显示武器准星（需管理员或 sv_cheats 1） |
+| `hg_scope` | 0 | 启用瞄准镜渲染 |
+| `zb_drawpoints` | 0 | 可视化地图点 |
+
+---
+
+## 技术参考
+
+### 文件加载约定
+
+| 前缀 | 加载范围 |
+|------|----------|
+| `sv_` 或 `_sv` | 仅服务端 |
+| `cl_` 或 `_cl` | 仅客户端 |
+| `sh_` 或 `_sh` | 共享（两端均加载） |
+| 无前缀 | 视为共享 |
+
+### 全局命名空间
+
+- `hg` — Homigrad 框架全局变量（伤害、生理、库存、工具函数）
+- `zb` — Z-City 游戏模式全局变量（回合、模式、队伍、地图点、经验）
+- `zb.modes` — 所有已加载模式的表
+- `zb.modesHooks` — 模式函数的内部钩子分发表
+
+### 编码规范
+
+- 全局函数/变量需加 `hg.` 或 `zb.` 前缀
+- 伤害和生命值由生理系统管理，避免直接调用 `Entity:SetHealth()`
+
+### 版本号格式
+
+`A.Bcc` — 例如 `1.4.1` 表示第一次大版本、第四次机制更新、第一次小修复。
+
+| 位 | 含义 |
+|----|------|
+| A | 全局大更新 |
+| B | 新机制、游戏玩法变更 |
+| c | 修复和其他小改动 |
