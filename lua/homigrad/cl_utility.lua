@@ -930,7 +930,7 @@ players : 1 humans, 0 bots (20 max)
 
 --\\ Remove CLIENT side hit particles
 	hook.Add("ScalePlayerDamage","remove_cl_hit_particles",function()
-		return !game.SinglePlayer() -- i hate singleplayer in gmod. WHY I SHOULD DO THIS STUPID IDIOTIC SHIT, i hate it.
+		return true
 	end)
 --//
 

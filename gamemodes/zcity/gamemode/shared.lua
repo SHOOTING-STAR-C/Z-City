@@ -37,7 +37,7 @@ function hg.DrawBlur(panel, amount, passes, alpha)
 end
 
 local function BlockSpawn(ply, ent)
-	if game.SinglePlayer() or ply:IsAdmin() then return true end
+	if ply:IsAdmin() then return true end
 
 	return false
 end
