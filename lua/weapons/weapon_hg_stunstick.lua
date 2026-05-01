@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "电击棒"
-SWEP.Instructions = "Metrocop issued electrified melee weapon used for stopping riots and misbehavings. Pick up dat can.\n\nLMB to attack.\nRMB to block."
+SWEP.Instructions = "联合军警配发的电击近战武器，用于制止暴乱和违规行为。捡起那个罐子。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

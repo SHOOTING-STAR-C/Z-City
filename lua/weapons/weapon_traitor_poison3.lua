@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_base"
 SWEP.PrintName = "氰化物罐"
-SWEP.Instructions = "Produces gas, which prevents transport of electrons from cytochrome c to oxygen. As a result, the electron transport chain is disrupted, meaning that the cell can no longer aerobically produce ATP for energy. Tissues that depend highly on aerobic respiration, such as the central nervous system and the heart, are particularly affected."
+SWEP.Instructions = "产生气体，阻止电子从细胞色素c传递到氧气。结果，电子传递链被破坏，意味着细胞无法再有氧产生ATP能量。高度依赖有氧呼吸的组织，如中枢神经系统和心脏，尤其受到影响。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

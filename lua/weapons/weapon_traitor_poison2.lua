@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_base"
-SWEP.PrintName = "VX vial"
-SWEP.Instructions = "VX is an extremely toxic synthetic chemical compound in the organophosphorus class, specifically, a thiophosphonate. In the class of nerve agents, it was developed for military use in chemical warfare after translation of earlier discoveries of organophosphate toxicity in pesticide research."
+SWEP.PrintName = "VX试剂瓶"
+SWEP.Instructions = "VX是一种剧毒有机磷类合成化合物，具体来说是硫代磷酸酯。在神经毒剂类别中，它是在早期农药研究中发现有机磷毒性后，为化学战军事用途而开发的。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

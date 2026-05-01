@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "大砍刀"
-SWEP.Instructions = "A machete is a broad blade used either as an agricultural implement similar to an axe, or in combat like a long-bladed knife.\n\nLMB to attack.\nRMB to block."
+SWEP.Instructions = "砍刀是一种宽刃刀具，既可用作类似斧头的农具，也可用作长刃刀进行战斗。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

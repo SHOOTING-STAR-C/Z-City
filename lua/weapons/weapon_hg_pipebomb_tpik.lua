@@ -1,13 +1,12 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_hg_grenade_tpik"
 SWEP.PrintName = "管状炸弹"
-SWEP.Instructions = 
-[[This improvised explosive device is a heavy-gauge steel pipe filled with black powder and surrounded by nails. It has a simple short pyrotechnic fuze. This device achieves high detonation speed and shrapnel projection through tight containment of the black powder (a low explosive). It's still not as deadly or reliable as a proper grenade, though.
+SWEP.Instructions =
+[[这种简易爆炸装置由一根填充黑火药并布满钉子的重型钢管制成。配有一个简单的短烟火引信。通过紧密约束黑火药（一种低爆炸药）实现高爆速和破片投射。不过，它仍然不如正规手雷致命或可靠。
 
-LMB - High ready
+左键 - 高位待机
 
-RMB - Low ready
-]]--"тильда двуеточее три"
+右键 - 低位待机]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

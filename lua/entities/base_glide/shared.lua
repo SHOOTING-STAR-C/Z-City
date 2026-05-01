@@ -4,7 +4,7 @@ ENT.Base = "base_anim"
 ENT.PrintName = "Glide Base Vehicle"
 ENT.Author = "StyledStrike"
 ENT.Purpose = "Move around"
-ENT.Instructions = "Aim at it, then press USE to enter"
+ENT.Instructions = "对准它，然后按使用键进入"
 ENT.AdminOnly = false
 ENT.RenderGroup = RENDERGROUP_BOTH
 

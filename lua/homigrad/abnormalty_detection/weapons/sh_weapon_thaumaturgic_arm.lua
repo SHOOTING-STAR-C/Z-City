@@ -5,26 +5,24 @@ SWEP.Secondary = {}
 
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
-SWEP.PrintName = "Thaumaturgic Arm"
-SWEP.Instructions = [[
-Thaumaturgic arm allows for blood drainage right into user for later use in rituals.
+SWEP.PrintName = "奇术手臂"
+SWEP.Instructions = [[奇术手臂可以将血液直接抽取到使用者体内，用于后续的仪式。
 
-Press R + Primary Attack to drain 100 blood from yourself.
+按R+左键从自己身上抽取100血液。
 
-Something prevents you from using this weapon rapidly. Your hands are getting tired.
+某种力量阻止你快速使用此武器。你的手会感到疲劳。
 
-Each primary strike to the human will drain 100 blood from them, if they are not in ragdoll and 300 otherwise, and add 200 blood scaled to the amount (it took / 100) to your abnormal blood
+每次对人类的主攻击将抽取他们100血液（如果不在布娃娃状态），否则抽取300，并将按比例（抽取量/100）增加200到你的异常血液
 
-This weapon produces no sound, except then the wall is hit or secondary attack used.
+除非击中墙壁或使用副攻击，此武器不产生声音。
 
-This weapon produces no effects.
+此武器不产生效果。
 
-Strike power is removed for primary attack.
+主攻击的打击力被移除。
 
-Only secondary attack does damage.
+只有副攻击造成伤害。
 
-Bleeding from this weapon is severe.
-]]
+此武器造成的出血极其严重。]]
 SWEP.ThaumaturgicArm = true
 --Each secondary strike will collapse the victim.
 

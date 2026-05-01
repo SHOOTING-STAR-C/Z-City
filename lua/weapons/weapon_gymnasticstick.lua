@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "体操棍"
-SWEP.Instructions = "A side-handle baton issued to law enforcement officers for riot control and self-defense. Its long reach and heavy weight make it an effective tool for subduing suspects. The tonfa is typically used in pairs, one in each hand, to block and strike opponents. It is an essential part of a police officer's toolkit, and a powerful weapon in the right hands.\n\nLMB to attack.\nRMB to block."
+SWEP.Instructions = "一种发给执法人员的侧柄警棍，用于防暴和自卫。其长距离和沉重重量使其成为制服嫌疑人的有效工具。警棍通常成对使用，一手一根，用于格挡和攻击对手。它是警察工具包中的重要组成部分，在正确的人手中是一件强大的武器。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

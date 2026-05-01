@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik_base"
 SWEP.PrintName = "手铐"
-SWEP.Instructions = "Restraint devices designed to secure an individual's wrists in proximity to each other. For the rulers of order in the form of police helps to avoid unnecessary problems when transporting detainees. Sometimes they may not be enough."
+SWEP.Instructions = "一种约束装置，用于将个人的手腕固定在一起。对于以警察为代表的秩序维护者来说，有助于在运送被拘留者时避免不必要的问题。有时可能不够用。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

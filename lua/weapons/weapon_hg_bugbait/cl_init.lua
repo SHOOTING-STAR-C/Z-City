@@ -1,10 +1,8 @@
 include("shared.lua")
 
 SWEP.PrintName = "'Bugbait' Pheropod"
-SWEP.Instructions = 
-[[
-Pheropods are naturally found inside the bodies of Antlion Guards, allowing them to exert control over lesser Antlions. They can be extracted and used by an individual to command Antlions in a similar fashion.
-]]
+SWEP.Instructions =
+[[信息素囊是天然存在于蚁狮守卫体内的器官，使它们能够控制低等蚁狮。它们可以被提取并由个体以类似方式用来指挥蚁狮。]]
 SWEP.Category = "Weapons - Other"
 SWEP.WorldModelReal = "models/mmod/weapons/c_bugbait.mdl"
 SWEP.WorldModelExchange = false

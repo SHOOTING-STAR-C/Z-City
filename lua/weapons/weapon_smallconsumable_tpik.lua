@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik_base"
 SWEP.PrintName = "Small Consumable"
-SWEP.Instructions = "A snack is always useful, regardless of the situation. Having a snack and waiting and regaining your well-being."
+SWEP.Instructions = "零食总是有用的，无论什么情况。吃点东西，等待并恢复你的健康。"
 SWEP.Category = "ZCity Anims items"
 SWEP.Spawnable = false
 SWEP.AdminOnly = false

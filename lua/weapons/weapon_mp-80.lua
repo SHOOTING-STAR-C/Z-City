@@ -3,7 +3,7 @@ SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.PrintName = "MP-80-13T"
 SWEP.Author = "Izhevsk Mechanical Plant"
-SWEP.Instructions = "Non-lethal gas pistol chambered in .45 Rubber"
+SWEP.Instructions = "非致命气体手枪，使用.45橡胶弹"
 SWEP.Category = "Weapons - Pistols"
 SWEP.ViewModel = ""
 

@@ -1,7 +1,7 @@
 include("shared.lua")
 SWEP.Category = "Weapons - Other"
 SWEP.PrintName = "\"Deer Hunter\" Bow"
-SWEP.Instructions = "This is a modern aluminum-fiberglass compound bow with a draw force of 290 newtons, used (with broadhead arrows) to take medium-sized north-american game.\n\nRMB to aim.\nLMB while aiming to fire.\nLMB when not aiming to strike."
+SWEP.Instructions = "这是一把现代铝-玻璃纤维复合弓，拉力为290牛顿，用于（与猎箭一起）猎取北美中型猎物。\n\n右键瞄准。\n瞄准时左键射击。\n未瞄准时左键击打。"
 SWEP.WorldModelReal = "models/z_city/nmrih/weapons/bow/v_bow_deerhunter.mdl"
 SWEP.WorldModelExchange = false
 SWEP.setlh = true

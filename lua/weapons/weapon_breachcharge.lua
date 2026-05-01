@@ -14,7 +14,7 @@ SWEP.ViewModel = ""
 SWEP.WorldModel = "models/props_combine/combine_mine01.mdl"
 
 SWEP.PrintName = "破门炸药"
-SWEP.Instructions = "This is an explosive device used to force open closed and/or locked doors.\n\nLeft click to place on a door."
+SWEP.Instructions = "一种用于强行打开关闭和/或锁住的门的爆炸装置。\n\n左键放置在门上。"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 

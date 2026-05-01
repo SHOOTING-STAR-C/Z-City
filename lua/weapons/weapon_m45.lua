@@ -5,7 +5,7 @@ SWEP.AdminOnly = false
 
 SWEP.PrintName = "Colt M45A1"
 SWEP.Author = "Colt’s Manufacturing Company"
-SWEP.Instructions = "Pistol chambered in .45 ACP"
+SWEP.Instructions = ".45 ACP口径手枪"
 
 SWEP.Slot = 2
 SWEP.SlotPos = 10

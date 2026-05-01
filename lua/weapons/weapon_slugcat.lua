@@ -3,25 +3,25 @@ SWEP.Spawnable = true
 SWEP.AdminOnly = true
 SWEP.PrintName = "SLUGCAT"
 SWEP.Author = "john rainworld"
-SWEP.Instructions = [[Pistol chambered in FIVE PEBBLES
+SWEP.Instructions = [[以「五卵石」为口径的手枪
 
-Is one of the quietest cats in the RAIN WORLD
+是「雨世界」中最安静的猫咪之一
 
-...is this reaching you?
+...你能听到我吗？
 
-A little animal, on the floor of my chamber. I think I know what you are looking for.
+一个小动物，在我房间的地板上。我想我知道你在找什么。
 
-You're stuck in a cycle, a repeating pattern. You want a way out.
+你困在一个循环中，一个重复的模式。你想要一条出路。
 
-Know that this does not make you special - every living thing shares that same frustration. From the microbes in the processing strata to me, who am, if you excuse me, godlike in comparison.
+要知道这并不使你特别——每个生物都有同样的挫折感。从处理层中的微生物到我，如果你不介意我这么说，与之相比我是神一般的存在。
 
-The good news first. In a way, I am what you are searching for. Me and my kind have as our purpose to solve that very oscillating claustrophobia in the chests of you and countless others. A strange charity - you the unknowing recipient, I the reluctant gift. The noble benefactors? Gone.
+先说说好消息。从某种意义上说，我就是你在寻找的东西。我和我的同类存在的目的，就是为了解决你和无数其他人胸腔中那种反复出现的幽闭恐惧症。一种奇怪的慈善——你，不知情的接受者；我，不情愿的礼物。高贵的捐助者？早已不在了。
 
-The bad news is that no definitive solution has been found. And every moment the equipment erodes to a new state of decay. I can't help you collectively, or individually. I can't even help myself.
+坏消息是，至今没有找到确定的解决方案。每一刻，设备都在向新的衰败状态侵蚀。我无法帮助你们集体或个人。我甚至无法帮助自己。
 
-For you though, there is another way. The old path. Go to the west past the Farm Arrays, and then down into the earth where the land fissures, as deep as you can reach, where the ancients built their temples and danced their silly rituals. The mark I gave you will let you through.
+不过对你来说，还有另一条路。古老的道路。向西穿过农场阵列，然后深入地下，到达地面裂缝的最深处，那里是古人建造庙宇和跳他们愚蠢仪式的地方。我给你的印记会让你通过。
 
-Not that it solves anyone's problem but yours.]]
+虽然这只能解决你一个人的问题。]]
 SWEP.Category = "Weapons - Pistols"
 SWEP.Slot = 2
 SWEP.SlotPos = 10

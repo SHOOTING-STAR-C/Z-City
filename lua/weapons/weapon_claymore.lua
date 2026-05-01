@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.PrintName = "阔剑地雷"
 SWEP.Category = "Weapons - Explosive"
-SWEP.Instructions = "The claymore is an extremely effective thing that can blow an opponent's legs to splinters. There is little chance that the victim will survive the blast."
+SWEP.Instructions = "阔剑地雷是一种极其高效的武器，可以把对手的腿炸成碎片。受害者生还的可能性很小。"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.Primary.ClipSize = -1

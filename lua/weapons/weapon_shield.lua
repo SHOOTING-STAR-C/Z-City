@@ -1,7 +1,7 @@
 if true then return end
 if SERVER then AddCSLuaFile() end
 SWEP.PrintName = "防弹盾牌"
-SWEP.Instructions = "A ballistic shield"
+SWEP.Instructions = "一块防弹盾牌"
 SWEP.Category = "ZCity Other"
 SWEP.Instructions = ""
 SWEP.Spawnable = false

@@ -1,21 +1,20 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_hg_grenade_tpik"
 SWEP.PrintName = "59式手雷"
-SWEP.Instructions = 
-[[This is a cheap Chinese clone of an old Soviet RGD-5 offensive hand grenade. It has a lethality radius of 3 meters and casualty radius of 9 meters. It has a pyrotechnic delay of 3.5-4.4 seconds.
+SWEP.Instructions =
+[[这是苏联老式RGD-5进攻型手雷的廉价中国仿制品。其致死半径为3米，杀伤半径为9米。其烟火延期为3.5-4.4秒。
 
-Reload looking on surface will set tripwire
+对着表面按R键可设置绊雷
 
-LMB - High ready
-While high ready:
-RMB to remove spoon.
-Reload to insert pin back.
+左键 - 高位待机
+高位待机时：
+右键移除保险片。
+R键插回保险针。
 
-RMB - Low ready
-While low ready:
-LMB to remove spoon.
-Reload to insert pin back.
-]]--"тильда двуеточее три"
+右键 - 低位待机
+低位待机时：
+左键移除保险片。
+R键插回保险针。]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

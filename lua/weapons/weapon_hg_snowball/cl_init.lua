@@ -1,10 +1,8 @@
 include("shared.lua")
 
 SWEP.PrintName = "雪球"
-SWEP.Instructions = 
-[[
-A snowball is a spherical object made from snow, usually created by scooping snow with the hands and pressing the snow together to compact it into a ball.
-]]
+SWEP.Instructions =
+[[雪球是用雪做成的球形物体，通常通过用手捧雪并挤压成球来制作。]]
 SWEP.Category = "Weapons - Other"
 SWEP.WorldModelReal = "models/mmod/weapons/c_bugbait.mdl"
 SWEP.WorldModelExchange = "models/zerochain/props_christmas/snowballswep/zck_w_snowballswep.mdl"

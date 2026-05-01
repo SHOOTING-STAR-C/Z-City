@@ -24,20 +24,20 @@ SWEP.Abnormalties_ShootableWeapon = true
 SWEP.Base = "weapon_m4super"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
-SWEP.PrintName = "Bleeding Musket"
+SWEP.PrintName = "流血火枪"
 SWEP.Author = "N/A"
 SWEP.Instructions = [[
-It does appear that this musket does bleed indeed.
-Hold LMB to charge up and shoot a blood projectile.
-Shooting requires 1000 of your blood or 2000 of your abnormal blood (sums up).
-Applies incredible pain and disorientation through shots.
-Dissolves anything what can not experience pain.
-Completely ignores armor.
-Bullets have high penetration.
-60 PAIN
-10 DISORIENTATION
-or
-80 DISSOLVE
+这把火枪确实在流血。
+按住左键充能并发射血液弹。
+射击需要1000你的血液或2000你的异常血液（合计）。
+射击造成难以置信的疼痛和迷失方向。
+溶解任何无法感受疼痛的东西。
+完全无视护甲。
+子弹具有高穿透力。
+60 疼痛
+10 迷失方向
+或
+80 溶解
 [HE]
 ]]
 SWEP.Category = "Weapons - Sniper Rifles"

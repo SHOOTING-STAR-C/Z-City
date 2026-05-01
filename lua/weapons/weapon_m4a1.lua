@@ -5,7 +5,7 @@ SWEP.AdminOnly = false
 
 SWEP.PrintName = "M4A1"
 SWEP.Author = "Colt’s Manufacturing Company"
-SWEP.Instructions = "Automatic rifle chambered in 5.56x45 mm\n\nRate of fire 950 rounds per minute"
+SWEP.Instructions = "5.56x45mm口径自动步枪\n\n射速 950发/分钟"
 SWEP.Category = "Weapons - Assault Rifles"
 
 SWEP.Slot = 2

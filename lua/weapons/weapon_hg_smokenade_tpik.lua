@@ -1,13 +1,12 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_hg_grenade_tpik"
 SWEP.PrintName = "硝石烟雾弹"
-SWEP.Instructions = 
-[[This is a home-cooked KNO3-sugar smoke bomb, useful for visual concealment while murdering people.
+SWEP.Instructions =
+[[这是一种自制的KNO3-糖烟雾弹，在杀人时可用于视觉隐蔽。
 
-LMB - High ready
+左键 - 高位待机
 
-RMB - Low ready
-]]--"тильда двуеточее три"
+右键 - 低位待机]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

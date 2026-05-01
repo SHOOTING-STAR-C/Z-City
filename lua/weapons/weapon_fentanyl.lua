@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "芬太尼"
-SWEP.Instructions = "Fentanyl is a highly potent synthetic piperidine opioid primarily used as an analgesic. Fentanyl dose must be strictly observed, as it can quickly lead to opiate overdose. Label says that ~20% is a maximum daily dose. RMB to inject into someone else."
+SWEP.Instructions = "芬太尼是一种高效合成哌啶类阿片类药物，主要用作镇痛药。必须严格控制芬太尼剂量，因为它可能迅速导致阿片类药物过量。标签显示约20%为最大日剂量。右键对他人注射。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "医疗包"
-SWEP.Instructions = "A small bag containing medical supplies. Has bandages, painkillers, tourniquets and internal bleeding medicine. A necessary thing in hiking, military conditions and just a necessary thing in everyday life. RMB to apply on others, R to change use mode."
+SWEP.Instructions = "一个装有医疗用品的小包。里面有绷带、止痛药、止血带和内出血药物。远足、军旅生活中的必需品，也是日常生活中的必要之物。右键对他人使用，R键切换使用模式。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1
@@ -24,11 +24,11 @@ SWEP.offsetVec = Vector(4, -0.5, -3)
 SWEP.offsetAng = Angle(-30, 20, 90)
 SWEP.modes = 5
 SWEP.modeNames = {
-	[1] = "bandaging",
-	[2] = "painkiller",
-	[3] = "tranexamic acid",
-	[4] = "tourniquet",
-	[5] = "decompression needle",
+	[1] = "包扎",
+	[2] = "止痛药",
+	[3] = "氨甲环酸",
+	[4] = "止血带",
+	[5] = "减压针",
 }
 SWEP.ofsV = Vector(-2,-10,8)
 SWEP.ofsA = Angle(90,-90,90)

@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "战斧"
-SWEP.Instructions = "A single-handed striking tool designed to be used as a melee weapon by military personnel or as a hunting tool. Can break down doors.\n\nLMB to attack.\nRMB to block.\nRMB + LMB to throw."
+SWEP.Instructions = "一种单手打击工具，被军事人员用作近战武器或狩猎工具。可以破坏门。\n\n左键攻击。\n右键格挡。\n右键+左键投掷。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

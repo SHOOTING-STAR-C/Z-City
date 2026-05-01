@@ -1,15 +1,14 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_hg_grenade_tpik"
 SWEP.PrintName = "莫洛托夫鸡尾酒"
-SWEP.Instructions = 
-[[A handmade molotov cocktail is an incendiary weapon consisting of a frangible container filled with flammable substances and equipped with a fuse.
+SWEP.Instructions =
+[[手工制作的莫洛托夫鸡尾酒是一种燃烧武器，由装有易燃物质的易碎容器制成，并配有引信。
 
-LMB - High ready
-While high ready:
+左键 - 高位待机
+高位待机时：
 
-RMB - Low ready
-While low ready:
-]]--"тильда двуеточее три"
+右键 - 低位待机
+低位待机时：]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

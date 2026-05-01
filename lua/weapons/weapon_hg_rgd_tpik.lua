@@ -1,21 +1,20 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_hg_grenade_tpik"
 SWEP.PrintName = "RGD-5手雷"
-SWEP.Instructions = 
-[[RGD-5 is an iconic post-WWII soviet anti-personnel grenade designed in the early 1950s. It's widely exported and used even to this day. It has a pyrotechnic delay of 3.2-4.2 seconds.
+SWEP.Instructions =
+[[RGD-5是二战后苏联的标志性杀伤人员手雷，设计于1950年代初期。至今仍被广泛出口和使用。其烟火延期为3.2-4.2秒。
 
-Reload looking on surface will set tripwire
+对着表面按R键可设置绊雷
 
-LMB - High ready
-While high ready:
-RMB to remove spoon.
-Reload to insert pin back.
+左键 - 高位待机
+高位待机时：
+右键移除保险片。
+R键插回保险针。
 
-RMB - Low ready
-While low ready:
-LMB to remove spoon.
-Reload to insert pin back.
-]]--"тильда двуеточее три"
+右键 - 低位待机
+低位待机时：
+左键移除保险片。
+R键插回保险针。]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

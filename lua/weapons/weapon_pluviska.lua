@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bigconsumable"
 SWEP.PrintName = "普利维斯卡"
-SWEP.Instructions = "PluvTown's Finest. A true delicacy."
+SWEP.Instructions = "普拉夫镇的精品。真正的美味佳肴。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "伐木斧"
-SWEP.Instructions = "An axe is an implement that has been used for millennia to shape, split, and cut wood. Can break down doors.\n\nLMB to attack.\nRMB to block."
+SWEP.Instructions = "斧头是一种已有数千年使用历史的工具，用于塑形、劈砍和切割木材。可以破坏门。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 
 SWEP.Spawnable = true

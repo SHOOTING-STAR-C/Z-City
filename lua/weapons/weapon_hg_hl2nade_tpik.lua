@@ -1,21 +1,20 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_hg_grenade_tpik"
 SWEP.PrintName = "联合军手雷"
-SWEP.Instructions = 
-[[The Grenade comes equipped with a red blinking light and a chirping timer that are played when the grenade is thrown, letting both the attacker and the victim know when an active grenade is in their vicinity. Most Combine Soldiers carry at least a few of these and use them to flush out and/or kill enemies.
+SWEP.Instructions =
+[[该手雷配备有红色闪烁灯和啾啾声定时器，在手雷被投掷时激活，让攻击者和受害者都知道附近有一颗已激活的手雷。大多数联合军士兵至少携带数枚，用于驱逐和/或击杀敌人。
 
-Reload looking on surface will set tripwire
+对着表面按R键可设置绊雷
 
-LMB - High ready
-While high ready:
-RMB to remove spoon.
-Reload to insert pin back.
+左键 - 高位待机
+高位待机时：
+右键移除保险片。
+R键插回保险针。
 
-RMB - Low ready
-While low ready:
-LMB to remove spoon.
-Reload to insert pin back.
-]]--"тильда двуеточее три"
+右键 - 低位待机
+低位待机时：
+左键移除保险片。
+R键插回保险针。]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

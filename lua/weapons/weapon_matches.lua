@@ -14,7 +14,7 @@ if CLIENT then
 end
 
 SWEP.Author = "John Walker"
-SWEP.Instructions = "This is a box made of cardboard with matches inside. It has a coarse striking surface on one edge for lighting the matches contained inside.\n\nHold LMB to ignite a match."
+SWEP.Instructions = "一个装有火柴的纸板盒。一侧边缘有粗糙的摩擦面，用于点燃里面的火柴。\n\n按住左键点燃一根火柴。"
 SWEP.Category = "ZCity Other"
 
 SWEP.Spawnable = true

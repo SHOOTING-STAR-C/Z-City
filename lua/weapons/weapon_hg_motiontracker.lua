@@ -2,7 +2,7 @@ if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik_base"
 SWEP.PrintName = "运动探测器"
 SWEP.Category = "ZCity Other"
-SWEP.Instructions = "A device that allows you to detect the movement of objects in the area. It is a very useful tool for security personnel.\n\nHas a paint charge capable of unlocking the infiltrator's disguise."
+SWEP.Instructions = "一种能够探测区域内物体移动的设备。对安保人员来说是非常有用的工具。\n\n含有能够解除渗透者伪装的油漆电荷。"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.Primary.ClipSize = -1

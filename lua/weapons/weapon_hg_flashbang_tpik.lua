@@ -1,21 +1,20 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_hg_grenade_tpik"
 SWEP.PrintName = "闪光弹"
-SWEP.Instructions = 
-[[Flashbang is a non-lethal stun device, used by SWAT.
+SWEP.Instructions =
+[[闪光弹是一种非致命性眩晕装置，被特警队使用。
 
-Reload looking on surface will set tripwire
+对着表面按R键可设置绊雷
 
-LMB - High ready
-While high ready:
-RMB to remove spoon.
-Reload to insert pin back.
+左键 - 高位待机
+高位待机时：
+右键移除保险片。
+R键插回保险针。
 
-RMB - Low ready
-While low ready:
-LMB to remove spoon.
-Reload to insert pin back.
-]]--"тильда двуеточее три"
+右键 - 低位待机
+低位待机时：
+左键移除保险片。
+R键插回保险针。]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

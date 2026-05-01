@@ -6,7 +6,7 @@ SWEP.AdminOnly = false
 
 SWEP.PrintName = "VPO-209"
 SWEP.Author = "Vyatskiye Polyany Machine-Building Plant"
-SWEP.Instructions = "An AKM version converted for the Russian civilian arms market, without automatic fire capability. Сhambered in .366 TKM."
+SWEP.Instructions = "AKM版本改装为俄罗斯民用武器市场，没有自动射击能力。使用.366 TKM口径。"
 SWEP.Category = "Weapons - Carbines"
 SWEP.ShockMultiplier = 1.5
 SWEP.Penetration = 3

@@ -3,7 +3,7 @@ SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.PrintName = "马卡洛夫手枪"
 SWEP.Author = "Izhevsk Mechanical Plant"
-SWEP.Instructions = "An semi-automatic Russian pistol chambered in 9x18mm"
+SWEP.Instructions = "一款俄罗斯半自动手枪，使用9x18mm口径"
 SWEP.Category = "Weapons - Pistols"
 SWEP.ViewModel = ""
 

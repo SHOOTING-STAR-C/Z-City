@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "胶带缠绕的玻璃碎片"
-SWEP.Instructions = "A piece of a broken glass, taped with some bandage/tape to make it safer to use.\n\nLMB to attack.\nRMB to block."
+SWEP.Instructions = "一块碎玻璃，用绷带或胶带缠绕使其更安全使用。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
