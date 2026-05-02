@@ -592,13 +592,15 @@ function SWEP:WorldModel_Transform(bNoApply, bNoAdditional, model)
 		
 		if not RHand then return end
 
-		local matrixR = ent:GetBoneMatrix(RHand) or ent:GetBoneMatrix(ent:LookupBone("ValveBiped.Bip01_R_Forearm"))
-		
-		if not matrixR then 
-			//matrixR = Matrix()
-			//local att = ent:GetAttachment(ent:LookupAttachment("anim_attachment_RH"))
-			//matrixR:SetTranslation(att.Pos)
-			//matrixR:SetAngles(att.Ang)
+		local matrixR = ent:GetBoneMatrix(RHand)
+		if not matrixR then
+			local forearmBone = ent:LookupBone("ValveBiped.Bip01_R_Forearm")
+			if forearmBone then
+				matrixR = ent:GetBoneMatrix(forearmBone)
+			end
+		end
+
+		if not matrixR then
 			return
 		end
 		
