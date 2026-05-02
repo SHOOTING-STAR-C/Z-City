@@ -1,52 +1,67 @@
---local Organism = hg.organism
+-- sv_random_event.lua -- 随机播放目录下的音频
+--
+-- 配置：
+--   hg_random_sound_dir - 音频目录（相对于 GAME 根目录），默认 "sound"
+--   hg_random_sound_refresh - 手动刷新缓存
+--
+-- 使用：
+--   1. 在 sound/ 下放入 .wav/.ogg 文件
+--   2. 运行 hg_random_sound_refresh 刷新
+--   3. 玩家存活时每隔 120~320 秒随机播放一个
+
 hg.organism.module.random_events = {}
 local module = hg.organism.module.random_events
-module[1] = function(org)
-	org.timeToRandom = CurTime() + math.random(120,320)
+
+local soundCache = {}
+local soundDirConVar = CreateConVar("hg_random_sound_dir", "sound/zcity/rnd", FCVAR_ARCHIVE, "音频目录（相对于 GAME 根目录）")
+
+local function RefreshSoundCache()
+    local dir = soundDirConVar:GetString()
+    local files = file.Find(dir .. "/*", "GAME")
+    soundCache = {}
+
+    local emitPrefix = dir ~= "sound" and dir:match("^sound/(.+)$") or ""
+
+    for _, f in ipairs(files or {}) do
+        local ext = f:lower():match("%.([%w]+)$")
+        if ext == "wav" or ext == "ogg" then
+            local path = emitPrefix and emitPrefix ~= "" and emitPrefix .. "/" .. f or f
+            soundCache[#soundCache + 1] = path
+            resource.AddFile("sound/" .. path)
+        end
+    end
 end
 
-local RandomEvents = {} 
-
-function module.TriggerRandomEvent(owner, eventName)
-    if RandomEvents[eventName] then
-        if owner:IsRagdoll() then return end
-        RandomEvents[eventName](owner, owner.organism)
+local function InitCache()
+    if file and file.Find then
+        RefreshSoundCache()
+    else
+        timer.Simple(1, InitCache)
     end
+end
+InitCache()
+
+module[1] = function(org)
+    org.timeToRandom = CurTime() + math.random(20, 60)
 end
 
 module[2] = function(owner, org, timeValue)
-    --print("huy")
-    if org.timeToRandom < CurTime() and owner:IsPlayer() and owner:Alive() then
-		if owner:GetPlayerClass() and owner:GetPlayerClass().CanEmitRNDSound ~= nil and not owner:GetPlayerClass().CanEmitRNDSound then
-			return
-		end
+    if org.timeToRandom and org.timeToRandom < CurTime() and owner:IsPlayer() and owner:Alive() then
+        if owner:GetPlayerClass() and owner:GetPlayerClass().CanEmitRNDSound ~= nil and not owner:GetPlayerClass().CanEmitRNDSound then
+            return
+        end
 
-        --if not org.otrub then
-        --    table.Random(RandomEvents)(owner,org)
-        --end
+        if not org.otrub and #soundCache > 0 then
+            local snd = soundCache[math.random(#soundCache)]
+            owner:EmitSound(snd, nil, 100)
+            print("[随机事件] 播放:", snd)
+        end
 
-        org.timeToRandom = CurTime() + math.random(120,320)
+        org.timeToRandom = CurTime() + math.random(120, 320)
     end
 end
 
-hook.Add("Org Think", "VirusRandomEvents", function(owner, org, timeValue)
-    if not owner:IsPlayer() or not owner:Alive() then return end
-    if owner:IsPlayer() and owner.Virus and owner.Virus.Infected and (owner.Virus.Stage == 1 or owner.Virus.Stage == 2) then
-        if not owner.NextVirusRandomEventTime or CurTime() >= owner.NextVirusRandomEventTime then
-            local event = math.random(1, 2) == 1 and "Cough" or "Sneeze"
-            module.TriggerRandomEvent(owner, event)
-            owner.NextVirusRandomEventTime = CurTime() + math.random(10, 15)
-        end
-    end
-end)
-
-hook.Add("Org Think", "TemperatureSounds", function(owner, org, timeValue) -- добавил звуки при низкой температуре Ж))
-    if not owner:IsPlayer() or not owner:Alive() or org.otrub then return end
-    if owner:IsPlayer() and org.temperature > 24 and org.temperature < 35 then
-        if not owner.ColdRandomEventTime or CurTime() >= owner.ColdRandomEventTime then
-            local event = math.random(1, 2) == 1 and "Cough" or "Sneeze"
-            module.TriggerRandomEvent(owner, event)
-            owner.ColdRandomEventTime = CurTime() + math.random(math.Remap(org.temperature, 35, 24, 60, 15), math.Remap(org.temperature, 35, 24, 120, 30))
-        end
-    end
+concommand.Add("hg_random_sound_refresh", function()
+    RefreshSoundCache()
+    print("[随机事件] 已刷新音频缓存，找到 " .. #soundCache .. " 个文件")
 end)

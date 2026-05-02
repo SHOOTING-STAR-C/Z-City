@@ -537,6 +537,8 @@ bind "v" "hg_inspect"             // 检视武器
 | `hg_draw_crosshair` | 1 | 显示武器准星（需管理员或 sv_cheats 1） |
 | `hg_scope` | 0 | 启用瞄准镜渲染 |
 | `zb_drawpoints` | 0 | 可视化地图点 |
+| `hg_random_sound_dir` | `sound/zcity/rnd` | 音频目录（相对于 GAME 根目录） |
+| `hg_random_sound_refresh` | 命令 | 手动刷新并打印找到的音频文件数 |
 
 ---
 
