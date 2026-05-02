@@ -461,21 +461,6 @@ hook.Add("PostPlayerDeath", "Garbage", function(ply)
 
 	ply.fakecd = 0
 	ply.viewmode = 3
-
-	-- 兜底清理：如果有其他mod创建了多余的布娃娃，移除它
-	timer.Simple(0, function()
-		if not IsValid(ply) then return end
-		local myRagdoll = ply.RagdollDeath
-		if not IsValid(myRagdoll) then return end
-
-		for _, ent in ipairs(ents.FindByClass("prop_ragdoll")) do
-			if IsValid(ent) and ent ~= myRagdoll and ent:GetModel() == myRagdoll:GetModel() then
-				if ent:GetPos():DistToSqr(myRagdoll:GetPos()) < 200*200 then
-					ent:Remove()
-				end
-			end
-		end
-	end)
 end)
 
 local function RemoveRag(self, ply)

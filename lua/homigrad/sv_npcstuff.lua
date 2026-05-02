@@ -402,14 +402,15 @@ local math_random, math_Rand = math.random, math.Rand
 --\\ Give our guns to NPCs
 	local function addNPCweps()
 		local weaponlist = weapons.GetList()
-		local based = weapons.IsBasedOn -- RESPECT
 		for _, wep in ipairs(weaponlist) do
+			if not wep.Spawnable then continue end
 			local classname = wep.ClassName
-			if (based(classname, "homigrad_base") or based(classname, "weapon_melee") or classname == "weapon_melee" or based(classname, "weapon_medkit_sh") or classname == "weapon_medkit_sh") and wep.Spawnable then
-				list.Add("NPCUsableWeapons", { 
+			local cat = wep.Category or ""
+			if cat ~= "ZCity Medicine" then
+				list.Add("NPCUsableWeapons", {
 					class = classname,
 					title = wep.PrintName,
-					category = wep.Category or "ZCity Other"
+					category = cat
 				})
 			end
 		end
