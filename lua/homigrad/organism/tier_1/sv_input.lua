@@ -449,7 +449,7 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 
 	if not org then return end
 
-	if dmgInfo:GetAttacker():GetClass() == "npc_zombie" then
+	if IsValid(attacker) and attacker:GetClass() == "npc_zombie" then
 		--if not org then return end 
 		dmgInfo:SetDamageType( org and org.immobilization > 50 and DMG_BLAST or DMG_SLASH )
 		attacker.ImmobilizationMul = 2
