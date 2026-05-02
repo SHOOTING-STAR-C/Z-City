@@ -53,7 +53,7 @@ module[2] = function(owner, org, timeValue)
 
         if not org.otrub and #soundCache > 0 then
             local snd = soundCache[math.random(#soundCache)]
-            owner:EmitSound(snd, nil, 100)
+            owner:EmitSound(snd)
             print("[随机事件] 播放:", snd)
         end
 

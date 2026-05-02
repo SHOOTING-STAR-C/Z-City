@@ -324,7 +324,7 @@ hook.Add("Org Think", "Main", function(owner, org, timeValue)
 	org.isPly = isPly
 
 	if isPly or org.fakePlayer then
-		if not org.fakePlayer then
+		if isPly or owner:IsNPC() then
 			org.alive = owner:Alive()
 		end
 	else
@@ -521,7 +521,7 @@ hook.Add("Org Think", "Main", function(owner, org, timeValue)
 	org.otrub = org.needotrub
 	org.fake = org.needfake
 	
-	if org.needfake and owner:IsNPC() then
+	if org.needfake and owner:IsNPC() and owner:Alive() then
 		local dmgInfo = DamageInfo()
 		dmgInfo:SetDamage(10000)
 		dmgInfo:SetAttacker(owner)

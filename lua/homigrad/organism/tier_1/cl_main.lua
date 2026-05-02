@@ -442,7 +442,7 @@ hook.Add("Post Post Pre Post Processing", "organism-effects", function()
 	k2 = (30 - (o2 or 30)) / 30 + (1 - (consciousnessLerp or 1)) * 1-- + brain * 2
 	k3 = ((5000 / math.max(blood, 1000)) - 1) * 1.5
 
-	DrawSharpen(k1 * 2, k1 * 1)
+	DrawSharpen(k1 * 0.5, k1 * 0.5)
 	local lowpulse = math.max((70 - pulse) / 70, 0) + math.max(3000 * ((math.cos(CurTime()/2) + 1) / 2 * 0.1 + 1) - (blood * adrenK - 300),0) / 400
 
 	if (lply.PlayerClassName == "headcrabzombie" or lply:GetNetVar("headcrab")) and lply:Alive() then
