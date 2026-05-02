@@ -435,7 +435,6 @@ hg.ragdollFake = hg.ragdollFake or {}
 --local ragdollFake = hg.ragdollFake
 hook.Add("DoPlayerDeath", "Fake", function(ply)
 	local ragdoll = ply.FakeRagdoll
-	--if not IsValid(ragdoll) then return end
 	if (not ply.Removed) and not IsValid(ragdoll) then
 		ragdoll = Ragdoll_Create(ply)
 		ply.FakeRagdoll = ragdoll
@@ -444,7 +443,7 @@ hook.Add("DoPlayerDeath", "Fake", function(ply)
 
 	if not IsValid(ragdoll) then return end
 	if IsValid(ragdoll.bull) then ragdoll.bull:Remove() end
-	
+
 	ply:SetNWEntity("RagdollDeath", ragdoll)
 	ragdoll:SetNetVar("wounds", ply:GetNetVar("wounds"))
 	ragdoll:SetNetVar("arterialwounds", ply:GetNetVar("arterialwounds"))
@@ -456,13 +455,27 @@ hook.Add("PostPlayerDeath", "Garbage", function(ply)
 	if IsValid(ragdoll) then ragdoll:Remove() end
 
 	ply:SetNWEntity("FakeRagdoll", NULL)
-	--ply:SetNWEntity("RagdollDeath", ragdoll)
 
 	ply.FakeRagdoll = nil
 	hg.ragdollFake[ply] = nil
-	
+
 	ply.fakecd = 0
 	ply.viewmode = 3
+
+	-- 兜底清理：如果有其他mod创建了多余的布娃娃，移除它
+	timer.Simple(0, function()
+		if not IsValid(ply) then return end
+		local myRagdoll = ply.RagdollDeath
+		if not IsValid(myRagdoll) then return end
+
+		for _, ent in ipairs(ents.FindByClass("prop_ragdoll")) do
+			if IsValid(ent) and ent ~= myRagdoll and ent:GetModel() == myRagdoll:GetModel() then
+				if ent:GetPos():DistToSqr(myRagdoll:GetPos()) < 200*200 then
+					ent:Remove()
+				end
+			end
+		end
+	end)
 end)
 
 local function RemoveRag(self, ply)
