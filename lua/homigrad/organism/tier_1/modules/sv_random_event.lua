@@ -42,7 +42,7 @@ end
 InitCache()
 
 module[1] = function(org)
-    org.timeToRandom = CurTime() + math.random(20, 60)
+    org.timeToRandom = CurTime() + math.random(120, 320)
 end
 
 module[2] = function(owner, org, timeValue)
