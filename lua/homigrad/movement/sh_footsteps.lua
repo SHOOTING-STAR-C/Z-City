@@ -56,7 +56,7 @@ local hg_coolcamera = ConVarExists("hg_coolcamera") and GetConVar("hg_coolcamera
 			local Hook = hook_Run("HG_PlayerFootstep", ply, pos, foot, sound, volume, rf)
 			if Hook then return Hook end
 
-			if !(ply:IsWalking() or ply:Crouching()) and ent == ply then
+			if !ply:Crouching() and ent == ply then
 				local snd
 				if ply.PlayerClassName == "furry" then
 					snd = "zbattle/footstep/hardbarefoot" .. math.random(1, 5) .. ".ogg"
