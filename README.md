@@ -21,6 +21,7 @@
 - [指令大全](#指令大全)
 - [键位绑定](#键位绑定)
 - [控制台变量](#控制台变量)
+- [随机音频](#随机音频)
 - [技术参考](#技术参考)
 
 ---
@@ -539,6 +540,51 @@ bind "v" "hg_inspect"             // 检视武器
 | `zb_drawpoints` | 0 | 可视化地图点 |
 | `hg_random_sound_dir` | `sound/zcity/rnd` | 音频目录（相对于 GAME 根目录） |
 | `hg_random_sound_refresh` | 命令 | 手动刷新并打印找到的音频文件数 |
+
+---
+
+## 随机音频
+
+玩家存活时每隔一段时间自动播放一个随机声音，活跃气氛。
+
+### 添加自己的声音
+
+1. 在 `garrysmod/addons/Z-City/sound/zcity/rnd/` 下放入 `.wav` 或 `.ogg` 文件（采样率必须是 **44100Hz**）
+
+2. 游戏中按 `` ` `` 打开控制台，运行：
+   ```
+   hg_random_sound_refresh
+   ```
+   如果显示"找到 X 个文件"说明成功
+
+3. 等 20~60 秒就会自动播放
+
+> 和朋友联机时，朋友会自动下载声音文件，无需额外操作
+
+### 更换音频目录
+
+默认目录是 `sound/zcity/rnd`，你也可以改成自己的目录：
+
+```
+hg_random_sound_dir sound/你的文件夹
+hg_random_sound_refresh
+```
+
+### 转换音频格式
+
+如果 GMod 报错 `Invalid sample rate`，说明采样率不是 44100Hz。用 FFmpeg 转换：
+
+```
+ffmpeg -i 你的文件.mp3 -ar 44100 输出.wav
+```
+
+### 常见问题
+
+| 问题 | 原因 | 解决 |
+|------|------|------|
+| 刷新后找到 0 个文件 | 目录不对或没有 `.wav`/`.ogg` 文件 | 检查 `hg_random_sound_dir` 是否正确，文件是否放在对应目录 |
+| 听到声音但朋友听不到 | 缺 `resource.AddFile` | 本系统已自动处理，确认文件在 `sound/` 下即可 |
+| `Invalid sample rate` | 采样率不是 44100Hz | 用 FFmpeg 转成 44100Hz 的 WAV |
 
 ---
 
