@@ -3,22 +3,11 @@ hg.PointShop = hg.PointShop or {}
 local PLUGIN = hg.PointShop
 PLUGIN.Items = PLUGIN.Items or {}
 -- Validate function for custom name
-local allowed = {
-	' ',
-	'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я',
-	'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я',
-	'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-}
 local function IsInvalidName(name)
 	local trimmedName = string.Trim(name)
 	if trimmedName == "" then return true end
 	if #trimmedName < 2 then return true end
 	if utf8.len(name) > 25 then return true end
-	local symblos = utf8.len(name)
-	for k = 1, symblos do
-		if not table.HasValue(allowed, utf8.GetChar(name, k)) then return true end
-	end
 
 	local ret = hook.Run("ZB_IsInvalidName", name)
 	if ret ~= nil then return ret end

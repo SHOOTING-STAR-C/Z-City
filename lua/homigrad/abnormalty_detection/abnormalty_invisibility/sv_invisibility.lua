@@ -8,6 +8,8 @@ PLUGIN.Invisibility = PLUGIN.Invisibility or {}
 PLUGIN.Invisibility.ToInvis = PLUGIN.Invisibility.ToInvis or {}
 --//
 
+local RecipientFilter = RecipientFilter or (recipientfilter and recipientfilter.RecipientFilter)
+
 --\\
 local function recursive_set_prevent_transmit(ent, ply, stop_transmitting)
     if(IsValid(ent))then
