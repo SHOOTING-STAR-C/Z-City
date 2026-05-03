@@ -16,6 +16,7 @@ local function damageOrgan(org, dmg, dmgInfo, key)
 	return 0//isCrush(dmgInfo) and 0 or prot
 end
 
+hg.organism.input_list = hg.organism.input_list or {}
 local input_list = hg.organism.input_list
 input_list.heart = function(org, bone, dmg, dmgInfo)
 	local oldDmg = org.heart

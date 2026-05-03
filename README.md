@@ -536,6 +536,8 @@ bind "v" "hg_inspect"             // 检视武器
 | `hg_optimise_scopes` | 0 | 开镜优化（1=降低道具质量，2=禁用主渲染） |
 | `hg_movement_stamina_debuff` | 0.3 | 耐力惩罚最低倍率 |
 | `hg_draw_crosshair` | 1 | 显示武器准星（需管理员或 sv_cheats 1） |
+| `hg_gunshotvolume` | 1 | 枪声音量倍率（0-1，调小可降低枪声） |
+| `hg_quietshots` | 0 | 启用更安静的枪声（禁用多层声音叠加） |
 | `hg_scope` | 0 | 启用瞄准镜渲染 |
 | `zb_drawpoints` | 0 | 可视化地图点 |
 | `hg_random_sound_dir` | `sound/zcity/rnd` | 音频目录（相对于 GAME 根目录） |

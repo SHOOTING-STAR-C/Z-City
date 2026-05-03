@@ -800,7 +800,7 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 		dmgBlood = dmgBlood * 1.5
 		local bleed_add = dmgBlood * bleedMul// / (RagdollDamageBoneMul[hitgroup] or 1)
 		--org.bleed = org.bleed + bleed_add
-		attacker.harm = attacker.harm + bleed_add / 50
+		attacker.harm = (attacker.harm or 0) + bleed_add / 50
 		local hurt_add = dmgHurt * 0.5 * hurtMul
 		org.hurtadd = org.hurtadd + hurt_add
 		local painadd = dmgHurt * painMul * 1.5

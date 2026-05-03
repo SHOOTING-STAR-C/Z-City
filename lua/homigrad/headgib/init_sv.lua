@@ -114,7 +114,9 @@ end
 
 local headpos_male, headpos_female, headang = Vector(0,0,5), Vector(-2,0,4), Angle(0,0,-0)
 
-util.AddNetworkString("addfountain")
+timer.Simple(0, function()
+	util.AddNetworkString("addfountain")
+end)
 
 hg.fountains = hg.fountains or {}
 local headboom_mdl = Model("models/gleb/zcity/headboom.mdl")

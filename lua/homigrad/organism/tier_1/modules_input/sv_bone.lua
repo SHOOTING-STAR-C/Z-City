@@ -241,6 +241,7 @@ local jaw_dislocated_msg = {
 	//"I CANT EVEN SPEAK, I NEED TO PUNCH IT BACK IN PLACE... BUT IT HURTS REAL BAD",
 }
 
+hg.organism.input_list = hg.organism.input_list or {}
 local input_list = hg.organism.input_list
 input_list.jaw = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet)
 	local oldDmg = org.jaw
