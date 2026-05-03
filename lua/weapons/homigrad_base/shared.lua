@@ -2084,7 +2084,7 @@ function SWEP:SetHandPos(noset)
 	local ply = self:GetOwner()
 
     if not IsValid(ply) or not IsValid(self.worldModel) then return end
-    if not ply.shouldTransmit or ply.NotSeen then return end
+    if ply != LocalPlayer() and (not ply.shouldTransmit or ply.NotSeen) then return end
 
 	local ent = IsValid(ply.FakeRagdoll) and ply.FakeRagdoll or ply
 	local inuse = self:InUse()

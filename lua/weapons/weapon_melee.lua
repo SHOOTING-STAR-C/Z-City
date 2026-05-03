@@ -227,7 +227,7 @@ if CLIENT then
         
         self.worldModel:SetNoDraw(true)
         
-        if IsValid(owner) and (not owner.shouldTransmit or owner.NotSeen) then return end
+        if IsValid(owner) and owner != LocalPlayer() and (not owner.shouldTransmit or owner.NotSeen) then return end
         if not IsValid(owner) and (not self.shouldTransmit or self.NotSeen) then return end
 
 		local WorldModel = self.worldModel
@@ -582,7 +582,7 @@ function SWEP:SetHandPos(noset)
 	self.lhandik = false
     
     if not IsValid(ply) or not IsValid(self.worldModel) then return end
-    if not ply.shouldTransmit or ply.NotSeen then return end
+    if ply != LocalPlayer() and (not ply.shouldTransmit or ply.NotSeen) then return end
 
     local ent = hg.GetCurrentCharacter(ply)
 

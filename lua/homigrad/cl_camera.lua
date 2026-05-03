@@ -63,7 +63,12 @@ local swayAng = Angle(0, 0, 0)
 hook.Add("Camera", "Weapon", function(ply, ...)
 	local ply = ply or lply
 	wep = ply:GetActiveWeapon()
-	if wep.Camera then return wep:Camera(...) end
+	if wep.Camera then
+		if type(wep.Camera) == "function" then return wep:Camera(...) end
+		if wep.DrawWorldModel2 then wep:DrawWorldModel2() end
+	elseif wep.DrawWorldModel2 then
+		wep:DrawWorldModel2()
+	end
 end)
 
 hook.Add("MotionBlur", "Weapon", function(x,y,w,z)
