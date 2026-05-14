@@ -83,6 +83,14 @@ end
 					recursive_set_prevent_transmit(ply.FakeRagdoll, otherPly, state)
 				end
 				recursive_set_prevent_transmit(ply, otherPly, state)
+
+				-- Also clear SetPreventTransmit on old ragdolls in case they weren't cleaned up
+				if not state and IsValid(ply.FakeRagdollOld) and ply.FakeRagdollOld ~= ply.FakeRagdoll then
+					recursive_set_prevent_transmit(ply.FakeRagdollOld, otherPly, false)
+				end
+				if not state and IsValid(ply.OldRagdoll) and ply.OldRagdoll ~= ply.FakeRagdoll and ply.OldRagdoll ~= ply.FakeRagdollOld then
+					recursive_set_prevent_transmit(ply.OldRagdoll, otherPly, false)
+				end
 			end
 		end
 
@@ -146,13 +154,13 @@ hook.Add("PlayerPostThink", "Abnormalties_Invisibility", function(ply)
 end)
 
 hook.Add("HomigradDamage", "Abnormalties_Invisibility", function(ply, dmg, hitgroup, ent, harm)
-	if(ply:IsPlayer() and dmg:GetDamage() > 5 and ply != attacker)then
+	local attacker = dmg:GetAttacker()
+
+	if(ply:IsPlayer() and dmg:GetDamage() > 5 and ply ~= attacker)then
 		if(ply.Abnormalties_Invisible)then
 			PLUGIN.Invisibility.SetInvisible(ply, false)
 			PLUGIN.ShowMessage(ply, "Your invisibility fades")
 		end
-
-		local attacker = dmg:GetAttacker()
 
 		if(IsValid(attacker))then
 			if(attacker.Abnormalties_Invisible)then
@@ -188,6 +196,21 @@ hook.Add("PostCleanupMap", "Abnormalties_Invisibility", function()
 		if(ply.Abnormalties_Invisible)then
 			PLUGIN.Invisibility.SetInvisible(ply, false)
 		end
+	end
+end)
+
+hook.Add("PlayerDisconnected", "Abnormalties_Invisibility", function(ply)
+	PLUGIN.Invisibility.ToInvis[ply] = nil
+
+	if(ply.Abnormalties_Invisible)then
+		PLUGIN.Invisibility.SetInvisible(ply, false)
+	end
+end)
+
+hook.Add("Fake Up", "Abnormalties_Invisibility", function(ply, ragdoll)
+	if(ply:IsPlayer() and ply.Abnormalties_Invisible)then
+		-- When exiting ragdoll while invisible, ensure the player entity is properly hidden
+		PLUGIN.Invisibility.UpdateInvisiblity(ply)
 	end
 end)
 --//

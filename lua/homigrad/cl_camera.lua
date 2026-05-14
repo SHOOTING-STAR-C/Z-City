@@ -63,12 +63,7 @@ local swayAng = Angle(0, 0, 0)
 hook.Add("Camera", "Weapon", function(ply, ...)
 	local ply = ply or lply
 	wep = ply:GetActiveWeapon()
-	if wep.Camera then
-		if type(wep.Camera) == "function" then return wep:Camera(...) end
-		if wep.DrawWorldModel2 then wep:DrawWorldModel2() end
-	elseif wep.DrawWorldModel2 then
-		wep:DrawWorldModel2()
-	end
+	if wep.Camera then return wep:Camera(...) end
 end)
 
 hook.Add("MotionBlur", "Weapon", function(x,y,w,z)
@@ -172,7 +167,7 @@ function HGAddView(ply, origin, angles, velLen)
 
 		//angles[1] = angles[1] + x * 1
 		//angles[2] = angles[2] + y * 1
-		ViewPunch4(Angle(y2, x2, x2 * 10) * 0.00005 * (ishgweapon(wep) and 1.5 or 1))
+		ViewPunch4(Angle(y2, x2, x2 * 10) * 0.000005 * (ishgweapon(wep) and 1.5 or 1))
 
 		local music = hg.DynamicMusicV2.Player.GetTrack()
 
@@ -612,7 +607,7 @@ function hg.cam_things(ply, view, angles)
 
 	eyeAnglesOld = eyeAngs
 	local position_differencedot = position_difference:Dot(angles:Right()) * 2
-	angles[3] = angles[3] - angle_difference[2] * 0.5
+	angles[3] = angles[3] - angle_difference[2] * 0.05
 	--angles[3] = angles[3] - position_differencedot
 	angles[3] = angles[3] - (lean_lerp or 0) * hg_leancam_mul:GetInt()
 end
