@@ -365,7 +365,7 @@ end
                 end
                 hg.CreateRadialMenu(commands)
                 return -1
-            end", "丢弃衣服"}
+            end, "丢弃衣服"}
             hg.radialOptions[#hg.radialOptions + 1] = tbl
         end
     end)
