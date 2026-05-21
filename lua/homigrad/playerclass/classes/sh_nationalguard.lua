@@ -32,10 +32,7 @@ local ranks = {
 local clr = Color(5, 65, 0):ToVector()
 function CLASS.On(self)
     if CLIENT then return end
-    ApplyAppearance(self,nil,nil,nil,true)
-    local Appearance = self.CurAppearance or hg.Appearance.GetRandomAppearance()
-    Appearance.AAttachments = ""
-    Appearance.AColthes = ""
+    local name = hg.Appearance.GenerateRandomName(math.random(1, 2))
 
     local randomValue = math.random() * 100
     local cumulativeChance = 0
@@ -49,12 +46,12 @@ function CLASS.On(self)
         end
     end
 
-    self:SetNWString("PlayerName", rank .. " " .. Appearance.AName)
+    self:SetNWString("PlayerName", rank .. " " .. name)
     self:SetPlayerColor(clr)
     self:SetModel(models[math.random(#models)])
-    self:SetBodygroup(0,14)
+    self:SetNetVar("Accessories", "")
+    self:SetBodygroup(0, 14)
     self:SetSubMaterial()
-    self.CurAppearance = Appearance
 end
 
 local function IsLookingAt(ply, targetVec)

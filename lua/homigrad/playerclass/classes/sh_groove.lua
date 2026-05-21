@@ -18,22 +18,19 @@ local subnames = {
 
 function CLASS.On(self)
     if CLIENT then return end
-    ApplyAppearance(self,nil,nil,nil,true)
-    local Appearance = self.CurAppearance or hg.Appearance.GetRandomAppearance()
-    Appearance.AAttachments = ""
-    Appearance.AColthes = ""
-	self:SetNWString("PlayerName",subnames[math.random(#subnames)] .. Appearance.AName)
-    self:SetPlayerColor(Color(0,165,0):ToVector())
+    local name = hg.Appearance.GenerateRandomName(math.random(1, 2))
+    self:SetNWString("PlayerName", subnames[math.random(#subnames)] .. name)
+    self:SetPlayerColor(Color(0, 165, 0):ToVector())
     self:SetModel(models[math.random(#models)])
-	for _, bg in ipairs(self:GetBodyGroups()) do
-		self:SetBodygroup(bg.id, math.random(0, bg.num))
-	end
-    
+    self:SetNetVar("Accessories", "")
+    for _, bg in ipairs(self:GetBodyGroups()) do
+        self:SetBodygroup(bg.id, math.random(0, bg.num))
+    end
+
     local inv = self:GetNetVar("Inventory", {})
     inv["Weapons"] = inv["Weapons"] or {}
     inv["Weapons"]["hg_sling"] = true
     self:SetNetVar("Inventory", inv)
 
     self:SetSubMaterial()
-    self.CurAppearance = Appearance
 end

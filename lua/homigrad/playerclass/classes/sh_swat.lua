@@ -10,24 +10,20 @@ local models = {
 
 function CLASS.On(self)
     if CLIENT then return end
-    ApplyAppearance(self,nil,nil,nil,true)
-    self:SetPlayerColor(Color(10,10,100):ToVector())
+    local name = hg.Appearance.GenerateRandomName(math.random(1, 2))
+    self:SetPlayerColor(Color(10, 10, 100):ToVector())
     self:SetModel(models[math.random(#models)])
+    self:SetNetVar("Accessories", "")
     self:SetSubMaterial()
-    timer.Simple(0,function()
+    timer.Simple(0, function()
         self:SetBodyGroups("00000000000")
     end)
-    local Appearance = self.CurAppearance or hg.Appearance.GetRandomAppearance()
-    Appearance.AAttachments = ""
-    Appearance.AColthes = ""
-    self:SetNetVar("Accessories", "")
-    self.CurAppearance = Appearance
     local inv = self:GetNetVar("Inventory", {})
     inv["Weapons"] = inv["Weapons"] or {}
     inv["Weapons"]["hg_sling"] = true
     self:SetNetVar("Inventory", inv)
 
-    self:SetNWString("PlayerName","SWAT "..Appearance.AName)
+    self:SetNWString("PlayerName", "SWAT " .. name)
 end
 
 function CLASS.Guilt(self, Victim)
