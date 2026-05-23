@@ -81,6 +81,16 @@ local function ForceApplyAppearance(ply, tbl, noModelChange)
     end
 
     ply:SetNWString("PlayerName", tbl.AName)
+    -- 保存非 Z-City 管理的身体组（防止其他 Mod 的修改被覆盖）
+    local savedBodygroups = {}
+    local bodygroupList = ply:GetBodyGroups()
+    for k, v in ipairs(bodygroupList) do
+        local idx = k - 1
+        if not v.name or not hg.Appearance.Bodygroups[v.name] then
+            savedBodygroups[idx] = ply:GetBodygroup(idx)
+        end
+    end
+
     ply:SetBodyGroups( "00000000000000000000" )
     --print(mdl)
     --if mdl == "models/zcity/m/male_09.mdl" and ply:SteamID() == "STEAM_0:1:163575696" then
@@ -102,6 +112,11 @@ local function ForceApplyAppearance(ply, tbl, noModelChange)
             if hg.Appearance.Bodygroups[v.name][tMdl.sex and 2 or 1][tbl.ABodygroups[v.name]][1] != b then continue end
             ply:SetBodygroup(k-1,i)
         end
+    end
+
+    -- 恢复非 Z-City 管理的身体组（避免其他 Mod 的修改被覆盖）
+    for idx, val in pairs(savedBodygroups) do
+        ply:SetBodygroup(idx, val)
     end
 
     ply:SetNetVar("Accessories", tbl.AAttachments)
@@ -165,8 +180,11 @@ end)
 net.Receive("OnlyGet_Appearance",function(len,client)
     local tAppearance = net.ReadTable()
     local bRandom = !tAppearance or table.IsEmpty(tAppearance)
-    --client:ChatPrint(bRandom)
     client.CachedAppearance = bRandom and APmodule.GetRandomAppearance() or tAppearance
+    if IsValid(client) then
+        local checked = CheckAttachments(client, client.CachedAppearance)
+        ForceApplyAppearance(client, checked, true)
+    end
 end)
 
 APmodule.ApplyAppearance = ApplyAppearance
