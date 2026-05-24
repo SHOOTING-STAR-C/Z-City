@@ -888,10 +888,11 @@ local IsValid = IsValid
 
 		weight = math.max(weight - 1,0)
 
-		local ammo = ply:GetAmmo()
-		for id,count in pairs(ammo) do
-			weight = weight + (game.GetAmmoForce(id) * count) / 1500
-		end
+		-- ammo weight removed: ammo no longer affects player speed
+		-- local ammo = ply:GetAmmo()
+		-- for id,count in pairs(ammo) do
+		-- 	weight = weight + (game.GetAmmoForce(id) * count) / 1500
+		-- end
 
 		ply.armors = ply:GetNetVar("Armor",{})
 		for plc,arm in pairs(ply.armors) do

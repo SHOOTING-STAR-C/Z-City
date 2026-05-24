@@ -78,7 +78,7 @@ hook.Add("HUDPaint","shownotification",function()
     if showstuff > CurTime() then
         local w, h = ScrW(), ScrH()
         local x, y = w / 2, h / 25 * 24
-        local txt = "按 F 打开原谅菜单。"
+        local txt = "按 L 打开原谅菜单。"
         surface.SetFont( "HomigradFontBig" )
         surface.SetTextColor(255,255,255,255)
         local w, h = surface.GetTextSize(txt)
@@ -86,7 +86,7 @@ hook.Add("HUDPaint","shownotification",function()
         surface.DrawText(txt)
     end
 
-    if input.IsKeyDown(KEY_F) and not gui.IsGameUIVisible() and not IsValid(vgui.GetKeyboardFocus()) then
+    if input.IsKeyDown(KEY_L) and not gui.IsGameUIVisible() and not IsValid(vgui.GetKeyboardFocus()) then
         if not pressed then
             showstuff = 0
             RunConsoleCommand("hg_guilt_menu")
