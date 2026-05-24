@@ -23,7 +23,7 @@ SWEP.Slot = 3
 SWEP.SlotPos = 1
 SWEP.WorkWithFake = true
 SWEP.modeNames = {
-	[1] = "painkiller"
+	[1] = "止痛药"
 }
 
 function SWEP:InitializeAdd()

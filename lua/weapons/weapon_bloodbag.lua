@@ -22,7 +22,7 @@ SWEP.WorkWithFake = true
 SWEP.offsetVec = Vector(4, -4, 0)
 SWEP.offsetAng = Angle(-30, 20, 180)
 SWEP.modeNames = {
-	[1] = "blood"
+	[1] = "输血"
 }
 
 SWEP.ofsV = Vector(-1,3,11)
@@ -55,8 +55,8 @@ SWEP.modeValuesdef = {
 SWEP.showstats = true
 
 SWEP.modeNames2 = {
-	[1] = "take blood",
-	[2] = "give blood"
+	[1] = "采血",
+	[2] = "输血"
 }
 
 function SWEP:GetInfo()
@@ -245,7 +245,7 @@ else
 		local mode = self:GetNetVar("mode",2) - 1
 		if mode == 0 then mode = 2 end
 		local modeStr = self.modeNames2[mode]
-		self.modeNames[1] = self:GetNetVar("modeValues", {})[1] == 0 and modeStr .. " | Recipent: " .. ent.organism.bloodtype or modeStr .. " | in: "..self:GetNetVar("type","o-").." | recipent: "..ent.organism.bloodtype
+		self.modeNames[1] = self:GetNetVar("modeValues", {})[1] == 0 and modeStr .. " | 受血者: " .. ent.organism.bloodtype or modeStr .. " | 输入: "..self:GetNetVar("type","o-").." | 受血者: "..ent.organism.bloodtype
 	end
 
 	function SWEP:AfterDrawModel(wm,nodraw)

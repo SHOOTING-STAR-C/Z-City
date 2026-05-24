@@ -24,7 +24,7 @@ SWEP.WorkWithFake = true
 SWEP.offsetVec = Vector(5, -1.5, -2.5)
 SWEP.offsetAng = Angle(90, 00, -90)
 SWEP.modeNames = {
-	[1] = "adrenaline"
+	[1] = "肾上腺素"
 }
 
 function SWEP:InitializeAdd()

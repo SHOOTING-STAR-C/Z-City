@@ -23,7 +23,7 @@ SWEP.offsetVec = Vector(3, -2.5, -1)
 SWEP.offsetAng = Angle(-30, 20, -90)
 SWEP.ModelScale = 0.7
 SWEP.modeNames = {
-	[1] = "analgesia"
+	[1] = "麻醉"
 }
 
 SWEP.DeploySnd = ""

@@ -22,7 +22,7 @@ SWEP.WorkWithFake = true
 SWEP.offsetVec = Vector(2.5, -2.5, 0)
 SWEP.offsetAng = Angle(-30, 20, 180)
 SWEP.modeNames = {
-	[1] = "painkiller"
+	[1] = "止痛药"
 }
 
 function SWEP:InitializeAdd()

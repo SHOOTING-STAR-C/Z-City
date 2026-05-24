@@ -22,7 +22,7 @@ SWEP.WorkWithFake = true
 SWEP.offsetVec = Vector(4, -1.5, 0)
 SWEP.offsetAng = Angle(-30, 20, 180)
 SWEP.modeNames = {
-	[1] = "analgesic"
+	[1] = "镇痛"
 }
 
 SWEP.DeploySnd = ""

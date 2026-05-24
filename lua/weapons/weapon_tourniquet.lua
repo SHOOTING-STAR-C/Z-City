@@ -38,7 +38,7 @@ SWEP.offsetVec = Vector(4, -1.5, 0)
 SWEP.offsetAng = Angle(-30, 20, -90)
 SWEP.ModelScale = 1
 SWEP.modeNames = {
-	[1] = "tourniquet"
+	[1] = "止血带"
 }
 
 function SWEP:InitializeAdd()
