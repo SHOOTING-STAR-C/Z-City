@@ -205,10 +205,17 @@ end)
 
 hook.Add("PlayerLoadout", "giveHands", function(ply)
     ply:Give("weapon_hands_sh")
-    hg.AddArmor(ply, "vest3")
-    hg.AddArmor(ply, "helmet5")
-    hg.AddArmor(ply, "nightvision1")
     return true
+end)
+
+local defaultArmor = {"vest3", "helmet5", "nightvision1"}
+hook.Add("PlayerSpawn", "giveDefaultArmor", function(ply)
+    timer.Simple(0.2, function()
+        if not IsValid(ply) or not ply:Alive() then return end
+        for _, armor in ipairs(defaultArmor) do
+            hg.AddArmor(ply, armor)
+        end
+    end)
 end)
 
 hook.Add("DoPlayerDeath", "homigrad-inventory", function(ply)
