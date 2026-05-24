@@ -384,6 +384,11 @@ hg.organism.input_list.mask3 = function(org, bone, dmg, dmgInfo, ...)
 	return protect
 end
 
+hg.organism.input_list.nightvision1 = function(org, bone, dmg, dmgInfo, ...)
+	local protect = protec(org, bone, dmg, dmgInfo, "face", "nightvision1", 0.8, 0.6, true, ...)
+	return protect
+end
+
 hg.organism.input_list.vest5 = function(org, bone, dmg, dmgInfo, ...)
 	local protect = protec(org, bone, dmg, dmgInfo, "torso", "vest5", 0.8, 0.5, false, ...)
 	return protect

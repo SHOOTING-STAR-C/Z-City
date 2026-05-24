@@ -205,6 +205,9 @@ end)
 
 hook.Add("PlayerLoadout", "giveHands", function(ply)
     ply:Give("weapon_hands_sh")
+    hg.AddArmor(ply, "vest3")
+    hg.AddArmor(ply, "helmet5")
+    hg.AddArmor(ply, "nightvision1")
     return true
 end)
 

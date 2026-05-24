@@ -205,6 +205,7 @@ if CLIENT then
 			
 			--model:SetupBones()
 			
+			if placement == "head" then continue end
 			if not (islply and armorData.norender) then
 				model:DrawModel()
 			end
@@ -356,18 +357,7 @@ if CLIENT then
 		end
 
 		if armors and armors["head"] then
-			local custommat = hg.armor.head[armors["head"]].viewmaterial
-			
-			if custommat != false then
-				surface.SetDrawColor(255,255,255,255)
-				surface.SetMaterial(custommat or mat)
-				surface.DrawTexturedRect(-1, -1, ScrW()+1, ScrH()+1)
-			end
-			
-			local customviewfunc = armors["head"] and hg.armor.head[armors["head"]].customviewrender
-			if customviewfunc then
-				customviewfunc(lply)
-			end
+			-- head armor view effects disabled
 		end
 
 		if IsValid(lply.EZNVGlamp) and armors and ((not armors["face"]) or (armors["face"] and !NVGEnabled)) then
