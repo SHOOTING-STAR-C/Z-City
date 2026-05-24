@@ -228,6 +228,18 @@ if CLIENT then
 				ent.armors = var
 			end)
 		end
+		if key == "HideArmorRender" and var == true then
+			timer.Simple(.1,function()
+				local ent = Entity(index)
+				if not IsValid(ent) then return end
+				for k,v in pairs(ent.modelArmor or {}) do
+					if IsValid(v) then
+						v:Remove()
+					end
+					ent.modelArmor[k] = nil
+				end
+			end)
+		end
 	end)
 	
 	local mat = Material("sprites/mat_jack_hmcd_helmover")
@@ -432,6 +444,11 @@ if CLIENT then
 		local att = args[1]
 		net.Start("hg_drop_equipment")
 		net.WriteString(att)
+		net.SendToServer()
+	end)
+
+	concommand.Add("hg_toggle_armor_render", function(ply, cmd, args)
+		net.Start("hg_toggle_armor_render")
 		net.SendToServer()
 	end)
 

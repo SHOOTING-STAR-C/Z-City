@@ -645,9 +645,9 @@ local function Respawn(ply,body)
             
             ply:SetNetVar("Inventory", ply.inventory)
             ply:SetNetVar("Armor",body:GetNetVar( "Armor", {} ))
-            ply:SetNetVar("HideArmorRender", body:GetNetVar("HideArmorRender", false))
+            ply:SetNetVar("HideArmorRender", body:GetNetVar("HideArmorRender", true))
             body:SetNetVar( "Armor", {} )
-            body:SetNetVar("HideArmorRender", false)
+            body:SetNetVar("HideArmorRender", true)
 
             for k,v in pairs( ply.inventory["Weapons"] ) do
                 --print(k,v)

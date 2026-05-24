@@ -92,7 +92,7 @@ local IsValid, math_Clamp = IsValid, math.Clamp
 		end
 
 		local armors = ply:GetNetVar("Armor") or ent.PredictedArmor
-		local hideArmorRender = ply:GetNetVar("HideArmorRender", false) or ent.PredictedHideArmorRender
+		local hideArmorRender = ply:GetNetVar("HideArmorRender", true) or ent.PredictedHideArmorRender
 		if armors and next(armors) and not hideArmorRender then
 			RenderArmors(ply, armors, ent)
 		end

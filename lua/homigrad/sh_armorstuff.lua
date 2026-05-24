@@ -813,7 +813,7 @@ function entityMeta:SyncArmor()
 		local rag = hg.GetCurrentCharacter(self)
 		if IsValid(rag) and rag:IsRagdoll() then
 			rag:SetNetVar("Armor", self.armors)
-			rag:SetNetVar("HideArmorRender", self:GetNetVar("HideArmorRender", false))
+			rag:SetNetVar("HideArmorRender", self:GetNetVar("HideArmorRender", true))
 		end
 	end
 end

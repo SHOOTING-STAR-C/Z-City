@@ -1,5 +1,6 @@
 util.AddNetworkString("hg_add_equipment")
 util.AddNetworkString("hg_drop_equipment")
+util.AddNetworkString("hg_toggle_armor_render")
 
 function hg.SetArmorRestrictions(ply, restrictions)
 	if not IsValid(ply) then return end
@@ -43,6 +44,16 @@ net.Receive("hg_drop_equipment", function(len, ply)
     if not ply.organism.canmove then return end
 
     hg.DropArmor(ply, equipment)
+end)
+
+net.Receive("hg_toggle_armor_render", function(len, ply)
+    local current = ply:GetNetVar("HideArmorRender", true)
+    ply:SetNetVar("HideArmorRender", not current)
+
+    local rag = hg.GetCurrentCharacter(ply)
+    if IsValid(rag) and rag:IsRagdoll() then
+        rag:SetNetVar("HideArmorRender", not current)
+    end
 end)
 
 function hg.AddArmor(ply, equipment, ent)
