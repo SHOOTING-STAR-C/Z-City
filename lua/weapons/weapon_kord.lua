@@ -41,6 +41,7 @@ SWEP.EjectAng = Angle(0,90,0)
 SWEP.weaponInvCategory = 1
 SWEP.HoldType = "rpg"
 SWEP.ZoomPos = Vector(-9, -0.0152, 6.2041)
+SWEP.StartAtt = {"holo4"}
 SWEP.RHandPos = Vector(4, -2, 0)
 SWEP.LHandPos = Vector(7, -2, -2)
 SWEP.ShellEject = "EjectBrass_762Nato"

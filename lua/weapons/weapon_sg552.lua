@@ -56,6 +56,7 @@ SWEP.holsteredAng = Angle(210, 0, 180)
 
 SWEP.HoldType = "rpg"
 SWEP.ZoomPos = Vector(-3, 0.1958, 10.2178)
+SWEP.StartAtt = {"holo4"}
 SWEP.RHandPos = Vector(-12, -1, 4)
 SWEP.LHandPos = Vector(7, -2, -2)
 SWEP.EjectAng = Angle(180, 0, 0)

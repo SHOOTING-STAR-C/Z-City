@@ -20,6 +20,7 @@ SWEP.FakeAttachment = "1"
 SWEP.AttachmentPos = Vector(-1.5,0,0)
 SWEP.AttachmentAng = Angle(0,0,0)
 SWEP.FakeBodyGroups = "000000000"
+SWEP.StartAtt = {"holo4"}
 SWEP.BarrelLength = 40
 SWEP.SUPBarrelLenght = 47
 SWEP.OpenBolt = false

@@ -56,6 +56,7 @@ SWEP.DeploySnd = {"homigrad/weapons/draw_pistol.mp3", 55, 100, 110}
 SWEP.HolsterSnd = {"homigrad/weapons/holster_pistol.mp3", 55, 100, 110}
 SWEP.HoldType = "rpg"
 SWEP.ZoomPos = Vector(-3, 0.1224, 1.7109)
+SWEP.StartAtt = {"holo4", "laser1", "grip1"}
 SWEP.RHandPos = Vector(-5, -0.5, -1)
 SWEP.LHandPos = false
 SWEP.SprayRand = {Angle(-0.05, -0.05, 0), Angle(-0.07, 0.07, 0)}

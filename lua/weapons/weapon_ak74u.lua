@@ -18,6 +18,8 @@ SWEP.AttachmentPos = Vector(-4.5,2.4,-19.3)
 SWEP.AttachmentAng = Angle(0,0,0)
 SWEP.FakeAttachment = "1"
 SWEP.FakeBodyGroups = "06901135412000"
+SWEP.StartAtt = {"holo4"}
+SWEP.StartAtt = {"holo4"}
 
 SWEP.GunCamPos = Vector(4,-15,-6)
 SWEP.GunCamAng = Angle(190,-5,-100)

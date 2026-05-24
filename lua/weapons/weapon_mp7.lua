@@ -160,6 +160,7 @@ SWEP.PPSMuzzleEffect = "muzzleflash_FAMAS" -- shared in sh_effects.lua
 
 SWEP.HoldType = "rpg"
 SWEP.ZoomPos = Vector(-3, 0.2258, 5.0211)
+SWEP.StartAtt = {"holo4", "laser1"}
 SWEP.RHandPos = Vector(1, -1, 0)
 SWEP.LHandPos = false
 SWEP.Spray = {}

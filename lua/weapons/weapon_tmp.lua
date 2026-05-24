@@ -131,6 +131,7 @@ SWEP.ReloadSoundes = {
 }
 SWEP.HoldType = "rpg"
 SWEP.ZoomPos = Vector(-3, 0.4379, 8.1642)
+SWEP.StartAtt = {"holo4", "laser1"}
 SWEP.RHandPos = Vector(-14, -1, 3)
 SWEP.LHandPos = false
 SWEP.Spray = {}

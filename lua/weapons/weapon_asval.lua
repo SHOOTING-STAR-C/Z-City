@@ -118,6 +118,7 @@ SWEP.PPSMuzzleEffectSuppress = "muzzleflash_suppressed"
 
 SWEP.HoldType = "rpg"
 SWEP.ZoomPos = Vector(0, -0.0762, 6.0112)
+SWEP.StartAtt = {"holo4"}
 SWEP.RHandPos = Vector(-5, -1, 1)
 SWEP.LHandPos = Vector(7, -2, -2)
 SWEP.ShockMultiplier = 3

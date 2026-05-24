@@ -12,6 +12,8 @@ SWEP.WorldModel = "models/weapons/w_shot_m3super90.mdl"
 SWEP.WorldModelFake = "models/weapons/arc9/darsu_eft/c_toz106.mdl"
 SWEP.FakeAttachment = "1"
 SWEP.FakeBodyGroups = "110011111"
+SWEP.StartAtt = {"holo4"}
+SWEP.StartAtt = {"holo4"}
 SWEP.FakeBodyGroupsPresets = {
 	"110011111",
 	"110012112",

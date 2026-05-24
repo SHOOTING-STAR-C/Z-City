@@ -20,6 +20,8 @@ SWEP.FakeAttachment = "1"
 SWEP.AttachmentPos = Vector(-8.5,0,0)
 SWEP.AttachmentAng = Angle(0,0,0)
 SWEP.FakeBodyGroups = "000000002"
+SWEP.StartAtt = {"holo4"}
+SWEP.StartAtt = {"holo4"}
 
 SWEP.FakeBodyGroupsPresets = {
 	"000000002",

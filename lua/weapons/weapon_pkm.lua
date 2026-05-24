@@ -138,6 +138,7 @@ SWEP.IconOverride = "pwb2/vgui/weapons/pkm.png"
 SWEP.weaponInvCategory = 1
 SWEP.HoldType = "rpg"
 SWEP.ZoomPos = Vector(-3, 0.0898, 6.2479)
+SWEP.StartAtt = {"holo4"}
 SWEP.RHandPos = Vector(4, -2, 0)
 SWEP.LHandPos = Vector(7, -2, -2)
 SWEP.ShellEject = "EjectBrass_762Nato"

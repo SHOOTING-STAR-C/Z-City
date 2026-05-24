@@ -17,6 +17,8 @@ SWEP.AttachmentPos = Vector(3,3,-26.8)
 SWEP.AttachmentAng = Angle(0,-1.5,0)
 SWEP.FakeAttachment = "1"
 SWEP.FakeBodyGroups = "07C000401210000"
+SWEP.StartAtt = {"holo4", "laser1", "grip1"}
+SWEP.StartAtt = {"holo4", "laser1", "grip1"}
 
 SWEP.FakeEjectBrassATT = "2"
 

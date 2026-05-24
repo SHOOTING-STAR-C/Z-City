@@ -16,6 +16,8 @@ SWEP.AttachmentPos = Vector(0,2.2,-28)
 SWEP.AttachmentAng = Angle(0,0,90)
 SWEP.FakeAttachment = "1"
 SWEP.FakeBodyGroups = "00000000000"
+SWEP.StartAtt = {"holo4"}
+SWEP.StartAtt = {"holo4"}
 SWEP.ZoomPos = Vector(0, 0.35, 7.6)
 
 SWEP.CanEpicRun = true

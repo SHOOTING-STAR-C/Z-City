@@ -25,6 +25,8 @@ SWEP.FakeAttachment = "1"
 SWEP.AttachmentPos = Vector(-5,-0.05,0.7)
 SWEP.AttachmentAng = Angle(0,0,-90)
 SWEP.FakeBodyGroups = "000000002"
+SWEP.StartAtt = {"holo4"}
+SWEP.StartAtt = {"holo4"}
 
 SWEP.FakeEjectBrassATT = "2"
 SWEP.FakeViewBobBone = "CAM_Homefield"

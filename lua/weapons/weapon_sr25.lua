@@ -198,7 +198,7 @@ function SWEP:DrawPost()
 	end
 end
 
-SWEP.StartAtt = {"ironsight1"}
+SWEP.StartAtt = {"holo4"}
 
 
 SWEP.lengthSub = 15

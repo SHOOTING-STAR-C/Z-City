@@ -20,6 +20,6 @@ SWEP.Primary.Wait = 0.063
 SWEP.Primary.Automatic = true
 
 //SWEP.StartAtt = {"ironsight2", false}
-SWEP.StartAtt = {"ironsight2"}
+SWEP.StartAtt = {"holo4"}
 
 SWEP.cameraShakeMul = 1

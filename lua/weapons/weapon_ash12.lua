@@ -99,7 +99,7 @@ SWEP.availableAttachments = {
 	}
 }
 
-SWEP.StartAtt = {"grip2", "ironsight1"}
+SWEP.StartAtt = {"holo4", "grip2"}
 
 SWEP.weight = 3
 

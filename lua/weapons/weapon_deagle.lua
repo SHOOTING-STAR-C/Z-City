@@ -175,6 +175,7 @@ SWEP.DeploySnd = {"homigrad/weapons/draw_pistol.mp3", 55, 100, 110}
 SWEP.HolsterSnd = {"homigrad/weapons/holster_pistol.mp3", 55, 100, 110}
 SWEP.HoldType = "revolver"
 SWEP.ZoomPos = Vector(-30, 0.0292, 4.5551)
+SWEP.StartAtt = {"holo4"}
 SWEP.RHandPos = Vector(0, -0.5, -1)
 SWEP.LHandPos = false
 SWEP.Ergonomics = 0.9

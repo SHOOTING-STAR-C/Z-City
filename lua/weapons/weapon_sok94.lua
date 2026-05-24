@@ -26,6 +26,7 @@ SWEP.AnimList = {
 SWEP.Slot = 2
 SWEP.SlotPos = 10
 SWEP.FakeBodyGroups = "09600074240000"
+SWEP.StartAtt = {"holo4"}
 SWEP.Primary.Wait = 0.098
 
 SWEP.ZoomPos = Vector(0, -0.0054, 4.6688)

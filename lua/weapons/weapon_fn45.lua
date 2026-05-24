@@ -84,6 +84,7 @@ SWEP.WorldPos = Vector(11, -0.8, 2.6)
 SWEP.WorldAng = Angle(0, 0, 0)
 SWEP.HoldType = "revolver"
 SWEP.ZoomPos = Vector(25, 0.53, 7.4)
+SWEP.StartAtt = {"holo4", "laser1"}
 SWEP.RHandPos = Vector(-13.5, 0, 3)
 SWEP.LHandPos = false
 SWEP.attPos = Vector(0, -2, -0.5)

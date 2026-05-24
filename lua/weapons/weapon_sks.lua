@@ -126,6 +126,7 @@ SWEP.DeploySnd = {"homigrad/weapons/draw_hmg.mp3", 55, 100, 110}
 SWEP.HolsterSnd = {"homigrad/weapons/hmg_holster.mp3", 55, 100, 110}
 SWEP.HoldType = "rpg"
 SWEP.ZoomPos = Vector(-3, 0.0925, 4.7642)
+SWEP.StartAtt = {"holo4"}
 SWEP.RHandPos = Vector(-8, -2, 6)
 SWEP.LHandPos = Vector(6, -3, 1)
 SWEP.AimHands = Vector(-10, 1.8, -6.1)

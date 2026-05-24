@@ -170,7 +170,7 @@ SWEP.WeaponEyeAngles = Angle(0,0,0.002)
 SWEP.attPos = Vector(0, -3.25, 22)
 SWEP.attAng = Angle(0, 0, 0)
 
-SWEP.StartAtt = {"ironsight1"}
+SWEP.StartAtt = {"holo4"}
 
 SWEP.Ergonomics = 1
 
