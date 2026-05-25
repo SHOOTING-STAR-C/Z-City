@@ -31,8 +31,14 @@ input_list.heart = function(org, bone, dmg, dmgInfo)
 	return result
 end
 
-input_list.liver = function(org, bone, dmg, dmgInfo)
+input_list.liver = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet)
 	local oldDmg = org.liver
+
+	local protec = hg.organism.protec
+	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
+		local protect = protec(org, bone, dmg, dmgInfo, "torso", org.owner.armors and org.owner.armors["torso"], 1, 0.5, false, boneindex, dir, hit, ricochet)
+		if protect and protect > 0 then return protect end
+	end
 	local prot = math.max(0.3 - org.liver,0)
 	
 	hg.AddHarmToAttacker(dmgInfo, (org.liver - oldDmg) * 3, "Liver damage harm")
@@ -59,8 +65,14 @@ input_list.liver = function(org, bone, dmg, dmgInfo)
 	return 0
 end
 
-input_list.stomach = function(org, bone, dmg, dmgInfo)
+input_list.stomach = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet)
 	local oldDmg = org.stomach
+
+	local protec = hg.organism.protec
+	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
+		local protect = protec(org, bone, dmg, dmgInfo, "torso", org.owner.armors and org.owner.armors["torso"], 1, 0.5, false, boneindex, dir, hit, ricochet)
+		if protect and protect > 0 then return protect end
+	end
 
 	local result = damageOrgan(org, dmg, dmgInfo, "stomach")
 
@@ -70,8 +82,14 @@ input_list.stomach = function(org, bone, dmg, dmgInfo)
 	return result
 end
 
-input_list.intestines = function(org, bone, dmg, dmgInfo)
+input_list.intestines = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet)
 	local oldDmg = org.intestines
+
+	local protec = hg.organism.protec
+	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
+		local protect = protec(org, bone, dmg, dmgInfo, "torso", org.owner.armors and org.owner.armors["torso"], 1, 0.5, false, boneindex, dir, hit, ricochet)
+		if protect and protect > 0 then return protect end
+	end
 
 	local result = damageOrgan(org, dmg, dmgInfo, "intestines")
 
