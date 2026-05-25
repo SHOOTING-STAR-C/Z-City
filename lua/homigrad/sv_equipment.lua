@@ -268,8 +268,10 @@ local function protec(org, bone, dmg, dmgInfo, placement, armor, scale, scalepro
 	ArmorEffect(placement, armor, dmgInfo, org, hit, prot)
 
 	if prot < 0 then
-		//dmgInfo:ScaleDamage(scale)
-		return 0
+		local penRatio = math.Clamp(-prot / 50, 0, 0.95)
+		dmgInfo:ScaleDamage(1 - penRatio)
+		dmgInfo:SetDamageForce(dmgInfo:GetDamageForce() * 0.6)
+		return 0.5
 	end
 
 	dmgInfo:SetDamageType(DMG_CLUB)
@@ -278,6 +280,8 @@ local function protec(org, bone, dmg, dmgInfo, placement, armor, scale, scalepro
 
 	return 0.9
 end
+
+hg.organism.protec = protec
 
 ArmorEffect = function(placement, armor, dmgInfo, org, hit, prot)
 	local armdata = placement and hg.armor[placement] and hg.armor[placement][armor] or {}
