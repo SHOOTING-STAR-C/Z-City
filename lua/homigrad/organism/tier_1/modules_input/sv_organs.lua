@@ -102,7 +102,7 @@ end
 input_list.brain = function(org, bone, dmg, dmgInfo)
 	if dmgInfo:IsDamageType(DMG_BLAST) then dmg = dmg / 50 end
 	local oldDmg = org.brain
-	local result = damageOrgan(org, dmg * 0.1, dmgInfo, "brain")
+	local result = damageOrgan(org, dmg * 0.00125, dmgInfo, "brain")
 
 	hg.AddHarmToAttacker(dmgInfo, (org.brain - oldDmg) * 15, "Brain damage harm")
 
@@ -141,7 +141,7 @@ input_list.brain = function(org, bone, dmg, dmgInfo)
 		end)
 	end
 
-	org.consciousness = math.Approach(org.consciousness, 0, dmg * 0.3)
+	org.consciousness = math.Approach(org.consciousness, 0, dmg * 0.003)
 
 	org.disorientation = org.disorientation + dmg * 0.1
 	org.shock = org.shock + dmg * 0.3

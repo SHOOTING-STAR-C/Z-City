@@ -85,9 +85,9 @@ module[2] = function(owner, org, mulTime)
 		end
 	end
 
-	if org.isPly and not org.otrub and org.blood < 2900 then org.owner:Notify(math.random(2) == 1 and "我感觉不到任何东西..." or (math.random(2) == 1 and "我觉得我要昏倒了...") or "我感觉不太舒服...",60,"blood2",0) end
+	if org.isPly and not org.otrub and org.blood < 1000 then org.owner:Notify(math.random(2) == 1 and "我感觉不到任何东西..." or (math.random(2) == 1 and "我觉得我要昏倒了...") or "我感觉不太舒服...",60,"blood2",0) end
 
-	if org.internalBleed < 0.5 and org.bleed < 0.05 and org.pulse > 5 then
+	if org.internalBleed < 5 and org.bleed < 0.5 and org.pulse > 5 then
 		org.blood = min(org.blood + mulTime * 5 * (adrenaline * 1.5 + 1) * (org.satiety / 100 + 1) * org.pulse / 70, 5000)
 	end
 
@@ -100,7 +100,7 @@ module[2] = function(owner, org, mulTime)
 		org.o2[1] = math.max(org.o2[1] - mulTime * 5,0)
 	end
 
-	org.consciousness = math.min(org.consciousness, math.min(org.blood / 3000, 1) * math.Clamp(((org.temperature < 30 and org.temperature - 30 or 0) * 0.25 + 1), 0.25, 1))
+	org.consciousness = math.min(org.consciousness, math.min(org.blood / 1000, 1) * math.Clamp(((org.temperature < 30 and org.temperature - 30 or 0) * 0.25 + 1), 0.25, 1))
 
 	local beatsPerSecond = max(min(60 / math.max(org.pulse,2) / (org.bleed / 15), 7), 0.3)
 	time = CurTime()
@@ -113,8 +113,8 @@ module[2] = function(owner, org, mulTime)
 		for i, wound in pairs(org.wounds) do
 			local rand1 = math.Rand(4, 10) * 1
 			local rand2 = math.Rand(0.5, 1) * 1
-			local bleed = rand1 * wound[1] * mulTime * math.max(org.pulse, 20) / 70 * 2.0 * (1 - math.min(adrenaline / 6, 0.5)) * org.bleedingmul * 0.02
-			local coagulate = 2 * mulTime * rand2 * (adrenaline * 0.1 + 1) * 0.04-- / #org.wounds
+			local bleed = rand1 * wound[1] * mulTime * math.max(org.pulse, 20) / 70 * 2.0 * (1 - math.min(adrenaline / 6, 0.5)) * org.bleedingmul * 0.005
+			local coagulate = 2 * mulTime * rand2 * (adrenaline * 0.1 + 1) * 0.2-- / #org.wounds
 			bleedoutspeed = bleedoutspeed + bleed / rand1 * 3--we pray for the luck of it being in the center
 			coagulatespeed = coagulatespeed + coagulate / rand2 * 1
 			
@@ -173,16 +173,16 @@ module[2] = function(owner, org, mulTime)
 	end
 	bleedoutspeed2 = bleedoutspeed2 / next_arterypump
 
-	if org.blood < (2400 / (adrenaline / 3 + 1)) * ((math.cos(CurTime()/2) + 1) / 2 * 0.1 + 1) then org.needotrub = true end
+	if org.blood < (500 / (adrenaline / 3 + 1)) * ((math.cos(CurTime()/2) + 1) / 2 * 0.1 + 1) then org.needotrub = true end
 
-	local bleed = org.internalBleed / 14 -- + org.lungsR[3] + org.lungsL[3]
-	org.internalBleed = math.Approach(org.internalBleed, 0, org.internalBleedHeal > 0 and mulTime / 2 or mulTime / 55)
+	local bleed = org.internalBleed / 50 -- + org.lungsR[3] + org.lungsL[3]
+	org.internalBleed = math.Approach(org.internalBleed, 0, org.internalBleedHeal > 0 and mulTime / 2 or mulTime / 10)
 	coagulatespeed = coagulatespeed + mulTime
 	org.internalBleedHeal = math.Approach(org.internalBleedHeal, 0, mulTime / 2)
 	
 	if bleed > 0 then org.blood = max(org.blood - bleed * mulTime * 10 * org.pulse / 70, 1) end
 	
-	if (org.internalBleed > 1 or org.pneumothorax > 0) and org.blood > 2000 and org.o2[1] > 0 then
+	if (org.internalBleed > 5 or org.pneumothorax > 0) and org.blood > 2000 and org.o2[1] > 0 then
 		org.wantToVomit = org.wantToVomit or 0
 
 		org.wantToVomit = org.wantToVomit + math.Rand(0, org.internalBleed / 1000 + org.pneumothorax / 200) * mulTime * 5

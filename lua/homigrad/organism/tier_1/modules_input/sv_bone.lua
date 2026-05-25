@@ -71,7 +71,7 @@ local dislocated_leg = {
 
 local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	local oldDmg = org[key]
-	local dmg = dmg * 1
+	local dmg = dmg * 0.02
 
 	local protec = hg.organism.protec
 	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
@@ -89,12 +89,15 @@ local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
 	local result, vecrand = damageBone(org, 0.3, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
-	local dmg = org[key]
+	local boneDmg = org[key]
 
-	org[key] = org[key] * 0.5
+	org[key] = boneDmg * 0.5
 
-	if dmg < 0.7 then return 0 end
-	if dmg < 1 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
+	if boneDmg < 0.7 then return 0 end
+
+	org[key.."_cum"] = (org[key.."_cum"] or 0) + dmg
+	if org[key.."_cum"] < 80 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
+	org[key.."_cum"] = 0
 
 	if org.isPly and !org[key.."amputated"] then org.just_damaged_bone = CurTime() end
 
@@ -103,7 +106,7 @@ local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
 		org.painadd = org.painadd + 30
 		org.owner:AddNaturalAdrenaline(1)
-		org.immobilization = org.immobilization + dmg * 15
+		org.immobilization = org.immobilization + dmg * 2
 		org.fearadd = org.fearadd + 0.3
 
 		--if org.isPly and !org[key.."amputated"] then org.owner:Notify(broke_leg[math.random(#broke_leg)], 1, "broke"..key, 1, nil, nil) end
@@ -117,7 +120,7 @@ local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
 		org.painadd = org.painadd + 20
 		org.owner:AddNaturalAdrenaline(0.5)
-		org.immobilization = org.immobilization + dmg * 5
+		org.immobilization = org.immobilization + dmg * 1
 		org.fearadd = org.fearadd + 0.3
 
 		--if org.isPly and !org[key.."amputated"] then org.owner:Notify(dislocated_leg[math.random(#dislocated_leg)], 1, "dislocated"..key, 1, nil, nil) end
@@ -134,7 +137,7 @@ end
 
 local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	local oldDmg = org[key]
-	local dmg = dmg * 1
+	local dmg = dmg * 0.02
 
 	local protec = hg.organism.protec
 	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
@@ -152,12 +155,15 @@ local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
 	local result, vecrand = damageBone(org, 0.3, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
-	local dmg = org[key]
+	local boneDmg = org[key]
 
-	org[key] = org[key] * 0.5
+	org[key] = boneDmg * 0.5
 
-	if dmg < 0.6 then return 0 end
-	if dmg < 1 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
+	if boneDmg < 0.6 then return 0 end
+
+	org[key.."_cum"] = (org[key.."_cum"] or 0) + dmg
+	if org[key.."_cum"] < 60 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
+	org[key.."_cum"] = 0
 
 	if org.isPly and !org[key.."amputated"] then org.just_damaged_bone = CurTime() end
 
@@ -214,7 +220,7 @@ local function spine(org, bone, dmg, dmgInfo, number, boneindex, dir, hit, ricoc
 	if org[name] >= hg.organism[name2] then return 0 end
 	local oldDmg = org[name]
 
-	local result, vecrand = damageBone(org, 0.1, isCrush(dmgInfo) and dmg * 0.2 or dmg * 0.2, dmgInfo, name, boneindex, dir, hit, ricochet)
+	local result, vecrand = damageBone(org, 0.1, isCrush(dmgInfo) and dmg * 0.008 or dmg * 0.008, dmgInfo, name, boneindex, dir, hit, ricochet)
 	
 	hg.AddHarmToAttacker(dmgInfo, (org[name] - oldDmg) * 5, "Spine bone damage harm")
 	
@@ -235,7 +241,7 @@ local function spine(org, bone, dmg, dmgInfo, number, boneindex, dir, hit, ricoc
 	end
 
 	org.painadd = org.painadd + dmg * 0.2
-	timer.Simple(0, function() hg.LightStunPlayer(org.owner) end)
+	if dmg > 20 then timer.Simple(0, function() hg.LightStunPlayer(org.owner) end) end
 	org.shock = org.shock + dmg * 0.5
 	return result,vecrand
 end
@@ -328,7 +334,7 @@ input_list.skull = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricoch
 	org.shock = org.shock + dmg * 0.3
 
 	local rnd = math.random(10) == 1 or dmgInfo:IsDamageType(DMG_CRUSH)
-	org.consciousness = math.Approach(org.consciousness, 0, rnd and dmg * 0.2 or 0)
+	org.consciousness = math.Approach(org.consciousness, 0, rnd and dmg * 0.0005 or 0)
 
 	org.brain = math.min(org.brain + (rnd and dmg * 0.005 or 0), 1)
 
@@ -352,7 +358,7 @@ input_list.skull = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricoch
 		end)
 	end
 
-	if dmg > 4 then
+	if dmg > 200 then
 		if org.isPly then
 			timer.Simple(0, function()
 				hg.LightStunPlayer(org.owner,1 + dmg)

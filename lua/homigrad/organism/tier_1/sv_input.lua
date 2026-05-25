@@ -2,7 +2,7 @@ hg = hg or {}
 hg.organism = hg.organism or {}
 hg.organism.fake_spine1 = 1
 hg.organism.fake_spine2 = 1
-hg.organism.fake_spine3 = 0.5
+hg.organism.fake_spine3 = 1
 hg.organism.fake_legs = 1
 hg.organism.input_list = hg.organism.input_list or {}
 
@@ -812,7 +812,7 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 		local slow_pain = (1 - instantPainMul) * painadd
 		org.painadd = org.painadd + slow_pain
 		//org.avgpain = org.avgpain + instant_pain
-		org.shock = math.min(org.shock + instaPain * shockMul * 4.5 * math.Clamp(pen / 5,1,2), 70)
+		org.shock = math.min(org.shock + instaPain * shockMul * 4.5 * math.Clamp(pen / 5,1,2), 1200)
 		org.immobilization = math.min(org.immobilization + immobilization * immobilizationMul, 30)
 		org.lasthit = CurTime()
 		
@@ -821,7 +821,7 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 		local analgesiaMul = (org.analgesia * 4 + 1)
 		local painkillerMul = (org.painkiller * 0.5 + 1)
 	
-		org.shock_turn = 10 * (!org.otrub and 1 or 0.1)
+		org.shock_turn = 2000 * (!org.otrub and 1 or 0.1)
 	
 		if org.shock > org.shock_turn * 1.5 * analgesiaMul * painkillerMul then
 			timer.Simple(0, function() hg.Fake(org.owner) end)
@@ -1064,12 +1064,12 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 
 	if org.isPly then
 		hook.Run("Org Think Call", ply, org)
-		
+
 		if (not ply:Alive() or not org.alive) and (math.Round(ply:GetInfoNum("hg_deathfadeout", 1)) == 1) then// or org.otrub or hg.organism.paincheck(org) or (ply:Health() <= 0) then
 			if org.skull == 1 then
 				//ent:SetNWString("PlayerName", "Unidentifiable person")
 			end
-			
+
 			ply:ScreenFade(0, color_black, 1, 1)
 			ply:ConCommand("soundfade 100 99999")
 		end
@@ -1472,14 +1472,14 @@ local function velocityDamage(ent, data)
 
 			hg.organism.input_list.skull(org, bone, dmg * 0.6 * (hadhelmet and 0.2 or 1), dmgInfo)
 
-			org.consciousness = math.Approach(org.consciousness, 0, dmg * 2 * (hadhelmet and 0.2 or 1))
+			org.consciousness = math.Approach(org.consciousness, 0, dmg * 0.0005 * (hadhelmet and 0.2 or 1))
 			
 			local neck_not_broken = org.spine3 < 0.8
 			
 			//if dmg > 0.5 then
-				hg.organism.input_list.spine3(org, bone, dmg * (math.random(4) == 1 and 1 or 0) * 3 * (hadhelmet and 0.5 or 1), dmgInfo)
+				hg.organism.input_list.spine3(org, bone, dmg * (math.random(4) == 1 and 1 or 0) * 0.1 * (hadhelmet and 0.5 or 1), dmgInfo)
 			//end
-			if dmg * 10 > 5 and !hadhelmet then
+			if dmg * 10 > 5000 and !hadhelmet then
 				org.otrub = true
 				org.shock = org.shock + 1
 			end
@@ -1503,7 +1503,7 @@ local function velocityDamage(ent, data)
 	
 	if org.isPly and ply then
 		hook.Run("Org Think Call", ply, org)
-		
+
 		if (not ply:Alive() or not org.alive) and (math.Round(ply:GetInfoNum("hg_deathfadeout", 1)) == 1) then// or org.otrub or hg.organism.paincheck(org) or (ply:Health() <= 0) then
 			if org.skull == 1 then
 				//ent:SetNWString("PlayerName", "Unidentifiable person")
