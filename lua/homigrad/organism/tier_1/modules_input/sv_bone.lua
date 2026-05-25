@@ -71,7 +71,13 @@ local dislocated_leg = {
 
 local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	local oldDmg = org[key]
-	local dmg = dmg * 4
+	local dmg = dmg * 1
+
+	local protec = hg.organism.protec
+	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
+		local protect = protec(org, bone, dmg, dmgInfo, "torso", org.owner.armors and org.owner.armors["torso"], 1, 0.5, false, boneindex, dir, hit, ricochet)
+		if protect and protect > 0 then return protect end
+	end
 
 	if dmgInfo:IsDamageType(DMG_CRUSH) and dmg > 4 and !org[key.."amputated"] then
 		hg.organism.AmputateLimb(org, key)
@@ -82,23 +88,23 @@ local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	if org[key] == 1 then return 0 end
 
 	local result, vecrand = damageBone(org, 0.3, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
-	
+
 	local dmg = org[key]
-	
+
 	org[key] = org[key] * 0.5
 
 	if dmg < 0.7 then return 0 end
 	if dmg < 1 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
 
 	if org.isPly and !org[key.."amputated"] then org.just_damaged_bone = CurTime() end
-	
-	if dmg >= 1 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
+
+	if dmg >= 1.5 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
 		org[key] = 1
 
-		org.painadd = org.painadd + 55
+		org.painadd = org.painadd + 30
 		org.owner:AddNaturalAdrenaline(1)
-		org.immobilization = org.immobilization + dmg * 25
-		org.fearadd = org.fearadd + 0.5
+		org.immobilization = org.immobilization + dmg * 15
+		org.fearadd = org.fearadd + 0.3
 
 		--if org.isPly and !org[key.."amputated"] then org.owner:Notify(broke_leg[math.random(#broke_leg)], 1, "broke"..key, 1, nil, nil) end
 
@@ -109,10 +115,10 @@ local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 		//org[key] = 0.5
 		org[key.."dislocation"] = true
 
-		org.painadd = org.painadd + 35
+		org.painadd = org.painadd + 20
 		org.owner:AddNaturalAdrenaline(0.5)
-		org.immobilization = org.immobilization + dmg * 10
-		org.fearadd = org.fearadd + 0.5
+		org.immobilization = org.immobilization + dmg * 5
+		org.fearadd = org.fearadd + 0.3
 
 		--if org.isPly and !org[key.."amputated"] then org.owner:Notify(dislocated_leg[math.random(#dislocated_leg)], 1, "dislocated"..key, 1, nil, nil) end
 
@@ -128,8 +134,14 @@ end
 
 local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	local oldDmg = org[key]
-	local dmg = dmg * 4
-	
+	local dmg = dmg * 1
+
+	local protec = hg.organism.protec
+	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
+		local protect = protec(org, bone, dmg, dmgInfo, "torso", org.owner.armors and org.owner.armors["torso"], 1, 0.5, false, boneindex, dir, hit, ricochet)
+		if protect and protect > 0 then return protect end
+	end
+
 	if dmgInfo:IsDamageType(DMG_CRUSH) and dmg > 4 and !org[key.."amputated"] then
 		hg.organism.AmputateLimb(org, key)
 
@@ -139,22 +151,22 @@ local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	if org[key] == 1 then return 0 end
 
 	local result, vecrand = damageBone(org, 0.3, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
-	
+
 	local dmg = org[key]
-	
+
 	org[key] = org[key] * 0.5
 
 	if dmg < 0.6 then return 0 end
 	if dmg < 1 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
 
 	if org.isPly and !org[key.."amputated"] then org.just_damaged_bone = CurTime() end
-	
-	if dmg >= 1 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
+
+	if dmg >= 1.5 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
 		org[key] = 1
 
-		org.painadd = org.painadd + 55
+		org.painadd = org.painadd + 30
 		org.owner:AddNaturalAdrenaline(1)
-		org.fearadd = org.fearadd + 0.5
+		org.fearadd = org.fearadd + 0.3
 
 		--if org.isPly and !org[key.."amputated"] then org.owner:Notify(broke_arm[math.random(#broke_arm)], 1, "broke"..key, 1, nil, nil) end
 
@@ -165,9 +177,9 @@ local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 		org[key.."dislocation"] = true
 		//org[key] = 0.5
 
-		org.painadd = org.painadd + 35
+		org.painadd = org.painadd + 20
 		org.owner:AddNaturalAdrenaline(0.5)
-		org.fearadd = org.fearadd + 0.5
+		org.fearadd = org.fearadd + 0.3
 
 		--if org.isPly and !org[key.."amputated"] then org.owner:Notify(dislocated_arm[math.random(#dislocated_arm)], 1, "dislocated"..key, 1, nil, nil) end
 
@@ -244,6 +256,14 @@ local jaw_dislocated_msg = {
 hg.organism.input_list = hg.organism.input_list or {}
 local input_list = hg.organism.input_list
 input_list.jaw = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet)
+	local protec = hg.organism.protec
+	if protec then
+		local protect = protec(org, bone, dmg, dmgInfo, "face", org.owner.armors and org.owner.armors["face"], 1, 0.5, false, boneindex, dir, hit, ricochet)
+		if protect and protect > 0 then return protect end
+		protect = protec(org, bone, dmg, dmgInfo, "head", org.owner.armors and org.owner.armors["head"], 1, 0.5, false, boneindex, dir, hit, ricochet)
+		if protect and protect > 0 then return protect end
+	end
+
 	local oldDmg = org.jaw
 
 	local result, vecrand = damageBone(org, 0.25, dmg, dmgInfo, "jaw", boneindex, dir, hit, ricochet)
