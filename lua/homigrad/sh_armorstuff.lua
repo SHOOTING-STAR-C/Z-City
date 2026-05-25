@@ -689,7 +689,7 @@ hg.armor.face = {
 		"models/arctic_nvgs/nvg_gpnvg.mdl",
 		Vector(1.6, 0.6, 0),
 		Angle(0, -90, -90),
-		protection = 15,
+		protection = 25,
 		bone = "ValveBiped.Bip01_Head1",
 		model = "models/arctic_nvgs/nvg_gpnvg.mdl",
 		femPos = Vector(-1, 0, 0.5),
