@@ -98,7 +98,7 @@ local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
 	if org.isPly and !org[key.."amputated"] then org.just_damaged_bone = CurTime() end
 
-	if dmg >= 1.5 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
+	if dmg >= 15 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
 		org[key] = 1
 
 		org.painadd = org.painadd + 30
@@ -161,7 +161,7 @@ local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
 	if org.isPly and !org[key.."amputated"] then org.just_damaged_bone = CurTime() end
 
-	if dmg >= 1.5 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
+	if dmg >= 15 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
 		org[key] = 1
 
 		org.painadd = org.painadd + 30
@@ -214,7 +214,7 @@ local function spine(org, bone, dmg, dmgInfo, number, boneindex, dir, hit, ricoc
 	if org[name] >= hg.organism[name2] then return 0 end
 	local oldDmg = org[name]
 
-	local result, vecrand = damageBone(org, 0.1, isCrush(dmgInfo) and dmg * 2 or dmg * 2, dmgInfo, name, boneindex, dir, hit, ricochet)
+	local result, vecrand = damageBone(org, 0.1, isCrush(dmgInfo) and dmg * 0.2 or dmg * 0.2, dmgInfo, name, boneindex, dir, hit, ricochet)
 	
 	hg.AddHarmToAttacker(dmgInfo, (org[name] - oldDmg) * 5, "Spine bone damage harm")
 	
@@ -234,9 +234,9 @@ local function spine(org, bone, dmg, dmgInfo, number, boneindex, dir, hit, ricoc
 		--org.owner:Notify("Your spinal cord is damaged.",true,"spinalcord",4)
 	end
 
-	org.painadd = org.painadd + dmg * 2
+	org.painadd = org.painadd + dmg * 0.2
 	timer.Simple(0, function() hg.LightStunPlayer(org.owner) end)
-	org.shock = org.shock + dmg * 5
+	org.shock = org.shock + dmg * 0.5
 	return result,vecrand
 end
 
@@ -266,7 +266,7 @@ input_list.jaw = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet
 
 	local oldDmg = org.jaw
 
-	local result, vecrand = damageBone(org, 0.25, dmg, dmgInfo, "jaw", boneindex, dir, hit, ricochet)
+	local result, vecrand = damageBone(org, 0.25, dmg * 0.1, dmgInfo, "jaw", boneindex, dir, hit, ricochet)
 
 	hg.AddHarmToAttacker(dmgInfo, (org.jaw - oldDmg) * 3, "Jaw bone damage harm")
 
@@ -275,17 +275,17 @@ input_list.jaw = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet
 	local dislocated = (org.jaw - oldDmg) > math.Rand(0.1, 0.3)
 
 	if org.jaw == 1 then
-		org.shock = org.shock + dmg * 40
-		org.avgpain = org.avgpain + dmg * 30
+		org.shock = org.shock + dmg * 4
+		org.avgpain = org.avgpain + dmg * 3
 
 		if oldDmg != 1 then org.owner:EmitSound("bones/bone"..math.random(8)..".mp3", 75, 100, 1, CHAN_AUTO) end
 	end
 
-	org.shock = org.shock + dmg * 3
+	org.shock = org.shock + dmg * 0.3
 
 	if dislocated then
-		org.shock = org.shock + dmg * 20
-		org.avgpain = org.avgpain + dmg * 20
+		org.shock = org.shock + dmg * 2
+		org.avgpain = org.avgpain + dmg * 2
 		
 		if !org.jawdislocation then
 			org.owner:EmitSound("bones/bone"..math.random(8)..".mp3", 75, 100, 1, CHAN_AUTO)
@@ -296,7 +296,7 @@ input_list.jaw = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet
 		if org.isPly then org.owner:Notify(jaw_dislocated_msg[math.random(#jaw_dislocated_msg)], true, "jaw", 2) end
 	end
 
-	if dmg > 0.2 then
+	if dmg > 2 then
 		if org.isPly then timer.Simple(0, function() hg.LightStunPlayer(org.owner,1 + dmg) end) end
 	end
 
@@ -314,26 +314,26 @@ end)
 input_list.skull = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet)
 	local oldDmg = org.skull
 	
-	local result, vecrand = damageBone(org, 0.25, dmg, dmgInfo, "skull", boneindex, dir, hit, ricochet)
+	local result, vecrand = damageBone(org, 0.25, dmg * 0.1, dmgInfo, "skull", boneindex, dir, hit, ricochet)
 
 	hg.AddHarmToAttacker(dmgInfo, (org.skull - oldDmg) * 4, "Skull bone damage harm")
 
 	if org.skull == 1 then
-		org.shock = org.shock + dmg * 40
-		org.avgpain = org.avgpain + dmg * 30
+		org.shock = org.shock + dmg * 4
+		org.avgpain = org.avgpain + dmg * 3
 
 		if oldDmg != 1 then org.owner:EmitSound("bones/bone"..math.random(8)..".mp3", 75, 100, 1, CHAN_AUTO) end
 	end
 
-	org.shock = org.shock + dmg * 3
+	org.shock = org.shock + dmg * 0.3
 
 	local rnd = math.random(10) == 1 or dmgInfo:IsDamageType(DMG_CRUSH)
-	org.consciousness = math.Approach(org.consciousness, 0, rnd and dmg * 2 or 0)
+	org.consciousness = math.Approach(org.consciousness, 0, rnd and dmg * 0.2 or 0)
 
-	org.brain = math.min(org.brain + (rnd and dmg * 0.05 or 0), 1)
+	org.brain = math.min(org.brain + (rnd and dmg * 0.005 or 0), 1)
 
 	if (org.skull - oldDmg) > 0.6 then
-		org.brain = math.min(org.brain + 0.1, 1)
+		org.brain = math.min(org.brain + 0.01, 1)
 	end
 
 	if org.brain >= 0.01 and math.random(3) == 1 and (rnd or (org.skull - oldDmg) > 0.6) then
@@ -352,7 +352,7 @@ input_list.skull = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricoch
 		end)
 	end
 
-	if dmg > 0.4 then
+	if dmg > 4 then
 		if org.isPly then
 			timer.Simple(0, function()
 				hg.LightStunPlayer(org.owner,1 + dmg)
@@ -360,7 +360,7 @@ input_list.skull = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricoch
 		end
 	end
 	
-	org.shock = org.shock + (dmg > 1 and 50 or dmg * 10)
+	org.shock = org.shock + (dmg > 1 and 5 or dmg * 1)
 
 	if org.skull == 1 then
 		if org.isPly then
@@ -377,7 +377,7 @@ input_list.skull = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricoch
 		end--]]
 	end
 
-	org.disorientation = org.disorientation + (isCrush(dmgInfo) and dmg * 1 or dmg * 1)
+	org.disorientation = org.disorientation + (isCrush(dmgInfo) and dmg * 0.1 or dmg * 0.1)
 
 	return result,vecrand
 end
@@ -394,12 +394,12 @@ input_list.chest = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricoch
 
 	if dmgInfo:IsDamageType(DMG_SLASH+DMG_BULLET+DMG_BUCKSHOT) and math.random(5) == 1 then return 0, vector_origin end --random chance it passed through ribs
 
-	local result, vecrand = damageBone(org, 0.1, dmg / 4, dmgInfo, "chest", boneindex, dir, hit, ricochet, true)
+	local result, vecrand = damageBone(org, 0.1, dmg / 40, dmgInfo, "chest", boneindex, dir, hit, ricochet, true)
 	
 	hg.AddHarmToAttacker(dmgInfo, (org.chest - oldDmg) * 3, "Ribs bone damage harm")
 
-	org.painadd = org.painadd + dmg * 1
-	org.shock = org.shock + dmg * 1
+	org.painadd = org.painadd + dmg * 0.1
+	org.shock = org.shock + dmg * 0.1
 
 	if org.isPly and (not org.brokenribs or (org.brokenribs ~= math.Round(org.chest * 3))) then
 		org.brokenribs = math.Round(org.chest * 3)
@@ -418,10 +418,10 @@ end
 
 input_list.pelvis = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricochet)
 	local oldDmg = org.pelvis
-	org.painadd = org.painadd + dmg * 1
-	org.shock = org.shock + dmg * 1
+	org.painadd = org.painadd + dmg * 0.1
+	org.shock = org.shock + dmg * 0.1
 
-	local result = damageBone(org, bone, dmg * 0.5, dmgInfo, "pelvis", boneindex, dir, hit, ricochet)
+	local result = damageBone(org, bone, dmg * 0.05, dmgInfo, "pelvis", boneindex, dir, hit, ricochet)
 	
 	hg.AddHarmToAttacker(dmgInfo, (org.pelvis - oldDmg) / 2, "Pelvis bone damage harm")
 

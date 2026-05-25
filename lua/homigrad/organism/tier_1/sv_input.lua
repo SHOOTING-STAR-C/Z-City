@@ -1440,15 +1440,15 @@ local function velocityDamage(ent, data)
 
 	local org = ent.organism
 	if org.godmode then return end
-	org.fearadd = org.fearadd + dmg * 0.5
+	org.fearadd = org.fearadd + dmg * 0.05
 
 	if not org.superfighter then
-		if hitgroup == HITGROUP_LEFTLEG and (dmg * 3 > 0.25) then hg.organism.input_list.llegup(org, bone, dmg * 1 * math.Rand(1, 2), dmgInfo) end--org.lleg = math.min(org.lleg + dmg, 1) end
-		if hitgroup == HITGROUP_RIGHTLEG and (dmg * 3 > 0.25) then hg.organism.input_list.rlegup(org, bone, dmg * 1 * math.Rand(1, 2), dmgInfo) end
-		if hitgroup == HITGROUP_LEFTARM and (dmg * 2 > 0.2) then hg.organism.input_list.larmup(org, bone, dmg * 1 * math.Rand(1, 2), dmgInfo) end
-		if hitgroup == HITGROUP_RIGHTARM and (dmg * 2 > 0.2) then hg.organism.input_list.rarmup(org, bone, dmg * 1 * math.Rand(1, 2), dmgInfo) end
-		if hitgroup == HITGROUP_CHEST and (dmg * 3 > 0.25) then hg.organism.input_list.chest(org, bone, dmg * 3, dmgInfo) end
-		if hitgroup == HITGROUP_STOMACH and (dmg * 3 > 0.25) then hg.organism.input_list.pelvis(org, bone, dmg * 3, dmgInfo) end
+		if hitgroup == HITGROUP_LEFTLEG and (dmg * 3 > 2.5) then hg.organism.input_list.llegup(org, bone, dmg * 1 * math.Rand(1, 2), dmgInfo) end--org.lleg = math.min(org.lleg + dmg, 1) end
+		if hitgroup == HITGROUP_RIGHTLEG and (dmg * 3 > 2.5) then hg.organism.input_list.rlegup(org, bone, dmg * 1 * math.Rand(1, 2), dmgInfo) end
+		if hitgroup == HITGROUP_LEFTARM and (dmg * 2 > 2) then hg.organism.input_list.larmup(org, bone, dmg * 1 * math.Rand(1, 2), dmgInfo) end
+		if hitgroup == HITGROUP_RIGHTARM and (dmg * 2 > 2) then hg.organism.input_list.rarmup(org, bone, dmg * 1 * math.Rand(1, 2), dmgInfo) end
+		if hitgroup == HITGROUP_CHEST and (dmg * 3 > 2.5) then hg.organism.input_list.chest(org, bone, dmg * 3, dmgInfo) end
+		if hitgroup == HITGROUP_STOMACH and (dmg * 3 > 2.5) then hg.organism.input_list.pelvis(org, bone, dmg * 3, dmgInfo) end
 		local physAng = data.PhysObject:GetAngles()
 		
 		if hitgroup == HITGROUP_STOMACH and physAng:Forward():Dot(data.HitNormal) > 0.6 then hg.organism.input_list.spine1(org, bone, dmg * (math.random(3) > 1 and 1 or 0) * 3, dmgInfo) end -- | И В ПРАВДУ ПОЧЕМУ У НАС СПИНА ЛОМАЕТСЯ ОТ ПАДЕНИЯ НА ГРУДЬ ИЛИ ЖИВОТ...
@@ -1456,32 +1456,32 @@ local function velocityDamage(ent, data)
 
 
 		--print(dmg * 3, dmg * 80)
-		if surfaceType and surfaceType ~= nil and bleedSurfaces[surfaceType] and (dmg * 3 > 0.17) and math.random(2) == 2 then
+		if surfaceType and surfaceType ~= nil and bleedSurfaces[surfaceType] and (dmg * 3 > 1.7) and math.random(2) == 2 then
 			hg.organism.AddWoundManual(ent,dmg*5,vector_origin,angle_zero,bone,CurTime() + (dmg * 250))
 			--PrintTable(org.wounds)
 		end
 		--print(dmg)
-		if dmg > 0.2 then
-			org.internalBleed = org.internalBleed + (dmg * 2.5) 
+		if dmg > 2 then
+			org.internalBleed = org.internalBleed + (dmg * 0.25)
 		end
 
-		org.owner:AddNaturalAdrenaline( math.min( dmg * 0.5, 4) )
+		org.owner:AddNaturalAdrenaline( math.min( dmg * 0.05, 4) )
 
 		if hitgroup == HITGROUP_HEAD then
 			local hadhelmet = org.owner.armors and org.owner.armors["head"] != nil
-			
-			hg.organism.input_list.skull(org, bone, dmg * 6 * (hadhelmet and 0.2 or 1), dmgInfo)
-			
-			org.consciousness = math.Approach(org.consciousness, 0, dmg * 20 * (hadhelmet and 0.2 or 1))
+
+			hg.organism.input_list.skull(org, bone, dmg * 0.6 * (hadhelmet and 0.2 or 1), dmgInfo)
+
+			org.consciousness = math.Approach(org.consciousness, 0, dmg * 2 * (hadhelmet and 0.2 or 1))
 			
 			local neck_not_broken = org.spine3 < 0.8
 			
 			//if dmg > 0.5 then
 				hg.organism.input_list.spine3(org, bone, dmg * (math.random(4) == 1 and 1 or 0) * 3 * (hadhelmet and 0.5 or 1), dmgInfo)
 			//end
-			if dmg * 10 > 0.5 and !hadhelmet then
+			if dmg * 10 > 5 and !hadhelmet then
 				org.otrub = true
-				org.shock = org.shock + 10
+				org.shock = org.shock + 1
 			end
 
 			if neck_not_broken and org.spine3 >= 0.8 then
