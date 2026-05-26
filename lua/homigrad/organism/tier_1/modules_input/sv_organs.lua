@@ -21,11 +21,11 @@ local input_list = hg.organism.input_list
 input_list.heart = function(org, bone, dmg, dmgInfo)
 	local oldDmg = org.heart
 
-	local result = damageOrgan(org, dmg * 0.03, dmgInfo, "heart")
+	local result = damageOrgan(org, dmg * (org.isPly and 0.03 or 0.3), dmgInfo, "heart")
 
 	hg.AddHarmToAttacker(dmgInfo, (org.heart - oldDmg) * 10, "Heart damage harm")
 
-	org.shock = org.shock + dmg * 2
+	org.shock = org.shock + dmg * (org.isPly and 2 or 20)
 	org.internalBleed = org.internalBleed + (org.heart - oldDmg) * 10
 
 	return result
@@ -43,10 +43,10 @@ input_list.liver = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricoch
 	
 	hg.AddHarmToAttacker(dmgInfo, (org.liver - oldDmg) * 3, "Liver damage harm")
 
-	org.shock = org.shock + dmg * 2
-	org.painadd = org.painadd + dmg * 3.5
+	org.shock = org.shock + dmg * (org.isPly and 2 or 20)
+	org.painadd = org.painadd + dmg * (org.isPly and 3.5 or 35)
 
-	org.liver = math.min(org.liver + dmg * 0.005, 1)
+	org.liver = math.min(org.liver + dmg * (org.isPly and 0.005 or 0.1), 1)
 	local harmed = (org.liver - oldDmg)
 	if org.analgesia < 0.4 and harmed >= 0.2 then
 		timer.Simple(0, function()
@@ -74,7 +74,7 @@ input_list.stomach = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, rico
 		if protect and protect > 0 then return protect end
 	end
 
-	local result = damageOrgan(org, dmg * 0.1, dmgInfo, "stomach")
+	local result = damageOrgan(org, dmg * (org.isPly and 0.1 or 1), dmgInfo, "stomach")
 
 	hg.AddHarmToAttacker(dmgInfo, (org.stomach - oldDmg) * 2, "Stomach damage harm")
 	
@@ -91,7 +91,7 @@ input_list.intestines = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, r
 		if protect and protect > 0 then return protect end
 	end
 
-	local result = damageOrgan(org, dmg * 0.1, dmgInfo, "intestines")
+	local result = damageOrgan(org, dmg * (org.isPly and 0.1 or 1), dmgInfo, "intestines")
 
 	hg.AddHarmToAttacker(dmgInfo, (org.intestines - oldDmg) * 2, "Intestines damage harm")
 
@@ -102,7 +102,7 @@ end
 input_list.brain = function(org, bone, dmg, dmgInfo)
 	if dmgInfo:IsDamageType(DMG_BLAST) then dmg = dmg / 50 end
 	local oldDmg = org.brain
-	local result = damageOrgan(org, dmg * 0.00125, dmgInfo, "brain")
+	local result = damageOrgan(org, dmg * (org.isPly and 0.00125 or 0.1), dmgInfo, "brain")
 
 	hg.AddHarmToAttacker(dmgInfo, (org.brain - oldDmg) * 15, "Brain damage harm")
 
@@ -141,11 +141,11 @@ input_list.brain = function(org, bone, dmg, dmgInfo)
 		end)
 	end
 
-	org.consciousness = math.Approach(org.consciousness, 0, dmg * 0.003)
+	org.consciousness = math.Approach(org.consciousness, 0, dmg * (org.isPly and 0.003 or 0.3))
 
-	org.disorientation = org.disorientation + dmg * 0.1
-	org.shock = org.shock + dmg * 0.3
-	org.painadd = org.painadd + dmg * 1
+	org.disorientation = org.disorientation + dmg * (org.isPly and 0.1 or 1)
+	org.shock = org.shock + dmg * (org.isPly and 0.3 or 3)
+	org.painadd = org.painadd + dmg * (org.isPly and 1 or 10)
 	return result
 end
 
@@ -221,10 +221,10 @@ input_list.lungsL = function(org, bone, dmg, dmgInfo)
 	local prot = math.max(0.3 - org.lungsL[1],0)
 	local oldval = org.lungsL[1]
 
-	hg.AddHarmToAttacker(dmgInfo, (dmg * 0.025), "Lung left damage harm")
+	hg.AddHarmToAttacker(dmgInfo, (dmg * (org.isPly and 0.025 or 0.25)), "Lung left damage harm")
 
-	org.lungsL[1] = math.min(org.lungsL[1] + dmg / 40, 1)
-	if (dmgInfo:IsDamageType(DMG_BULLET+DMG_SLASH+DMG_BUCKSHOT)) or (math.random(3) == 1) then org.lungsL[2] = math.min(org.lungsL[2] + dmg * 0.1, 1) end
+	org.lungsL[1] = math.min(org.lungsL[1] + dmg / (org.isPly and 40 or 4), 1)
+	if (dmgInfo:IsDamageType(DMG_BULLET+DMG_SLASH+DMG_BUCKSHOT)) or (math.random(3) == 1) then org.lungsL[2] = math.min(org.lungsL[2] + dmg * (org.isPly and 0.1 or 1), 1) end
 
 	org.internalBleed = org.internalBleed + (org.lungsL[1] - oldval) * 2
 	
@@ -236,10 +236,10 @@ end
 input_list.lungsR = function(org, bone, dmg, dmgInfo)
 	local oldval = org.lungsR[1]
 
-	hg.AddHarmToAttacker(dmgInfo, (dmg * 0.025), "Lung right damage harm")
+	hg.AddHarmToAttacker(dmgInfo, (dmg * (org.isPly and 0.025 or 0.25)), "Lung right damage harm")
 
-	org.lungsR[1] = math.min(org.lungsR[1] + dmg / 40, 1)
-	if (dmgInfo:IsDamageType(DMG_BULLET+DMG_SLASH+DMG_BUCKSHOT)) or (math.random(3) == 1) then org.lungsR[2] = math.min(org.lungsR[2] + dmg * 0.1, 1) end
+	org.lungsR[1] = math.min(org.lungsR[1] + dmg / (org.isPly and 40 or 4), 1)
+	if (dmgInfo:IsDamageType(DMG_BULLET+DMG_SLASH+DMG_BUCKSHOT)) or (math.random(3) == 1) then org.lungsR[2] = math.min(org.lungsR[2] + dmg * (org.isPly and 0.1 or 1), 1) end
 
 	org.internalBleed = org.internalBleed + (org.lungsR[1] - oldval) * 2
 

@@ -36,7 +36,7 @@ module[2] = function(owner, org, timeValue)
 	local analgesiaMul = (org.analgesia * 4 + 1)
 	local painkillerMul = (org.painkiller * 0.5 + 1)
 
-	org.shock_turn = 2000 * (!org.otrub and 1 or 0.1)
+	org.shock_turn = (org.isPly and 2000 or 10) * (!org.otrub and 1 or 0.1)
 
 	if org.shock > org.shock_turn * 1.5 * analgesiaMul * painkillerMul then
 		--org.needfake = true
