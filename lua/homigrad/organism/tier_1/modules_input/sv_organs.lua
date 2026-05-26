@@ -46,7 +46,7 @@ input_list.liver = function(org, bone, dmg, dmgInfo, boneindex, dir, hit, ricoch
 	org.shock = org.shock + dmg * 2
 	org.painadd = org.painadd + dmg * 3.5
 
-	org.liver = math.min(org.liver + dmg * 0.1, 1)
+	org.liver = math.min(org.liver + dmg * 0.005, 1)
 	local harmed = (org.liver - oldDmg)
 	if org.analgesia < 0.4 and harmed >= 0.2 then
 		timer.Simple(0, function()
