@@ -352,8 +352,8 @@ hook.Add("Post Post Processing", "ItHurts", function()
 		render.DrawScreenQuad()
 	end
 
-	if (org.consciousness < 0.7) then
-		lerpblood = LerpFT(0.01, lerpblood or 0, math.Clamp((0.7 - org.consciousness) * 5, 0, 1) * 255)
+	if (org.consciousness < 0.5) then
+		lerpblood = LerpFT(0.01, lerpblood or 0, math.Clamp((0.5 - org.consciousness) * 3, 0, 1) * 255)
 		local lowblood = (3600 - (org.blood or 5000)) / 600
 
 		addtime = addtime + FrameTime() / 6
@@ -491,8 +491,8 @@ hook.Add("Post Post Processing", "ItHurts", function()
 		render.UpdateScreenEffectTexture()
 
 		vignetteMat:SetFloat("$c2_x", CurTime() + 10000) //Time
-		vignetteMat:SetFloat("$c0_z", org.otrub and 5 or (pain / 40 + math.max(shock - 5, 0) / 3)) //ColorIntensity
-		vignetteMat:SetFloat("$c1_y", org.otrub and 10 or (pain / 40 + math.max(shock - 5, 0) / 3)) //Vignette
+		vignetteMat:SetFloat("$c0_z", org.otrub and 5 or (pain / 80 + math.max(shock - 5, 0) / 5)) //ColorIntensity
+		vignetteMat:SetFloat("$c1_y", org.otrub and 10 or (pain / 80 + math.max(shock - 5, 0) / 5)) //Vignette
 
 		render.SetMaterial(vignetteMat)
 		render.DrawScreenQuad()
@@ -502,8 +502,8 @@ hook.Add("Post Post Processing", "ItHurts", function()
 		painMat:SetFloat("$c2_x", CurTime() + 10000) //Time
 		painMat:SetFloat("$c0_y", 0.8) //Gate
 		painMat:SetFloat("$c0_z", 1) //ColorIntensity
-		painMat:SetFloat("$c1_x", math.Clamp(pain / 90, 0, 0.75)) //Lerp
-		painMat:SetFloat("$c1_y", math.Clamp(pain / 90, 0, 0.75)) //Vignette
+		painMat:SetFloat("$c1_x", math.Clamp(pain / 180, 0, 0.75)) //Lerp
+		painMat:SetFloat("$c1_y", math.Clamp(pain / 180, 0, 0.75)) //Vignette
 
 		render.SetMaterial(painMat)
 		render.DrawScreenQuad()

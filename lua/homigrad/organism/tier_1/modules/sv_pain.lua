@@ -46,7 +46,7 @@ module[2] = function(owner, org, timeValue)
 
 	local owner = org.owner
 	
-	if !org.lasthit or org.lasthit + 1.5 < CurTime() then org.shock = max(org.shock - timeValue * 4 * (org.otrub and 1 or 0.5), 0) end
+	if !org.lasthit or org.lasthit + 1.5 < CurTime() then org.shock = max(org.shock - timeValue * 8 * (org.otrub and 1 or 0.5), 0) end
 	org.immobilization = max(org.immobilization - timeValue * 2 * adrenalineMul, 0)
 
 	local shouldPainAdd = not (org.otrub or org.spine2 >= hg.organism.fake_spine2 or org.spine3 >= hg.organism.fake_spine3)
@@ -78,7 +78,7 @@ module[2] = function(owner, org, timeValue)
 	end
 
 	if (org.shock > (org.shock_turn * 1.5 * analgesiaMul)) or org.otrub then
-		org.consciousness = math.Approach(org.consciousness, 0.1, timeValue / 5)
+		org.consciousness = math.Approach(org.consciousness, 0.1, timeValue / 10)
 	end
 
 	if org.tranquilizer > 0 then
@@ -86,7 +86,7 @@ module[2] = function(owner, org, timeValue)
 		--org.shock = math.Approach(org.shock, 50, timeValue * org.tranquilizer * 5)
 		org.consciousness = math.Approach(org.consciousness, 0, timeValue / 30 * org.tranquilizer)
 	else
-		org.consciousness = math.Approach(org.consciousness, org.blood < 3000 and (org.blood - 2500) / 500 or 1, timeValue / 15)
+		org.consciousness = math.Approach(org.consciousness, org.blood < 3000 and (org.blood - 2500) / 500 or 1, timeValue / 5)
 	end
 
 	if org.consciousness < 0.1 then

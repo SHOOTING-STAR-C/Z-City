@@ -242,7 +242,7 @@ local function protec(org, bone, dmg, dmgInfo, placement, armor, scale, scalepro
 	org.owner.armors_health = org.owner.armors_health or {}
 
 	prot = prot * (org.owner.armors_health[armor] or 1)
-	
+
 	if punch then
 		if org.owner:IsPlayer() and org.alive and dmgInfo:IsDamageType(DMG_BUCKSHOT + DMG_BULLET) then
 			org.owner:ViewPunch(AngleRand(-30, 30))

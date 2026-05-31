@@ -764,8 +764,9 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 	--if ent:IsRagdoll() then
 		if RagdollForceBoneMul[hitgroup] then len = len * RagdollForceBoneMul[hitgroup] end
 		if dmgInfo:IsDamageType(DMG_BULLET) and RagdollDamageBoneMul[hitgroup] then
-			dmgInfo:ScaleDamage(RagdollDamageBoneMul[hitgroup])
-			dmg_before = dmg_before * RagdollDamageBoneMul[hitgroup]
+			local boneMul = ent:IsNPC() and 1 or RagdollDamageBoneMul[hitgroup]
+			dmgInfo:ScaleDamage(boneMul)
+			dmg_before = dmg_before * boneMul
 			-- я даже не знаю, может это снова убрать? ^
 			-- у нас это так давно было неправильно, что, наверное,
 			-- все уже привыкли
@@ -798,7 +799,7 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 	--if hitbody then
 	if not org.superfighter then
 		dmgBlood = dmgBlood * 1.5
-		local bleed_add = dmgBlood * bleedMul// / (RagdollDamageBoneMul[hitgroup] or 1)
+		local bleed_add = dmgBlood * bleedMul// / (ent:IsNPC() and 1 or RagdollDamageBoneMul[hitgroup] or 1)
 		--org.bleed = org.bleed + bleed_add
 		attacker.harm = (attacker.harm or 0) + bleed_add / 50
 		local hurt_add = dmgHurt * 0.5 * hurtMul
@@ -815,6 +816,10 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 		org.shock = math.min(org.shock + instaPain * shockMul * 4.5 * math.Clamp(pen / 5,1,2), org.isPly and 4000 or 70)
 		org.immobilization = math.min(org.immobilization + immobilization * immobilizationMul, 30)
 		org.lasthit = CurTime()
+		-- NPC直接扣血，确保3枪致死节奏
+		if not org.isPly then
+			org.blood = org.blood - dmgBlood * 5
+		end
 		
 		local adrenalineMul = math.min(math.max(1 + org.adrenaline, 1), 1.2)
 		local adrenaline = org.adrenaline
@@ -935,7 +940,7 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 	end
 
 	local lend = math.max(0.1, (ent:GetPos() - dmgInfo:GetDamagePosition()):Length())
-	local damageStack = dmg_before / (dmgInfo:IsDamageType(DMG_BULLET) and RagdollDamageBoneMul[hitgroup] or 1)
+	local damageStack = dmg_before / (dmgInfo:IsDamageType(DMG_BULLET) and (ent:IsNPC() and 1 or RagdollDamageBoneMul[hitgroup]) or 1)
 	--print(damageStack, 3)
 	damageStack = damageStack * (dmgInfo:IsDamageType(DMG_BLAST) and 200 / lend or 1) * (!dmgInfo:IsDamageType(DMG_CLUB+DMG_SLASH+DMG_BULLET+DMG_BLAST+DMG_SNIPER) and 0 or 1) * (ent:IsNPC() and 3 or 1)
 	--damageStack = damageStack * (bullet and bullet.AmmoType and hg.ammotypeshuy[bullet.AmmoType] and hg.ammotypeshuy[bullet.AmmoType].BulletSettings and hg.ammotypeshuy[bullet.AmmoType].BulletSettings.Mass or 1) / 8
@@ -1436,7 +1441,7 @@ local function velocityDamage(ent, data)
 	local bonename = ent:GetBoneName(ent:TranslatePhysBoneToBone(bone or 0))
 	
 	if bonetohitgroup[bonename] ~= nil then hitgroup = bonetohitgroup[bonename] end
-	if RagdollDamageBoneMul[hitgroup] then dmgInfo:ScaleDamage(RagdollDamageBoneMul[hitgroup]) end
+	if RagdollDamageBoneMul[hitgroup] then dmgInfo:ScaleDamage(ent:IsNPC() and 1 or RagdollDamageBoneMul[hitgroup]) end
 
 	local org = ent.organism
 	if org.godmode then return end
@@ -1462,7 +1467,7 @@ local function velocityDamage(ent, data)
 		end
 		--print(dmg)
 		if dmg > (org.isPly and 2 or 0.2) then
-			org.internalBleed = org.internalBleed + (dmg * (org.isPly and 0.25 or 2.5))
+			org.internalBleed = org.internalBleed + (dmg * (org.isPly and 0.25 or 6))
 		end
 
 		org.owner:AddNaturalAdrenaline( math.min( dmg * (org.isPly and 0.05 or 0.5), 4) )

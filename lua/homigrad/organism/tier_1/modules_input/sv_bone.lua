@@ -71,13 +71,7 @@ local dislocated_leg = {
 
 local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	local oldDmg = org[key]
-	local dmg = dmg * (org.isPly and 0.02 or 4)
-
-	local protec = hg.organism.protec
-	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
-		local protect = protec(org, bone, dmg, dmgInfo, "torso", org.owner.armors and org.owner.armors["torso"], 1, 0.5, false, boneindex, dir, hit, ricochet)
-		if protect and protect > 0 then return protect end
-	end
+	local dmg = dmg * (org.isPly and 0.4 or 4)
 
 	if dmgInfo:IsDamageType(DMG_CRUSH) and dmg > 4 and !org[key.."amputated"] then
 		hg.organism.AmputateLimb(org, key)
@@ -93,11 +87,11 @@ local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
 	org[key] = boneDmg * 0.5
 
-	if boneDmg < 0.7 then return 0 end
+	if boneDmg < 0.2 then return 0 end
 
 	if org.isPly then
 		org[key.."_cum"] = (org[key.."_cum"] or 0) + dmg
-		if org[key.."_cum"] < 80 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
+		if org[key.."_cum"] < 5 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
 		org[key.."_cum"] = 0
 	else
 		if boneDmg < 1 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
@@ -106,7 +100,7 @@ local function legs(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	if org.isPly and !org[key.."amputated"] then org.just_damaged_bone = CurTime() end
 
 	if org.isPly then
-		if dmg >= 15 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
+		if dmg >= 0.4 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
 			org[key] = 1
 			org.painadd = org.painadd + 30
 			org.owner:AddNaturalAdrenaline(1)
@@ -150,13 +144,7 @@ end
 
 local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	local oldDmg = org[key]
-	local dmg = dmg * (org.isPly and 0.02 or 4)
-
-	local protec = hg.organism.protec
-	if protec and dmgInfo:IsDamageType(DMG_BULLET + DMG_BUCKSHOT) then
-		local protect = protec(org, bone, dmg, dmgInfo, "torso", org.owner.armors and org.owner.armors["torso"], 1, 0.5, false, boneindex, dir, hit, ricochet)
-		if protect and protect > 0 then return protect end
-	end
+	local dmg = dmg * (org.isPly and 0.4 or 4)
 
 	if dmgInfo:IsDamageType(DMG_CRUSH) and dmg > 4 and !org[key.."amputated"] then
 		hg.organism.AmputateLimb(org, key)
@@ -172,11 +160,11 @@ local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 
 	org[key] = boneDmg * 0.5
 
-	if boneDmg < 0.6 then return 0 end
+	if boneDmg < 0.2 then return 0 end
 
 	if org.isPly then
 		org[key.."_cum"] = (org[key.."_cum"] or 0) + dmg
-		if org[key.."_cum"] < 60 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
+		if org[key.."_cum"] < 5 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
 		org[key.."_cum"] = 0
 	else
 		if boneDmg < 1 and !dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) then return 0 end
@@ -185,7 +173,7 @@ local function arms(org, bone, dmg, dmgInfo, key, boneindex, dir, hit, ricochet)
 	if org.isPly and !org[key.."amputated"] then org.just_damaged_bone = CurTime() end
 
 	if org.isPly then
-		if dmg >= 15 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
+		if dmg >= 0.4 and (!dmgInfo:IsDamageType(DMG_CLUB+DMG_CRUSH+DMG_FALL) or math.random(3) != 1) then
 			org[key] = 1
 			org.painadd = org.painadd + 30
 			org.owner:AddNaturalAdrenaline(1)
