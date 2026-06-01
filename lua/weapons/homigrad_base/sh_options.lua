@@ -95,6 +95,8 @@ if CLIENT then
 7 - gangsta shooting
 8 - one-handed shooting
 9 - somalian shooting
+-1 - cycle through postures
+-2 - reset to auto mode
 ]]) printed = true end
 		local pos = math.Round(args[1] or -1)
 		net.Start("change_posture")
@@ -121,16 +123,25 @@ else
 			ply:EmitSound("weapons/zmirli/shared/foley_light" .. math.random(1,4) .. ".wav", 45, math.random(95,105))
 		end
 
-		if pos ~= -1 then
+		if pos == -2 then
+			-- 重置为自动模式
+			ply.customPosture = false
+			-- 根据当前武器类型设置默认姿势
+			local gun = ply:GetActiveWeapon()
+			ply.posture = (IsValid(gun) and ishgweapon(gun) and gun:IsPistolHoldType()) and 3 or 0
+		elseif pos == -1 then
+			-- 轮切（恢复原来的逻辑）
+			ply.customPosture = true
+			ply.posture = ply.posture or 0
+			ply.posture = (ply.posture + 1) > #hg.postures and 0 or ply.posture + 1
+		else
+			-- 手动设置姿势
+			ply.customPosture = true
 			if pos == ply.posture then
 				ply.posture = 0
-				pos = 0
 			else
 				ply.posture = pos
 			end
-		else
-			ply.posture = ply.posture or 0
-			ply.posture = (ply.posture + 1) > #hg.postures and 0 or ply.posture + 1
 		end
 		net.Start("change_posture")
 		net.WriteEntity(ply)
