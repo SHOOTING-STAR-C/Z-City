@@ -315,7 +315,7 @@ function SWEP:SetHandPos(noset)
 	-- ent:SetupBones()
 
 	self.rhandik = self.setrh
-	self.lhandik = self.setlh and (ply:GetTable().ChatGestureWeight < 0.1)
+	self.lhandik = self.setlh and ((ply:GetTable().ChatGestureWeight or 0) < 0.1)
 
     local rhmat, lhmat = ent:GetBoneMatrix(ent:LookupBone("ValveBiped.Bip01_R_Hand")), ent:GetBoneMatrix(ent:LookupBone("ValveBiped.Bip01_L_Hand"))
 
