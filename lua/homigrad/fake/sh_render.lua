@@ -54,6 +54,8 @@ local IsValid, math_Clamp = IsValid, math.Clamp
 	local vector_small = Vector(0.01, 0.01, 0.01)
 	local angfuck = Angle()
 	local hg_no_camera_in_cars = CreateConVar("hg_no_camera_in_cars","0",FCVAR_ARCHIVE + FCVAR_REPLICATED, "disables camera in cars", 0, 1)
+	local hg_hide_bandages = CreateClientConVar("hg_hide_bandages", "1", true, false, "Hide bandage models on player body", 0, 1)
+	local hg_hide_tourniquets = CreateClientConVar("hg_hide_tourniquets", "1", true, false, "Hide tourniquet models on player body", 0, 1)
 	function DrawPlayerRagdoll(ent, ply) --// actually not only ragdoll render but player too
 		if ply.prevragdoll_index != nil and ply.prevragdoll_index != ply.ragdoll_index and ply.ragdoll_index == 0 then
 			//print(ply.ragdoll_index, ply.prevragdoll_index, Entity(ply.ragdoll_index))
@@ -97,9 +99,13 @@ local IsValid, math_Clamp = IsValid, math.Clamp
 			RenderArmors(ply, armors, ent)
 		end
 
-		hg.RenderBandages(ent, ply)
+		if not hg_hide_bandages:GetBool() then
+			hg.RenderBandages(ent, ply)
+		end
 
-		hg.RenderTourniquets(ent, ply)
+		if not hg_hide_tourniquets:GetBool() then
+			hg.RenderTourniquets(ent, ply)
+		end
 
 		hg.GoreCalc(ent, ply)
 
