@@ -21,7 +21,7 @@ local function isPlayerSurrendered(ply)
 end
 
 -- 阻止 NPC 射击投降玩家
-hook.Add("EntityFireBullets", "Surrender_BlockFire", function(ent, data)
+hook.Add("1`", "Surrender_BlockFire", function(ent, data)
     if not IsValid(ent) or not ent:IsNPC() then return end
     local enemy = ent:GetEnemy()
     if IsValid(enemy) then
@@ -107,13 +107,24 @@ local function ClearNPCEnemies(ply)
     if IsValid(nearestNPC) then
         nearestNPC.guardingPlayer = ply
         nearestNPC:SetLastPosition(ply:GetPos())
+        -- 覆盖之前在循环里设置的 IDLE_WANDER，避免 NPC 分心散步
+        nearestNPC:ClearEnemyMemory()
+        nearestNPC:SetEnemy(NULL)
+        nearestNPC:SetNPCState(NPC_STATE_ALERT)
         nearestNPC:SetSchedule(SCHED_FORCED_GO_RUN)
 
         -- 定时器持续控制这个 NPC
         local npcGuard = nearestNPC
+        local wasClose = false  -- 滞后标记：上一次是否在近距离
+        local wasRunning = true -- 当前 schedule 是否是跑向玩家
         timer.Create("Surrender_GuardNPC" .. ply:UserID(), 0.1, 0, function()
             if not IsValid(npcGuard) or not IsValid(ply) or not surrenderedPlayers[ply] then
-                if IsValid(npcGuard) then npcGuard.guardingPlayer = nil end
+                if IsValid(npcGuard) then
+                    npcGuard.guardingPlayer = nil
+                    npcGuard:ClearEnemyMemory()
+                    npcGuard:SetNPCState(NPC_STATE_IDLE)
+                    npcGuard:SetSchedule(SCHED_IDLE_WANDER)
+                end
                 timer.Remove("Surrender_GuardNPC" .. ply:UserID())
                 return
             end
@@ -123,37 +134,46 @@ local function ClearNPCEnemies(ply)
             local dir = plyPos - npcPos
             local dist = dir:Length2D()
 
-            -- 面向玩家
-            local ang = dir:Angle()
-            npcGuard:SetAngles(Angle(0, ang.y, 0))
+            -- 带滞后的远近判断：close→far 需要 dist>130，far→close 需要 dist<90
+            if wasClose and dist > 130 then
+                wasClose = false
+            elseif not wasClose and dist < 90 then
+                wasClose = true
+            end
 
-            if dist > 100 then
-                -- 走向玩家（设置跑步动画+速度）
-                npcGuard:SetMovementActivity(ACT_RUN)
-                dir:Normalize()
-                local speed = 200
-                npcGuard:SetVelocity(dir * speed - npcGuard:GetVelocity())
+            if not wasClose then
+                -- 跑向玩家：持续更新目标位置，但只在切换时设 schedule（避免每 tick 重启碎步）
+                npcGuard:SetLastPosition(plyPos)
+                if not wasRunning then
+                    npcGuard:SetNPCState(NPC_STATE_ALERT)
+                    npcGuard:SetSchedule(SCHED_FORCED_GO_RUN)
+                    wasRunning = true
+                end
             else
-                -- 靠近了，停下并开镜瞄准玩家
-                npcGuard:SetMovementActivity(ACT_IDLE)
-                npcGuard:SetVelocity(Vector(0, 0, npcGuard:GetVelocity().z))
-                npcGuard:SetNPCState(NPC_STATE_COMBAT)
+                -- 靠近了：停下瞄准
+                if wasRunning then
+                    npcGuard:SetNPCState(NPC_STATE_ALERT)
+                    npcGuard:SetSchedule(SCHED_IDLE_STAND)
+                    wasRunning = false
+                end
 
-                -- 瞄准玩家身体（胸口位置）
+                -- 持续面向并瞄准玩家
+                local ang = dir:Angle()
+                npcGuard:SetAngles(Angle(0, ang.y, 0))
+
                 local aimPos = ply:GetPos() + Vector(0, 0, 40)
-                npcGuard:SetLastPosition(aimPos)
-                npcGuard:SetSchedule(SCHED_TARGET_FACE)
 
-                -- 设置视线目标为玩家（让武器指向玩家）
                 if npcGuard.SetEyeTarget then
                     npcGuard:SetEyeTarget(aimPos)
                 end
 
-                -- 设置敌人指向玩家（让NPC进入战斗状态瞄准）
+                -- 设置敌人让武器指向玩家（AI保持在ALERT状态，不会攻击）
                 if IsValid(ply.bull) then
                     npcGuard:SetEnemy(ply.bull)
+                    npcGuard:UpdateEnemyMemory(ply.bull, aimPos)
                 else
                     npcGuard:SetEnemy(ply)
+                    npcGuard:UpdateEnemyMemory(ply, aimPos)
                 end
             end
         end)
@@ -168,6 +188,12 @@ end
 local function RestoreNPCEnemies(ply)
     for npc, enemies in pairs(originalEnemies) do
         if IsValid(npc) then
+            -- 如果这个 NPC 之前是守卫 NPC，恢复 AI 控制
+            if npc.guardingPlayer == ply then
+                npc.guardingPlayer = nil
+                npc:SetNPCState(NPC_STATE_COMBAT)
+            end
+
             -- 恢复敌对关系
             if IsValid(ply.bull) and npc.AddEntityRelationship then
                 npc:AddEntityRelationship(ply.bull, D_HT, 99)
