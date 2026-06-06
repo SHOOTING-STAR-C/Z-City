@@ -104,7 +104,7 @@ PrecacheParticleSystem("smoke_trail_wild")
 local vector_full = Vector(1, 1, 1)
 
 if CLIENT then
-	SWEP.HowToUseInstructions = "<font=ZCity_Tiny>"..string.upper( (input.LookupBinding("+use") or "请绑定你的 +使用 键。在控制台输入 \"bind e +use\"，拜托了") ).." to pickup</font>"
+	SWEP.HowToUseInstructions = "<font=ZCity_Tiny>"..string.upper( (input.LookupBinding("+use") or "未绑定 +使用 键。请在控制台输入 bind e +use") ).." to pickup</font>"
 end
 SWEP.StartAtt = {}
 function SWEP:Initialize()
@@ -287,7 +287,7 @@ function SWEP:OnRemove()
 	end
 end
 
-local hg_aimtoshoot = ConVarExists("hg_aimtoshoot") and GetConVar("hg_aimtoshoot") or CreateConVar("hg_aimtoshoot", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "切换类似DarkRP的射击系统（瞄准射击）", 0, 1)
+local hg_aimtoshoot = ConVarExists("hg_aimtoshoot") and GetConVar("hg_aimtoshoot") or CreateConVar("hg_aimtoshoot", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "类DarkRP射击模式（瞄准即射击）", 0, 1)
 
 local owner
 local CurTime = CurTime
@@ -332,11 +332,11 @@ function SWEP:IsLocal2()
 	return CLIENT and self:GetOwner() == LocalPlayer() and LocalPlayer() == GetViewEntity()
 end
 
-local hg_quietshots = GetConVar("hg_quietshots") or CreateClientConVar("hg_quietshots", "0", true, false, "切换更安静的枪声", 0, 1)
+local hg_quietshots = GetConVar("hg_quietshots") or CreateClientConVar("hg_quietshots", "0", true, false, "低音量枪声", 0, 1)
 local hg_gunshotvolume = GetConVar("hg_gunshotvolume") or CreateClientConVar("hg_gunshotvolume", "1", true, false, "调整枪声音量", 0, 1)
 local hg_oldsights = CreateConVar("hg_oldsights", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "瞄准时禁用相机晃动")
-local hg_coolcamera = ConVarExists("hg_coolcamera") and GetConVar("hg_coolcamera") or CreateConVar("hg_coolcamera", 0, FCVAR_ARCHIVE + FCVAR_REPLICATED, "酷炫相机移动", 0, 5)
-local hg_coolcameralerpmult = ConVarExists("hg_coolcameralerpmult") and GetConVar("hg_coolcameralerpmult") or CreateConVar("hg_coolcameralerpmult", 1, FCVAR_ARCHIVE + FCVAR_REPLICATED, "酷炫相机移动插值倍率", 0, 5)
+local hg_coolcamera = ConVarExists("hg_coolcamera") and GetConVar("hg_coolcamera") or CreateConVar("hg_coolcamera", 0, FCVAR_ARCHIVE + FCVAR_REPLICATED, "镜头移动特效", 0, 5)
+local hg_coolcameralerpmult = ConVarExists("hg_coolcameralerpmult") and GetConVar("hg_coolcameralerpmult") or CreateConVar("hg_coolcameralerpmult", 1, FCVAR_ARCHIVE + FCVAR_REPLICATED, "镜头移动插值倍率", 0, 5)
 
 if CLIENT then
 	EmitSound = hg.EmitSound
@@ -345,8 +345,8 @@ if CLIENT then
 		EmitSound = hg.EmitSound
 	end)
 end
-local hg_gopro = ConVarExists("hg_gopro") and GetConVar("hg_gopro") or CreateClientConVar("hg_gopro", "0", true, false, "切换类似GoPro的第一人称视角", 0, 1)
-local hg_distortedsounds = ConVarExists("hg_distortedsounds") and GetConVar("hg_distortedsounds") or CreateClientConVar("hg_distortedsounds", "0", true, false, "切换枪声失真效果", 0, 1)
+local hg_gopro = ConVarExists("hg_gopro") and GetConVar("hg_gopro") or CreateClientConVar("hg_gopro", "0", true, false, "GoPro风格第一人称视角", 0, 1)
+local hg_distortedsounds = ConVarExists("hg_distortedsounds") and GetConVar("hg_distortedsounds") or CreateClientConVar("hg_distortedsounds", "0", true, false, "枪声失真效果", 0, 1)
 
 local math_random = math.random
 function SWEP:PlaySnd(snd, server, chan, vol, pitch, entity, tripleaffirmative)
@@ -438,11 +438,11 @@ local weapons_Get = weapons.Get
 if SERVER then util.AddNetworkString("hgwep shoot") end
 
 local CantDoIt = {
-	"但是... 还有这么多值得活下去的东西！",
+	"但是...还有那么多值得留恋的东西！",
 	"I... I can't do it...",
-	"一定有别的办法。这不是！",
-	"我... 无法让自己这样做。",
-	"我在做什么？我做不到。"
+	"一定还有别的办法。这样不行！",
+	"我...下不了手。",
+	"我在做什么？做不到啊。"
 }
 --qol lmao
 function SWEP:CanPrimaryAttack()
@@ -602,7 +602,7 @@ if SERVER then
 		net.Send(ply)
 	end)
 
-	hg_shoot_tinnitus = ConVarExists("hg_shoot_tinnitus") and GetConVar("hg_shoot_tinnitus") or CreateConVar("hg_shoot_tinnitus","0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "切换射击耳鸣效果")
+	hg_shoot_tinnitus = ConVarExists("hg_shoot_tinnitus") and GetConVar("hg_shoot_tinnitus") or CreateConVar("hg_shoot_tinnitus","0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "射击耳鸣效果")
 	SetGlobalBool("hg_shoot_tinnitus",hg_shoot_tinnitus:GetBool())
 
 	cvars.AddChangeCallback("hg_shoot_tinnitus", function(convar_name, value_old, value_new)
@@ -621,7 +621,7 @@ else
 	end)
 end
 
-local hg_highpitchgunfire = ConVarExists("hg_highpitchgunfire") and GetConVar("hg_highpitchgunfire") or CreateClientConVar("hg_highpitchgunfire", "0", true, false, "切换室内高音调枪声", 0, 1)
+local hg_highpitchgunfire = ConVarExists("hg_highpitchgunfire") and GetConVar("hg_highpitchgunfire") or CreateClientConVar("hg_highpitchgunfire", "0", true, false, "室内高音枪声", 0, 1)
 
 function SWEP:EmitShoot()
 	if SERVER then return end
@@ -750,8 +750,8 @@ if CLIENT then
 		antialias = true
 	})
 
-	dynamicmags = CreateClientConVar("hg_dynamic_mags", "0", true, false, "射击时启用动态弹药显示",0,1)
-	instructions = CreateClientConVar("hg_instructions","1", true, false, "启用枪械说明",0,1)
+	dynamicmags = CreateClientConVar("hg_dynamic_mags", "0", true, false, "动态弹药显示",0,1)
+	instructions = CreateClientConVar("hg_instructions","1", true, false, "武器操作提示",0,1)
 end
 
 function SWEP:DrawHUDAdd()
@@ -877,7 +877,7 @@ if CLIENT then
 					(clip > clipsize - (self.OpenBolt and 0 or 1) - 1) and "Full" or 
 					(clip <= clipsize and clip > clipsize/1.5 ) and "~ 满弹" or 
 					(clip <= clipsize/1.5 and clip > clipsize/3.5) and "~ 半弹" or 
-					(clip <= clipsize/3.5 and clip != 0 ) and "~ 几乎空仓" or 
+					(clip <= clipsize/3.5 and clip != 0 ) and "~ 快打光了" or
 					(clip == 0 and "空仓")
 				)
 				coloruse.r = 0
@@ -1115,7 +1115,7 @@ if SERVER then
 	end)
 end
 
-local hg_slings = ConVarExists("hg_slings") and GetConVar("hg_slings") or CreateConVar("hg_slings", 0, FCVAR_SERVER_CAN_EXECUTE + FCVAR_ARCHIVE, "切换枪带系统", 0, 1)
+local hg_slings = ConVarExists("hg_slings") and GetConVar("hg_slings") or CreateConVar("hg_slings", 0, FCVAR_SERVER_CAN_EXECUTE + FCVAR_ARCHIVE, "枪带系统", 0, 1)
 
 local vpang1 = Angle(1, -1.5, 2) / 2
 local bashvpang = Angle(-10, 0, 0)
@@ -1960,22 +1960,22 @@ function SWEP:GetAdditionalValues()
 		animpos = animpos * 0.15 * mulhuy * (self:IsPistolHoldType() and 1 or 1)
 		animpos = animpos * math.min((self.Primary.Force2 or self.Primary.Force) / 40,3) * ((self.NumBullet or 1) * 3 or 1) * (self.animposmul or 1) // * 4
 
-		self.AdditionalPos2 = self.AdditionalPos2 - (self.AdditionalAng + self.AdditionalAng2):Forward() * animpos * 9
+		self.AdditionalPos2 = self.AdditionalPos2 - (self.AdditionalAng + self.AdditionalAng2):Forward() * animpos * 1.5
 		local shit2 = (1 / self.weight) * (self.NumBullet or 3) / 3 * 0.5
-		self.AdditionalPos2[2] = self.AdditionalPos2[2] + math.sin(animpos3) * 1 * shit2
-		self.AdditionalPos2[1] = self.AdditionalPos2[1] + math.sin(animpos3) * -1 * shit2
-		self.AdditionalAng2[2] = self.AdditionalAng2[2] + math.sin(animpos3) * -2 * shit2
-		
-		self.AdditionalPos2:Add(VectorRand(-0.07, 0.07) * animpos3 * shit2)
+		self.AdditionalPos2[2] = self.AdditionalPos2[2] + math.sin(animpos3) * 0.02 * shit2
+		self.AdditionalPos2[1] = self.AdditionalPos2[1] + math.sin(animpos3) * -0.02 * shit2
+		self.AdditionalAng2[2] = self.AdditionalAng2[2] + math.sin(animpos3) * -0.04 * shit2
+
+		self.AdditionalPos2:Add(VectorRand(-0.003, 0.003) * animpos3 * shit2)
 
 		//self.AdditionalPos2[3] = self.AdditionalPos2[3] + animpos * ply.offsetView[2] * 0.2
 		
 		if self.podkid or self:IsPistolHoldType() then
 			local animpos2 = self:GetAnimShoot2(0.05 * mulhuy / host_timescale(), true)
-			self.AdditionalAng2[2] = self.AdditionalAng2[2] + animpos2 * 20 * (self.podkid or 1)
-			self.AdditionalAng2[3] = self.AdditionalAng2[3] + animpos2 * 10 * (self.podkid or 1)
-			self.AdditionalAng2[1] = self.AdditionalAng2[1] + animpos2 * -5 * (self.podkid or 1)
-			self.AdditionalPos2[2] = self.AdditionalPos2[2] - animpos2 * 1 * (self.podkid or 1)
+			self.AdditionalAng2[2] = self.AdditionalAng2[2] + animpos2 * 3 * (self.podkid or 1)
+			self.AdditionalAng2[3] = self.AdditionalAng2[3] + animpos2 * 1.5 * (self.podkid or 1)
+			self.AdditionalAng2[1] = self.AdditionalAng2[1] + animpos2 * -0.75 * (self.podkid or 1)
+			self.AdditionalPos2[2] = self.AdditionalPos2[2] - animpos2 * 0.15 * (self.podkid or 1)
 		end
 	end
 

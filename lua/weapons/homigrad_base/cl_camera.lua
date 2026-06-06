@@ -310,16 +310,16 @@ function SWEP:Camera(eyePos, eyeAng, view, vellen, ply)
 
 	if zoom or hg.KeyDown(ply, IN_SPEED) then offsetView = LerpFT(0.07, offsetView, angZero) end
 
-	outputAng:Add(-eyeSpray * 10)
+	outputAng:Add(-eyeSpray * 3)
 	
 	outputPos:Add(-(angle_difference_localvec * 30 * (-k + 2) * 2) / (self.Ergonomics or 1) + position_difference23 * 0.25 * (-k + 1.25))
 	outputPos:Add(spray * 1.1)
 	
 	local fthuy = ftlerped * 150
 
-	angle_spray[3] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 18 * game.GetTimeScale() * 0.7
-	angle_spray[1] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 3.6 * game.GetTimeScale() * 0.7
-	angle_spray[2] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 3.6 * game.GetTimeScale() * 0.7
+	angle_spray[3] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 6 * game.GetTimeScale() * 0.7
+	angle_spray[1] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 1.2 * game.GetTimeScale() * 0.7
+	angle_spray[2] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 1.2 * game.GetTimeScale() * 0.7
 	outputAng:Add(angle_spray)
 	
 	local imm = (organism and organism.immobilization) or 0
@@ -410,7 +410,7 @@ function SWEP:GetCameraSprayValues()
 	local owner = self:GetOwner()
 	local spray = self.EyeSpray + GetViewPunchAngles2() * 0.25 + GetViewPunchAngles3() * 0.25
 	
-	local _, newspr = LocalToWorld(vector_origin, spray * 8, vector_origin, owner:EyeAngles())
+	local _, newspr = LocalToWorld(vector_origin, spray * 2, vector_origin, owner:EyeAngles())
 
 	return newspr:Forward() - owner:EyeAngles():Forward()
 end
