@@ -250,7 +250,7 @@ function SWEP:Camera(eyePos, eyeAng, view, vellen, ply)
 	local sp3  = isnumber(organism.spine3) and organism.spine3 or 0
 
 	local shakeMul = (((larm > 0.75 and (larm - 0.75) * (ply.posture != 7 and ply.posture != 8 and 1 or 0)) or 0)
-		+ ((rarm > 0.1 and (rarm - 0.1)) or 0)) / 4
+		+ ((rarm > 0.1 and (rarm - 0.1)) or 0)) / 13.33
 
 	local addview = AngleRand(-shakeMul - 0.01, shakeMul + 0.01) * (organism.holdingbreath and 0.1 or 1)
 	addview[3] = 0
@@ -260,7 +260,7 @@ function SWEP:Camera(eyePos, eyeAng, view, vellen, ply)
 	end
 
 	local k4 = ((organism.adrenaline or 0) * 0.01)
-	local angRand = AngleRand(-k4 * 2, k4 * 2) * 0.2
+	local angRand = AngleRand(-k4 * 2, k4 * 2) * 0.06
 	lerpedAdren:Add(angRand)
 	lerpedAdren = LerpFT(0.1, lerpedAdren, angle_zero)
 	--ViewPunch(angRand)
@@ -317,9 +317,9 @@ function SWEP:Camera(eyePos, eyeAng, view, vellen, ply)
 	
 	local fthuy = ftlerped * 150
 
-	angle_spray[3] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 60 * game.GetTimeScale() * 0.7
-	angle_spray[1] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 12 * game.GetTimeScale() * 0.7
-	angle_spray[2] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 12 * game.GetTimeScale() * 0.7
+	angle_spray[3] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 18 * game.GetTimeScale() * 0.7
+	angle_spray[1] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 3.6 * game.GetTimeScale() * 0.7
+	angle_spray[2] = math.Rand(-self.sprayAngles[3], self.sprayAngles[3]) * 3.6 * game.GetTimeScale() * 0.7
 	outputAng:Add(angle_spray)
 	
 	local imm = (organism and organism.immobilization) or 0

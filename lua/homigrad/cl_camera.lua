@@ -113,7 +113,7 @@ function HGAddView(ply, origin, angles, velLen)
 		
 		camera_position_addition[1] = 0
 		camera_position_addition[2] = 0
-		camera_position_addition[3] = (math.sin(breathing_amount + math.pi)) * 0.5
+		camera_position_addition[3] = (math.sin(breathing_amount + math.pi)) * 0.15
 
 		local anga2 = ply:GetBoneMatrix(ply:LookupBone("ValveBiped.Bip01_Spine")):GetAngles()---(-angles)
 		anga2:RotateAroundAxis(anga2:Right(), 90)
@@ -122,7 +122,7 @@ function HGAddView(ply, origin, angles, velLen)
 
 		origin:Add(camera_position_addition)
 
-		local ang = AngleRand(-0.1, 0.1) * math.Rand(0, math.min(adrenaline, 1)) / 1
+		local ang = AngleRand(-0.03, 0.03) * math.Rand(0, math.min(adrenaline, 1)) / 1
 		ang[1] = ang[1] + breathing_amount
 		ang[3] = 0
 
@@ -167,7 +167,7 @@ function HGAddView(ply, origin, angles, velLen)
 
 		//angles[1] = angles[1] + x * 1
 		//angles[2] = angles[2] + y * 1
-		ViewPunch4(Angle(y2, x2, x2 * 10) * 0.000005 * (ishgweapon(wep) and 1.5 or 1))
+		ViewPunch4(Angle(y2, x2, x2 * 10) * 0.0000015 * (ishgweapon(wep) and 1.5 or 1))
 
 		local music = hg.DynamicMusicV2.Player.GetTrack()
 
