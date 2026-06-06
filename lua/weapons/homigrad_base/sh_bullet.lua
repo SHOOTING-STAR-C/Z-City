@@ -822,9 +822,9 @@ function SWEP:FireBullet()
 				dlight.r = math_random(245, 255)
 				dlight.g = math_random(245, 255)
 				dlight.b = math_random(150, 200)
-				dlight.brightness = math_Rand(7, 8)
+				dlight.brightness = math_Rand(3, 4)
 				dlight.Decay = 4000
-				dlight.Size = math_Rand(60, 75) * mul
+				dlight.Size = math_Rand(30, 40) * mul
 				dlight.DieTime = CurTime() + 1 / 60
 			end
 		end

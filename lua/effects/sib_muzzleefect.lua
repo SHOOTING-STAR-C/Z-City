@@ -49,7 +49,7 @@ function EFFECT:Init(data)
 			particle:SetDieTime(math.Rand(0.1, 0.2))
 			particle:SetStartAlpha(255)
 			particle:SetEndAlpha(0)
-			particle:SetStartSize(math.Rand(7, 10))
+			particle:SetStartSize(math.Rand(4, 6))
 			particle:SetEndSize(0)
 			particle:SetRoll(math.Rand(0, 360))
 			particle:SetRollDelta(math.Rand(-2, 2))
@@ -66,9 +66,9 @@ function EFFECT:Init(data)
 			dlight.r = 255
 			dlight.g = 215
 			dlight.b = 55
-			dlight.brightness = 1
+			dlight.brightness = 0.5
 			dlight.decay = 4000
-			dlight.size = 156
+			dlight.size = 80
 			dlight.dietime = CurTime() + 0.2
 		end
 	end
