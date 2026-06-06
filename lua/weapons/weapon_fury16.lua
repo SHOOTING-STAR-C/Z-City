@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "'Uber' Norepinephrine"
-SWEP.Instructions = "一种从早期Fury-13样本中提炼的实验性战斗兴奋剂，来源不明，绰号为\"Fury-16\"。\n\n它不是改造你的身体，而是迫使身体燃烧所有资源以获得巨大的速度提升。其作用原理是向系统注入大量合成去甲肾上腺素，导致极端血管收缩和心输出量增加。"
+SWEP.Instructions = "绰号\"Fury-16\"，实验性战斗兴奋剂。向体内注入合成去甲肾上腺素，燃烧全身资源换取极限速度提升。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

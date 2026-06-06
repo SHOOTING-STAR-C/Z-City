@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.PrintName = "阔剑地雷"
 SWEP.Category = "Weapons - Explosive"
-SWEP.Instructions = "阔剑地雷是一种极其高效的武器，可以把对手的腿炸成碎片。受害者生还的可能性很小。"
+SWEP.Instructions = "定向反步兵地雷，专炸腿部。踩中基本没救。"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.Primary.ClipSize = -1

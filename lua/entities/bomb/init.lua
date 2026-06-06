@@ -115,9 +115,7 @@ function ENT:ActivateBomb()
 		elseif BombInSite(self:GetPos(), 2) then
 			siteName = "B"
 		end
-		PrintMessage(HUD_PRINTTALK, "炸弹已安装"
-			..(siteName and (" on site "..siteName) or "")
-			..".")
+		PrintMessage(HUD_PRINTTALK, "炸弹已在"..(siteName and (" "..siteName.."点 ") or "").."安装。")
 		
 		hg.UpdateRoundTime(zb.ROUND_TIME + self.ExplodeTime + 1)
 	end

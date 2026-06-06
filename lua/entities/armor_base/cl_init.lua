@@ -1,5 +1,5 @@
 include("shared.lua")
-ENT.HowToUseInstructions = "<font=ZCity_Tiny>"..string.upper( (input.LookupBinding("+use") or "请绑定+use键。请在控制台输入\"bind e +use\"") ).." 穿戴</font>"
+ENT.HowToUseInstructions = "<font=ZCity_Tiny>"..string.upper( (input.LookupBinding("+use") or "未绑定使用键，请在控制台输入 bind e +use") ).." 穿戴</font>"
 
 function ENT:Draw()
 	if not self.PhysModel then

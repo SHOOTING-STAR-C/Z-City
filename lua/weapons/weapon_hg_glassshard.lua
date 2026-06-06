@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "玻璃碎片"
-SWEP.Instructions = "一块碎玻璃。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "一块碎玻璃，握紧就能当刀使。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

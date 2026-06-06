@@ -2,7 +2,7 @@ if SERVER then AddCSLuaFile() end
 
 SWEP.PrintName = "门楔"
 SWEP.Category = "ZCity Other"
-SWEP.Instructions = "这是一个重型商用门楔。可以踢入到位以阻止门移动。\n\n左键堵塞门。\n按E重新拾起门楔。"
+SWEP.Instructions = "重型商用门楔，一脚踢进去就能卡住门，谁也推不开。\n\n左键堵门。\n按E捡回门楔。"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.Primary.ClipSize = -1

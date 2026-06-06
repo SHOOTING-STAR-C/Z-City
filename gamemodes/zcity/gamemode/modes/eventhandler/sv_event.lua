@@ -373,7 +373,7 @@ concommand.Add("zb_event_endlogic", function(ply, _, _, args)
     local logicType = tonumber(args) or 2
     logicType = math.Clamp(logicType, 1, 3)
     MODE.EndLogicType = logicType
-    ply:ChatPrint("事件结束逻辑设置为: " .. logicType)
+    ply:ChatPrint("回合结束条件已设为: " .. logicType)
 end)
 
 concommand.Add("zb_event_loot", function(ply, _, _, args)
@@ -393,7 +393,7 @@ concommand.Add("zb_event_loot", function(ply, _, _, args)
         timer.Remove("EventLootSpawnTimer")
     end
     
-    ply:ChatPrint("事件战利品 " .. (enabled and "已启用" or "已禁用"))
+    ply:ChatPrint("活动战利品 " .. (enabled and "已开启" or "已关闭"))
 end)
 
 hook.Add("PlayerInitialSpawn", "ZB_EventLootSync", function(ply)

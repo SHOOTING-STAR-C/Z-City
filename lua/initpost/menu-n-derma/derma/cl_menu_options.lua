@@ -59,13 +59,13 @@ if not game.IsDedicated() then
 	hg.settings:AddOpt("服务器玩法","hg_toughnpcs", "强力NPC")
 	hg.settings:AddOpt("服务器玩法","hg_thirdperson", "第三人称（开发中）")
 	hg.settings:AddOpt("服务器玩法","hg_legacycam", "旧版相机")
-	hg.settings:AddOpt("服务器玩法","hg_ragdollcombat", "布娃娃战斗模式")
-	hg.settings:AddOpt("服务器玩法","hg_movement_stamina_debuff", "移动耐力减益")
-	hg.settings:AddOpt("服务器玩法","hg_furcity", "毛茸茸城市")
+	hg.settings:AddOpt("服务器玩法","hg_ragdollcombat", "布娃娃战斗")
+	hg.settings:AddOpt("服务器玩法","hg_movement_stamina_debuff", "移动耐力惩罚")
+	hg.settings:AddOpt("服务器玩法","hg_furcity", "福瑞城市")
 	hg.settings:AddOpt("服务器玩法","hg_appearance_access_for_all", "外观全员开放", nil, nil, "bool")
 	hg.settings:AddOpt("服务器玩法","hg_healanims", "治疗与进食动画")
-	hg.settings:AddOpt("服务器玩法","hg_aimtoshoot", "类DarkRP射击系统（瞄准射击）")
-	hg.settings:AddOpt("服务器玩法","hg_slings", "背带系统")
+	hg.settings:AddOpt("服务器玩法","hg_aimtoshoot", "类DarkRP射击模式（瞄准即射击）")
+	hg.settings:AddOpt("服务器玩法","hg_slings", "枪带系统")
     hg.settings:AddOpt("服务器玩法","homicide_traitoramount", "凶杀模式：叛徒数量", nil, nil, "int")
 end
 --hg_appearance_access_for_all
@@ -74,10 +74,10 @@ end
 --hg_toughnpcs
 
 hg.settings:AddOpt("调试","hg_show_hitposmuzzle", "显示武器命中位置")
-hg.settings:AddOpt("调试","hg_setzoompos", "编辑武器瞄准位置，查看控制台获取结果")
+hg.settings:AddOpt("调试","hg_setzoompos", "编辑武器瞄准位置（查看控制台获取结果）")
 hg.settings:AddOpt("调试","hg_show_hitbox", "显示命中框")
 
-hg.settings:AddOpt("优化","hg_potatopc", "土豆电脑模式")
+hg.settings:AddOpt("优化","hg_potatopc", "低配模式")
 hg.settings:AddOpt("优化","hg_anims_draw_distance", "动画渲染距离", true, nil, "int")
 hg.settings:AddOpt("优化","hg_anim_fps", "动画帧率", nil, nil, "int")
 hg.settings:AddOpt("优化","hg_attachment_draw_distance", "配件渲染距离", true, nil, "int")
@@ -86,32 +86,32 @@ hg.settings:AddOpt("优化","hg_tpik_distance", "TPIK渲染距离", true, nil, "
 
 hg.settings:AddOpt("血液","hg_blood_draw_distance", "血液渲染距离")
 hg.settings:AddOpt("血液","hg_blood_fps", "血液帧率")
-hg.settings:AddOpt("血液","hg_blood_sprites", "血液精灵（已对所有人禁用）")
+hg.settings:AddOpt("血液","hg_blood_sprites", "血液粒子（已全局禁用）")
 hg.settings:AddOpt("血液","hg_old_blood", "旧版血液")
 
 hg.settings:AddOpt("界面","hg_font", "更改自定义字体", false, true)
 
 hg.settings:AddOpt("武器","hg_weaponshotblur_enable", "射击模糊")
-hg.settings:AddOpt("武器","hg_dynamic_mags", "动态弹药检视")
+hg.settings:AddOpt("武器","hg_dynamic_mags", "动态弹药显示")
 hg.settings:AddOpt("武器","hg_zoomsensitivity", "瞄准镜灵敏度")
-hg.settings:AddOpt("武器","hg_highpitchgunfire", "建筑内高音枪声开关")
+hg.settings:AddOpt("武器","hg_highpitchgunfire", "室内高音枪声")
 
 hg.settings:AddOpt("视角","hg_firstperson_death", "第一人称死亡")
 hg.settings:AddOpt("视角","hg_fov", "视野")
-hg.settings:AddOpt("视角","hg_newspectate", "平滑观战相机")
-hg.settings:AddOpt("视角","hg_cshs_fake", "C'sHS布娃娃相机")
-hg.settings:AddOpt("视角","hg_gun_cam", "枪械相机（仅限管理员）")
+hg.settings:AddOpt("视角","hg_newspectate", "平滑观战镜头")
+hg.settings:AddOpt("视角","hg_cshs_fake", "C'sHS布娃娃镜头")
+hg.settings:AddOpt("视角","hg_gun_cam", "枪械镜头（仅限管理员）")
 hg.settings:AddOpt("视角","hg_nofovzoom", "禁用/启用FOV缩放")
-hg.settings:AddOpt("视角","hg_realismcam", "真实感相机（很烂）")
-hg.settings:AddOpt("视角","hg_gopro", "GoPro相机")
-hg.settings:AddOpt("视角","hg_newfakecam", "新版假死相机")
-hg.settings:AddOpt("视角","hg_leancam_mul", "倾斜相机倍率", true, nil, "int")
-hg.settings:AddOpt("视角","hg_gun_cam", "枪械相机（开发中，仅限管理员）")
+hg.settings:AddOpt("视角","hg_realismcam", "真实感镜头（效果一般）")
+hg.settings:AddOpt("视角","hg_gopro", "GoPro镜头")
+hg.settings:AddOpt("视角","hg_newfakecam", "新版假死镜头")
+hg.settings:AddOpt("视角","hg_leancam_mul", "倾斜镜头倍率", true, nil, "int")
+hg.settings:AddOpt("视角","hg_gun_cam", "枪械镜头（开发中，仅限管理员）")
 --hg_hints
 --hg_leancam_mul
   --hg_newfakecam
 hg.settings:AddOpt("声音","hg_dmusic", "动态音乐")
-hg.settings:AddOpt("声音","hg_quietshots", "启用/禁用静默射击音效")
+hg.settings:AddOpt("声音","hg_quietshots", "低音量枪声")
 
 
 function hg.CreateCategory(ctgName, ParentPanel, yPos)

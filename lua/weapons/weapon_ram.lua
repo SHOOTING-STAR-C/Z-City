@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "破门锤"
-SWEP.Instructions = "一把强力而沉重的武器，可以砸碎门。用来破坏路障和穿过狭小空间。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "沉得要命的破门重锤，专砸各种门板和路障。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

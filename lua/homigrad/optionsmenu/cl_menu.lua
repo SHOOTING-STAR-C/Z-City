@@ -41,15 +41,15 @@ function hg.AddOptionPanel( convarname, mode, optiondata, category )
     options[category][convarname] = {mode, optiondata}
 end
 
-hg.AddOptionPanel( "hg_potatopc", "switcher", {desc = "启用较弱的效果，适用于配置较低的电脑"}, "optimization" )
-hg.AddOptionPanel( "hg_dynamic_mags", "switcher", {desc = "启用\"浮动弹药HUD\"功能"}, "other" )
-hg.AddOptionPanel( "hg_anims_draw_distance", "slider", {desc = "更改动画渲染距离\n有助于提升帧数 | 0 - 无限",min = 0,max = 4096}, "optimization" )
-hg.AddOptionPanel( "hg_attachment_draw_distance", "slider", {desc = "更改配件渲染距离\n有助于提升帧数 | 0 - 无限",min = 0,max = 4096}, "optimization" )
+hg.AddOptionPanel( "hg_potatopc", "switcher", {desc = "降低特效质量，适合低配电脑"}, "optimization" )
+hg.AddOptionPanel( "hg_dynamic_mags", "switcher", {desc = "启用\"动态弹药HUD\"功能"}, "other" )
+hg.AddOptionPanel( "hg_anims_draw_distance", "slider", {desc = "调整动画渲染距离\n有助于提升帧数 | 0 = 无限",min = 0,max = 4096}, "optimization" )
+hg.AddOptionPanel( "hg_attachment_draw_distance", "slider", {desc = "调整配件渲染距离\n有助于提升帧数 | 0 = 无限",min = 0,max = 4096}, "optimization" )
 hg.AddOptionPanel( "hg_old_notificate", "switcher", {desc = "启用旧版伤害通知（聊天栏显示）",min = 0,max = 4096}, "other" )
-hg.AddOptionPanel( "hg_weaponshotblur_enable", "switcher", {desc = "启用射击时的模糊效果",min = 0,max = 4096}, "other" )
-hg.AddOptionPanel( "hg_weaponshotblur_mul", "slider", {desc = "射击模糊效果的倍率",min = 0,max = 1,decimals = 3}, "other" )
-hg.AddOptionPanel( "hg_maxsmoketrails", "slider", {desc = "烟雾轨迹效果的最大数量（超过10可能会卡顿）",min = 0,max = 30,decimals = 0}, "optimization" )
-hg.AddOptionPanel( "hg_optimise_scopes", "slider", {desc = "如果开镜导致帧数下降请启用（1 - 降低周围道具质量，2 - \"禁用\"主渲染）",min = 0,max = 2,decimals = 0}, "optimization" )
+hg.AddOptionPanel( "hg_weaponshotblur_enable", "switcher", {desc = "启用射击模糊效果",min = 0,max = 4096}, "other" )
+hg.AddOptionPanel( "hg_weaponshotblur_mul", "slider", {desc = "射击模糊效果强度",min = 0,max = 1,decimals = 3}, "other" )
+hg.AddOptionPanel( "hg_maxsmoketrails", "slider", {desc = "烟雾轨迹效果上限（超过 10 可能卡顿）",min = 0,max = 30,decimals = 0}, "optimization" )
+hg.AddOptionPanel( "hg_optimise_scopes", "slider", {desc = "开镜严重掉帧时启用（1 - 降低周围物体画质，2 - \"关闭\"主画面渲染）",min = 0,max = 2,decimals = 0}, "optimization" )
 
 local red = Color(75,25,25)
 local redselected = Color(150,0,0)

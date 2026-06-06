@@ -192,7 +192,7 @@ hook.Add("radialOptions", "DislocatedJoint", function()
 				lply.tried_fixing_limb = CurTime() + 0.5
 				RunConsoleCommand("hg_fixdislocation", 1, 0)
             end,
-            "复位脱臼 (腿)"
+            "复位脱臼 (腿部)"
         }
         hg.radialOptions[#hg.radialOptions + 1] = tbl
 	else
@@ -204,7 +204,7 @@ hook.Add("radialOptions", "DislocatedJoint", function()
 					lply.tried_fixing_limb = CurTime() + 0.5
 					RunConsoleCommand("hg_fixdislocation", 1, 1)
 				end,
-				"帮 "..ent:GetPlayerName().." 复位脱臼 (腿)"
+				"帮 "..ent:GetPlayerName().." 复位脱臼 (腿部)"
 			}
 			hg.radialOptions[#hg.radialOptions + 1] = tbl
 		end

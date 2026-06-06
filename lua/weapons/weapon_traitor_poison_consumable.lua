@@ -9,7 +9,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_base"
 SWEP.PrintName = "氰化物胶囊"
-SWEP.InstructionsBasic = "胶囊中的氰化钾粉末\n剧毒（140mg约90秒内致 incapacitation）\n含糖饮料会在摄入后分解KCN\n不要与食物混合或涂抹在绷带上，你不想用它杀人吧？"	--; TODO Mansion tea cup
+SWEP.InstructionsBasic = "胶囊装氰化钾粉末\n剧毒（140mg约90秒内致命）\n含糖饮料会加速分解KCN\n别跟食物混在一起或涂在绷带上——你不是真想用它杀人吧？"	--; TODO Mansion tea cup
 SWEP.Instructions = SWEP.InstructionsBasic
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true

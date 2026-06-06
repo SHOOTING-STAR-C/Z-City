@@ -2,7 +2,7 @@ if SERVER then AddCSLuaFile() end
 
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "β受体阻滞剂"
-SWEP.Instructions = "β受体阻滞剂可以在紧张情况下提供帮助，减少恐慌和肾上腺素。在战斗中适量使用非常有用。右键对他人注射。"
+SWEP.Instructions = "在紧张情况下减少恐慌、抑制肾上腺素飙升。战斗中适量使用有奇效。右键对他人注射。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

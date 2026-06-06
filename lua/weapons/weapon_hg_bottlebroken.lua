@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "碎瓶子"
-SWEP.Instructions = "破碎的啤酒瓶，看起来有人喝得太醉了。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "碎掉的啤酒瓶，玻璃茬子比完整的瓶子更致命。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

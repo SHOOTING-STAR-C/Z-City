@@ -3,7 +3,7 @@ SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.PrintName = "PB-4 Osa"
 SWEP.Author = "Research Institute of Applied Chemistry"
-SWEP.Instructions = "轻便、紧凑、折管式非 lethal 手枪。设计用于自卫和近距离应用，常用于平民和执法部门。该枪有四发容量，兼容多种弹药类型。使用18x45mm口径"
+SWEP.Instructions = "俄罗斯PB-4非致命手枪，18x45mm口径，4发弹容量，折管式装填，执法和民用防身器材。"
 SWEP.Category = "Weapons - Pistols"
 SWEP.ViewModel = ""
 

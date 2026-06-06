@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik_base"
 SWEP.PrintName = "胶带"
-SWEP.Instructions = "一卷增强型铝色防水聚乙烯涂层布基胶带。用于把东西粘在一起。\n\n按住左键粘合某物。\n你只能将胶带贴在两个物体之间的接缝或缝隙上。"
+SWEP.Instructions = "一卷银色防水布基胶带，结实耐用。什么东西坏了就缠两圈。\n\n按住左键粘合物体。\n只能贴在两个物体之间的缝隙或接缝处。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

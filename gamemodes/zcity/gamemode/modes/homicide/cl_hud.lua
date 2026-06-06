@@ -318,7 +318,7 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
     surface.DrawOutlinedRect(x, y, traitor_panel.width, height, 2)
     
 
-    local title = is_main and "主叛徒" or "叛徒助手"
+    local title = is_main and "主叛徒" or "叛徒同伙"
     draw.SimpleText(title, "TraitorPanelTitle", x + traitor_panel.width/2, y + 15, 
                     traitor_panel.colors.title, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     
@@ -327,11 +327,11 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
     surface.DrawLine(x + 15, y + 30, x + traitor_panel.width - 15, y + 30)
     
 
-    draw.SimpleText("按 F4 切换面板", "TraitorPanelText", x + traitor_panel.width/2, y + 42, 
+    draw.SimpleText("F4 切换面板", "TraitorPanelText", x + traitor_panel.width/2, y + 42, 
                     Color(180, 180, 180, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     
     local word_y = y + 65
-    draw.SimpleText("暗号:", "TraitorPanelText", x + traitor_panel.width/2, word_y, 
+    draw.SimpleText("接头暗号：", "TraitorPanelText", x + traitor_panel.width/2, word_y,
                     Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     
     word_y = word_y + 25
@@ -362,7 +362,7 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
         end
         
         if has_assistants then
-            draw.SimpleText("你的助手:", "TraitorPanelText", x + traitor_panel.width/2, assist_y, 
+            draw.SimpleText("你的同伙：", "TraitorPanelText", x + traitor_panel.width/2, assist_y, 
                             Color(220, 220, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             
             assist_y = assist_y + 25   
@@ -409,7 +409,7 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
                 local display_color = is_alive and color or Color(150, 150, 150)
                 display_color = Color(display_color.r, display_color.g, display_color.b, alpha)
                 
-                local status = is_alive and "" or " [死亡]"
+                local status = is_alive and "" or " [已击杀]"
 
 
                 local display_name = name
@@ -449,7 +449,7 @@ hook.Add("HUDPaint", "DrawTraitorPanel", function()
             end
         else
 
-            draw.SimpleText("没有可用助手", "TraitorPanelText", x + traitor_panel.width/2, assist_y, 
+            draw.SimpleText("暂无同伙", "TraitorPanelText", x + traitor_panel.width/2, assist_y, 
                             Color(150, 150, 150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
     else

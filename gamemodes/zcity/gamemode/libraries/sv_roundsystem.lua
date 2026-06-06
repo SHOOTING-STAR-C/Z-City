@@ -115,7 +115,7 @@ function zb:ShouldRoundEnd()
 		local boringround = (zb.ROUND_START + time) < CurTime()
 
 		if boringround and CurrentRound().BoringRoundFunction then
-			PrintMessage(HUD_PRINTTALK, "回合太无聊了，正在停止。")
+			PrintMessage(HUD_PRINTTALK, "回合太无聊了，正在结束。")
 
 			CurrentRound():BoringRoundFunction()
 		end

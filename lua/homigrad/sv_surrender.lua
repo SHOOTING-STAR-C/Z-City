@@ -293,14 +293,14 @@ concommand.Add("surrender_npc_debug", function(ply)
     if not IsValid(ply) or not ply:IsAdmin() then return end
     local count = 0
     for _ in pairs(surrenderedPlayers) do count = count + 1 end
-    ply:PrintMessage(HUD_PRINTCONSOLE, "当前投降玩家数: " .. count)
+    ply:PrintMessage(HUD_PRINTCONSOLE, "当前投降的玩家数: " .. count)
     for p, _ in pairs(surrenderedPlayers) do
         ply:PrintMessage(HUD_PRINTCONSOLE, "  - " .. p:Nick())
     end
 
     local enemyCount = 0
     for _ in pairs(originalEnemies) do enemyCount = enemyCount + 1 end
-    ply:PrintMessage(HUD_PRINTCONSOLE, "记录的原始敌人数: " .. enemyCount)
+    ply:PrintMessage(HUD_PRINTCONSOLE, "记录的原始敌对 NPC 数: " .. enemyCount)
 end)
 
 print("[Surrender NPC] NPC 投降反应系统已加载 - 监听 Surrendering/Kneeling 网络变量")

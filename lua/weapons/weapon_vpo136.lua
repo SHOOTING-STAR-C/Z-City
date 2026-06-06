@@ -6,7 +6,7 @@ SWEP.AdminOnly = false
 
 SWEP.PrintName = "VPO-136"
 SWEP.Author = "Vyatskiye Polyany Machine-Building Plant"
-SWEP.Instructions = "AKM版本改装为俄罗斯民用武器市场，没有自动射击能力。使用7.62x39mm口径。"
+SWEP.Instructions = "7.62x39mm口径半自动步枪\n\nAKM的民用狩猎版，取消全自动功能，保留了AK系列的可靠与耐用。"
 SWEP.Category = "Weapons - Carbines"
 
 SWEP.Slot = 2

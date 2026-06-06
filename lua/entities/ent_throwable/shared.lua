@@ -1,6 +1,6 @@
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "投掷物基础"
+ENT.PrintName = "投掷物"
 ENT.Spawnable = false
 ENT.WorldModel = "models/jaanus/shuriken_small.mdl"
 ENT.MaxSpeed = 1500

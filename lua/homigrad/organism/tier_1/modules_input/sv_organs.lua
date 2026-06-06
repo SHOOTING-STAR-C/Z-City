@@ -174,9 +174,9 @@ local arterySize = {
 }
 
 local arteryMessages ={
-	"我能感觉到血液从脖子涌出……",
-	"我的脖子……在……喷血。",
-	"我的脖子在流血！"
+	"我能感觉到血从脖子里涌出来……",
+	"我的脖子……在喷血……",
+	"脖子在飙血！"
 }
 
 local function hitArtery(artery, org, dmg, dmgInfo, boneindex, dir, hit)

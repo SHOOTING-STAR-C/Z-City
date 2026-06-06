@@ -114,7 +114,7 @@ hook.Add("HUDPaint","FUCKINGSAMENAMEUSEDINHOOKFUCKME",function()
 	local w, h = surface.GetTextSize(txt)
 	surface.SetTextPos(ScrW() / 2 - w / 2, ScrH() / 8 * 7)
 	surface.DrawText(txt)
-	local txt = "游戏内名称: "..spect:GetPlayerName()
+	local txt = "游戏昵称: "..spect:GetPlayerName()
 	local w, h = surface.GetTextSize(txt)
 	surface.SetTextPos(ScrW() / 2 - w / 2, ScrH() / 8 * 7 + h)
 	surface.DrawText(txt)
@@ -812,7 +812,7 @@ function GM:ScoreboardShow()
 		end
 
 		function but:DoClick()
-			if ply:IsBot() then chat.AddText("那是机器人。") return end
+			if ply:IsBot() then chat.AddText("这是个机器人。") return end
 			gui.OpenURL("https://steamcommunity.com/profiles/"..ply:SteamID64())
 		end
 
@@ -945,7 +945,7 @@ local snakeGameOpen = false
 
 concommand.Add("zb_snake", function() -- вот как здесь!
     if snakeGameOpen then
-        print("[贪吃蛇] 游戏已经在运行中！")
+        print("[贪吃蛇] 游戏正在运行中！")
         return
     end
 

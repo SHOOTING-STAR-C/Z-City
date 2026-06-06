@@ -12,7 +12,7 @@ elseif CLIENT then
 end
 
 SWEP.PrintName = "抓钩"
-SWEP.Instructions = "一个带有绳索的重型钢制抓钩。用于到达高处/远处或从高处安全下降。\n\n左键摆动/投掷\n左键拉紧绳索\n左键收绳\n右键放绳\nR键释放绳索"
+SWEP.Instructions = "重型钢制抓钩带绳索，可以荡到高处，也能从高处安全下降。\n\n左键挥舞/投掷\n左键拉紧绳索\n左键收绳\n右键放绳\nR键释放绳索"
 
 if CLIENT then
 	SWEP.WepSelectIcon = Material("vgui/wep_jack_hmcd_grapl")

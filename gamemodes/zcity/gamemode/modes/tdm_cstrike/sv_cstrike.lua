@@ -138,7 +138,7 @@ function MODE:Intermission()
         end)
     end
 
-    PrintMessage(HUD_PRINTTALK, "第 "..(self.Rounds - zb.RoundsLeft).." 回合，共 "..self.Rounds.." 回合。")
+    PrintMessage(HUD_PRINTTALK, "第 "..(self.Rounds - zb.RoundsLeft).."/"..self.Rounds.." 回合")
 
 	net.Start("tdm_start")
         net.WriteString(zb.rtype or "bomb")
@@ -155,7 +155,7 @@ concommand.Add("tdm_setrounds", function(ply, cmd, args)
     local played = oldRounds - oldLeft
     MODE.Rounds = math.max(tonumber(args[1]) or oldRounds, 1)
     zb.RoundsLeft = math.max(MODE.Rounds - played, 0)
-    PrintMessage(HUD_PRINTTALK, "TDM 回合数设置为 "..MODE.Rounds.."。剩余回合: "..zb.RoundsLeft)
+    PrintMessage(HUD_PRINTTALK, "TDM 回合数设为 "..MODE.Rounds.."。剩余: "..zb.RoundsLeft.." 回合")
 end)
 
 COMMANDS.nextcsround = {
@@ -163,12 +163,12 @@ COMMANDS.nextcsround = {
 		if not ply:IsAdmin() then ply:ChatPrint("你没有权限") return end
 		if string.lower(args[1]) == "bomb" then
             zb.nextcsround = "bomb"
-            PrintMessage(HUD_PRINTTALK, "选定的CS回合 - 炸弹")
+            PrintMessage(HUD_PRINTTALK, "已选定回合类型 - 炸弹")
         end
 
         if string.lower(args[1]) == "hostage" then
             zb.nextcsround = "hostage"
-            PrintMessage(HUD_PRINTTALK, "选定的CS回合 - 人质")
+            PrintMessage(HUD_PRINTTALK, "已选定回合类型 - 人质")
         end
 	end,
 	0
@@ -235,7 +235,7 @@ function MODE:EndRound()
                 end
                 
                 winner = maxTeam == 0 and 1 or 0
-                PrintMessage(HUD_PRINTTALK, (maxTeam == 0 and "恐怖分子" or "反恐精英") .. " 已杀死人质")
+                PrintMessage(HUD_PRINTTALK, (maxTeam == 0 and "恐怖分子" or "反恐精英") .. " 误杀了人质")
             else
                 winner = 3
             end
@@ -257,7 +257,7 @@ function MODE:EndRound()
 
     local winnerprt = (winner == 1 and "反恐精英") or (winner == 0 and "恐怖分子") or "无人"
 
-    PrintMessage(HUD_PRINTTALK, winnerprt.." 赢得了回合。")
+    PrintMessage(HUD_PRINTTALK, winnerprt.." 拿下了这一回合！")
 
 	for k,ply in player.Iterator() do
 		if ply:Team() == winner then
@@ -277,12 +277,12 @@ function MODE:EndRound()
 	if winsTeam0 > winsTeam1 then
 		for _, ply in ipairs(team.GetPlayers(1)) do
 			ply:SetNWInt("TDM_Money", math.max(ply:GetNWInt("TDM_Money") + 1000, 0))
-			ply:ChatPrint("你的队伍正在失利，你获得了1000金钱补偿。")
+			ply:ChatPrint("局势不利，已获得1000资金援助。")
 		end
 	elseif winsTeam1 > winsTeam0 then
 		for _, ply in ipairs(team.GetPlayers(0)) do
 			ply:SetNWInt("TDM_Money", math.max(ply:GetNWInt("TDM_Money") + 1000, 0))
-			ply:ChatPrint("你的队伍正在失利，你获得了1000金钱补偿。")
+			ply:ChatPrint("局势不利，已获得1000资金援助。")
 		end
 	end
 
@@ -315,7 +315,7 @@ function MODE:EndRound()
         if winner then
             local winnerprt = (winner == 1 and "反恐精英") or (winner == 0 and "恐怖分子") or "无人"
             
-            PrintMessage(HUD_PRINTTALK, winnerprt.." 赢得了比赛。")
+            PrintMessage(HUD_PRINTTALK, winnerprt.." 赢得了比赛！")
         end
 
         zb.RoundsLeft = nil

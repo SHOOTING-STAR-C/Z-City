@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "锤子"
-SWEP.Instructions = "一把普通的家用锤子，有钝面和尖面。用来阻挡路径或限制某人移动。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。\n右键+左键钉钉子。"
+SWEP.Instructions = "普通家用锤子，一头钝一头尖。可以用来封门堵路。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。\n右键+左键钉钉子。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

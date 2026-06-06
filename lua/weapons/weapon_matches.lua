@@ -14,7 +14,7 @@ if CLIENT then
 end
 
 SWEP.Author = "John Walker"
-SWEP.Instructions = "一个装有火柴的纸板盒。一侧边缘有粗糙的摩擦面，用于点燃里面的火柴。\n\n按住左键点燃一根火柴。"
+SWEP.Instructions = "一盒火柴，侧面有条粗糙的擦火面。\n\n按住左键划燃一根火柴。"
 SWEP.Category = "ZCity Other"
 
 SWEP.Spawnable = true

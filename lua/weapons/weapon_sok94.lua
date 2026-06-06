@@ -6,7 +6,7 @@ SWEP.AdminOnly = false
 
 SWEP.PrintName = "Vepr SOK-94-03"
 SWEP.Author = "Vyatskiye Polyany Machine-Building Plant"
-SWEP.Instructions = "SOK-94卡宾枪基于手动卡拉什尼科夫机枪设计，用于商业和业余的中大型动物狩猎。使用.366 TKM口径。"
+SWEP.Instructions = "俄罗斯Vepr半自动猎用卡宾枪，AK平台，.366 TKM口径，为中大型猎物狩猎设计。"
 SWEP.Category = "Weapons - Carbines"
 SWEP.ShockMultiplier = 1.5
 SWEP.Ergonomics = 0.85

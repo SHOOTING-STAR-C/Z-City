@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "止痛药"
-SWEP.Instructions = "可用于缓解疼痛（感谢明显先生）。右键对他人使用。"
+SWEP.Instructions = "缓解疼痛（这还用说吗）。右键对他人使用。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

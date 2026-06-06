@@ -37,20 +37,20 @@ net.Receive("HMCD_RoundStart",function()
 
 	if(lply.isTraitor and screen_time_is_default)then
 		if(MODE.TraitorExpectedAmt == 1)then
-			chat.AddText("你独自执行任务。")
+			chat.AddText("这次任务你只能靠自己。")
 		else
 			if(MODE.TraitorExpectedAmt == 2)then
-				chat.AddText("你有 1 个同伙")
+				chat.AddText("你有 1 名同伙")
 			else
-				chat.AddText("除此之外还有 " .. MODE.TraitorExpectedAmt - 1 .. " 个叛徒")
+				chat.AddText("此外还有 " .. MODE.TraitorExpectedAmt - 1 .. " 名叛徒")
 			end
 
-			chat.AddText("叛徒暗号是: \"" .. MODE.TraitorWord .. "\" 和 \"" .. MODE.TraitorWordSecond .. "\"")
+			chat.AddText("叛徒接头暗号：\"" .. MODE.TraitorWord .. "\" 和 \"" .. MODE.TraitorWordSecond .. "\"")
 		end
 
 		if(lply.MainTraitor)then
 			if(MODE.TraitorExpectedAmt > 1)then
-				chat.AddText("叛徒名单（只有你作为主叛徒才能看到）:")
+				chat.AddText("叛徒名单（仅主叛徒可见）：")
 			end
 
 			for key = 1, MODE.TraitorExpectedAmt do
@@ -88,7 +88,7 @@ net.Receive("HMCD_RoundStart",function()
 end)
 
 MODE.TypeNames = {
-	["standard"] = "标准",
+	["standard"] = "标准模式",
 	["soe"] = "紧急状态",
 	["gunfreezone"] = "禁枪区",
 	["suicidelunatic"] = "自杀狂徒",
@@ -146,21 +146,21 @@ surface.CreateFont("ZB_HomicideHumongous", {
 MODE.TypeObjectives = {}
 MODE.TypeObjectives.soe = {
 	traitor = {
-		objective = "你装备了大量物品、毒药、爆炸物和隐藏的武器。杀光这里的所有人。",
+		objective = "你携带了大量道具、毒药、爆炸物和隐藏武器。干掉所有人。",
 		name = "叛徒",
 		color1 = Color(190,0,0),
 		color2 = Color(190,0,0)
 	},
 
 	gunner = {
-		objective = "你是一名持有猎枪的平民。在为时已晚之前找到并消灭叛徒。",
+		objective = "你是一名持枪平民。在事态无法挽回之前找到并消灭叛徒。",
 		name = "平民",
 		color1 = Color(0,120,190),
 		color2 = Color(158,0,190)
 	},
 
 	innocent = {
-		objective = "你是无辜的，只能依靠自己，但最好和人群待在一起，让叛徒更难下手。",
+		objective = "你是无辜的，只能靠自己。最好和大部队待在一起，别落单给叛徒可乘之机。",
 		name = "平民",
 		color1 = Color(0,120,190)
 	},
@@ -168,44 +168,44 @@ MODE.TypeObjectives.soe = {
 
 MODE.TypeObjectives.standard = {
 	traitor = {
-		objective = "你装备了大量物品、毒药、爆炸物和隐藏的武器。杀光这里的所有人。",
-		name = "杀人犯",
+		objective = "你携带了大量道具、毒药、爆炸物和隐藏武器。干掉所有人。",
+		name = "凶手",
 		color1 = Color(190,0,0),
 		color2 = Color(190,0,0)
 	},
 
 	gunner = {
-		objective = "你是一名携带隐蔽枪支的旁观者。你要帮助警察更快找到罪犯。",
-		name = "旁观者",
+		objective = "你是一名携带隐蔽枪支的目击者。协助警方尽快找到凶手。",
+		name = "目击者",
 		color1 = Color(0,120,190),
 		color2 = Color(158,0,190)
 	},
 
 	innocent = {
-		objective = "你是谋杀现场的旁观者，尽管受害者不是你，但你最好小心行事。",
-		name = "旁观者",
+		objective = "你是凶案现场的目击者。受害者不是你，但你最好处处小心。",
+		name = "目击者",
 		color1 = Color(0,120,190)
 	},
 }
 
 MODE.TypeObjectives.wildwest = {
 	traitor = {
-		objective = "这个镇子容不下我们所有人。",
+		objective = "这个小镇容不下我们所有人。",
 		name = "杀手",
 		color1 = Color(190,0,0),
 		color2 = Color(190,0,0)
 	},
 
 	gunner = {
-		objective = "你是这个镇的警长。你必须找到并杀死那个无法无天的混蛋。",
+		objective = "你是本镇的警长。找到那个无法无天的混蛋，一枪崩了他。",
 		name = "警长",
 		color1 = Color(0,120,190),
 		color2 = Color(158,0,190)
 	},
 
 	innocent = {
-		objective = "我们必须在这里伸张正义，有个无法无天的混蛋在杀人。",
-		name = "牛仔同伴",
+		objective = "我们必须在此伸张正义。有个疯子正在四处杀人。",
+		name = "牛仔",
 		color1 = Color(0,120,190),
 		color2 = Color(158,0,190)
 	},
@@ -213,41 +213,41 @@ MODE.TypeObjectives.wildwest = {
 
 MODE.TypeObjectives.gunfreezone = {
 	traitor = {
-		objective = "你装备了大量物品、毒药、爆炸物和隐藏的武器。杀光这里的所有人。",
-		name = "杀人犯",
+		objective = "你携带了大量道具、毒药、爆炸物和隐藏武器。干掉所有人。",
+		name = "凶手",
 		color1 = Color(190,0,0),
 		color2 = Color(190,0,0)
 	},
 
 	gunner = {
-		objective = "你是谋杀现场的旁观者，尽管受害者不是你，但你最好小心行事。",
-		name = "旁观者",
+		objective = "你是凶案现场的目击者。受害者不是你，但你最好处处小心。",
+		name = "目击者",
 		color1 = Color(0,120,190)
 	},
 
 	innocent = {
-		objective = "你是谋杀现场的旁观者，尽管受害者不是你，但你最好小心行事。",
-		name = "旁观者",
+		objective = "你是凶案现场的目击者。受害者不是你，但你最好处处小心。",
+		name = "目击者",
 		color1 = Color(0,120,190)
 	},
 }
 
 MODE.TypeObjectives.suicidelunatic = {
 	traitor = {
-		objective = "我的兄弟，愿真主保佑，不要让他失望。",
-		name = " 殉道者",
+		objective = "我的兄弟，真主与你同在，别让他失望。",
+		name = "殉道者",
 		color1 = Color(190,0,0),
 		color2 = Color(190,0,0)
 	},
 
 	gunner = {
-		objective = "那疯子已经失控了，现在你需要活下来。",
+		objective = "那个疯子已经失控了。想办法活下去吧。",
 		name = "平民",
 		color1 = Color(0,120,190)
 	},
 
 	innocent = {
-		objective = "那疯子已经失控了，现在你需要活下来。",
+		objective = "那个疯子已经失控了。想办法活下去吧。",
 		name = "平民",
 		color1 = Color(0,120,190)
 	},
@@ -256,21 +256,21 @@ MODE.TypeObjectives.suicidelunatic = {
 
 MODE.TypeObjectives.supermario = {
 	traitor = {
-		objective = "你是邪恶的马里奥！跳来跳去，打倒所有人。",
-		name = "叛徒马里奥",
+		objective = "你是邪恶的马里奥！跳来跳去，把所有人踩扁！",
+		name = "邪恶马里奥",
 		color1 = Color(190,0,0),
 		color2 = Color(190,0,0)
 	},
 
 	gunner = {
-		objective = "你是英雄马里奥！利用你的跳跃能力阻止叛徒。",
+		objective = "你是英雄马里奥！用你的跳跃能力阻止叛徒。",
 		name = "英雄马里奥",
 		color1 = Color(158,0,190),
 		color2 = Color(158,0,190)
 	},
 
 	innocent = {
-		objective = "你是旁观者马里奥，生存下来并避开叛徒的陷阱！",
+		objective = "你是平民马里奥！活下来，小心叛徒的陷阱！",
 		name = "平民马里奥",
 		color1 = Color(0,120,190)
 	},
@@ -292,17 +292,17 @@ function MODE:RenderScreenspaceEffects()
 end
 
 local handicap = {
-	[1] = "你有身体障碍：右腿骨折。",
-	[2] = "你有身体障碍：你患有严重肥胖症。",
-	[3] = "你有身体障碍：你患有血友病。",
-	[4] = "你有身体障碍：你身体失能了。"
+	[1] = "你身有残疾：右腿骨折。",
+	[2] = "你身有残疾：严重肥胖症。",
+	[3] = "你身有残疾：血友病。",
+	[4] = "你身有残疾：身体瘫痪。"
 }
 
 function MODE:HUDPaint()
 	if not MODE.Type or not MODE.TypeObjectives[MODE.Type] then return end
 	if lply:Team() == TEAM_SPECTATOR then return end
 	if StartTime + 12 < CurTime() then return end
-	
+
 	fade = Lerp(FrameTime()*1, fade, math.Clamp(StartTime + 5 - CurTime(),-2,2))
 
 	draw.SimpleText("杀人游戏 | " .. (MODE.TypeNames[MODE.Type] or "未知"), "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0,162,255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -334,7 +334,7 @@ function MODE:HUDPaint()
 	if(!lply.MainTraitor and lply.isTraitor)then
 		cur_y = cur_y + ScreenScale(20)
 
-		draw.SimpleText("助手", "ZB_HomicideMedium", sw * 0.5, cur_y, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText("同伙", "ZB_HomicideMedium", sw * 0.5, cur_y, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 
@@ -345,7 +345,7 @@ function MODE:HUDPaint()
 			MODE.TraitorsLocal = MODE.TraitorsLocal or {}
 
 			if(#MODE.TraitorsLocal > 1)then
-				draw.SimpleText("叛徒名单:", "ZB_HomicideMedium", sw * 0.5, cur_y, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText("叛徒名单：", "ZB_HomicideMedium", sw * 0.5, cur_y, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 				for _, traitor_info in ipairs(MODE.TraitorsLocal) do
 					local traitor_color = Color(traitor_info[1].r, traitor_info[1].g, traitor_info[1].b, 255 * fade)
@@ -355,7 +355,7 @@ function MODE:HUDPaint()
 				end
 			end
 		else
-			draw.SimpleText("叛徒暗号:", "ZB_HomicideMedium", sw * 0.5, cur_y, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			draw.SimpleText("接头暗号：", "ZB_HomicideMedium", sw * 0.5, cur_y, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 			cur_y = cur_y + ScreenScale(15)
 
@@ -370,9 +370,9 @@ function MODE:HUDPaint()
 	if(lply.Profession and lply.Profession != "")then
 		cur_y = cur_y + ScreenScale(20)
 
-		draw.SimpleText("职业: " .. ((MODE.Professions[lply.Profession] and MODE.Professions[lply.Profession].Name or lply.Profession) or lply.Profession), "ZB_HomicideMedium", sw * 0.5, cur_y, color_role_innocent, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText("职业：" .. ((MODE.Professions[lply.Profession] and MODE.Professions[lply.Profession].Name or lply.Profession) or lply.Profession), "ZB_HomicideMedium", sw * 0.5, cur_y, color_role_innocent, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
-	
+
 	if(handicap[lply:GetLocalVar("karma_sickness", 0)])then
 		cur_y = cur_y + ScreenScale(20)
 
@@ -388,7 +388,7 @@ function MODE:HUDPaint()
 	end
 
 	if(!lply.MainTraitor and lply.isTraitor)then
-		Objective = "你没有装备任何物品。帮助其他叛徒获胜。"
+		Objective = "你没有携带任何装备。协助其他叛徒获胜。"
 	end
 
 	--; WARNING Traitor's objective is not lined up with SubRole's
@@ -447,7 +447,7 @@ net.Receive("hmcd_announce_traitor_lose", function()
 	local traitor_alive = net.ReadBool()
 
 	if(IsValid(traitor))then
-		chat.AddText(color_white, (traitor_alive and "" or "叛徒 "), traitor:GetPlayerColor():ToColor(), traitor:GetPlayerName() .. ", " .. traitor:Nick(), color_white, " " .. (traitor_alive and "是叛徒。" or "被杀了。"))
+		chat.AddText(color_white, (traitor_alive and "" or "叛徒 "), traitor:GetPlayerColor():ToColor(), traitor:GetPlayerName() .. ", " .. traitor:Nick(), color_white, " " .. (traitor_alive and "是叛徒。" or "已被击杀。"))
 	end
 end)
 
@@ -494,7 +494,7 @@ CreateEndMenu = function(traitor)
 	for i, ply in player.Iterator() do
 		if ply:Team() == TEAM_SPECTATOR then continue end
 		if !IsValid(ply) then return end
-		
+
 		players[#players + 1] = {
 			nick = ply:Nick(),
 			name = ply:GetPlayerName(),
@@ -589,7 +589,7 @@ CreateEndMenu = function(traitor)
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
 			local lengthX, lengthY = surface.GetTextSize(info.name)
 			surface.SetTextPos(15, h / 2 - lengthY / 2)
-			surface.DrawText(info.name .. ((!info.alive and " - 死亡") or (info.incapacitated and " - incapacitated") or ""))
+			surface.DrawText(info.name .. ((!info.alive and " - 已击杀") or (info.incapacitated and " - incapacitated") or ""))
 
 			surface.SetFont("ZB_InterfaceMediumLarge")
 			surface.SetTextColor(col.r, col.g, col.b, col.a)

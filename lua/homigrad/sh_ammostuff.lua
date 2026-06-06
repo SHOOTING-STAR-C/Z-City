@@ -3032,7 +3032,7 @@ if CLIENT then
         local DLabel = vgui.Create( "DLabel", Frame )
         DLabel:SetPos( 10, 268 )
 		DLabel:SetTextColor(color_white)
-        DLabel:SetText( "左键 - 丢弃指定数量\n右键 - 丢弃全部" )
+        DLabel:SetText( "左键 - 取出指定数量\n右键 - 取出全部" )
 		DLabel:SetFont("HomigradFontVSmall")
         DLabel:SizeToContents()
         local DLabel = vgui.Create( "DLabel", Frame )
@@ -3057,7 +3057,7 @@ if CLIENT then
 
 					return 0
 				end,
-				"丢弃弹药"
+				"取出弹药"
 			}
 		end
 	end)
@@ -3071,14 +3071,14 @@ if SERVER then
         local ammotype = net.ReadFloat()
         local count = net.ReadFloat()
         local pos = ply:EyePos()+ply:EyeAngles():Forward()*15
-        if ply:GetAmmoCount(ammotype)-count < 0 then ply:ChatPrint(((math.random(1,100) == 100 or 1) and "我需要更多子弹！！！" ) or "你没有足够的弹药") return end
-        if count < 1 then ply:ChatPrint("你不能丢弃零发弹药") return end
-			--if not ammolistent[ammotype] then ply:ChatPrint("无效的实体类型...") return end
+        if ply:GetAmmoCount(ammotype)-count < 0 then ply:ChatPrint(((math.random(1,100) == 100 or 1) and "弹药不够啊！！！" ) or "弹药不够") return end
+        if count < 1 then ply:ChatPrint("不能丢零发出去啊") return end
+			--if not ammolistent[ammotype] then ply:ChatPrint("无法识别的物品类型……") return end
 			--print(game.GetAmmoName(ammotype))
 		
         local AmmoEnt = ents.Create( "ent_ammo_"..string.lower( string.Replace(game.GetAmmoName(ammotype)," ", "") ) )
 		if not IsValid(AmmoEnt) then
-			ply:ChatPrint("无效的实体类型...")
+			ply:ChatPrint("无法识别的物品类型……")
 		else
 			AmmoEnt:SetPos( pos )
 			AmmoEnt:Spawn()

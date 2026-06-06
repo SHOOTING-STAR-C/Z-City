@@ -544,7 +544,7 @@ function PANEL:PostInit()
         local presetName = presetNameEntry:GetValue()
         if presetName == "" or #presetName < 2 then
             surface.PlaySound("buttons/button10.wav")
-            notification.AddLegacy("输入预设名称（最少2个字符）", NOTIFY_ERROR, 3)
+            notification.AddLegacy("请输入预设名称（至少2个字符）", NOTIFY_ERROR, 3)
             return
         end
         
@@ -572,7 +572,7 @@ function PANEL:PostInit()
         local presetList = GetPresetList()
         if #presetList == 0 then
             surface.PlaySound("buttons/button10.wav")
-            notification.AddLegacy("还没有保存的预设！", NOTIFY_ERROR, 3)
+            notification.AddLegacy("暂无已保存的预设！", NOTIFY_ERROR, 3)
             return
         end
         
@@ -655,7 +655,7 @@ function PANEL:PostInit()
         local presetName = presetNameEntry:GetValue()
         if presetName == "" then
             surface.PlaySound("buttons/button10.wav")
-            notification.AddLegacy("输入要删除的预设名称", NOTIFY_ERROR, 3)
+            notification.AddLegacy("请输入要删除的预设名称", NOTIFY_ERROR, 3)
             return
         end
         

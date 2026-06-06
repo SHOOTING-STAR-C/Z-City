@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "铅管"
-SWEP.Instructions = "一根铅管的一部分，可以用来殴打某人，暴乱的好家伙。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "一截铅管，街头斗殴的经典选择，闷声一棍下去直接躺平。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

@@ -160,7 +160,7 @@ OpenMenu = function(tbl)
         but.ply = ply
         but.name = ply:Name()
         but.harm = harm
-        local txt = "原谅 "..but.name.."? 你将原谅他 "..math.Round(but.harm,1).." 业力值。"
+        local txt = "原谅 "..but.name.."? 你将原谅他 "..math.Round(but.harm,1).." 因果值。"
         local clr = 255
         but.Paint = function(self,w,h)
             BlurBackground(self)

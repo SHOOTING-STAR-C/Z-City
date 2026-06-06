@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "减压针"
-SWEP.Instructions = "针头减压用于治疗张力性气胸。左键对自己使用；右键对他人使用。"
+SWEP.Instructions = "用于张力性气胸的紧急减压。左键扎自己；右键扎别人。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

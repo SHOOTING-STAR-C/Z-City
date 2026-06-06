@@ -126,10 +126,10 @@ end)
 
 local lowoxy = {
 	"我要晕了……氧气不够了……",
-	"氧气不够了……我撑不了多久了……",
-	"我真的需要吸点新鲜空气……",
-	"我在喘不上气……",
-	"得呼吸啊……不然就要在这晕倒了……"
+	"氧气不够了……撑不了多久了……",
+	"真的得吸点新鲜空气……",
+	"我喘不上气了……",
+	"得呼吸……不然就要在这晕倒了……"
 }
 
 local not_enough_intake = {
@@ -142,8 +142,8 @@ local not_enough_intake = {
 }
 
 local drop_mask = {
-	"戴着这面具我没法呼吸……得摘了它。",
-	"把面具扔了吧，不值得……",
+	"戴着这玩意儿没法呼吸……得摘了。",
+	"把面具扔了吧，不值当……",
 	"真他妈恶心……戴着这玩意根本喘不上气……",
 	"太他妈臭了……得把这面具摘了……",
 }
@@ -251,7 +251,7 @@ module[2] = function(owner, org, timeValue)
 	if org.isPly and not org.otrub and o2.curregen < losing_oxy and org.analgesia <= 1.5 and !org.heartstop then
 		if mask_blevota then
 			if o2[1] < 15 then
-				org.owner:Notify("快他妈把面具摘了！", 25, "take_gasmask2", 0, nil, color_red2)
+				org.owner:Notify("赶紧把这破面具摘了！", 25, "take_gasmask2", 0, nil, color_red2)
 			else
 				org.owner:Notify(drop_mask[math.random(#drop_mask)], 15, "take_gasmask", 0)
 			end
@@ -306,19 +306,19 @@ module[2] = function(owner, org, timeValue)
 
 	if org.isPly then
 		if org.pneumothorax > 0 then
-			org.owner:Notify("我感觉有什么东西在灌进我的肺里。", true, "pneumothorax1",10) // delay of 10 seconds before typing that
+			org.owner:Notify("好像有什么东西灌进肺里了。", true, "pneumothorax1",10) // delay of 10 seconds before typing that
 		else
 			org.owner:ResetNotification("pneumothorax1")
 		end
 
 		if org.pneumothorax > 0.3 then
-			org.owner:Notify("呼吸越来越困难了。", true, "pneumothorax2", 5)
+			org.owner:Notify("呼吸越来越费劲了。", true, "pneumothorax2", 5)
 		else
 			org.owner:ResetNotification("pneumothorax2")
 		end
 
 		if org.pneumothorax > 0.5 then
-			org.owner:Notify("我真的快喘不上气了……", true, "pneumothorax3", 5)
+			org.owner:Notify("我快喘不上气了……", true, "pneumothorax3", 5)
 		else
 			org.owner:ResetNotification("pneumothorax3")
 		end
@@ -389,7 +389,7 @@ module[2] = function(owner, org, timeValue)
 
 	if org.isPly then
 		if org.brain > 0.1 and org.brain < 0.3 then
-			org.owner:Notify(math.random(2) == 1 and "我脑袋好疼……" or "我在哪……？", true, "brain", 5)
+			org.owner:Notify(math.random(2) == 1 and "我头好疼……" or "我这是在哪……？", true, "brain", 5)
 		else
 			org.owner:ResetNotification("brain") 
 		end

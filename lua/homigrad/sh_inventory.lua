@@ -38,7 +38,7 @@ if CLIENT then
 		if entss then return entss.PrintName end
 		if hg.armor and hg.armor[i] and hg.armor[i][thing] then return thing end
 		if hg.attachmentslaunguage and hg.attachmentslaunguage[thing] then return thing end
-		if i == "Money" then return "金钱, " .. tostring(thing) .. "$" end
+		if i == "Money" then return "金钱：" .. tostring(thing) .. "$" end
 		return tostring(i)
 	end
 
@@ -309,7 +309,7 @@ if CLIENT then
 					
 					if not functions[tab](ply, ent, i, unpack(thing1)) then
 						local OptionsMenu = DermaMenu() 
-							OptionsMenu:AddOption( "你已有此类物品", function() end )
+							OptionsMenu:AddOption( "你已经有了", function() end )
 						OptionsMenu:Open()
 						return
 					end
@@ -334,7 +334,7 @@ if CLIENT then
 					
 					if not functions[tab](ply, ent, i, unpack(thing1)) then
 						local OptionsMenu = DermaMenu() 
-							OptionsMenu:AddOption( "你已有此类物品", function() end )
+							OptionsMenu:AddOption( "你已经有了", function() end )
 						OptionsMenu:Open()
 						return
 					end

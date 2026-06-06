@@ -199,8 +199,8 @@ net.Receive("tdm_buyitem",function(len,ply)
 	if not item then return end
 
 	if tItem[3] then
-		if not ply:HasWeapon(item.ItemClass) then ply:ChatPrint("没有武器无法购买此配件。") return end
-		if ((ply:GetNWInt("TDM_Money",0) - AttachmentPrice) < 0) then ply:ChatPrint("金钱不足。") return end
+		if not ply:HasWeapon(item.ItemClass) then ply:ChatPrint("你需要先拥有这把武器。") return end
+		if ((ply:GetNWInt("TDM_Money",0) - AttachmentPrice) < 0) then ply:ChatPrint("余额不足。") return end
 
 		local wep = ply:GetWeapon(item.ItemClass)
 		hg.AddAttachmentForce( ply,wep,tItem[3] )
@@ -210,7 +210,7 @@ net.Receive("tdm_buyitem",function(len,ply)
 		return
 	end
 
-	if ((ply:GetNWInt("TDM_Money",0) - item.Price) < 0) then ply:ChatPrint("金钱不足。") return end
+	if ((ply:GetNWInt("TDM_Money",0) - item.Price) < 0) then ply:ChatPrint("余额不足。") return end
 	local ent = ply:Give(item.ItemClass)
 	
 	if ent.Use and IsValid(ent) then

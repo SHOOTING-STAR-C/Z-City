@@ -23,7 +23,7 @@ function SWEP:CanReload()
 
 	if ply.organism and (ply.organism.larmamputated or ply.organism.rarmamputated) then
 		if not self.Notified and self:Clip1() < self:GetMaxClip1() then
-			ply:Notify("我没法用手重新装弹...", 10)
+			ply:Notify("手动不了，装不了弹...", 10)
 			self.Notified = true
 		end
 		return false

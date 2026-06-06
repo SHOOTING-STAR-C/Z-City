@@ -507,7 +507,7 @@ local function OpenBuyMenu()
 	lbl:SetSize(0,ScrH()*0.02)
 
 	function lbl:Think()
-		self:SetText("Cash: $"..LocalPlayer():GetNWInt("TDM_Money",0))
+		self:SetText("现金: $"..LocalPlayer():GetNWInt("TDM_Money",0))
 	end
 
 end

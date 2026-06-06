@@ -166,7 +166,7 @@ function zb.SendPointsToPly(ply, shouldprint)
     net.Send(ply)
 
     if shouldprint then
-        ply:ChatPrint("点位: 点位已转移")
+        ply:ChatPrint("点位: 点位已同步")
     end
 end
 
@@ -190,7 +190,7 @@ function zb.SendSpecificPointsToPly(ply, pointGroup, shouldprint)
         net.Send(ply)
         
         if shouldprint then
-            ply:ChatPrint("点位: 点位已转移")
+            ply:ChatPrint("点位: 点位已同步")
         end
     else
         net.Broadcast()

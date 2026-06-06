@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "SOG SEAL 2000"
-SWEP.Instructions = "海豹突击队使用的一把正经大号刀具（美国海军特种部队）。近战武器的好选择。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。"
+SWEP.Instructions = "海豹突击队配发的大型战术刀，一刀在手，近战不愁。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

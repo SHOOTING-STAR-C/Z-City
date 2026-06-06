@@ -2,16 +2,16 @@ if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik_base"
 SWEP.PrintName = "M67手雷"
 SWEP.Instructions =
-[[M67破片手雷自1968年以来被世界上许多国家使用。其烟火延期为4-5.5秒。
+[[M67破片手雷，1968年列装，至今仍是多国军队的主力手雷。其延迟引信约为4-5.5秒。
 
-左键 - 高位待机
-高位待机时：
-右键移除保险片。
+左键 - 高抛准备
+高抛状态下：
+右键拔掉保险片。
 R键插回保险针。
 
-右键 - 低位待机
-低位待机时：
-左键移除保险片。
+右键 - 低抛准备
+低抛状态下：
+左键拔掉保险片。
 R键插回保险针。]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true

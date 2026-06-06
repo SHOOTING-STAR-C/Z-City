@@ -10,7 +10,7 @@ end)
 
 local teams = {
 	[0] = {
-		objective = "击杀所有联合军并生存下来。",
+		objective = "消灭联合军，活到最后。",
 		name = "反抗军",
 		name_refugee = "难民",
 		color1 = Color(230,100,5),
@@ -22,7 +22,7 @@ local teams = {
 	[1] = {
         objective = "消灭所有反抗军。",
         name = "联合军士兵",
-        name_elite = "精英联合军士兵",
+        name_elite = "联合军精英",
         name_shotgunner = "联合军霰弹枪手",
         color1 = Color(0, 200, 220), -- самый
         color2 = Color(0, 180, 200),
@@ -163,7 +163,7 @@ CreateEndMenu = function()
 	--hmcdEndMenu:SetBackgroundColor(colGray)
 	hmcdEndMenu:MakePopup()
 	hmcdEndMenu:SetKeyboardInputEnabled(false)
-	hmcdEndMenu:Show关闭Button(false)
+	hmcdEndMenu:ShowCloseButton(false)
 
 	local closebutton = vgui.Create("DButton",hmcdEndMenu)
 	closebutton:SetPos(5,5)
@@ -172,7 +172,7 @@ CreateEndMenu = function()
 	
 	closebutton.DoClick = function()
 		if IsValid(hmcdEndMenu) then
-			hmcdEndMenu:关闭()
+			hmcdEndMenu:Close()
 			hmcdEndMenu = nil
 		end
 	end

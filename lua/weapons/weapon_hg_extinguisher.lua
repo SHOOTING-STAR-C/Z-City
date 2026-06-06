@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "灭火器"
-SWEP.Instructions = "这是一个手持式圆柱形压力容器，装有可喷射灭火的药剂。\n\n左键攻击。\nR切换模式。\n右键格挡。"
+SWEP.Instructions = "便携式圆柱压力罐，既能灭火，也能当钝器砸人。\n\n左键攻击。\nR切换模式。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

@@ -14,7 +14,7 @@ if CLIENT then
 	    local wep = ply:GetActiveWeapon()
 	    local type_ = math.Round(args[1])
 	    if wep and ishgweapon(wep) and (wep:Clip1() == 0 or wep.AllwaysChangeAmmo) and wep:CanUse() and wep.AmmoTypes and wep.AmmoTypes[type_] then
-	        ply:ChatPrint("弹药类型已切换为: " .. wep.AmmoTypes[type_][1])
+	        ply:ChatPrint("弹药已切换至: " .. wep.AmmoTypes[type_][1])
 	        net.Start("changeAmmoType")
 	        net.WriteEntity(wep)
 	        net.WriteInt(type_, 4)
@@ -77,7 +77,7 @@ hg.postures = {
     [6] = "掩体射击",
     [7] = {"黑帮持枪",isPistolOnly = true},
     [8] = {"单手射击",isPistolOnly = true},
-	[9] = "索马里式",
+    [9] = "索马里式射击",
 }
 
 if CLIENT then
@@ -124,18 +124,18 @@ else
 		end
 
 		if pos == -2 then
-			-- 重置为自动模式
+			-- 恢复为自动模式
 			ply.customPosture = false
-			-- 根据当前武器类型设置默认姿势
+			-- 根据当前武器类型设定默认姿态
 			local gun = ply:GetActiveWeapon()
 			ply.posture = (IsValid(gun) and ishgweapon(gun) and gun:IsPistolHoldType()) and 3 or 0
 		elseif pos == -1 then
-			-- 轮切（恢复原来的逻辑）
+			-- 轮切（原有的轮换逻辑）
 			ply.customPosture = true
 			ply.posture = ply.posture or 0
 			ply.posture = (ply.posture + 1) > #hg.postures and 0 or ply.posture + 1
 		else
-			-- 手动设置姿势
+			-- 手动选择姿态
 			ply.customPosture = true
 			if pos == ply.posture then
 				ply.posture = 0

@@ -2,12 +2,12 @@
 SWEP.Base = "weapon_hg_grenade_tpik"
 SWEP.PrintName = "莫洛托夫鸡尾酒"
 SWEP.Instructions =
-[[手工制作的莫洛托夫鸡尾酒是一种燃烧武器，由装有易燃物质的易碎容器制成，并配有引信。
+[[自制燃烧武器，用易燃液体加引信做成。便宜好使，打群架必备。
 
-左键 - 高位待机
+左键 - 高抛准备
 高位待机时：
 
-右键 - 低位待机
+右键 - 低抛准备
 低位待机时：]]--"тильда двуеточее три"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true

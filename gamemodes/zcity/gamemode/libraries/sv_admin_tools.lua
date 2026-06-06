@@ -5,7 +5,7 @@ COMMANDS.sendtospawn = {
 		for i, ply2 in pairs(player.GetListByName(plya)) do
 			if ply2:Alive() then
 				ply2:Spawn()
-				ply:ChatPrint( ply2:Name().. " | 已传送到随机出生点..." )
+				ply:ChatPrint( ply2:Name().. " | 已传送至随机出生点" )
 			end
 		end
 	end,
@@ -23,7 +23,7 @@ COMMANDS.give = {
                 if not IsValid(ent) then return end
 
                 ent:Use(ply2)
-				ply:ChatPrint( ply2:Name().. " | 已给予武器" )
+				ply:ChatPrint( ply2:Name().. " | 武器已发放" )
 			end
 		end
 	end,

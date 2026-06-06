@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "医疗包"
-SWEP.Instructions = "一个装有医疗用品的小包。里面有绷带、止痛药、止血带和内出血药物。远足、军旅生活中的必需品，也是日常生活中的必要之物。右键对他人使用，R键切换使用模式。"
+SWEP.Instructions = "装有医疗用品的急救包：绷带、止痛药、止血带、内出血药物和减压针。行军打仗、日常生活都离不开它。右键对他人使用，R 键切换模式。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

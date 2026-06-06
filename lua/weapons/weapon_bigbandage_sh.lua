@@ -2,7 +2,7 @@ if SERVER then AddCSLuaFile() end
 
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "大绷带"
-SWEP.Instructions = "一卷纱布绷带，可以帮助止住轻度出血。由于绷带没有包装，不太可能是无菌的。右键对他人使用。"
+SWEP.Instructions = "一卷纱布绷带，可止住轻度出血。因未密封包装，不能保证无菌。右键对他人使用。"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.modeValuesdef = {

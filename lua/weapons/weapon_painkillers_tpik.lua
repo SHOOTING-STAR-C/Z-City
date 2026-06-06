@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik_base"
 SWEP.PrintName = "Painkillers"
-SWEP.Instructions = "可用于缓解疼痛（感谢明显先生）。右键对他人使用。"
+SWEP.Instructions = "缓解疼痛（这还用说吗）。右键对他人使用。"
 SWEP.Category = "ZCity Anims items"
 SWEP.Spawnable = false
 SWEP.AdminOnly = false

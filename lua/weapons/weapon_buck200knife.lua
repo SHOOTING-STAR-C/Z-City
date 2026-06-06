@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "Buck 120 General"
-SWEP.Instructions = "大型猎刀，带有血槽，可以进行造成严重出血的刺击。在电影《惊声尖叫》中被用作杀手的主要武器。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。"
+SWEP.Instructions = "大型猎刀，带血槽，刺中能造成严重出血。《惊声尖叫》里的杀手同款。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

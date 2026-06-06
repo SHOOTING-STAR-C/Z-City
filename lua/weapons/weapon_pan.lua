@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "平底锅"
-SWEP.Instructions = "一个铸铁烹饪锅，能打出致命一击。不能防弹。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "铸铁平底锅，抡起来虎虎生风。可惜挡不了子弹。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

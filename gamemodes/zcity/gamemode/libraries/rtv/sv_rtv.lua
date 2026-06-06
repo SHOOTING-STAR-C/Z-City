@@ -476,7 +476,7 @@ function zb.CheckRTVVotes(needPrint)
     if votes >= votesNeeded then
         if needPrint then
             for _, v in player.Iterator() do
-                v:ChatPrint("足够的票数来更换地图。RTV将在下一回合进行。")
+                v:ChatPrint("换图票数已达标，将在下一回合进行投票。")
             end
         end
         
@@ -496,7 +496,7 @@ local function rtv(ply, args)
     
     if rtvVotes[steamID] then
         rtvVotes[steamID] = nil
-        ply:ChatPrint("你取消了更换地图的投票。")
+        ply:ChatPrint("你已取消换图投票。")
         
         local votesNeeded = math.ceil(#player.GetAll() / 2)
         local votes = table.Count(rtvVotes)
@@ -532,8 +532,8 @@ local function rtv(ply, args)
     for _, v in player.Iterator() do
         if remaining != 0 then
             v:ChatPrint(
-                ply:Nick() .. " 投票更换地图。" .. 
-                remaining .. " 还需要更多票。再次输入 !rtv 取消你的投票。"
+                ply:Nick() .. " 发起了换图投票，" ..
+                "还需 " .. remaining .. " 票。输入 !rtv 投票，再次输入可取消。"
             )
         end
     end

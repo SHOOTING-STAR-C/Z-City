@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "Fury-13"
-SWEP.Instructions = "Fury-13（不要与\"Furry-13\"混淆，那是一种无关的病原体病毒株）是一种极其强效的刺激剂药物。这种药物并非\"修改\"你的身体机能，而是旨在提供额外的资源，使您比以往任何时候都更强大。副作用可能包括永久性脑损伤。请勿对感染者使用。"
+SWEP.Instructions = "强效战斗兴奋剂，极大提升体能和战斗表现。副作用包括永久性脑损伤。切勿对感染者使用。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

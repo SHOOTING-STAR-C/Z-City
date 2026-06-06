@@ -1,7 +1,7 @@
 ENT.Type = "anim"
 ENT.Author = "Sadsalat"
 ENT.Category = "ZCity Other"
-ENT.PrintName = "烟花基础"
+ENT.PrintName = "烟花"
 ENT.IconOverride = "entities/gf2_rocket_large_01.png"
 ENT.Spawnable = true
 ENT.AdminOnly = true

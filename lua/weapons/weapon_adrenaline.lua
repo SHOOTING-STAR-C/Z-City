@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "肾上腺素自动注射器"
-SWEP.Instructions = "肾上腺素，也称为epinephrine，是一种激素和药物，参与调节内脏功能。用于升高血压和/或停止心脏骤停。右键对他人注射。"
+SWEP.Instructions = "肾上腺素（Epinephrine），用于升高血压和心脏骤停急救。右键对他人注射。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

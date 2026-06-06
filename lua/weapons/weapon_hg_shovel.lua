@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "铲子"
-SWEP.Instructions = "铲子虽然又大又慢，但它的打击力可不小。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "又大又沉，挥起来慢，但一铲子下去能让你怀疑人生。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

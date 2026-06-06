@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
-SWEP.PrintName = "大消耗品"
-SWEP.Instructions = "零食总是有用的，无论什么情况。吃点东西，等待并恢复你的健康。"
+SWEP.PrintName = "大份食物"
+SWEP.Instructions = "啥时候都少不了零食。吃点东西垫垫肚子，慢慢回血。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

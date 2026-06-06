@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "血袋"
-SWEP.Instructions = "一个装有必要输血器械的塑料袋。可用于帮助处理大量失血。"
+SWEP.Instructions = "内含输血器械的血袋，用于大量失血时的紧急输血。R 键切换采血/输血模式。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1
@@ -245,7 +245,7 @@ else
 		local mode = self:GetNetVar("mode",2) - 1
 		if mode == 0 then mode = 2 end
 		local modeStr = self.modeNames2[mode]
-		self.modeNames[1] = self:GetNetVar("modeValues", {})[1] == 0 and modeStr .. " | 受血者: " .. ent.organism.bloodtype or modeStr .. " | 输入: "..self:GetNetVar("type","o-").." | 受血者: "..ent.organism.bloodtype
+		self.modeNames[1] = self:GetNetVar("modeValues", {})[1] == 0 and modeStr .. " | 受血者: " .. ent.organism.bloodtype or modeStr .. " | 血源: "..self:GetNetVar("type","o-").." | 受血者: "..ent.organism.bloodtype
 	end
 
 	function SWEP:AfterDrawModel(wm,nodraw)

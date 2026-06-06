@@ -585,8 +585,8 @@ elseif SERVER then
     }
 
     local phrases = {
-        "戈登·弗里曼已阵亡。现在该怎么办？",
-        "他已阵亡。现在谁来带路？",
+        "戈登·弗里曼已阵亡。接下来该怎么办？",
+        "他已倒下。现在谁来领路？",
         "戈登·弗里曼未能完成任务。",
         "如此优秀的员工竟落得这般不幸的结局。",
     }
@@ -616,7 +616,7 @@ elseif SERVER then
             if org.brain > 0.1 then
                 org.mannitol = org.brain * 2
                 --ply, msg, delay, msgKey, showTime, func, clr)
-                ply:Notify("HEV 护甲检测到创伤性脑损伤。正在注射甘露醇。",true,"mannitol_hev",0.5,function(ply)
+                ply:Notify("HEV 护甲检测到脑损伤。正在注射甘露醇。",true,"mannitol_hev",0.5,function(ply)
                     net.Start("HEV_DAMAGE")
                         net.WriteString("hl1/fvox/automedic_on.wav")
                     net.Send(ply)
@@ -650,7 +650,7 @@ elseif SERVER then
                     ply.HEV.Morphine = ply.HEV.Morphine - administer
                     
                     if administer > 0.1 then
-                        ply:Notify("HEV 护甲检测到疼痛受体接近阈值。正在注射吗啡。", 10, "morphine_hev", 0.5,
+                        ply:Notify("HEV 护甲检测到疼痛接近阈值。正在注射吗啡。", 10, "morphine_hev", 0.5,
                         function(ply)
                             net.Start("HEV_DAMAGE")
                                 net.WriteString("hl1/fvox/morphine_shot.wav")
@@ -739,7 +739,7 @@ elseif SERVER then
             end
 
             if (org.pulse < 40) or (org.blood < 3000) or (org.o2[1] < 10) then
-                ply:Notify("HEV 护甲检测到脉搏过低。已注射肾上腺素。自动脉搏已启用。已注射血浆。", 60, "pulse_hev", 0.5, function(ply)
+                ply:Notify("HEV 护甲检测到脉搏过低。已注射肾上腺素，已激活自动起搏，已注射血浆。", 60, "pulse_hev", 0.5, function(ply)
                     net.Start("HEV_DAMAGE")
                         net.WriteString("hl1/fvox/health_critical.wav")
                     net.Send(ply)

@@ -48,7 +48,7 @@ net.Receive("defense_admin_wave_skip", function(len, ply)
     
 
     for _, player in player.Iterator() do
-        player:ChatPrint("肥仔 " .. ply:Nick() .. " 将波次切换到 " .. targetWave)
+        player:ChatPrint("管理员 " .. ply:Nick() .. " 将波次切换到 " .. targetWave)
     end
     
 

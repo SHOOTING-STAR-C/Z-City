@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_base"
 SWEP.PrintName = "手铐钥匙"
-SWEP.Instructions = "手铐的钥匙。"
+SWEP.Instructions = "打开手铐用的钥匙。别弄丢了。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

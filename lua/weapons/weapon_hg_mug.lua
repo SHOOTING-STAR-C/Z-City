@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "马克杯"
-SWEP.Instructions = "一种通常用来盛液体的小杯子。\n\n左键攻击。\n右键格挡。\n右键+左键投掷。"
+SWEP.Instructions = "一个普通的马克杯。喝着咖啡突然被卷入枪战？抡它！\n\n左键攻击。\n右键格挡。\n右键+左键投掷。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

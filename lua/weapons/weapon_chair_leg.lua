@@ -3,7 +3,7 @@ if SERVER then
 end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "椅子腿"
-SWEP.Instructions = "某人野蛮地拆下来的椅子腿，相当适合做冷兵器。总比没有好。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "被人野蛮拆下来的椅子腿，打架时随手一抄就能用。有总比没有强。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

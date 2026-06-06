@@ -55,7 +55,7 @@ function MODE:HUDPaint()
     ColorRole.a = 255 * fade
     draw.SimpleText("你是 "..Rolename , "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.5, ColorRole, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-    local Objective = lply.PlayerClassName == "Gordon" and "带领反抗军走向胜利！" or "跟随戈登！"
+    local Objective = lply.PlayerClassName == "Gordon" and "带领队伍抵达撤离点！" or "跟上弗里曼！"
     local ColorObj = teams[0].color2
     ColorObj.a = 255 * fade
     draw.SimpleText( Objective, "ZB_HomicideMedium", sw * 0.5, sh * 0.9, ColorObj, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)

@@ -56,7 +56,7 @@ net.Receive("scugarena_start", function()
 end)
 
 local slugcat = {
-    objective = "生存并消灭其他人。",
+    objective = "活下来，消灭所有对手。",
     name = "蛞蝓猫",
     color1 = Color(190,15,15)
 }

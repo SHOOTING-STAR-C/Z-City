@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "甘露醇"
-SWEP.Instructions = "甘露醇用于静脉注射，以降低急性颅内压升高，直到可以进行更确定的治疗，例如在头部创伤后。虽然甘露醇注射是治疗严重脑损伤后颅内高压的主要手段，但作为一线治疗并不比高渗盐水更好。在治疗抵抗性病例中，高渗盐水效果更好。甘露醇的动脉内输注可以通过破坏紧密连接来暂时打开血脑屏障。"
+SWEP.Instructions = "用于静脉注射，降低急性颅内压（如头部创伤后）。虽然甘露醇是治疗严重脑损伤后颅内高压的主要手段，但在顽固性病例中高渗盐水效果更佳。右键对他人注射。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

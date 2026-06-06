@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "芬太尼"
-SWEP.Instructions = "芬太尼是一种高效合成哌啶类阿片类药物，主要用作镇痛药。必须严格控制芬太尼剂量，因为它可能迅速导致阿片类药物过量。标签显示约20%为最大日剂量。右键对他人注射。"
+SWEP.Instructions = "强效合成阿片类镇痛药。剂量必须严格控制，起效极快，过量风险高。标签显示本支约为最大日用量的 20%。右键对他人注射。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

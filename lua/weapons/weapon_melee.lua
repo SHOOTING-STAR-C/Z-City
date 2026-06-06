@@ -2,7 +2,7 @@
 SWEP.PrintName = "Combat Knife"
 SWEP.Instructions = "A military grade combat knife designed to neutralize the enemy during combat operations and special operations."
 SWEP.Category = "Weapons - Melee"
-SWEP.Instructions = "这是你可信赖的碳钢直刀。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。"
+SWEP.Instructions = "一把靠得住的碳钢直刀。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.Slot = 1

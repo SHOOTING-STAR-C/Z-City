@@ -284,12 +284,12 @@ function PANEL:Paint(w, h)
 	surface.SetAlphaMultiplier(self:GetAlpha() / 255)
 
 	DisableClipping(true)
-		draw.SimpleText("按住左ALT并按回车键耳语", "zChatFontSmall", 5, h * 1.01 + 1, black)
-		draw.SimpleText("按住左ALT并按回车键耳语", "zChatFontSmall", 4, h * 1.01, gray)
+		draw.SimpleText("按住 Alt + 回车发送悄悄话", "zChatFontSmall", 5, h * 1.01 + 1, black)
+		draw.SimpleText("按住 Alt + 回车发送悄悄话", "zChatFontSmall", 4, h * 1.01, gray)
 
 		if LocalPlayer().organism and LocalPlayer().organism.otrub  then
-			draw.SimpleText("你的消息当前对任何人都不可见。", "zChatFontSmall", ScrW() * 0.3 + 1, h * 1.01 + 1, black, TEXT_ALIGN_RIGHT)
-			draw.SimpleText("你的消息当前对任何人都不可见。", "zChatFontSmall", ScrW() * 0.3, h * 1.01, gray, TEXT_ALIGN_RIGHT)
+			draw.SimpleText("你当前的消息对任何人都不可见。", "zChatFontSmall", ScrW() * 0.3 + 1, h * 1.01 + 1, black, TEXT_ALIGN_RIGHT)
+			draw.SimpleText("你当前的消息对任何人都不可见。", "zChatFontSmall", ScrW() * 0.3, h * 1.01, gray, TEXT_ALIGN_RIGHT)
 		end
 	DisableClipping(false)
 

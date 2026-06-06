@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_base"
 SWEP.PrintName = "氰化物罐"
-SWEP.Instructions = "产生气体，阻止电子从细胞色素c传递到氧气。结果，电子传递链被破坏，意味着细胞无法再有氧产生ATP能量。高度依赖有氧呼吸的组织，如中枢神经系统和心脏，尤其受到影响。"
+SWEP.Instructions = "释放气体阻断细胞呼吸链，使身体无法产生能量。中枢神经系统和心脏等高度依赖有氧呼吸的组织最先受损。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

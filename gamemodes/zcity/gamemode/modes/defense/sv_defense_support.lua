@@ -122,7 +122,7 @@ local function CreateFallingAirdrop(items, requester)
             end
         else
             if IsValid(requester) then
-                requester:ChatPrint("找不到合适的投放地点。请稍后再试。")
+                requester:ChatPrint("找不到合适的空投地点，请稍后再试。")
             end
             return false
         end
@@ -196,9 +196,9 @@ local function CreateFallingAirdrop(items, requester)
             for _, player in player.Iterator() do
                 if player:Alive() and player:Team() ~= TEAM_SPECTATOR then
                     if IsValid(requester) then
-                        player:ChatPrint("指挥官 " .. requester:Nick() .. " 的补给已到达！")
+                        player:ChatPrint("指挥官 " .. requester:Nick() .. " 的补给已送达！")
                     else
-                        player:ChatPrint("补给已到达！")
+                        player:ChatPrint("补给已送达！")
                     end
                 end
             end
@@ -245,7 +245,7 @@ local function SpawnSupportTeam(requester)
     
     if #spawnPoints < 2 then
         if IsValid(requester) then
-            requester:ChatPrint("没有足够的空间部署支援小队！")
+            requester:ChatPrint("没有足够空间部署支援小队！")
         end
         return false
     end
@@ -351,7 +351,7 @@ local function RespawnDeadPlayers(requester)
     
     if #deadPlayers == 0 then
         if IsValid(requester) then
-            requester:ChatPrint("没有死亡的玩家可以重生！")
+            requester:ChatPrint("没有可复活的玩家！")
         end
         return false
     end
@@ -370,7 +370,7 @@ local function RespawnDeadPlayers(requester)
     local spawnPoints = MODE.GetUsualPlayerSpawnPoints and MODE:GetUsualPlayerSpawnPoints() or {}
     if not spawnPoints or #spawnPoints == 0 then
         if IsValid(requester) then
-            requester:ChatPrint("没有可用的出生点！")
+            requester:ChatPrint("没有可用的复活点！")
         end
         return false
     end
@@ -535,12 +535,12 @@ net.Receive("RequestSupport", function(len, ply)
     if not MODE or MODE.name ~= "defense" then return end
 
     if CurTime() - lastSupportRequest < supportCooldown then
-        ply:ChatPrint("等一下。")
+        ply:ChatPrint("请稍等片刻。")
         return
     end
 
     if ply.organism and ply.organism.otrub then
-        ply:ChatPrint("什么鬼")
+        ply:ChatPrint("你现在状态不对。")
         return
     end
 
@@ -552,7 +552,7 @@ net.Receive("RequestSupport", function(len, ply)
     lastSupportRequest = CurTime()
 
     
-    ply:ChatPrint("你的订单 #" .. orderId .. " 正在运送中！")
+    ply:ChatPrint("你的订单 #" .. orderId .. " 正在运输途中！")
 
     local delay = math.random(20, 40)
     local timerName = "airdrop_timer_" .. orderId
@@ -570,7 +570,7 @@ net.Receive("RequestSupport", function(len, ply)
             local success = CreateFallingAirdrop(items, ply)
             
             if not success and IsValid(ply) then
-                ply:ChatPrint("找不到合适的投放地点。")
+                ply:ChatPrint("找不到合适的空投地点。")
             end
         end)
     end

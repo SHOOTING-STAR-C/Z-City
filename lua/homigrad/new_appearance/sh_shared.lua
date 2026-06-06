@@ -216,11 +216,11 @@ hg.Appearance.ClothesDesc = {
 		desc = "from orignial Jack's Homicide gamemode.\nForever."
 	},
 	sweater_xmas = {
-		desc = "来自Steam创意工坊的Wontairr\n右键打开链接",
+		desc = "来自 Steam 创意工坊，作者 Wontairr\n右键打开链接",
 		link = "https://steamcommunity.com/sharedfiles/filedetails/?id=3621630161"
 	},
 	worker = {
-		desc = "来自Steam创意工坊的Chervo93\n右键打开链接",
+		desc = "来自 Steam 创意工坊，作者 Chervo93\n右键打开链接",
 		link = "https://steamcommunity.com/sharedfiles/filedetails/?id=3540506879"
 	},
 }

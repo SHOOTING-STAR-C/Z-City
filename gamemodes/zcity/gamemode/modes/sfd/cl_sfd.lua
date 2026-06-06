@@ -74,7 +74,7 @@ net.Receive("supfight_start",function()
 end)
 
 local fighter = {
-    objective = "杀死所有人。",
+    objective = "干掉所有人。",
     name = "超级格斗者",
     color1 = Color(0,120,190)
 }

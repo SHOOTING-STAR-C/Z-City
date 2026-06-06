@@ -2,7 +2,7 @@ if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_tpik_base"
 SWEP.PrintName = "SLAM炸药"
 SWEP.Category = "Weapons - Explosive"
-SWEP.Instructions = "可选轻型攻击弹药（M2/M3/M4 SLAM）是一种美国制造的小型多用途地雷，由ATK精密引信公司生产。它配备被动红外传感器和磁感应传感器，可用作爆破弹药、路旁地雷或全宽腹部攻击地雷。"
+SWEP.Instructions = "美制小型多用途地雷（M2/M3/M4 SLAM），配备被动红外和磁感应传感器。既可当爆破炸药用，也能当路边雷或反车底雷。"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
 SWEP.Primary.ClipSize = -1

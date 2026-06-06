@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "硫胺素"
-SWEP.Instructions = "一种水溶性维生素（B1），在身体对碳水化合物、脂肪和蛋白质的代谢中起着重要作用。"
+SWEP.Instructions = "水溶性维生素 B1，帮助身体代谢碳水化合物、脂肪和蛋白质。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1
@@ -22,7 +22,7 @@ SWEP.WorkWithFake = true
 SWEP.offsetVec = Vector(2.5, -2.5, 0)
 SWEP.offsetAng = Angle(-30, 20, 180)
 SWEP.modeNames = {
-	[1] = "止痛药"
+	[1] = "维生素B1"
 }
 
 function SWEP:InitializeAdd()

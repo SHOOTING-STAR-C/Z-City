@@ -233,7 +233,7 @@ hook.Add("HomigradDamage", "GuiltReg", function(ply, dmgInfo, hitgroup, ent, har
 		-- 	Attacker:Ban(30, true)
 		-- end
 
-        PrintMessage(HUD_PRINTTALK, "玩家 "..Attacker:Name().." 因在团队模式中恶意击杀被禁赛30分钟。")
+        PrintMessage(HUD_PRINTTALK, "玩家 "..Attacker:Name().." 因在团队模式中恶意击杀被封禁30分钟。")
     end
 
     Attacker:SetNetVar("Karma", Attacker.Karma)
@@ -262,7 +262,7 @@ hook.Add("HomigradDamage", "GuiltReg", function(ply, dmgInfo, hitgroup, ent, har
 			-- 	Attacker:Ban(60, true)
 			-- end
             
-            PrintMessage(HUD_PRINTTALK, "玩家 "..name.." 因因果值过低被禁赛 "..time.." 分钟。")
+            PrintMessage(HUD_PRINTTALK, "玩家 "..name.." 因果值过低，已被封禁 "..time.." 分钟。")
         end)
     end
 end)

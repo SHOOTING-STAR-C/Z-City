@@ -1,9 +1,9 @@
 local MODE = MODE
 MODE.start_time = 1
 MODE.end_time = 7
- 
+
 MODE.ROUND_TIME = 600
- 
+
 MODE.randomSpawns = true
 
 MODE.shouldfreeze = true
@@ -201,7 +201,7 @@ MODE.TraitorWordsAdjectives = {
 	"cyan",
 	"pink",
 	"mesmerizing",
-	"",	--; да да
+	"",	----; да да
 }
 
 MODE.TraitorWords = {
@@ -258,8 +258,8 @@ MODE.Types.standard = {
 	ChanceFunction = function() return (zb.GetWorldSize() < ZBATTLE_BIGMAP) and (zb.ModesChances["standard"] or zb.modes["hmcd"].Types.standard.Chance) or 0 end,
 	LootTable = MODE.LootTableStandard,
 	Messages = {
-		[3] = "所有人都死了。",
-		[1] = "凶手杀死了所有人。",
+		[3] = "所有人均已死亡。",
+		[1] = "凶手杀光了所有人。",
 		[0] = "凶手是",
 	},
 	Message = "凶手是 ",
@@ -310,7 +310,7 @@ MODE.Types.standard = {
 		ply:Give("weapon_handcuffs")
 		ply:Give("weapon_handcuffs_key")
 		ply:Give("weapon_hg_tonfa")
-		
+
 		local gun = ply:Give("weapon_taser")
 		ply:GiveAmmo(gun:GetMaxClip1() * 3,gun:GetPrimaryAmmoType(),true)
 
@@ -334,9 +334,9 @@ MODE.Types.wildwest = {
 	ChanceFunction = function() return (zb.GetWorldSize() < ZBATTLE_BIGMAP) and (zb.ModesChances["wildwest"] or zb.modes["hmcd"].Types.wildwest.Chance) or 0 end,
 	LootTable = MODE.LootTableStandard,
 	Messages = {
-		[3] = "死寂笼罩着空荡的城镇...",
-		[1] = "城镇落入了犯罪之手。",
-		[0] = "正义再次得到伸张。这个混蛋是",
+		[3] = "死寂笼罩着这座空荡的小镇...",
+		[1] = "小镇落入了罪犯之手。",
+		[0] = "正义再次得到伸张。凶手是 ",
 	},
 	Message = "罪犯是 ",
 	TraitorLoot = function(ply)
@@ -470,8 +470,8 @@ MODE.Types.gunfreezone = {
 	ChanceFunction = function() return (zb.GetWorldSize() < ZBATTLE_BIGMAP) and (zb.ModesChances["gunfreezone"] or zb.modes["hmcd"].Types.gunfreezone.Chance) or 0 end,
 	LootTable = MODE.LootTableStandard,
 	Messages = {
-		[3] = "所有人都死了。",
-		[1] = "凶手杀死了所有人。",
+		[3] = "所有人均已死亡。",
+		[1] = "凶手杀光了所有人。",
 		[0] = "凶手是",
 	},
 	Message = "凶手是 ",
@@ -546,8 +546,8 @@ MODE.Types.soe = {
 	ChanceFunction = function() return (zb.GetWorldSize() >= ZBATTLE_BIGMAP) and (zb.ModesChances["soe"] or zb.modes["hmcd"].Types.soe.Chance) or 0 end,
 	LootTable = MODE.LootTable,
 	Messages = {
-		[3] = "所有人都死了。",
-		[1] = "叛徒杀死了所有人。",
+		[3] = "所有人均已死亡。",
+		[1] = "叛徒杀光了所有人。",
 		[0] = "叛徒是",
 	},
 	Message = "叛徒是 ",
@@ -591,37 +591,37 @@ MODE.Types.soe = {
 		inv["Weapons"]["hg_flashlight"] = true
 		inv["Weapons"]["hg_sling"] = true
 		ply:SetNetVar("Inventory", inv)
-	
+
 		ply:SetPlayerClass("nationalguard")
 		local gun = ply:Give("weapon_fn45")
 		ply:GiveAmmo(gun:GetMaxClip1() * 3, gun:GetPrimaryAmmoType(), true)
-	
+
 		gun = ply:Give("weapon_hk416")
 		ply:GiveAmmo(gun:GetMaxClip1() * 3, gun:GetPrimaryAmmoType(), true)
 		hg.AddAttachmentForce(ply, gun, {"holo14", "laser3", "grip3"})
-	
+
 		ply:Give("weapon_hg_grenade_tpik")
 		ply:Give("weapon_melee")
-	
+
 		ply:Give("weapon_medkit_sh")
 		ply:Give("weapon_bandage_sh")
 		ply:Give("weapon_walkie_talkie")
 		ply:Give("weapon_painkillers")
 		ply:Give("weapon_morphine")
-	
+
 		ply.organism.recoilmul = 0.5
-	
+
 		ply:Give("weapon_handcuffs")
 		ply:Give("weapon_handcuffs_key")
-	
+
 		gun = ply:Give("weapon_taser")
 		ply:GiveAmmo(gun:GetMaxClip1() * 3, gun:GetPrimaryAmmoType(), true)
-	
+
 		hg.AddArmor(ply, {"vest4", "helmet1"})
-	
+
 		local hands = ply:Give("weapon_hands_sh")
 		ply:SetActiveWeapon(hands)
-	
+
 		zb.GiveRole(ply, "National Guard", Color(55, 85, 0))
 		ply:SetNetVar("CurPluv", "pluvberet")
 	end,
@@ -681,10 +681,10 @@ function MODE:Intermission()
 	MODE.TraitorWordSecond = MODE.TraitorWords[math.random(1, #MODE.TraitorWords)]
 
 	local traitors_needed = math.min(player_count - 1, homicide_traitoramount:GetInt())
-	
+
 	if(MODE.ShouldStartRoleRound())then
 		traitors_needed = math.ceil(player_count / 9)
-		
+
 		if(player_count > 8 and math.random(1, 8) == 1)then
 			traitors_needed = traitors_needed + 1
 		end
@@ -700,9 +700,9 @@ function MODE:Intermission()
 
 	-- 	players[#players + 1] = {ply, ply.Karma}
 	-- end
-	
+
 	-- -- potom
-	
+
 	for i, ply in RandomPairs(player.GetAll()) do
 		if ply.isTraitor or ply:Team() == TEAM_SPECTATOR then continue end
 		if math.random(100) > (ply.Karma or 100) then continue end
@@ -726,7 +726,7 @@ function MODE:Intermission()
 			ply.isTraitor = true
 			traitors_needed = traitors_needed - 1
 			traitors[#traitors + 1] = ply
-			
+
 			if not main_traitor then
 				main_traitor = ply
 				ply.MainTraitor = true
@@ -774,7 +774,7 @@ function MODE:Intermission()
 					net.WriteString("")
 					net.WriteUInt(0, MODE.TraitorExpectedAmtBits)
 				end
-				
+
 				net.WriteString("")	--; Profession
 			net.Send(ply)
 
@@ -785,15 +785,15 @@ function MODE:Intermission()
 	end
 
 	--local pts = zb.GetMapPoints( "RandomSpawns" )
-	
+
 	local ent = ents.Create("prop_ragdoll")
 	local appearance = hg.Appearance.GetRandomAppearance()
-	
+
 	local tMdl = hg.Appearance.PlayerModels[1][appearance.AModel] or hg.Appearance.PlayerModels[2][appearance.AModel] or appearance.AModel
 	local mdl = istable(tMdl) and tMdl.mdl or tMdl
-	
+
 	ent:SetModel(mdl)
-	
+
 	for i, ply in RandomPairs(player.GetAll()) do
 		ent:SetPos(ply:EyePos() + vector_up * 72)
 	end
@@ -815,7 +815,7 @@ function MODE:Intermission()
 		local trace = util.TraceHull(tr)
 		if !trace.Hit or forced then
 			ent:SetPos(pos)
-			
+
 			break
 		end
 	end--]]
@@ -835,7 +835,7 @@ function MODE:Intermission()
 		local phys = ent:GetPhysicsObjectNum(physNum)
 		local bone = ent:TranslatePhysBoneToBone(physNum)
 		if bone < 0 then continue end
-		
+
 		phys:SetMass(hg.IdealMassPlayer[ent:GetBoneName(bone)] or 4)
 		phys:SetPos(ent:GetPos() + VectorRand(-32, 32))
 	end
@@ -848,7 +848,7 @@ function MODE:Intermission()
 		else
 			Appearance = "stetson"
 		end
-	
+
 		ent:SetNetVar("Accessories", Appearance)
 		local sex = ThatPlyIsFemale(ent) and 2 or 1
 		local tbl = ent.CurAppearance
@@ -884,16 +884,16 @@ function MODE:CheckAlivePlayers()
 		[0] = {},
 		[1] = {}
 	}
-	
+
 	for _, ply in player.Iterator() do
 		if(not ply:Alive())then
 			continue
 		end
-		
+
 		if((not ply.isTraitor)and ply.organism and ply.organism.incapacitated)then
 			continue
 		end
-		
+
 		if ply.isTraitor and not ply:GetNetVar("handcuffed",false) then
 			--print(ply)
 			AlivePlyTbl[1][#AlivePlyTbl[1] + 1] = ply
@@ -901,10 +901,10 @@ function MODE:CheckAlivePlayers()
 			AlivePlyTbl[0][#AlivePlyTbl[0] + 1] = ply
 		end
 	end
-	
+
 	return AlivePlyTbl
 end
-	
+
 local deadPoliceCount = 0
 local swatDeployed = false
 
@@ -912,9 +912,9 @@ function MODE:GetActivePlayers()
 	local valid = {}
 
 	for _, ply in player.Iterator() do
-		if ply:Alive() then continue end                        
-		if ply:Team() == TEAM_SPECTATOR then continue end       
-		if ply.afkTime2 and ply.afkTime2 > 60 then continue end 
+		if ply:Alive() then continue end
+		if ply:Team() == TEAM_SPECTATOR then continue end
+		if ply.afkTime2 and ply.afkTime2 > 60 then continue end
 
 		valid[#valid + 1] = ply
 	end
@@ -933,37 +933,37 @@ function MODE:RoundThink()
 
 	if self.Type ~= "soe" and not self.PoliceSpawned and self.saved.PoliceTime < CurTime() then
 		if not self.Types[self.Type] or not self.Types[self.Type].PoliceAllowed then return end
-		
+
 		local available = self:GetActivePlayers()
 		local max = math.min(#available, 4)
-	
+
 		if max > 0 then
 			local spawned = self:SpawnForce("police", max)
 			self.spawnedPoliceCount = spawned
-	
+
 			if spawned > 0 then
 				self.PoliceSpawned = true
-				PrintMessage(HUD_PRINTTALK, "警察已到达。")
+				PrintMessage(HUD_PRINTTALK, "警察已抵达现场。")
 				EmitSound("snd_jack_hmcd_policesiren.wav", vector_origin, 0, CHAN_AUTO, 1, 125, 0, 100)
 			end
 		end
 	end
-	
+
 
 	if self.Type ~= "soe" and not self.swatDeployed and self.deadPoliceCount >= (self.spawnedPoliceCount or 4) and self.spawnedPoliceCount > 0 then
 		if not self.Types[self.Type] or not self.Types[self.Type].PoliceAllowed then return end
-		
+
 		self.swatDeployed = true
-		local currentType = self.Type 
-		
+		local currentType = self.Type
+
 		timer.Create("HMCDSpawnSWAT", 60, 1, function()
-			if zb.ROUND_STATE ~= 1 or not MODE or MODE.Type ~= currentType then return end 
-			
+			if zb.ROUND_STATE ~= 1 or not MODE or MODE.Type ~= currentType then return end
+
 			if not MODE.Types[MODE.Type] or not MODE.Types[MODE.Type].PoliceAllowed then return end
-			
+
 			local available = MODE:GetActivePlayers()
 			local count = math.min(#available, 5)
-	
+
 			if count > 0 then
 				PrintMessage(HUD_PRINTTALK, "SWAT小组正在赶来！")
 				EmitSound("snd_jack_hmcd_heli2.mp3", vector_origin, 0, CHAN_AUTO, 1, 125, 0, 100)
@@ -971,16 +971,16 @@ function MODE:RoundThink()
 			end
 		end)
 	end
-	
+
 	if self.Type == "soe" and not self.PoliceSpawned and self.saved.PoliceTime < CurTime() then
 		local available = self:GetActivePlayers()
 		local count = math.min(#available, 6)
-	
+
 		if count > 0 then
 			local spawned = self:SpawnForce("nationalguard", count)
 			if spawned > 0 then
 				self.PoliceSpawned = true
-				PrintMessage(HUD_PRINTTALK, self.Types[self.Type].PoliceText or "国民警卫队已到达。")
+				PrintMessage(HUD_PRINTTALK, self.Types[self.Type].PoliceText or "国民警卫队已抵达。")
 				EmitSound(self.Types[self.Type].PoliceSound or "snd_jack_hmcd_heli2.mp3", vector_origin, 0, CHAN_AUTO, 1, 125, 0, 100)
 			end
 		end
@@ -1001,7 +1001,7 @@ function MODE:SpawnForce(teamtype, count)
         ply:Spawn()
 
         if not basepos then
-            basepos = zb:GetRandomSpawn()            
+            basepos = zb:GetRandomSpawn()
 			ply:SetPos(basepos)
 		else
 			hg.tpPlayer(basepos, ply, i)
@@ -1026,7 +1026,7 @@ local function tbl_Random(tbl) -- when you can't even say
 end
 function MODE:EquipSWAT(ply, index)
     ply:SetPlayerClass("swat")
-    
+
     local classes = {
         [1] = function() return tbl_Random({"weapon_m4a1", "weapon_hk416"}) end, --;; Team Leader
         [2] = function() ply:Give("weapon_ram") return tbl_Random({"weapon_remington870", "weapon_m590a1"}) end, --;; Breacher
@@ -1155,7 +1155,7 @@ util.AddNetworkString("HMCD_RequestTraitorStatuses")
 function MODE:SendTraitorDeathState(traitor, is_alive)
     if not traitor.CurAppearance then return end
     local name = traitor.CurAppearance.AName
-    
+
 
     local recipients = {}
     for _, ply in player.Iterator() do
@@ -1163,7 +1163,7 @@ function MODE:SendTraitorDeathState(traitor, is_alive)
             table.insert(recipients, ply)
         end
     end
-    
+
     net.Start("HMCD_TraitorDeathState")
     net.WriteString(name)
     net.WriteBool(is_alive)
@@ -1189,19 +1189,19 @@ hook.Add("PlayerCanPickupWeapon", "HMCD_TraitorRadioPickup", function( ply, weap
         if ply:HasWeapon("weapon_walkie_talkie") then
             weapon:Remove()
 			ply:SetActiveWeapon("weapon_walkie_talkie")
-			ply:ChatPrint("你藏起了额外的对讲机。")
+			ply:ChatPrint("你藏起了一台额外的对讲机。")
         end
     end
 end)
 
 net.Receive("HMCD_RequestTraitorStatuses", function(len, ply)
     if not ply.isTraitor or not ply.MainTraitor then return end
-    
+
 
     for _, other_ply in player.Iterator() do
         if other_ply.isTraitor and other_ply.CurAppearance then
             local is_alive = other_ply:Alive() and (not other_ply.organism or not other_ply.organism.incapacitated)
-            
+
             net.Start("HMCD_TraitorDeathState")
             net.WriteString(other_ply.CurAppearance.AName)
             net.WriteBool(is_alive)
@@ -1243,21 +1243,21 @@ function MODE:RoundStart()
 	local roles_choose = MODE.ShouldStartRoleRound()
 	MODE.StartRoundTime = CurTime()
 	MODE.RoleChooseRound = false
-	
+
 
 	self.roundStartType = self.Type
-	
+
 
 	self.deadPoliceCount = 0
 	self.swatDeployed = false
 	self.spawnedPoliceCount = 0
-	
+
 
 	timer.Remove("HMCDSpawnSWAT")
-	
+
 	if(roles_choose)then
 		MODE.StartPlayersRoleSelection()
-		PrintMessage(HUD_PRINTTALK, "叛徒正在选择角色，持续 " .. MODE.RoleChooseRoundStartTime ..  " 秒")
+		PrintMessage(HUD_PRINTTALK, "叛徒正在选择角色，剩余 " .. MODE.RoleChooseRoundStartTime ..  " 秒")
 	else
 		MODE.ChoosingPlayersList = {}
 
@@ -1277,7 +1277,7 @@ function MODE:EndRound()
 	timer.Remove("HMCDSpawnSWAT")
 	timer.Remove("SpawnAdditionalPolice")
     timer.Remove("SpawnAdditionalNationalGuard")
-	
+
 
 	self.deadPoliceCount = 0
 	self.swatDeployed = false
@@ -1296,11 +1296,11 @@ function MODE:EndRound()
 		if ply.isTraitor and ply:Team() ~= TEAM_SPECTATOR then
 			traitors[#traitors + 1] = ply
 		end
-		
+
 		if ply.isGunner and ply:Team() ~= TEAM_SPECTATOR then
 			gunners[#gunners + 1] = ply
 		end
-		
+
 		if(ply:Alive() and ply.organism and !ply.organism.incapacitated)then
 			players_alive = players_alive + 1
 		end
@@ -1312,36 +1312,36 @@ function MODE:EndRound()
 		ply.SubRole = nil
 		ply.Profession = nil
 	end
-	
+
 	if(not winner)then
 		net.Start("hmcd_roundend")
 			net.WriteUInt(#traitors, MODE.TraitorExpectedAmtBits)
-			
+
 			for _, traitor in ipairs(traitors) do
 				net.WriteEntity(traitor)
 			end
-			
+
 			net.WriteUInt(#gunners, MODE.TraitorExpectedAmtBits)
-			
+
 			for _, gunner in ipairs(gunners) do
 				net.WriteEntity(gunner)
 			end
 		net.Broadcast()
-		
+
 		return
 	end
 
 	if self.Type then
 		if(MODE.RoleChooseRound)then
 			if(winner ~= 1)then
-				PrintMessage(HUD_PRINTTALK, "所有叛徒已被阻止。")
-				
+				PrintMessage(HUD_PRINTTALK, "所有叛徒已被消灭。")
+
 				for _, traitor in ipairs(traitors) do
 					net.Start("hmcd_announce_traitor_lose")
 						net.WriteEntity(traitor)
 						net.WriteBool(traitor:Alive())
 					net.Broadcast()
-					
+
 					hook.Run("ZB_TraitorWinOrNot", traitor, winner)
 				end
 
@@ -1354,25 +1354,25 @@ function MODE:EndRound()
 					traitor:GiveSkill( math.Rand(0.1,0.3) )
 					traitor:SetPData("zb_hmcd_t_wins",traitor:GetPData("zb_hmcd_t_wins",0) + 1)
 				end
-				PrintMessage(HUD_PRINTTALK, "所有平民被杀害。")
+				PrintMessage(HUD_PRINTTALK, "所有平民已被杀害。")
 			end
-			
+
 			timer.Simple(2, function()
 				if(players_alive == 0)then
 					PrintMessage(HUD_PRINTTALK, "无人幸存。")
 				else
 					if(players_alive == 1)then
-						PrintMessage(HUD_PRINTTALK, "城市中只剩下1名幸存者。")
+						PrintMessage(HUD_PRINTTALK, "城内仅剩1名幸存者。")
 					else
-						PrintMessage(HUD_PRINTTALK, players_alive .. " 名幸存者留在城市中。")
+						PrintMessage(HUD_PRINTTALK, players_alive .. " 名幸存者存活。")
 					end
 				end
 			end)
 		else
 			if traitor and IsValid(traitor) then
 				--local CheckAlive = #self:CheckAlivePlayers()[1]
-				PrintMessage(HUD_PRINTTALK, self.Types[self.Type].Messages[winner]..(winner == 0 and (traitor:Alive() and " 被制服。" or " 被杀死。") or ""))
-				
+				PrintMessage(HUD_PRINTTALK, self.Types[self.Type].Messages[winner]..(winner == 0 and (traitor:Alive() and " 已被制服。" or " 已被击杀。") or ""))
+
 				timer.Simple(2, function()
 					PrintMessage(HUD_PRINTTALK, self.Types[self.Type].Message..traitor:Name())
 				end)
@@ -1384,10 +1384,10 @@ function MODE:EndRound()
 				else
 					traitor:GiveSkill( -math.Rand(0.05,0.1) )
 				end
-				
+
 				hook.Run("ZB_TraitorWinOrNot", traitor, winner)
 			else
-				PrintMessage(HUD_PRINTTALK, self.Types[self.Type].Messages[winner]..(winner == 0 and (" 被杀死。") or ""))
+				PrintMessage(HUD_PRINTTALK, self.Types[self.Type].Messages[winner]..(winner == 0 and (" 已被击杀。") or ""))
 				for _, traitor in ipairs(traitors) do
 					net.Start("hmcd_announce_traitor_lose")
 						net.WriteEntity(traitor)
@@ -1403,13 +1403,13 @@ function MODE:EndRound()
 	timer.Simple(2,function()
 		net.Start("hmcd_roundend")
 			net.WriteUInt(#traitors, MODE.TraitorExpectedAmtBits)
-			
+
 			for _, traitor in ipairs(traitors) do
 				net.WriteEntity(traitor)
 			end
-			
+
 			net.WriteUInt(#gunners, MODE.TraitorExpectedAmtBits)
-			
+
 			for _, gunner in ipairs(gunners) do
 				net.WriteEntity(gunner)
 			end
@@ -1435,7 +1435,7 @@ hook.Add("Player_Death", "HMCD_PlayerDeath", function(ply, _)
 				last_attacker = attacker
 			end
 		end
-		
+
 
 		if ply.isTraitor then
 			--local Appearance = ply.CurAppearance
@@ -1445,10 +1445,10 @@ hook.Add("Player_Death", "HMCD_PlayerDeath", function(ply, _)
 			--	PrintMessage(HUD_PRINTTALK, "Some traitor died.")
 			--else
 			--	local character_name = Appearance.AName or "error"
-			--	
+			--
 			--	PrintMessage(HUD_PRINTTALK, "Traitor " .. character_name .. " died.")
 			--end
-		
+
 			if biggest_attacker then
 				if biggest_attacker == ply:Name() then
 					--timer.Simple(1,function()
@@ -1475,7 +1475,7 @@ hook.Add("Player_Death", "HMCD_PlayerDeath", function(ply, _)
 			end
 		else
 			if not biggest_attacker or not IsValid(ply) then return end
-			
+
 			if biggest_attacker == ply:Name() then
 				ply:ChatPrint("你自杀了。")
 			elseif not biggest_attacker then
@@ -1497,20 +1497,20 @@ MODE.NextRoundMainTraitors = MODE.NextRoundMainTraitors or {}
 
 concommand.Add("hmcd_request_main_traitor", function(ply, cmd, args)
     if not IsValid(ply) or not ply:IsAdmin() then return end
-    
+
 
     if zb.ROUND_STATE == 1 then
-        ply:ChatPrint("回合结束时")
+        ply:ChatPrint("等回合结束再说")
         return
     end
-    
+
 
     MODE.NextRoundMainTraitors[ply:SteamID()] = true
-    ply:ChatPrint("正确")
+    ply:ChatPrint("已确认")
 end)
 
 hook.Add("RoundStateChange", "ResetNextRoundMainTraitors", function(old, new)
-    if new == 2 then 
+    if new == 2 then
         MODE.NextRoundMainTraitors = {}
     end
 end)
@@ -1565,14 +1565,14 @@ function MODE.SpawnPlayers(spawn_with_subroles)
                         professions_possible[profession_key][1] = professions_possible[profession_key][1] / 2
                         ply.Profession = profession
                         professions_count_to_satisfy = professions_count_to_satisfy - 1
-                        
+
                         if(professions_count_to_satisfy == 0)then
                             break
                         end
                     end
                 end
             end
-            
+
 
             if(professions_count_to_satisfy > 0)then
                 for _, ply in RandomPairs(player.GetAll()) do
@@ -1581,7 +1581,7 @@ function MODE.SpawnPlayers(spawn_with_subroles)
                         professions_possible[profession_key][1] = professions_possible[profession_key][1] / 2
                         ply.Profession = profession
                         professions_count_to_satisfy = professions_count_to_satisfy - 1
-                        
+
                         if(professions_count_to_satisfy == 0)then
                             break
                         end
@@ -1649,7 +1649,7 @@ function MODE.SpawnPlayers(spawn_with_subroles)
                     MODE.Types[MODE.Type].GunManLoot(current_ply)
                 end
             end
-            
+
             if(MODE.Type == "soe")then
                 if(current_ply.isTraitor)then
                     local walkie_talkie = current_ply:Give("weapon_walkie_talkie")
@@ -1673,8 +1673,8 @@ function MODE.SpawnPlayers(spawn_with_subroles)
             current_ply:SetNetVar("flashlight", false)
 
             local this_player = current_ply
-            
-            timer.Simple(0.1, function() 
+
+            timer.Simple(0.1, function()
                 if IsValid(this_player) then
                     this_player.noSound = false
                     this_player:SetSuppressPickupNotices(false)
@@ -1686,29 +1686,29 @@ function MODE.SpawnPlayers(spawn_with_subroles)
 
                 local traitor_amt = 0
                 local traitor_assistants = {}
-                
+
                 if (this_player.isTraitor) then
                     for _, other_ply in player.Iterator() do
                         if (other_ply.isTraitor) then
                             traitor_amt = traitor_amt + 1
-                            
+
 
                             if this_player.MainTraitor and other_ply.CurAppearance then
                                 local Appearance = other_ply.CurAppearance
                                 local color = Appearance.AColor or color_white
                                 local name = Appearance.AName or "error"
                                 local steamID = other_ply:SteamID() or ""
-                                
+
                                 if not IsColor(color) then
                                     color = Color(color.r, color.g, color.b)
                                 end
-                                
+
                                 table.insert(traitor_assistants, {color, name, steamID})
                             end
                         end
                     end
                 end
-                
+
 
                 net.Start("HMCD_RoundStart")
                     net.WriteBool(this_player.isTraitor)
@@ -1717,7 +1717,7 @@ function MODE.SpawnPlayers(spawn_with_subroles)
                     net.WriteBool(true)
                     net.WriteString(this_player.SubRole or "")
                     net.WriteBool(this_player.MainTraitor == true)
-                    
+
                     if (this_player.isTraitor) then
                         net.WriteString(MODE.TraitorWord)
                         net.WriteString(MODE.TraitorWordSecond)
@@ -1727,7 +1727,7 @@ function MODE.SpawnPlayers(spawn_with_subroles)
                         net.WriteString("")
                         net.WriteUInt(0, MODE.TraitorExpectedAmtBits)
                     end
-                    
+
                     if (this_player.MainTraitor) then
 
                         for _, traitor_info in ipairs(traitor_assistants) do
@@ -1739,7 +1739,7 @@ function MODE.SpawnPlayers(spawn_with_subroles)
                             if IsValid(this_player) and this_player.isTraitor and this_player.MainTraitor then
                                 net.Start("HMCD_UpdateTraitorAssistants")
                                     net.WriteUInt(#traitor_assistants, 8)
-                                    
+
                                     for _, info in ipairs(traitor_assistants) do
                                         net.WriteColor(info[1])
                                         net.WriteString(info[2])
@@ -1749,10 +1749,10 @@ function MODE.SpawnPlayers(spawn_with_subroles)
                             end
                         end)
                     end
-                    
+
                     net.WriteString(this_player.Profession or "")
                 net.Send(this_player)
-                
+
                 local role = MODE.Roles[MODE.Type][(this_player.isTraitor and "traitor") or (this_player.isGunner and "gunner") or "innocent"]
                 if role then
                     zb.GiveRole(this_player, role.name, role.color)
@@ -1764,12 +1764,12 @@ end
 
 hook.Add("PlayerSpawn", "HMCD_UpdateTraitorsList", function(ply)
 	if not ply.isTraitor then return end
-	
+
 	timer.Simple(0.5, function()
 		for _, main_traitor in player.Iterator() do
 			if IsValid(main_traitor) and main_traitor.isTraitor and main_traitor.MainTraitor then
 				local traitor_assistants = {}
-				
+
 				for _, other_ply in player.Iterator() do
 					if other_ply.isTraitor then
 						local Appearance = other_ply.CurAppearance
@@ -1777,25 +1777,25 @@ hook.Add("PlayerSpawn", "HMCD_UpdateTraitorsList", function(ply)
 							local color = Appearance.AColor or color_white
 							local name = Appearance.AName or "error"
 							local steamID = other_ply:SteamID() or ""
-							
+
 							if not IsColor(color) then
 								color = Color(color.r, color.g, color.b)
 							end
-							
+
 							table.insert(traitor_assistants, {color, name, steamID})
 						end
 					end
 				end
-				
+
 				net.Start("HMCD_UpdateTraitorAssistants")
 				net.WriteUInt(#traitor_assistants, 8)
-				
+
 				for _, info in ipairs(traitor_assistants) do
 					net.WriteColor(info[1])
 					net.WriteString(info[2])
 					net.WriteString(info[3])
 				end
-				
+
 				net.Send(main_traitor)
 			end
 		end
@@ -1804,17 +1804,17 @@ end)
 
 hook.Add("PlayerDeath", "HMCD_UpdateTraitorsList", function(ply)
 	if not ply.isTraitor then return end
-	
+
 	timer.Simple(0.1, function()
 		if IsValid(ply) and ply.CurAppearance then
 			MODE:SendTraitorDeathState(ply, false)
 		end
-		
+
 		timer.Simple(0.4, function()
 			for _, main_traitor in player.Iterator() do
 				if IsValid(main_traitor) and main_traitor.isTraitor and main_traitor.MainTraitor then
 					local traitor_assistants = {}
-					
+
 					for _, other_ply in player.Iterator() do
 						if other_ply.isTraitor then
 							local Appearance = other_ply.CurAppearance
@@ -1822,25 +1822,25 @@ hook.Add("PlayerDeath", "HMCD_UpdateTraitorsList", function(ply)
 								local color = Appearance.AColor or color_white
 								local name = Appearance.AName or "error"
 								local steamID = other_ply:SteamID() or ""
-								
+
 								if not IsColor(color) then
 									color = Color(color.r, color.g, color.b)
 								end
-								
+
 								table.insert(traitor_assistants, {color, name, steamID})
 							end
 						end
 					end
-					
+
 					net.Start("HMCD_UpdateTraitorAssistants")
 					net.WriteUInt(#traitor_assistants, 8)
-					
+
 					for _, info in ipairs(traitor_assistants) do
 						net.WriteColor(info[1])
 						net.WriteString(info[2])
 						net.WriteString(info[3])
 					end
-					
+
 					net.Send(main_traitor)
 				end
 			end

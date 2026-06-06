@@ -50,7 +50,7 @@ function MODE:HUDPaint()
 	if not lply:Alive() then return end
     local fade = math.Clamp(zb.ROUND_START + 8 - CurTime(), 0, 1)
 	local team_ = lply:Team()
-    draw.SimpleText("ZBattle | 半条命2基地防御", "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0,162,255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    draw.SimpleText("ZBattle | 半条命2 基地防御", "ZB_HomicideMediumLarge", sw * 0.5, sh * 0.1, Color(0,162,255, 255 * fade), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
     local playerRole = lply:GetNWString("PlayerRole", "难民")
     local roleColor = teams[team_].color1
@@ -187,9 +187,9 @@ CreateEndMenu = function()
 
 		surface.SetFont( "ZB_InterfaceMediumLarge" )
 		surface.SetTextColor(col.r,col.g,col.b,col.a)
-		local lengthX, lengthY = surface.GetTextSize("玩家:")
+		local lengthX, lengthY = surface.GetTextSize("玩家：")
 		surface.SetTextPos(w / 2 - lengthX/2,20)
-		surface.DrawText("玩家:")
+		surface.DrawText("玩家：")
 	end
 
 	local DScrollPanel = vgui.Create("DScrollPanel", hmcdEndMenu)
@@ -229,7 +229,7 @@ CreateEndMenu = function()
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
 			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "已离开..." )
 			surface.SetTextPos(15,h/2 - lengthY/2)
-			surface.DrawText((ply:Name() .. (not ply:Alive() and " - 死亡" or "")) or "已离开...")
+			surface.DrawText((ply:Name() .. (not ply:Alive() and " - 已阵亡" or "")) or "已离开...")
 
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
@@ -261,7 +261,7 @@ function createSupportMenu()
     local frame = vgui.Create("ZFrame")
     frame:SetSize(400, 200)
     frame:Center()
-    frame:SetTitle("你想要订购什么？")
+    frame:SetTitle("需要订购什么物资？")
     frame:SetVisible(true)
     frame:SetDraggable(true)
     frame:ShowCloseButton(true)
@@ -283,10 +283,10 @@ function createSupportMenu()
     local armorButton = createButton("护甲", "Armor")
     armorButton:SetPos(50, 50)
 
-    local medsButton = createButton("药品", "Medications")
+    local medsButton = createButton("医疗物资", "Medications")
     medsButton:SetPos(150, 50)
 
-    local ammoButton = createButton("弹药", "Ammunition")
+    local ammoButton = createButton("弹药补给", "Ammunition")
     ammoButton:SetPos(250, 50)
 end
 
@@ -608,7 +608,7 @@ local function CreateVoteMenu()
         [2] = {
             title = "扩展模式",
             shortDesc = "12波包含Boss和特殊敌人",
-            longDesc = "老兵玩家的挑战！12波无情的血腥与残暴。",
+            longDesc = "老兵玩家的挑战！12波无情的血战。",
             color = Color(200, 100, 50),
             features = {
                 "• 12波高强度战斗",
@@ -620,7 +620,7 @@ local function CreateVoteMenu()
         [3] = {
             title = "僵尸模式",
             shortDesc = "6波僵尸末日",
-            longDesc = "用各种僵尸类型替代联合军的独特模式。",
+            longDesc = "用各种僵尸类型替代联合军的特殊模式。",
             color = Color(50, 200, 50),
             features = {
                 "• 6波僵尸大军",
@@ -706,7 +706,7 @@ local function CreateVoteMenu()
             
 
             if self.SelectedFrac > 0 and not isDisabled then
-                draw.SimpleText("已选择", "Defense_SmallText", w - 120, 50, Color(255, 255, 255, 255 * self.SelectedFrac), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                draw.SimpleText("已选", "Defense_SmallText", w - 120, 50, Color(255, 255, 255, 255 * self.SelectedFrac), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             end
         end
         
@@ -848,7 +848,7 @@ MODE.HUDPaint = function(self)
 
         modeColor.a = alpha
 
-        local text = "已选择模式: " .. modeName
+        local text = "已选模式: " .. modeName
         
         draw.SimpleText(text, "Defense_Title", ScrW() * 0.5, ScrH() * 0.3, modeColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         draw.SimpleText(description, "Defense_Subtitle", ScrW() * 0.5, ScrH() * 0.35, Color(255, 255, 255, alpha), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -1004,7 +1004,7 @@ local function DrawBossIncomingBanner()
 
 
     local infoY = y + headerHeight + (scaledHeight - headerHeight) / 2
-    draw.SimpleText("准备迎接强大的敌人！", "ZB_HomicideMedium", centerX, infoY, textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    draw.SimpleText("准备迎战强敌！", "ZB_HomicideMedium", centerX, infoY, textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     
 
     local barHeight = scaledHeight * 0.04

@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_base"
 SWEP.PrintName = "简易爆炸装置"
-SWEP.Instructions = "一个手制的C4炸药，放在小纸板箱里。引爆器是一部旧诺基亚手机。把炸弹放在不同物体中可获得破片或火焰效果。左键放入物体中，右键直接放置炸弹。放置后按左键激活。"
+SWEP.Instructions = "土制C4，装在纸板箱里，用旧诺基亚手机当引爆器。塞进不同物体里可以搞出破片或火焰效果。左键放入物体，右键直接放置。放好后按左键引爆。"
 SWEP.Category = "Weapons - Explosive"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

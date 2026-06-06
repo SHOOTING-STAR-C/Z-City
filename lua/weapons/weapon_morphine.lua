@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "吗啡"
-SWEP.Instructions = "一种非常强效的药物，主要用于降低压力和/或作为麻醉剂。必须严格控制吗啡剂量，因为它可能导致阿片类药物过量。包含最大日剂量。右键对他人注射。"
+SWEP.Instructions = "强效镇痛药和麻醉剂。务必控制剂量，过量可导致阿片类药物中毒。包装上标有每日最大剂量。右键对他人注射。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

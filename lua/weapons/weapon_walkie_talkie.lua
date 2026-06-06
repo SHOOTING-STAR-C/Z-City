@@ -4,7 +4,7 @@ end
 
 SWEP.Base = "weapon_base"
 SWEP.PrintName = "对讲机"
-SWEP.Instructions = "使用对讲机与4公里范围内的其他人通信。必须在同一频率。"
+SWEP.Instructions = "用对讲机和4公里范围内的队友通话。记得调到同一个频率。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

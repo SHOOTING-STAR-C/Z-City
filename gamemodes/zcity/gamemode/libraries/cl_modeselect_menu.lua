@@ -168,7 +168,7 @@ if CLIENT then
         queueScroll:DockMargin(5, 5, 5, 5)
         
         local saveBtn = vgui.Create("DButton", queuePanel)
-        saveBtn:SetText("应用队列")
+        saveBtn:SetText("应用")
         saveBtn:Dock(BOTTOM)
         saveBtn:DockMargin(5, 5, 5, 5)
         saveBtn:SetTall(30)
@@ -181,7 +181,7 @@ if CLIENT then
                     net.WriteBool(true)
                 net.SendToServer()
                 
-                chat.AddText(Color(0, 255, 0), "游戏模式队列已设置！")
+                chat.AddText(Color(0, 255, 0), "游戏模式队列已更新！")
             //else
                 //chat.AddText(Color(255, 0, 0), "Game mode queue is empty!")
             //end
@@ -209,7 +209,7 @@ if CLIENT then
             
             if zb.nextround and zb.nextround ~= "" then
                 local nextRoundLabel = vgui.Create("DLabel", queueScroll)
-                nextRoundLabel:SetText("下一模式: " .. zb.nextround)
+                nextRoundLabel:SetText("下一回合: " .. zb.nextround)
                 nextRoundLabel:SetFont("DermaDefaultBold")
                 nextRoundLabel:SetTextColor(Color(100, 255, 100))
                 nextRoundLabel:Dock(TOP)
@@ -486,7 +486,7 @@ if CLIENT then
         frame:MakePopup()
 
         local setModeBtn = vgui.Create("DButton", frame)
-        setModeBtn:SetText("设置下一模式")
+        setModeBtn:SetText("设置下一回合模式")
         setModeBtn:Dock(TOP)
         setModeBtn:DockMargin(5, 10, 5, 2)
         setModeBtn:SetSize(300, 40)
@@ -496,7 +496,7 @@ if CLIENT then
         end
 
         local setForceModeBtn = vgui.Create("DButton", frame)
-        setForceModeBtn:SetText("设置自动下一模式")
+        setForceModeBtn:SetText("锁定回合模式")
         setForceModeBtn:Dock(TOP)
         setForceModeBtn:DockMargin(5, 2, 5, 2)
         setForceModeBtn:SetSize(300, 40)
@@ -516,7 +516,7 @@ if CLIENT then
         end
 
         local endRoundBtn = vgui.Create("DButton", frame)
-        endRoundBtn:SetText("结束回合")
+        endRoundBtn:SetText("强行结束回合")
         endRoundBtn:Dock(TOP)
         endRoundBtn:DockMargin(5, 2, 5, 2)
         endRoundBtn:SetSize(300, 40)

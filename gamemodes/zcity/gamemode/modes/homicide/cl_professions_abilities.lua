@@ -181,7 +181,7 @@ hook.Add("radialOptions", "EngineerCraft", function()
 
 		local have_pipe = ply:HasWeapon("weapon_leadpipe")
 		if have_ammo and have_pipe and have_nails then
-			local tbl = {createPipeBomb, "制作管状炸弹"}
+			local tbl = {createPipeBomb, "制作土制管状炸弹"}
         	hg.radialOptions[#hg.radialOptions + 1] = tbl
 		end
 

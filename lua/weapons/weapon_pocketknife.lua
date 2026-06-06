@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "折叠刀"
-SWEP.Instructions = "一柄可以轻松藏在口袋中的小刀。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。"
+SWEP.Instructions = "一把能轻松藏进口袋的小折刀。低调但好用。\n\n左键攻击。\nR+左键切换攻击模式。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

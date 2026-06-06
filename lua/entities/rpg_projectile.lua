@@ -292,15 +292,15 @@ function ENT:Use(ply)
         if not self.ExtractStarted then
             self.ExtractStarted = true
             self.ExtractingPlayer = ply
-            ply:ChatPrint("进行中")
-            
+            ply:ChatPrint("拆除中")
+
             local dots = ""
             timer.Create("RPGExtractDots_" .. self:EntIndex(), 1, 6, function()
-                if not IsValid(self) or not IsValid(ply) then 
+                if not IsValid(self) or not IsValid(ply) then
                     timer.Remove("RPGExtractDots_" .. self:EntIndex())
-                    return 
+                    return
                 end
-                
+
                 if self:GetPos():Distance(ply:GetPos()) > 100 then
                     timer.Remove("RPGExtractDots_" .. self:EntIndex())
                     --ply:ChatPrint("huy")
@@ -308,9 +308,9 @@ function ENT:Use(ply)
                     self.ExtractingPlayer = nil
                     return
                 end
-                
+
                 dots = dots .. "."
-                ply:ChatPrint("进行中" .. dots)
+                ply:ChatPrint("拆除中" .. dots)
                 
                 if dots == "......" then
                     timer.Remove("RPGExtractDots_" .. self:EntIndex())

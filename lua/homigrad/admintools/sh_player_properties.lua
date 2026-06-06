@@ -80,7 +80,7 @@ properties.Add( "strip", {
 	Filter = check,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_Query(
-            "该玩家将被清除所有武器，只保留拳头。",
+            "该玩家的所有武器将被清除，只保留拳头。",
             "确定吗？",
             "是",
             function()
@@ -112,7 +112,7 @@ properties.Add( "fullstrip", {
 	Filter = check,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_Query(
-            "所有武器，包括拳头，都将被清除。",
+            "所有武器（包括拳头）都将被清除。",
             "确定吗？",
             "是",
             function()
@@ -144,7 +144,7 @@ properties.Add( "reset_org", {
 	Filter = check,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_Query(
-            "生理状态将恢复到重生时的状态",
+            "生理状态将恢复至重生时的状态",
             "确定吗？",
             "Yes",
             function()
@@ -211,7 +211,7 @@ properties.Add( "snatch", {
     end,
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
         Derma_Query(
-            "如果周围没有玩家，他将直接消失。",
+            "若周围没有其他玩家，目标将直接消失。",
             "确定吗？",
             "Yes",
             function()
@@ -308,7 +308,7 @@ properties.Add( "lobotomize", {
         print(tostring(ply:Nick() or ply) .." has lobotomized ".. tostring(ent:Nick() or ent))
 
         if ent.organism.brain >= 0.25 and ent.organism.brain < 0.3 then
-            ply:ChatPrint("下次脑叶切除将失去意识！")
+            ply:ChatPrint("再次进行脑叶切除将导致意识丧失！")
         end
     end 
 } )
@@ -722,7 +722,7 @@ properties.Add( "respawn_ply_in_rag", {
 } )
 
 properties.Add( "respawn_lply_in_rag", {
-	MenuLabel = "自己重生", -- Name to display on the context menu
+	MenuLabel = "亲自重生", -- Name to display on the context menu
 	Order = 2, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/heart.png", -- The icon to display next to the property
 
@@ -759,7 +759,7 @@ properties.Add( "respawn_lply_in_rag", {
 } )
 
 properties.Add( "respawn_ragply_in_rag", {
-	MenuLabel = "重生布娃娃主人", -- Name to display on the context menu
+	MenuLabel = "重生布娃娃原主", -- Name to display on the context menu
 	Order = 3, -- The order to display this property relative to other properties
 	MenuIcon = "icon16/heart.png", -- The icon to display next to the property
 
@@ -772,7 +772,7 @@ properties.Add( "respawn_ragply_in_rag", {
 	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
 
         Derma_Query(
-            "这个布娃娃的玩家将重生到自己的身体里",
+            "该布娃娃的原主将重生回自己的身体",
             "确定吗？",
             "Yes",
             function()

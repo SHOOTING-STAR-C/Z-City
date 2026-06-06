@@ -72,7 +72,7 @@ hook.Add("Think", "ZoneSoundThink", function()
 end)
 
 local fighter = {
-    objective = "击杀所有人。",
+    objective = "干掉所有人。",
     name = "斗士",
     color1 = Color(0,120,190)
 }
@@ -299,7 +299,7 @@ CreateEndMenu = function()
 			surface.SetTextColor(col.r,col.g,col.b,col.a)
 			local lengthX, lengthY = surface.GetTextSize( ply:GetPlayerName() or "已离开..." )
 			surface.SetTextPos(15,h/2 - lengthY/2)
-			surface.DrawText((ply:Name() .. (ply.most_violent_player and " - 最佳选手" or (not ply:Alive() and " - 死亡" or ""))))
+			surface.DrawText((ply:Name() .. (ply.most_violent_player and " - MVP" or (not ply:Alive() and " - 死亡" or ""))))
 
 			surface.SetFont( "ZB_InterfaceMediumLarge" )
 			surface.SetTextColor(col.r,col.g,col.b,col.a)

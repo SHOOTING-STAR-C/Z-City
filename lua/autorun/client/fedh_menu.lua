@@ -26,15 +26,15 @@ local function PopulateSBXToolMenu(pnl)
     pnl:ControlHelp("First Person Death.")
 	
 	pnl:NumSlider("Facial Time", "sv_fedhoria_facial_duaration",0,30,3)
-    pnl:ControlHelp("表情变化的持续时间，注意要小于die time.")
+    pnl:ControlHelp("表情变化的持续时间，注意要小于死亡持续时间。")
 	
 	pnl:NumSlider("Eyeclose_trend", "sv_fedhoria_eyelid_trend", 0, 1, 3)
-    pnl:ControlHelp("眼睛闭上的倾向，这个值越大，最后眼皮闭合的程度越接近最大值，减少半睁着眼睛的概率。")
+    pnl:ControlHelp("眼皮闭合倾向，值越大闭合越接近最大值，减少半睁眼的情况。")
 	pnl:ControlHelp("The trend of eye closing to max value")
 	
 	
 	pnl:NumSlider("Mouth_Twitch_Random_scale", "sv_fedhoria_facial_random", 0, 1, 3)
-    pnl:ControlHelp("嘴部开合的随机性大小，会让嘴部抽动（The mouth will twitch）")
+    pnl:ControlHelp("嘴部开合的随机程度，会让嘴部自然抽动。")
 	
 	-- pnl:NumSlider("Death_FOV", "fed_fov",0,100,3)
     -- pnl:ControlHelp("渐进式死亡视角的镜头FOV，如果不改变就调成0，注意不要调的太小")
@@ -44,10 +44,10 @@ local function PopulateSBXToolMenu(pnl)
 	
 	
 	pnl:NumSlider("fed_camera_distance", "fed_camera_distance",-100,100,3)
-    pnl:ControlHelp("非渐进式死亡视角的镜头距离，如果不改变就调成0，注意不要调的太大")
+    pnl:ControlHelp("死亡视角镜头距离，不需要调整时设为 0，注意不要设太大。")
 	
 	pnl:NumSlider("Znear", "fed_z_near",0,30,3)
-    pnl:ControlHelp("非渐进式死亡视角的贴地程度，如果不改变就调成0，注意不要调的太大")
+    pnl:ControlHelp("死亡视角贴地程度，不需要调整时设为 0，注意不要设太大。")
 	
 	pnl:CheckBox("RagdollsCollideWithPlayers", "sv_playerragdolls_collide_players")
     pnl:ControlHelp("Enable or disable Ragdoll Collide With Players.")

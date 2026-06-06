@@ -1,6 +1,6 @@
 if SERVER then AddCSLuaFile() end
 SWEP.PrintName = "折叠箱"
-SWEP.Instructions = "一个方便的折叠箱，你可以在里面躲避敌人"
+SWEP.Instructions = "一个方便折叠收纳的箱子，躲进去敌人就看不到你了。"
 SWEP.Category = "ZCity Other"
 SWEP.Spawnable = true
 SWEP.Slot = 1

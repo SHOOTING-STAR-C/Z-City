@@ -134,7 +134,7 @@ net.Receive("RadioURLInput", function()
 	--urlEntry:DockMargin(10,5,150,2.5)	
 	--urlEntry:SetSize(50,45)	
 	urlEntry:SetTextColor(Color(255,255,255))
-	urlEntry:SetPlaceholderText( "在此输入URL" )
+	urlEntry:SetPlaceholderText( "在此输入 URL" )
 	urlEntry:SetPaintBackground(false)
 
 	urlEntry.OnEnter = function()

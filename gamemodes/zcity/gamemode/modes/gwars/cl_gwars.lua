@@ -78,7 +78,7 @@ function MODE:HUDPaint()
 		surface.SetTextPos(sw * 0.5 - w2 / 2, sh * 0.05)
 		surface.DrawText(time)
 		surface.SetTextPos(sw * 0.5 - w2 / 2 + w, sh * 0.05)
-		surface.DrawText("SWAT到达剩余时间！")
+		surface.DrawText("  SWAT 抵达倒计时")
 		//draw.SimpleText(" left before SWAT arrives!", "timer_Font2", sw * 0.432, sh * 0.05, Color(255, 255, 255, 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 		//draw.SimpleText(time, "timer_Font2", sw * 0.36, sh * 0.05, Color(255, 255, 255, 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 	end
@@ -190,14 +190,14 @@ CreateEndMenu = function()
 	--hmcdEndMenu:SetBackgroundColor(colGray)
 	hmcdEndMenu:MakePopup()
 	hmcdEndMenu:SetKeyboardInputEnabled(false)
-	hmcdEndMenu:Show关闭Button(false)
+	hmcdEndMenu:ShowCloseButton(false)
 	local closebutton = vgui.Create("DButton", hmcdEndMenu)
 	closebutton:SetPos(5, 5)
 	closebutton:SetSize(ScrW() / 20, ScrH() / 30)
 	closebutton:SetText("")
 	closebutton.DoClick = function()
 		if IsValid(hmcdEndMenu) then
-			hmcdEndMenu:关闭()
+			hmcdEndMenu:Close()
 			hmcdEndMenu = nil
 		end
 	end

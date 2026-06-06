@@ -118,7 +118,7 @@ if SERVER then
         if not ply.organism then return end
         
         ply.organism.godmode = !ply.organism.godmode
-		ply:Notify(ply.organism.godmode and "现在我不朽了..." or "现在我凡人了")
+		ply:Notify(ply.organism.godmode and "已开启无敌模式" or "已关闭无敌模式")
 		return
     end,1}
 
@@ -129,13 +129,13 @@ if SERVER then
 		ply:DrawShadow(!ply.cloak)
 		ply:SetCollisionGroup(ply.cloak and COLLISION_GROUP_DEBRIS or COLLISION_GROUP_PLAYER)
 		ply:RemoveAllDecals()
-		ply:Notify(ply.cloak and "现在我隐形了..." or "现在我可见了") -- walking by the wall
+		ply:Notify(ply.cloak and "已开启隐身模式" or "已关闭隐身模式") -- walking by the wall
 		return
     end,1}
 
     COMMANDS.punish = {function(ply, args)
         if #args < 1 then
-            ply:ChatPrint("给我那个 OwO 的名字。")
+            ply:ChatPrint("请告诉我要惩罚谁嘛 OwO")
             return
         end
 
@@ -149,7 +149,7 @@ if SERVER then
         end
 
         if not IsValid(target) then
-            ply:ChatPrint("我找不到那个 OwO 。")
+            ply:ChatPrint("找不到那个玩家诶 OwO")
             return
         end
 
@@ -172,7 +172,7 @@ if SERVER then
         dmg:SetDamageType(DMG_SHOCK)
         target:TakeDamageInfo(dmg)
 
-        ply:ChatPrint("肥仔 " .. target:Nick() .. " 已被惩罚。")
+        ply:ChatPrint("小肥肥 " .. target:Nick() .. " 已被惩罚。")
     end, 2, "ник игрока"}
 
     COMMANDS.pluv = {function(ply, args)

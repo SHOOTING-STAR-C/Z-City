@@ -18,7 +18,7 @@ end)
 
 local teams = {
 	[0] = {
-		objective = "谈判失败，消除威胁。收到。",
+		objective = "谈判破裂，清除威胁。收到。",
 		name = "SWAT 队员",
 		color1 = Color(68, 10, 255),
 		color2 = Color(68, 10, 255)

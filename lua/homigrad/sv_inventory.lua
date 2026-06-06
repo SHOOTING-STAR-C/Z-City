@@ -93,13 +93,13 @@ hook.Add("WeaponEquip", "homigrad-inventory", function(wep, ply)
         wep.sling = nil
         if not inv["Weapons"]["hg_sling"] then
             inv["Weapons"]["hg_sling"] = true
-            ply:ChatPrint("你拿起了武器附带的背带。")
+            ply:ChatPrint("你取下了武器上的背带。")
         else
             local sling = ents.Create("hg_sling")
             sling:SetPos(ply:EyePos())
             sling:SetVelocity(ply:GetAimVector() * 5)
             sling:Spawn()
-            ply:ChatPrint("你卸下了武器连接的背带。")
+            ply:ChatPrint("背带已从武器上拆下，掉在了地上。")
         end
     end
 

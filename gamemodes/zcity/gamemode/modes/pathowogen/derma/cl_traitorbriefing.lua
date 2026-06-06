@@ -13,7 +13,7 @@ function PANEL:Init()
     self.dialogue = self:Add("ZB_DialogueTraitor")
     self.dialogue:SetPos(ScrW() / 2 - self.dialogue:GetWide() / 2, ScrH() / 2 - self.dialogue:GetTall() / 2)
 
-    self.dialogue:SetText("你的目标很简单：消灭所有幸存者。你需要在现场获取装备，只有任务完成后我们才会撤离你。", 2)
+    self.dialogue:SetText("你的任务很简单：消灭所有幸存者。在现场自行获取装备，任务完成后我们才会安排撤离。", 2)
 	timer.Simple(15, function()
 		if !IsValid(self) then return end
 		self.dialogue:SetText("祝你好运。完毕。")

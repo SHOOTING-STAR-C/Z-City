@@ -81,7 +81,7 @@ local function ForceApplyAppearance(ply, tbl, noModelChange)
     end
 
     ply:SetNWString("PlayerName", tbl.AName)
-    -- 保存非 Z-City 管理的身体组（防止其他 Mod 的修改被覆盖）
+    -- 保存非 Z-City 管理的身体组（避免其他 Mod 的修改被覆盖）
     local savedBodygroups = {}
     local bodygroupList = ply:GetBodyGroups()
     for k, v in ipairs(bodygroupList) do

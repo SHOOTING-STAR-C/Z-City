@@ -1,7 +1,7 @@
 if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_bandage_sh"
 SWEP.PrintName = "止血带"
-SWEP.Instructions = "一种Esmarch止血带，用于止住大（动脉）出血。也可用于止住轻度出血，但会使肢体失去功能。"
+SWEP.Instructions = "Esmarch 止血带，用于止住动脉大出血。也可止住轻度出血，但上止血带的肢体将暂时失去功能。"
 SWEP.Category = "ZCity Medicine"
 SWEP.Spawnable = true
 SWEP.Primary.Wait = 1

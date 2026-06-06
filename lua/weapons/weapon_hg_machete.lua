@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "大砍刀"
-SWEP.Instructions = "砍刀是一种宽刃刀具，既可用作类似斧头的农具，也可用作长刃刀进行战斗。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "宽刃大刀，既能当农具用，也能当武器使。一刀下去干脆利落。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false

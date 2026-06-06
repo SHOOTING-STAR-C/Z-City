@@ -1,7 +1,7 @@
 ﻿if SERVER then AddCSLuaFile() end
 SWEP.Base = "weapon_melee"
 SWEP.PrintName = "撬棍"
-SWEP.Instructions = "撬棍是一种可以当作近战武器的双手工具。它也是戈登·弗里曼的标志性武器。可以破坏门。\n\n左键攻击。\n右键格挡。"
+SWEP.Instructions = "经典多功能工具，也是戈登·弗里曼的传世之宝。可以撬开门。\n\n左键攻击。\n右键格挡。"
 SWEP.Category = "Weapons - Melee"
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
