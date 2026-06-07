@@ -250,21 +250,21 @@ module[2] = function(owner, org, timeValue)
 	
 	if org.isPly and not org.otrub and o2.curregen < losing_oxy and org.analgesia <= 1.5 and !org.heartstop then
 		if mask_blevota then
-			if o2[1] < 15 then
+			if o2[1] < 10 then
 				org.owner:Notify("赶紧把这破面具摘了！", 25, "take_gasmask2", 0, nil, color_red2)
 			else
 				org.owner:Notify(drop_mask[math.random(#drop_mask)], 15, "take_gasmask", 0)
 			end
 		else
-			if o2[1] < 25 and o2[1] > 12 then
+			if o2[1] < 20 and o2[1] > 8 then
 				org.owner:Notify(not_enough_intake[math.random(#not_enough_intake)], 61, "oxygen_lowintake", 0)
 			end
 		end
 
-		if o2[1] < 12 then
+		if o2[1] < 8 then
 			org.owner:Notify(lowoxy[math.random(#lowoxy)], 30, "lowoxy", 0, nil, color_red3)
-	
-			if o2[1] < 6 then
+
+			if o2[1] < 4 then
 				org.owner:Notify("氧气……求你了……", 30, "lowoxy2", 0, nil, color_red)
 			end
 		end
@@ -280,17 +280,23 @@ module[2] = function(owner, org, timeValue)
 		end
 	end
 
-	if o2[1] == 0 then
+	if o2[1] == 0 and org.needle == 0 then
 		if math.random(50) == 1 then
 			org.lungsfunction = false
 		end
 	else
-		if math.random(50) == 1 then
+		if math.random(50) == 1 or org.needle > 0 then
 			org.lungsfunction = true
 		end
 	end
 
-	if (org.lungsL[1] == 1 and org.lungsR[1] == 1) or org.heartstop then
+	if org.needle > 0 then
+		if org.heartstop and org.alive and org.brain < 0.6 then
+			org.heartstop = false
+		end
+	end
+
+	if (org.lungsL[1] == 1 and org.lungsR[1] == 1) and org.needle == 0 then
 		org.lungsfunction = false
 	end
 
@@ -326,13 +332,13 @@ module[2] = function(owner, org, timeValue)
 
 	local k = halfValue2(o2[1], o2.range, o2.k)
 
-	if o2[1] < 10 then
+	if o2[1] < 3 then
 		if org.isPly then
 			hg.StunPlayer(owner, 3)
 		end
 	end
 
-	if o2[1] < 12 then
+	if o2[1] < 5 then
 		org.needfake = true
 
 		if org.isPly then
@@ -340,16 +346,16 @@ module[2] = function(owner, org, timeValue)
 		end
 	end
 
-	if o2[1] < 4 then
+	if o2[1] < 1 then
 		org.needotrub = true
 	end
 
 	if org.lungsR[1] < 0.5 then
-		//org.lungsR[1] = max(org.lungsR[1] - timeValue / 240, 0)
+		org.lungsR[1] = max(org.lungsR[1] - timeValue / (org.needle > 0 and 120 or 600), 0)
 	end
 
 	if org.lungsL[1] < 0.5 then
-		//org.lungsL[1] = max(org.lungsL[1] - timeValue / 240, 0)
+		org.lungsL[1] = max(org.lungsL[1] - timeValue / (org.needle > 0 and 120 or 600), 0)
 	end
 
 	if owner:IsBerserk() then
