@@ -10,11 +10,11 @@ hook.Add("HG.InputMouseApply", "ChangeZoom", function(tbl)
 
 	if IsAiming(ply) then
 		delta = input.WasMousePressed(MOUSE_WHEEL_UP) and delta + 1 * (FrameTime() / engine.TickInterval()) or input.WasMousePressed(MOUSE_WHEEL_DOWN) and delta - 1 * (FrameTime() / engine.TickInterval()) or delta
-		//tbl.cmd:SetMouseWheel(0)
-		if LocalPlayer():KeyDown(IN_WALK) then
-			delta = delta - tbl.y / 24
-			tbl.y = 0
-		end
+		-- tbl.cmd:SetMouseWheel(0)
+		-- if LocalPlayer():KeyDown(IN_WALK) then
+		-- 	delta = delta - tbl.y / 24
+		-- 	tbl.y = 0
+		-- end
 	end
 end)
 

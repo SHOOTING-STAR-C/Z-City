@@ -256,16 +256,15 @@ local function spine(org, bone, dmg, dmgInfo, number, boneindex, dir, hit, ricoc
 end
 
 local jaw_broken_msg = {
-	"I FEEL PIECES OF MY JAW... FUCK-FUCK-FUCK",
-	"MY JAW IS FUCKING FLOATING IN MY HEAD",
-	"MY JAW... OHH IT HURTS REALLY BAD... I FEEL PIECES OF IT MOVING",
+	"下巴...下巴碎了...草草草好疼",
+	"我下巴的骨头在脑袋里乱晃啊操",
+	"我的下巴...啊啊啊好疼...能感觉到碎渣在里面动",
 }
 
 local jaw_dislocated_msg = {
-	"I CAN'T CLOSE MY JAW... IT FUCKING HURTS",
-	"MY JAW... ITS JUST STUCK THERE-- OH ITS PAINING",
-	"I CANT MOVE MY JAW AT ALL... AND ITS REALLY ACHING",
-	//"I CANT EVEN SPEAK, I NEED TO PUNCH IT BACK IN PLACE... BUT IT HURTS REAL BAD",
+	"嘴合不上了...操真几把疼",
+	"下巴卡住了...啊疼死我了",
+	"下巴动不了了...疼得要命啊",
 }
 
 hg.organism.input_list = hg.organism.input_list or {}

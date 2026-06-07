@@ -46,13 +46,13 @@ module[2] = function(owner, org, timeValue)
 
 	local owner = org.owner
 	
-	if !org.lasthit or org.lasthit + 1.5 < CurTime() then org.shock = max(org.shock - timeValue * 8 * (org.otrub and 1 or 0.5), 0) end
-	org.immobilization = max(org.immobilization - timeValue * 2 * adrenalineMul, 0)
+	if !org.lasthit or org.lasthit + 1.5 < CurTime() then org.shock = max(org.shock - timeValue * 16 * (org.otrub and 1 or 0.5), 0) end
+	org.immobilization = max(org.immobilization - timeValue * 6 * adrenalineMul, 0)
 
 	local shouldPainAdd = not (org.otrub or org.spine2 >= hg.organism.fake_spine2 or org.spine3 >= hg.organism.fake_spine3)
 	
 	local add = math.min(timeValue * 20, org.painadd)
-	local sub = timeValue * 2 * (org.otrub and 2 or 1) + timeValue * (org.painkiller * 2) + timeValue * (org.analgesia * 4)
+	local sub = timeValue * 6 * (org.otrub and 2 or 1) + timeValue * (org.painkiller * 2) + timeValue * (org.analgesia * 4)
 
 	if adrenaline > 0.5 then
 		sub = sub * math.max(1 - adrenaline, 0.05) / 1.5// / (adrenaline >= 2 and 16 or 8)
@@ -62,12 +62,12 @@ module[2] = function(owner, org, timeValue)
 	if org.pain > 60 and not org.otrub then
 		add = add / 5
 		if org.pain > 70 and add > 0.01 then
-			sub = sub / 20
-		else
 			sub = sub / 5
+		else
+			sub = sub / 2
 		end
 
-		org.disorientation = math.max(org.pain / 50, org.disorientation)//org.disorientation + add
+		org.disorientation = math.max(org.pain / 50 * 0.3, org.disorientation)//org.disorientation + add
 		org.fearadd = 1
 	end
 
