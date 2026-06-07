@@ -427,6 +427,7 @@ function MODULE:PhysicsSimulate(phys, dt)
 
 	if (phys_bone == self.phys_bone_torso) then
 		local phys_pelvis = target:GetPhysicsObjectNum(self.phys_bone_pelvis or 0)
+		if (not IsValid(phys_pelvis)) then return false end
 		local vel = phys:GetVelocity()
 		vel.z = 0
 		vel:Normalize()
@@ -448,9 +449,10 @@ function MODULE:PhysicsSimulate(phys, dt)
 
 	if (phys_bone == (self.phys_bone_pelvis or 0)) then
 		local phys_torso = target:GetPhysicsObjectNum(self.phys_bone_torso or 1)
+		if (not IsValid(phys_torso)) then return false end
 		--calculate animation settings here so its only done once per frame
 		local pos = phys:GetPos()
-		local ang = phys:GetAngles()		
+		local ang = phys:GetAngles()
 		--local vel = phys:GetVelocity()
 		local vel = phys_torso:GetVelocity()
 
