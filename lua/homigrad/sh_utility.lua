@@ -472,7 +472,7 @@ hg.ConVars = hg.ConVars or {}
 		ply.RenderOverride = function(self, flags)
 			if not IsValid(self) or self:IsDormant() then return end
 			local p,a = self:GetBonePosition(1)
-			if not p or p:IsEqualTol(self:GetPos(), 0.01) then return end
+			if not p then return end
 			local ent = self.FakeRagdoll
 			if IsValid(ent) then return end
 
