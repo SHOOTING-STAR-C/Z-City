@@ -225,6 +225,9 @@ local viewOverride
 
 local hg_thirdperson = ConVarExists("hg_thirdperson") and GetConVar("hg_thirdperson") or CreateConVar("hg_thirdperson", 0, FCVAR_REPLICATED, "Toggle third-person camera view", 0, 1)
 local hg_legacycam = ConVarExists("hg_legacycam") and GetConVar("hg_legacycam") or CreateConVar("hg_legacycam", 0, FCVAR_REPLICATED, "Toggle legacy first-person camera view if hg_thirdperson is enabled", 0, 1)
+local hg_thirdperson_orbit = ConVarExists("hg_thirdperson_orbit") and GetConVar("hg_thirdperson_orbit") or CreateConVar("hg_thirdperson_orbit", 1, FCVAR_ARCHIVE, "Enable third-person camera orbit with mouse", 0, 1)
+local tp_orbit_ang = Angle(0, 0, 0)
+local tp_orbit_dist = 1
 local lerpasad = 0
 
 hook.Remove("CalcView", "wac_air_calcview")
@@ -469,14 +472,42 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 
 		local pos = hg.eye(ply, 10, follow)
 		local ang = ply:EyeAngles()
-		local tr = {}
-		tr.start = pos
-		tr.endpos = pos - ang:Forward() * 60 * lerpasad + ang:Right() * 15 * lerpasad
-		tr.filter = {ply}
-		tr.mask = MASK_SOLID
 
-		view.origin = util.TraceLine(tr).HitPos + ((tr.endpos - tr.start):GetNormalized() * -5)
-		view.angles = angles
+		if hg_thirdperson_orbit:GetBool() and ply:Alive() then
+			-- 公转模式：用 tp_orbit_ang 旋转相机偏移
+			local camDist = 60 * lerpasad * tp_orbit_dist
+			local offset = ang:Forward() * -camDist + ang:Right() * 15 * lerpasad
+			offset:Rotate(Angle(0, tp_orbit_ang.yaw, 0))
+			offset:Rotate(Angle(tp_orbit_ang.pitch, 0, 0))
+
+			local tr = {}
+			tr.start = pos
+			tr.endpos = pos + offset
+			tr.filter = {ply}
+			tr.mask = MASK_SOLID
+
+			view.origin = util.TraceLine(tr).HitPos + ((tr.endpos - tr.start):GetNormalized() * -5)
+
+			if lerpasad > 0.1 then
+				view.angles = (pos - view.origin):Angle()
+			else
+				-- 瞄准时相机很近，用原始视角+公转偏移
+				view.angles = angles
+				view.angles:RotateAroundAxis(view.angles:Up(), tp_orbit_ang.yaw)
+				view.angles:RotateAroundAxis(view.angles:Right(), tp_orbit_ang.pitch)
+			end
+		else
+			-- 原始第三人称逻辑
+			local tr = {}
+			tr.start = pos
+			tr.endpos = pos - ang:Forward() * 60 * lerpasad + ang:Right() * 15 * lerpasad
+			tr.filter = {ply}
+			tr.mask = MASK_SOLID
+
+			view.origin = util.TraceLine(tr).HitPos + ((tr.endpos - tr.start):GetNormalized() * -5)
+			view.angles = angles
+		end
+
 		view.drawviewer = true
 		view.fov = 95 + lerpfovadd + lerpfovadd2
 		return view
@@ -647,6 +678,59 @@ hook.Add( "HG.InputMouseApply", "FreezeTurning", function( tbl )
 	end
 
 end )
+
+hook.Add("HG.InputMouseApply", "ThirdPersonOrbit", function(tbl)
+	local ply = lply
+	if not hg_thirdperson:GetBool() or not hg_thirdperson_orbit:GetBool() then
+		hg.ThirdPersonOrbitActive = false
+		return
+	end
+	if not IsValid(ply) or not ply:Alive() then
+		hg.ThirdPersonOrbitActive = false
+		return
+	end
+
+	local moving = ply:KeyDown(IN_FORWARD) or ply:KeyDown(IN_BACK) or ply:KeyDown(IN_MOVELEFT) or ply:KeyDown(IN_MOVERIGHT)
+	local aiming = IsAimingNoScope(ply)
+
+	if moving or aiming then
+		-- 移动时自动回到背后，鼠标正常控制角色方向
+		tp_orbit_ang.yaw = LerpFT(0.1, tp_orbit_ang.yaw, 0)
+		tp_orbit_ang.pitch = LerpFT(0.1, tp_orbit_ang.pitch, 0)
+		if math.abs(tp_orbit_ang.yaw) < 0.5 and math.abs(tp_orbit_ang.pitch) < 0.5 then
+			tp_orbit_ang.yaw = 0
+			tp_orbit_ang.pitch = 0
+		end
+		hg.ThirdPersonOrbitActive = false
+		return
+	end
+
+	-- 静止时进入公转模式
+	hg.ThirdPersonOrbitActive = true
+
+	local sens = GetConVar("sensitivity"):GetFloat() * 0.03
+	tp_orbit_ang.yaw = tp_orbit_ang.yaw - tbl.x * sens
+	tp_orbit_ang.pitch = math.Clamp(tp_orbit_ang.pitch - tbl.y * sens, -90, 90)
+	tp_orbit_ang.yaw = math.NormalizeAngle(tp_orbit_ang.yaw)
+
+	-- 清零鼠标输入，阻止玩家旋转
+	tbl.x = 0
+	tbl.y = 0
+	tbl.override_angle = true
+end)
+
+-- 公转模式下滚轮控制远近
+hook.Add("PlayerBindPress", "ThirdPersonOrbitScroll", function(ply, bind, pressed)
+	if not hg.ThirdPersonOrbitActive then return end
+	if bind == "invprev" or bind == "invnext" then
+		if bind == "invprev" then
+			tp_orbit_dist = math.Clamp(tp_orbit_dist - 0.1, 0.01, 2)
+		else
+			tp_orbit_dist = math.Clamp(tp_orbit_dist + 0.1, 0.3, 2)
+		end
+		return true
+	end
+end, "HIGHEST")
 
 hg.CalcView = CalcView
 hook.Add("CalcView", "homigrad-view", function(ply, origin, angles, fov, znear, zfar)

@@ -218,6 +218,7 @@ local function canUseSelector(ply)
 end
 
 function WS.ChangeSelectionWep( ply, key )
+    if hg.ThirdPersonOrbitActive then return end
     if not IsValid( ply ) or not ply:Alive() or GetGlobalBool("RadialInventory", false) then return end
     if ply.organism and ply.organism.otrub then return end
     if canUseSelector( ply ) then return end
@@ -268,6 +269,7 @@ function WS.ChangeSelectionWep( ply, key )
 end
 
 function WS.SetActuallyWeapon( ply, cmd )
+    if hg.ThirdPersonOrbitActive then return end
     if not IsValid( ply ) or not ply:Alive() or GetGlobalBool("RadialInventory", false) then return end
     if (cmd:KeyDown( IN_ATTACK ) or cmd:KeyDown( IN_ATTACK2 )) and WS.Show > CurTime() then
 
@@ -298,6 +300,7 @@ end
 hook.Add( "PlayerBindPress", "WeaponSelector_PlayerBindPress", WS.ChangeSelectionWep )
 
 hook.Add( "HUDPaint", "WeaponSelector_Draw", function()
+    if hg.ThirdPersonOrbitActive then return end
     WS.WeaponSelectorDraw( LocalPlayer() )
 end)
 

@@ -556,6 +556,18 @@ bind "v" "hg_inspect"             // 检视武器
 | `zb_drawpoints` | 0 | 可视化地图点 |
 | `hg_random_sound_dir` | `sound/zcity/rnd` | 音频目录（相对于 GAME 根目录） |
 | `hg_random_sound_refresh` | 命令 | 手动刷新并打印找到的音频文件数 |
+| `hg_thirdperson_orbit` | 1 | 第三人称公转模式（静止时鼠标控制相机绕角色旋转） |
+
+### 第三人称公转模式
+
+开启 `hg_thirdperson 1` 后，公转模式默认生效（`hg_thirdperson_orbit 1`）。
+
+| 操作 | 效果 |
+|------|------|
+| 鼠标移动（静止时） | 相机绕角色公转，可看正面/背面/侧面 |
+| 鼠标移动（移动/瞄准时） | 正常控制角色转向 |
+| 滚轮（公转时） | 控制相机远近 |
+| 移动键/WASD | 相机自动回到角色背后 |
 
 ---
 
