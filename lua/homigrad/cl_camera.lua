@@ -698,6 +698,10 @@ hook.Add("HG.InputMouseApply", "ThirdPersonOrbit", function(tbl)
 		hg.ThirdPersonOrbitActive = false
 		return
 	end
+	if IsValid(follow) then
+		hg.ThirdPersonOrbitActive = false
+		return
+	end
 
 	local moving = ply:KeyDown(IN_FORWARD) or ply:KeyDown(IN_BACK) or ply:KeyDown(IN_MOVELEFT) or ply:KeyDown(IN_MOVERIGHT)
 	local aiming = IsAimingNoScope(ply)
