@@ -474,11 +474,16 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 		local ang = ply:EyeAngles()
 
 		if hg_thirdperson_orbit:GetBool() and ply:Alive() then
-			-- 公转模式：用 tp_orbit_ang 旋转相机偏移
+			-- 公转模式：三角函数计算相机位置，无万向锁
 			local camDist = 60 * lerpasad * tp_orbit_dist
-			local offset = ang:Forward() * -camDist + ang:Right() * 15 * lerpasad
-			offset:Rotate(Angle(0, tp_orbit_ang.yaw, 0))
-			offset:Rotate(Angle(tp_orbit_ang.pitch, 0, 0))
+			local yawRad = math.rad(tp_orbit_ang.yaw)
+			local pitchRad = math.rad(tp_orbit_ang.pitch)
+
+			local rightDist = math.sin(yawRad) * camDist
+			local backDist = -math.cos(yawRad) * math.cos(pitchRad) * camDist
+			local upDist = math.sin(pitchRad) * camDist
+
+			local offset = ang:Right() * rightDist + ang:Forward() * backDist + ang:Up() * upDist
 
 			local tr = {}
 			tr.start = pos
@@ -492,9 +497,13 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 				view.angles = (pos - view.origin):Angle()
 			else
 				-- 瞄准时相机很近，用原始视角+公转偏移
-				view.angles = angles
-				view.angles:RotateAroundAxis(view.angles:Up(), tp_orbit_ang.yaw)
-				view.angles:RotateAroundAxis(view.angles:Right(), tp_orbit_ang.pitch)
+				local yawRad = math.rad(tp_orbit_ang.yaw)
+				local pitchRad = math.rad(tp_orbit_ang.pitch)
+				local forward = angles:Forward() * math.cos(yawRad) * math.cos(pitchRad)
+					+ angles:Right() * math.sin(yawRad)
+					+ angles:Up() * math.sin(pitchRad)
+				view.angles = forward:Angle()
+				view.angles.r = angles.r
 			end
 		else
 			-- 原始第三人称逻辑
@@ -710,7 +719,8 @@ hook.Add("HG.InputMouseApply", "ThirdPersonOrbit", function(tbl)
 
 	local sens = GetConVar("sensitivity"):GetFloat() * 0.03
 	tp_orbit_ang.yaw = tp_orbit_ang.yaw - tbl.x * sens
-	tp_orbit_ang.pitch = math.Clamp(tp_orbit_ang.pitch - tbl.y * sens, -90, 90)
+	tp_orbit_ang.pitch = tp_orbit_ang.pitch + tbl.y * sens
+	tp_orbit_ang.pitch = math.NormalizeAngle(tp_orbit_ang.pitch)
 	tp_orbit_ang.yaw = math.NormalizeAngle(tp_orbit_ang.yaw)
 
 	-- 清零鼠标输入，阻止玩家旋转
