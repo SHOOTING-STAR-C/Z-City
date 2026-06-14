@@ -369,6 +369,8 @@ players : 1 humans, 0 bots (20 max)
 
 		local vignetteMat = Material( "effects/shaders/zb_vignette" )
 		hook.Add("RenderScreenspaceEffects","SIB_Suppresss",function()
+			local noscreenfx = GetConVar("hg_noscreenfx")
+			if noscreenfx and noscreenfx:GetBool() then return end
 			if not LocalPlayer():Alive() then return end
 
 			local fraction = math.Clamp(SIB_suppress.Force / 5, 0, 1)
@@ -991,6 +993,8 @@ players : 1 humans, 0 bots (20 max)
 	end)
 
 	hook.Add("Post Post Pre Post Processing","flasheseffect",function()
+		local noscreenfx = GetConVar("hg_noscreenfx")
+		if noscreenfx and noscreenfx:GetBool() then return end
 		if !lply:Alive() then
 			if !next(hg.flashes) then
 				hg.flashes = {}

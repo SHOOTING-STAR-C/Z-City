@@ -55,10 +55,12 @@ local tab = {
 	["$pp_colour_colour"] = 1
 }
 
---local potatopc = GetConVar("hg_potatopc") or CreateClientConVar("hg_potatopc", "0", true, false, "enable this if you are noob", 0, 1)
+-- ConVar to disable all negative screen effects (black screen, noise, blur, etc.)
+local noscreenfx = GetConVar("hg_noscreenfx") or CreateClientConVar("hg_noscreenfx", "0", true, false, "Disable all negative screen effects (pain, blindness, noise, blur, etc.)", 0, 1)
+
 local hook_Run = hook.Run
 hook.Add("RenderScreenspaceEffects", "homigrad", function()
-	//if potatopc:GetInt() >= 1 then return end
+	if noscreenfx:GetBool() then return end
 	hook_Run("Post Processing")
 	//DrawSunEffect()
 	for _, layer in ipairs(layers_name) do
@@ -326,6 +328,7 @@ local lerpblood = 0
 local addtime = CurTime()
 local hurtoverlay = Material("zcity/neurotrauma/damageOverlay.png", "smooth")
 hook.Add("Post Post Processing", "ItHurts", function()
+	if noscreenfx:GetBool() then return end
 	local spect = IsValid(lply:GetNWEntity("spect")) and lply:GetNWEntity("spect")
 	
 	if IsValid(PainStation) then

@@ -557,6 +557,7 @@ bind "v" "hg_inspect"             // 检视武器
 | `hg_random_sound_dir` | `sound/zcity/rnd` | 音频目录（相对于 GAME 根目录） |
 | `hg_random_sound_refresh` | 命令 | 手动刷新并打印找到的音频文件数 |
 | `hg_thirdperson_orbit` | 1 | 第三人称公转模式（静止时鼠标控制相机绕角色旋转） |
+| `hg_noscreenfx` | 0 | 禁用所有负面视觉效果和移动速度惩罚（黑屏、雪花、模糊、疼痛屏幕、减速等） |
 
 ### 第三人称公转模式
 

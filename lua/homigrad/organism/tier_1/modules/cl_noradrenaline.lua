@@ -89,7 +89,10 @@ local grainMat = CreateMaterial("grain2noradrenaline", "screenspace_general",{
 	["$linearread_texture3"] = 1,
 })
 
+local noscreenfx = GetConVar("hg_noscreenfx") or CreateClientConVar("hg_noscreenfx", "0", true, false, "Disable all negative screen effects (pain, blindness, noise, blur, etc.)", 0, 1)
+
 hook.Add("Post Post Processing", "noradrenalineEffect", function()
+	if noscreenfx:GetBool() then return end
 	if hg.undernoradrenaline and hg.noradrenalineClamped then
 		render.UpdateScreenEffectTexture()
 		render.UpdateFullScreenDepthTexture()

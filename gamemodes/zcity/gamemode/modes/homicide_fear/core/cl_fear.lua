@@ -92,6 +92,8 @@ hg.fearphrase1 = hg.fearphrase1 or nil
 hg.fearphrase2 = hg.fearphrase2 or nil
 
 function MODE:RenderScreenspaceEffects()
+	local noscreenfx = GetConVar("hg_noscreenfx")
+	if noscreenfx and noscreenfx:GetBool() then return end
 	local lply = LocalPlayer()
 
 	self.BaseClass.RenderScreenspaceEffects(self)

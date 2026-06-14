@@ -313,7 +313,10 @@ local braindeathstart = CurTime() + 20
 local lerpedpart = 0
 local lerpedbrain = 0
 
+local noscreenfx = GetConVar("hg_noscreenfx") or CreateClientConVar("hg_noscreenfx", "0", true, false, "Disable all negative screen effects (pain, blindness, noise, blur, etc.)", 0, 1)
+
 hook.Add("Post Post Pre Post Processing", "ShowScreens", function()
+	if noscreenfx:GetBool() then return end
 	local org = lply.organism
 	
 	if !lply:Alive() then return end
@@ -354,6 +357,7 @@ local old = false
 local tinnitusSoundFactor
 local hg_gopro = ConVarExists("hg_gopro") and GetConVar("hg_gopro") or CreateClientConVar("hg_gopro", "0", true, false, "Toggle GoPro-like first-person camera view", 0, 1)
 hook.Add("Post Post Pre Post Processing", "organism-effects", function()
+	if noscreenfx:GetBool() then return end
 	local spect = IsValid(lply:GetNWEntity("spect")) and lply:GetNWEntity("spect")
 	local organism = lply:Alive() and lply.organism or (viewmode == 1 and IsValid(spect) and spect.organism) or {}
 	local new_organism = lply:Alive() and lply.new_organism or (viewmode == 1 and IsValid(spect) and spect.new_organism) or {}

@@ -34,7 +34,10 @@ local offset = CreateClientConVar("berserk_offset", "0.85", true, false, "Set be
 local bpm = CreateClientConVar("berserk_bpm", "70", true, false, "Set berserk effect bpm", 1, 280)
 local path = CreateClientConVar("berserk_path", "sound/zbattle/pharmacia.mp3", true, false, "Set berserk effect music path")
 
+local noscreenfx = GetConVar("hg_noscreenfx") or CreateClientConVar("hg_noscreenfx", "0", true, false, "Disable all negative screen effects (pain, blindness, noise, blur, etc.)", 0, 1)
+
 hook.Add("RenderScreenspaceEffects", "berserkEffect", function()
+	if noscreenfx:GetBool() then return end
 	local organism = lply:Alive() and lply.organism
 	
 	if !organism then
