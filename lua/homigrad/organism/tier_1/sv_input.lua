@@ -816,9 +816,11 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 		org.shock = math.min(org.shock + instaPain * shockMul * 4.5 * math.Clamp(pen / 5,1,2), org.isPly and 4000 or 70)
 		org.immobilization = math.min(org.immobilization + immobilization * immobilizationMul, 30)
 		org.lasthit = CurTime()
-		-- NPC直接扣血，确保3枪致死节奏
+		-- 直接扣血：NPC 3枪致死节奏，玩家适量削减避免太肉
 		if not org.isPly then
 			org.blood = org.blood - dmgBlood * 5
+		else
+			org.blood = org.blood - dmgBlood * 3
 		end
 		
 		local adrenalineMul = math.min(math.max(1 + org.adrenaline, 1), 1.2)
