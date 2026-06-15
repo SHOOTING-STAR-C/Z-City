@@ -121,7 +121,7 @@ module[2] = function(owner, org, mulTime)
 			local rand = math.Rand(0, 2) * 2
 			//if wound[5] + beatsPerSecond * 2 < time then
 				wound[5] = time
-				org.blood = max(org.blood - bleed, 1)
+				org.blood = max(org.blood - bleed, 0)
 				
 				if (owner:IsPlayer() and owner:Alive()) or not owner:IsPlayer() then
 					hg.organism.BloodDroplet2(owner, org, wound, ent:GetVelocity() + VectorRand(-15, 15), false)
@@ -139,8 +139,8 @@ module[2] = function(owner, org, mulTime)
 	end
 
 	if org.liver > 0.5 then
-		//org.blood = math.max(org.blood - mulTime * 10 * org.pulse / 70 * org.liver,0)
-		//bleedoutspeed = bleedoutspeed + mulTime * 10 * org.pulse / 70 * org.liver
+		org.blood = max(org.blood - mulTime * 15 * org.pulse / 70 * org.liver, 0)
+		bleedoutspeed = bleedoutspeed + mulTime * 15 * org.pulse / 70 * org.liver
 	end
 
 	bleedoutspeed = bleedoutspeed / (beatsPerSecond + 2)
@@ -154,7 +154,7 @@ module[2] = function(owner, org, mulTime)
 		if wound[5] + next_arterypump * 2 < time then
 			local pos, ang = ent:GetBonePosition(ent:LookupBone(wound[4]))
 			wound[5] = time
-			org.blood = max(org.blood - wound[1] * mulTime * 4.5 * math.max(org.pulse, 20) / 80, 1)
+			org.blood = max(org.blood - wound[1] * mulTime * 4.5 * math.max(org.pulse, 20) / 80, 0)
 			if (owner:IsPlayer() and owner:Alive()) or not owner:IsPlayer() then
 				local dir = wound[6]
 				local len = dir:Length()
@@ -180,7 +180,7 @@ module[2] = function(owner, org, mulTime)
 	coagulatespeed = coagulatespeed + mulTime
 	org.internalBleedHeal = math.Approach(org.internalBleedHeal, 0, mulTime / 2)
 	
-	if bleed > 0 then org.blood = max(org.blood - bleed * mulTime * 10 * org.pulse / 70, 1) end
+	if bleed > 0 then org.blood = max(org.blood - bleed * mulTime * 10 * org.pulse / 70, 0) end
 	
 	if (org.internalBleed > (org.isPly and 5 or 1) or org.pneumothorax > 0) and org.blood > 2000 and org.o2[1] > 0 then
 		org.wantToVomit = org.wantToVomit or 0

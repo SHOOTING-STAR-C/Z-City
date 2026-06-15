@@ -467,6 +467,16 @@ hook.Add("Org Think", "Main", function(owner, org, timeValue)
 	
 	if not (org.canmove and org.canmovehead and (org.stun - CurTime()) < 0) then org.needfake = true end
 	if (org.blood < (org.isPly and 500 or 3800)) then org.needfake = true end
+	if org.blood <= 0 and org.alive then org.alive = false end
+
+	if org.heartstop then
+		org.heartstop_time = (org.heartstop_time or 0) + timeValue
+		if org.heartstop_time > 90 then
+			org.brain = 1
+		end
+	else
+		org.heartstop_time = 0
+	end
 
 	local just_went_uncon = not org.otrub and org.needotrub
 

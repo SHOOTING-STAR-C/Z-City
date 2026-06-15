@@ -412,6 +412,6 @@ module[2] = function(owner, org, timeValue)
 			end
 		end
 		
-		org.brain = min(org.brain + timeValue / (org.brain < 0.3 and (org.isPly and 3000 or 300) or (org.isPly and 1200 or 120)) * math.min(((org.o2[1] < 0.25 and 1 or 0) + org.skull), 1), 1)
+		org.brain = min(org.brain + timeValue / (org.brain < 0.3 and (org.isPly and 350 or 300) or (org.isPly and 180 or 120)) * math.min(((org.o2[1] < 0.25 and 1 or 0) + org.skull), 1), 1)
 	end --~120 seconds to fully die (0.3 of 300 and 0.4 of 60 seconds after)
 end
