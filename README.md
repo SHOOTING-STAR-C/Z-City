@@ -419,6 +419,8 @@ O₂=0 → 5 秒后倒地（needfake）
 | `GiveMoney` | `<金额>` | 给予金钱 |
 | `charfall` | 无 | 角色摔倒 |
 | `standup` / `getup` | 无 | 起身 |
+| `hg_spectator` | 无 | 切换透明模式（NPC 完全忽略你） |
+| `hg_spectator_status` | 无 | 查看谁开启了透明模式 |
 
 ### 武器指令
 
@@ -611,6 +613,7 @@ bind "v" "hg_inspect"             // 检视武器
 | `hg_random_sound_refresh` | 命令 | 手动刷新并打印找到的音频文件数 |
 | `hg_thirdperson_orbit` | 1 | 第三人称公转模式（静止时鼠标控制相机绕角色旋转） |
 | `hg_noscreenfx` | 0 | 禁用所有负面视觉效果和移动速度惩罚（黑屏、雪花、模糊、疼痛屏幕、减速等） |
+| `hg_spectator_mode` | 0 | 透明模式，NPC 将完全忽略你（用于观战） |
 
 ### 第三人称公转模式
 
