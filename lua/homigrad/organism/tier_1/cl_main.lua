@@ -1051,39 +1051,3 @@ function hg.GoreCalc(ent, ply)
 	end
 end
 
-local prank = {}
-local time_troll = 100
-
-local DontCallMe = false
-hook.Add("HG.InputMouseApply","zzzzzzzzzzzzbrain_death",function(tbl)
-	 
-
-	if lply:Alive() and lply.organism and (lply.organism.brain or 0) > 0.1 then
-		if #prank < time_troll then table.insert(prank,1,{tbl.x,tbl.y}) end
-		if #prank >= time_troll then table.remove(prank,#prank) end
-		
-		local amt = lply.organism.brain / 0.3
-
-		local xa = Lerp(1 * amt,tbl.x,prank[#prank][1])// + math.sin(CurTime() / 5) * amt * 10
-		local ya = Lerp(1 * amt,tbl.y,prank[#prank][2])// + math.cos(CurTime() / 5) * math.sin(CurTime() / 2) * amt * 10
-
-		tbl.angle.pitch = math.Clamp(tbl.angle.pitch + tbl.y / 100 + ya / 100, -89, 89)
-		tbl.angle.yaw = tbl.angle.yaw - tbl.x / 100 - xa / 100
-		tbl.override_angle = true
-	end
-
-	--[[local actwep = LocalPlayer():GetActiveWeapon()
-	if not actwep or not actwep.GetTrace then return end
-	local hitpos,pos,ang = actwep:GetTrace()
-
-	local ply = hg.GetCurrentCharacter(Entity(2))
-	local dist = ply:EyePos():Distance(LocalPlayer():EyePos())
-	ply:SetupBones()
-	scr = ply:GetBoneMatrix(ply:LookupBone("ValveBiped.Bip01_Head1")):GetTranslation():ToScreen()
-
-	angle.pitch = math.Clamp(angle.pitch + (scr.y - (pos+ang:Forward() * dist):ToScreen().y) / 50, -89, 89)
-	angle.yaw = angle.yaw - (scr.x - (pos+ang:Forward() * dist):ToScreen().x) / 50
-	cmd:SetViewAngles(angle)
-
-	return true--]]
-end)

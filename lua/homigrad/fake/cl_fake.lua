@@ -291,11 +291,8 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 		angEye = angles
 	end
 
-	if ply.organism and ply.organism.otrub then
-		angEye = att_Ang
-	end
 
-	local cshs_fake = hg_cshs_fake:GetBool() or (ply.organism and ply.organism.otrub) or (!hg.KeyDown(ply, IN_USE) and !ply:InVehicle()) or (follow:GetVelocity():Length() > 350 and !ply:InVehicle())
+	local cshs_fake = hg_cshs_fake:GetBool() or (!hg.KeyDown(ply, IN_USE) and !ply:InVehicle() and !hg_thirdperson:GetBool()) or (follow:GetVelocity():Length() > 350 and !ply:InVehicle())
 	
 	if IsValid(ply.OldRagdoll) then DrawPlayerRagdoll(follow, ply) end
 
@@ -398,7 +395,6 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 		wep:DrawAttachments()
 	end--]]
 	
-	if ply.organism and ply.organism.otrub then view.angles = att_Ang end
 
 	if hg_gopro:GetBool() then
 		return SpecCam(follow, origin, angles, fov, znear, zfar)

@@ -228,6 +228,7 @@ local hg_legacycam = ConVarExists("hg_legacycam") and GetConVar("hg_legacycam") 
 local hg_thirdperson_orbit = ConVarExists("hg_thirdperson_orbit") and GetConVar("hg_thirdperson_orbit") or CreateConVar("hg_thirdperson_orbit", 1, FCVAR_ARCHIVE, "Enable third-person camera orbit with mouse", 0, 1)
 local tp_orbit_ang = Angle(0, 0, 0)
 local tp_orbit_dist = 1
+local prevRagdoll = false
 local lerpasad = 0
 
 hook.Remove("CalcView", "wac_air_calcview")
@@ -341,6 +342,7 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 
 
 	if IsValid(follow) then
+	prevRagdoll = true
 		return hg.CalcViewFake(ply, origin, angles, fov, znear, zfar)
 	end
 	if ply:InVehicle() then
@@ -359,11 +361,12 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 				--lply:SetEyeAngles(ply:EyeAngles())
 			end
 		else
+		prevRagdoll = true
 			return hook.Run("HG_CalcView", lply, origin, angles, fov, znear, zfar)
 		end
 	end
 
-	if not IsValid(ply) or not ply.LookupBone or not ply:LookupBone("ValveBiped.Bip01_Head1") then return end
+	if not IsValid(ply) or not ply.LookupBone or not ply:LookupBone("ValveBiped.Bip01_Head1") then prevRagdoll = true return end
 	
 	if not ply.GetAimVector then return end
 
@@ -474,6 +477,11 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 		local ang = ply:EyeAngles()
 
 		if hg_thirdperson_orbit:GetBool() and ply:Alive() then
+			if prevRagdoll then
+				tp_orbit_ang.yaw = 0
+				tp_orbit_ang.pitch = 0
+				prevRagdoll = false
+			end
 			-- 公转模式：三角函数计算相机位置，无万向锁
 			local camDist = 60 * lerpasad * tp_orbit_dist
 			local yawRad = math.rad(tp_orbit_ang.yaw)
@@ -494,7 +502,7 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 			view.origin = util.TraceLine(tr).HitPos + ((tr.endpos - tr.start):GetNormalized() * -5)
 
 			if lerpasad > 0.1 then
-				view.angles = (pos - view.origin):Angle()
+			view.angles = (pos - view.origin):Angle()
 			else
 				-- 瞄准时相机很近，用原始视角+公转偏移
 				local yawRad = math.rad(tp_orbit_ang.yaw)
@@ -699,10 +707,14 @@ hook.Add("HG.InputMouseApply", "ThirdPersonOrbit", function(tbl)
 	end
 	if not IsValid(ply) or not ply:Alive() then
 		hg.ThirdPersonOrbitActive = false
+		tp_orbit_ang.yaw = 0
+		tp_orbit_ang.pitch = 0
 		return
 	end
 	if IsValid(follow) then
 		hg.ThirdPersonOrbitActive = false
+		tp_orbit_ang.yaw = 0
+		tp_orbit_ang.pitch = 0
 		return
 	end
 
@@ -727,8 +739,8 @@ hook.Add("HG.InputMouseApply", "ThirdPersonOrbit", function(tbl)
 	local sens = GetConVar("sensitivity"):GetFloat() * 0.03
 	tp_orbit_ang.yaw = tp_orbit_ang.yaw - tbl.x * sens
 	tp_orbit_ang.pitch = tp_orbit_ang.pitch + tbl.y * sens
-	tp_orbit_ang.pitch = math.NormalizeAngle(tp_orbit_ang.pitch)
-	tp_orbit_ang.yaw = math.NormalizeAngle(tp_orbit_ang.yaw)
+		tp_orbit_ang.pitch = math.NormalizeAngle(tp_orbit_ang.pitch)
+		tp_orbit_ang.yaw = math.NormalizeAngle(tp_orbit_ang.yaw)
 
 	-- 清零鼠标输入，阻止玩家旋转
 	tbl.x = 0
@@ -741,7 +753,7 @@ hook.Add("PlayerBindPress", "ThirdPersonOrbitScroll", function(ply, bind, presse
 	if not hg.ThirdPersonOrbitActive then return end
 	if bind == "invprev" or bind == "invnext" then
 		if bind == "invprev" then
-			tp_orbit_dist = math.Clamp(tp_orbit_dist - 0.1, 0.01, 2)
+			tp_orbit_dist = math.Clamp(tp_orbit_dist - 0.1, 0.3, 2)
 		else
 			tp_orbit_dist = math.Clamp(tp_orbit_dist + 0.1, 0.3, 2)
 		end
