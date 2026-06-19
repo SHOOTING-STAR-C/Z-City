@@ -63,6 +63,9 @@ hook.Add("InputMouseApply", "fakeCameraAngles", function(cmd, x, y, angle)
 	
 	if cc then
 		realangle = tbl.angle
+		-- 重新获取最新的 punch 值（ViewpunchThink 已在 HG.InputMouseApply 中更新弹簧物理）
+		-- 修复：倒地后 ViewpunchThink 只在 fakeCameraAngles2 内运行，原 L36 的 vpangs 是旧的
+		vpangs = GetViewPunchAngles2() * 1 + GetViewPunchAngles() * 1 + GetViewPunchAngles3() * 1 + GetViewPunchAngles4() * 1
 	end
 
 	if not tbl.override_angle then
@@ -378,7 +381,7 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 	view = hook.Run("Camera", ply, view.origin, view.angles, view, vector_origin) or view
 	
 	if GetCoolCameraBool() and !hg_cshs_fake:GetBool() and ply:Alive() then
-		local angcool = realangle + GetViewPunchAngles() * 0.2 - vpang
+		local angcool = realangle + GetViewPunchAngles() * 0.2 + vpang
 		view.angles = LerpAngle(deathlerp,angcool,deathLocalAng)
 		view.angles:RotateAroundAxis(view.angles:Up(),-LookX)
 		view.angles:RotateAroundAxis(view.angles:Right(),-LookY)
