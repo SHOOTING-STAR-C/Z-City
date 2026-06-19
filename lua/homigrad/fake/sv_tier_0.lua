@@ -776,6 +776,16 @@ function hg.FakeUp(ply, forced, instant)
 	ply:SetEyeAngles(ang)
 	if IsValid(wep) then ply:SelectWeapon(wep:GetClass()) else ply:SelectWeapon("weapon_hands_sh") end
 	
+	-- 同步布娃娃的身体组到玩家（兼容 corpsesex 等修改布娃娃身体组的 Mod）
+	if IsValid(ragdoll) and ragdoll:GetModel() == ply:GetModel() then
+		local bodygroups = ragdoll:GetBodyGroups()
+		if bodygroups then
+			for _, bg in ipairs(bodygroups) do
+				ply:SetBodygroup(bg.id, ragdoll:GetBodygroup(bg.id))
+			end
+		end
+	end
+	
 	if IsValid(ragdoll) and ragdoll.rope_attach then
 		ply:PickupWeapon(ragdoll.rope_attach)
 		ragdoll.rope_attach = nil

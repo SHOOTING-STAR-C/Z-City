@@ -607,6 +607,12 @@ bind "v" "hg_inspect"             // 检视武器
 | `hg_quietshots` | 0 | 启用更安静的枪声（禁用多层声音叠加） |
 | `hg_hide_bandages` | 1 | 隐藏绷带模型（1=隐藏，0=显示） |
 | `hg_hide_tourniquets` | 1 | 隐藏止血带模型（1=隐藏，0=显示） |
+| `surrender_npc_attack` | 1 | NPC 靠近投降玩家后是否近战处决（1=攻击，0=仅守卫） |
+| `surrender_npc_attack_range` | 80 | NPC 近战处决触发距离（30-200） |
+| `surrender_npc_attack_damage` | 30 | NPC 近战处决伤害值（5-100） |
+| `surrender_npc_attack_delay` | 2.0 | NPC 靠近投降玩家后等待秒数再攻击（0-10） |
+| `surrender_npc_attack_force` | 3000 | NPC 近战处决布娃娃击退力度（500-10000） |
+| `surrender_npc_execute_time` | 8 | NPC 处决后起身强制跪地到开枪击杀的等待秒数（3-30） |
 | `hg_scope` | 0 | 启用瞄准镜渲染 |
 | `zb_drawpoints` | 0 | 可视化地图点 |
 | `hg_random_sound_dir` | `sound/zcity/rnd` | 音频目录（相对于 GAME 根目录） |
