@@ -8,6 +8,16 @@
 local surrenderedPlayers = {}
 local originalEnemies = {}  -- 记录NPC的原始敌人 {npc = {ply1, ply2, ...}}
 
+-- NPC 守卫近战攻击配置
+local NPC_ATTACK_ENABLED  = CreateConVar("surrender_npc_attack", "1", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC是否近战攻击投降玩家 (0=仅守卫, 1=靠近后攻击)", 0, 1)
+local NPC_ATTACK_RANGE    = CreateConVar("surrender_npc_attack_range", "80", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC近战攻击触发距离", 30, 200)
+local NPC_ATTACK_DAMAGE   = CreateConVar("surrender_npc_attack_damage", "30", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC近战伤害值", 5, 100)
+local NPC_ATTACK_DELAY    = CreateConVar("surrender_npc_attack_delay", "2.0", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC靠近后等待秒数再攻击", 0, 10)
+local NPC_ATTACK_FORCE    = CreateConVar("surrender_npc_attack_force", "3000", FCVAR_ARCHIVE + FCVAR_NOTIFY, "布娃娃击退力度", 500, 10000)
+local NPC_EXECUTE_TIME    = CreateConVar("surrender_npc_execute_time", "8", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC处决起身后强制跪地等待秒数", 3, 30)
+
+util.AddNetworkString("hg_surrender_force_kneel")
+
 -- 检测玩家是否处于投降状态
 local function isPlayerSurrendered(ply)
     if not IsValid(ply) or not ply:Alive() then return false end
@@ -41,11 +51,74 @@ hook.Add("EntityTakeDamage", "Surrender_BlockDamage", function(target, dmginfo)
     if not IsValid(target) or not target:IsPlayer() then return end
     if not surrenderedPlayers[target] then return end
 
+    -- 放行 NPC 守卫的处决攻击
+    if target.surrenderGuardAttack then return end
+
     local attacker = dmginfo:GetAttacker()
     if IsValid(attacker) and attacker:IsNPC() then
         return true -- 阻止伤害
     end
 end)
+
+-- NPC 守卫对投降玩家执行近战处决攻击
+local function ExecuteNPCGuardAttack(npc, ply)
+    if not IsValid(npc) or not IsValid(ply) then return end
+    if not NPC_ATTACK_ENABLED:GetBool() then return end
+
+    -- 安全检查：玩家已布娃娃则跳过
+    if IsValid(ply.FakeRagdoll) or not ply:Alive() then return end
+
+    print("[Surrender] NPC " .. npc:GetClass() .. " 对 " .. ply:Nick() .. " 执行近战处决")
+
+    -- 攻击方向
+    local attackDir = (ply:GetPos() - npc:GetPos()):GetNormalized()
+
+    -- 1. 立即造成伤害（让 organism 系统处理伤口/流血/shock）
+    local dmgInfo = DamageInfo()
+    dmgInfo:SetAttacker(npc)
+    dmgInfo:SetInflictor(npc)
+    dmgInfo:SetDamage(NPC_ATTACK_DAMAGE:GetFloat())
+    dmgInfo:SetDamageType(DMG_SLASH)
+    dmgInfo:SetDamageForce(attackDir * NPC_ATTACK_FORCE:GetFloat())
+    dmgInfo:SetDamagePosition(ply:GetPos() + Vector(0, 0, 40))
+
+    ply.surrenderGuardAttack = true
+    ply:TakeDamageInfo(dmgInfo)
+    ply.surrenderGuardAttack = nil
+
+    -- 2. NPC 播放近战动画 + 挥击音效
+    npc:SetSchedule(SCHED_MELEE_ATTACK1)
+    npc:EmitSound("weapons/slam/throw.wav", 75, math.random(95, 105))
+
+    -- 3. 0.5 秒后倒地（给肘击动画一点时间）
+    timer.Simple(0.5, function()
+        if not IsValid(ply) or not IsValid(npc) then return end
+        if IsValid(ply.FakeRagdoll) or not ply:Alive() then return end
+
+        -- 强制布娃娃（no_freemove=true 防止爬走）
+        hg.Fake(ply, nil, true)
+
+        -- 标记为守卫处决，起身后强制跪地处决
+        ply.guardExecution = {
+            npc = npc,
+            attackedAt = CurTime()
+        }
+
+        -- 击退力（骨盆方向）
+        if IsValid(ply.FakeRagdoll) then
+            local pelvisBone = ply.FakeRagdoll:TranslateBoneToPhysBone(
+                ply.FakeRagdoll:LookupBone("ValveBiped.Bip01_Pelvis"))
+            hg.AddForceRag(ply, pelvisBone or 0, attackDir * NPC_ATTACK_FORCE:GetFloat(), 0.5)
+        end
+
+        -- 倒地音效
+        timer.Simple(0.2, function()
+            if IsValid(ply) and IsValid(ply.FakeRagdoll) then
+                ply.FakeRagdoll:EmitSound("physics/flesh/flesh_impact_hard" .. math.random(6) .. ".wav", 75, math.random(95, 105))
+            end
+        end)
+    end)
+end
 
 -- 让 NPC 失去对投降玩家的敌意（记录原始敌人并设置为中立）
 local function ClearNPCEnemies(ply)
@@ -112,6 +185,7 @@ local function ClearNPCEnemies(ply)
         nearestNPC:SetEnemy(NULL)
         nearestNPC:SetNPCState(NPC_STATE_ALERT)
         nearestNPC:SetSchedule(SCHED_FORCED_GO_RUN)
+        nearestNPC:SetMaxLookDistance(6000) -- 防止 sex 等外部 mod 修改视距
 
         -- 定时器持续控制这个 NPC
         local npcGuard = nearestNPC
@@ -125,24 +199,35 @@ local function ClearNPCEnemies(ply)
                     npcGuard:SetNPCState(NPC_STATE_IDLE)
                     npcGuard:SetSchedule(SCHED_IDLE_WANDER)
                 end
+                -- 清理已完成/中断的处决状态（killAt 存在说明已进入跪地处决阶段）
+                if IsValid(ply) and ply.guardExecution and ply.guardExecution.killAt then
+                    ply.guardExecution = nil
+                end
                 timer.Remove("Surrender_GuardNPC" .. ply:UserID())
                 return
             end
+
+            npcGuard:SetMaxLookDistance(6000) -- 每 tick 恢复，防止外部 mod 修改
 
             local npcPos = npcGuard:GetPos()
             local plyPos = ply:GetPos()
             local dir = plyPos - npcPos
             local dist = dir:Length2D()
 
-            -- 带滞后的远近判断：close→far 需要 dist>130，far→close 需要 dist<90
-            if wasClose and dist > 130 then
+            -- 处决跪地阶段 NPC 站远一点（150-200），普通守卫贴脸（90-130）
+            local isExecutionPhase = ply.guardExecution and ply.guardExecution.killAt
+            local closeThreshold = isExecutionPhase and 150 or 90
+            local farThreshold   = isExecutionPhase and 200 or 130
+
+            -- 带滞后的远近判断
+            if wasClose and dist > farThreshold then
                 wasClose = false
-            elseif not wasClose and dist < 90 then
+            elseif not wasClose and dist < closeThreshold then
                 wasClose = true
             end
 
             if not wasClose then
-                -- 跑向玩家：持续更新目标位置，但只在切换时设 schedule（避免每 tick 重启碎步）
+                -- 跑向玩家
                 npcGuard:SetLastPosition(plyPos)
                 if not wasRunning then
                     npcGuard:SetNPCState(NPC_STATE_ALERT)
@@ -150,7 +235,7 @@ local function ClearNPCEnemies(ply)
                     wasRunning = true
                 end
             else
-                -- 靠近了：停下瞄准
+                -- 停下瞄准
                 if wasRunning then
                     npcGuard:SetNPCState(NPC_STATE_ALERT)
                     npcGuard:SetSchedule(SCHED_IDLE_STAND)
@@ -174,6 +259,18 @@ local function ClearNPCEnemies(ply)
                 else
                     npcGuard:SetEnemy(ply)
                     npcGuard:UpdateEnemyMemory(ply, aimPos)
+                end
+
+                -- 攻击倒计时（已被处决过的玩家不再攻击）
+                if NPC_ATTACK_ENABLED:GetBool() and not ply.guardExecution then
+                    if not npcGuard.attackPrepared then
+                        npcGuard.attackPrepared = CurTime() + NPC_ATTACK_DELAY:GetFloat()
+                    elseif npcGuard.attackPrepared <= CurTime() then
+                        if IsValid(ply) and ply:Alive() and not IsValid(ply.FakeRagdoll) and dist < NPC_ATTACK_RANGE:GetFloat() then
+                            ExecuteNPCGuardAttack(npcGuard, ply)
+                        end
+                        npcGuard.attackPrepared = nil
+                    end
                 end
             end
         end)
@@ -226,6 +323,37 @@ local function RestoreNPCEnemies(ply)
     end
 end
 
+-- 投降玩家被守卫处决后起身 → 强制跪地 + 重建 NPC 守卫
+hook.Add("Fake Up", "Surrender_GuardForceKneel", function(ply, ragdoll)
+    if not ply.guardExecution then return end
+    local execData = ply.guardExecution
+
+    -- 守卫 NPC 已死/无效则跳过，玩家正常起身
+    if not IsValid(execData.npc) then
+        ply.guardExecution = nil
+        return
+    end
+
+    -- 记录处决时间
+    execData.killAt = CurTime() + NPC_EXECUTE_TIME:GetFloat()
+
+    -- 瞬间恢复敌意再压制：先 Restore 让 NPC 重新认识玩家，再立即 Clear 让它们变中立
+    RestoreNPCEnemies(ply)
+
+    -- 立即设置投降保护 + 分配守卫
+    ply:SetNWBool("Surrendering", true)
+    ply:SetNWBool("Kneeling", true)
+    surrenderedPlayers[ply] = true
+    ClearNPCEnemies(ply)
+
+    -- 发送强制跪地消息给客户端（客户端执行动画）
+    net.Start("hg_surrender_force_kneel")
+    net.Send(ply)
+
+    print("[Surrender] " .. ply:Nick() .. " 被守卫处决后起身，强制跪地，" .. NPC_EXECUTE_TIME:GetFloat() .. "秒后处决")
+end)
+
+
 -- 定期检查状态变化（每0.5秒检查一次）
 timer.Create("Surrender_StateCheck", 0.5, 0, function()
     for _, ply in ipairs(player.GetAll()) do
@@ -243,13 +371,39 @@ timer.Create("Surrender_StateCheck", 0.5, 0, function()
                 ClearNPCEnemies(ply)
                 print("[Surrender] " .. ply:Nick() .. " 已投降，NPC 停止攻击")
             end
+
+            -- 处决倒计时检查：时间到则 0.5s 后 NPC 开枪处决
+            if ply.guardExecution and ply.guardExecution.killAt and ply.guardExecution.killAt <= CurTime() then
+                ply.guardExecution.killAt = nil -- 防止重复触发
+                -- 优先用当前守卫 NPC（可能和肘击时的不同），fallback 到原始 NPC
+                local killNpc = ply.guardExecution.npc
+                for _, npc in ipairs(ents.FindByClass("npc_*")) do
+                    if IsValid(npc) and npc.guardingPlayer == ply then
+                        killNpc = npc
+                        break
+                    end
+                end
+                if IsValid(killNpc) then
+                    killNpc:EmitSound("weapons/pistol/pistol_fire2.wav", 90, 100)
+                end
+                timer.Simple(0.5, function()
+                    if IsValid(ply) and ply:Alive() then
+                        print("[Surrender] " .. ply:Nick() .. " 被 NPC 处决")
+                        ply:Kill()
+                    end
+                    ply.guardExecution = nil
+                end)
+            end
         else
             if surrenderedPlayers[ply] then
-                -- 取消投降，恢复原始敌意
+                -- 停止守卫
                 surrenderedPlayers[ply] = nil
-                timer.Remove("Surrender_GuardNPC" .. ply:UserID())  -- 停止守护
-                RestoreNPCEnemies(ply)
-                print("[Surrender] " .. ply:Nick() .. " 取消投降，NPC 恢复攻击")
+                timer.Remove("Surrender_GuardNPC" .. ply:UserID())
+                -- 已被守卫处决的玩家不恢复敌意（ragdoll 期间防止其他 NPC 攻击）
+                if not ply.guardExecution then
+                    RestoreNPCEnemies(ply)
+                    print("[Surrender] " .. ply:Nick() .. " 取消投降，NPC 恢复攻击")
+                end
             end
         end
     end
@@ -258,6 +412,7 @@ end)
 -- 清理
 hook.Add("PlayerDisconnected", "Surrender_Cleanup", function(ply)
     surrenderedPlayers[ply] = nil
+    ply.guardExecution = nil
     -- 清理该玩家的原始敌人记录
     for npc, enemies in pairs(originalEnemies) do
         for i, enemy in ipairs(enemies) do
@@ -273,19 +428,15 @@ hook.Add("PlayerDisconnected", "Surrender_Cleanup", function(ply)
 end)
 
 hook.Add("PlayerDeath", "Surrender_OnDeath", function(ply)
+    -- 先恢复 NPC 敌意（D_NU → D_HT），再清理状态
+    RestoreNPCEnemies(ply)
+    timer.Remove("Surrender_GuardNPC" .. ply:UserID())
     surrenderedPlayers[ply] = nil
-    -- 清理该玩家的原始敌人记录
-    for npc, enemies in pairs(originalEnemies) do
-        for i, enemy in ipairs(enemies) do
-            if enemy == ply then
-                table.remove(originalEnemies[npc], i)
-                break
-            end
-        end
-        if #originalEnemies[npc] == 0 then
-            originalEnemies[npc] = nil
-        end
-    end
+    ply.guardExecution = nil
+end)
+
+hook.Add("PlayerSpawn", "Surrender_OnSpawn", function(ply)
+    ply.guardExecution = nil
 end)
 
 -- 调试命令
