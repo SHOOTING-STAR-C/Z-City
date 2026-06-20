@@ -538,10 +538,11 @@ function hg.Fake(ply, huyragdoll, no_freemove, force)
 	if ply.InVehicle and ply:InVehicle() and not force then return end
 	if not IsValid(huyragdoll) and (not IsValid(ply) or IsValid(ply.FakeRagdoll) or not (ply:IsPlayer() and ply:Alive())) then return end
 	local ragdoll = IsValid(huyragdoll) and huyragdoll or Ragdoll_Create(ply, true)
-	
+
+	ply:SetNWEntity("FakeRagdoll", ragdoll)
+	ragdoll:SetNWEntity("ply", ply)
+
 	if IsValid(huyragdoll) then
-		ply:SetNWEntity("FakeRagdoll", ragdoll)
-		ragdoll:SetNWEntity("ply", ply)
 		hook_Run("Ragdoll_Create", ply, ragdoll)
 	end
 	if !IsValid(ragdoll) then return end

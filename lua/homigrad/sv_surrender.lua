@@ -86,6 +86,12 @@ local function ExecuteNPCGuardAttack(npc, ply)
     ply:TakeDamageInfo(dmgInfo)
     ply.surrenderGuardAttack = nil
 
+    -- 立即标记，防止守卫定时器在倒地前继续设 enemy 导致 NPC 开火
+    ply.guardExecution = {
+        npc = npc,
+        attackedAt = CurTime()
+    }
+
     -- 2. NPC 播放近战动画 + 挥击音效
     npc:SetSchedule(SCHED_MELEE_ATTACK1)
     npc:EmitSound("weapons/slam/throw.wav", 75, math.random(95, 105))
@@ -97,12 +103,6 @@ local function ExecuteNPCGuardAttack(npc, ply)
 
         -- 强制布娃娃（no_freemove=true 防止爬走）
         hg.Fake(ply, nil, true)
-
-        -- 标记为守卫处决，起身后强制跪地处决
-        ply.guardExecution = {
-            npc = npc,
-            attackedAt = CurTime()
-        }
 
         -- 击退力（骨盆方向）
         if IsValid(ply.FakeRagdoll) then
@@ -207,6 +207,9 @@ local function ClearNPCEnemies(ply)
                 return
             end
 
+            -- NPC 正在参与 sex，暂停守卫控制，避免和 corpsesex 冲突
+            if IsValid(npcGuard.fktg) or IsValid(npcGuard.rag) then return end
+
             npcGuard:SetMaxLookDistance(6000) -- 每 tick 恢复，防止外部 mod 修改
 
             local npcPos = npcGuard:GetPos()
@@ -252,8 +255,12 @@ local function ClearNPCEnemies(ply)
                     npcGuard:SetEyeTarget(aimPos)
                 end
 
-                -- 设置敌人让武器指向玩家（AI保持在ALERT状态，不会攻击）
-                if IsValid(ply.bull) then
+                -- 肘击后倒地期间（含 guardExecution 已设但 FakeRagdoll 尚未创建的空窗期）只注视不设敌
+                local isRagdollPhase = IsValid(ply.FakeRagdoll) or (ply.guardExecution and not ply.guardExecution.killAt)
+                if isRagdollPhase then
+                    npcGuard:ClearEnemyMemory()
+                    npcGuard:SetEnemy(NULL)
+                elseif IsValid(ply.bull) then
                     npcGuard:SetEnemy(ply.bull)
                     npcGuard:UpdateEnemyMemory(ply.bull, aimPos)
                 else
@@ -399,11 +406,12 @@ timer.Create("Surrender_StateCheck", 0.5, 0, function()
                 -- 停止守卫
                 surrenderedPlayers[ply] = nil
                 timer.Remove("Surrender_GuardNPC" .. ply:UserID())
-                -- 已被守卫处决的玩家不恢复敌意（ragdoll 期间防止其他 NPC 攻击）
-                if not ply.guardExecution then
+                -- 布娃娃期间 NWBool 被清通常来自客户端 Fake hook，非真正取消投降
+                if not IsValid(ply.FakeRagdoll) then
+                    ply.guardExecution = nil
                     RestoreNPCEnemies(ply)
-                    print("[Surrender] " .. ply:Nick() .. " 取消投降，NPC 恢复攻击")
                 end
+                print("[Surrender] " .. ply:Nick() .. " 取消投降，NPC 恢复攻击")
             end
         end
     end

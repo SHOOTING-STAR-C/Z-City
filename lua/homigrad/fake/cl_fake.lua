@@ -96,7 +96,6 @@ local lerpedq = Quaternion()
 local hg_newfakecam = ConVarExists("hg_newfakecam") and GetConVar("hg_newfakecam") or CreateConVar("hg_newfakecam", 0, FCVAR_ARCHIVE, "New camera rotate", 0, 1)
 local rollang = 0
 local ctime
-local vecUpX, vecUpY, vecUpZ = Vector(1, 0, 0), Vector(0, 1, 0), Vector(0, 0, 1)
 hook.Add("HG.InputMouseApply", "fakeCameraAngles2", function(tbl)
 	if IsValid(follow) and ctime != CurTime() then
 		ctime = CurTime()
@@ -162,30 +161,14 @@ hook.Add("HG.InputMouseApply", "fakeCameraAngles2", function(tbl)
 	end
 
 	local fucke = false--!hg_newfakecam:GetBool()
-	local oldroll = angle.roll
 	angle.roll = fucke and 0 or angle.roll - (tbl.vpangle and tbl.vpangle.roll or 0)
 
 	rollang = rollang + lean_lerp * 0.5
 
-	local q = Quaternion():SetAngle(angle)
-    local q_pitch = Quaternion():SetAngleAxis(y / 50, vecUpY)
-    local q_yaw = Quaternion():SetAngleAxis(-x / 50, vecUpZ)
-    local q_roll = Quaternion():SetAngleAxis(lean_lerp * 0.5 + huy + x / 50 * math.abs(angle.pitch / 90), vecUpX)
-	
-	q = q * q_pitch * q_yaw * q_roll
-
-	--oldangs = oldangs or q
-	--local diffq = -(-q):Invert() * oldangs * 1
-	--oldangs = -(-q)
-	--if diffq then lerpedq:SLerp(diffq, 0.1) end
-	
-	--q = q * lerpedq
-
-    local newAng = q:Angle() --thank you, Bara :3
-
-	angle.pitch = newAng.p
-    angle.yaw = newAng.y
-    angle.roll = fucke and oldroll + lean_lerp * 0.5 or newAng.r
+	-- 直接用欧拉角加减，避免四元数在极端角度时万向锁导致鼠标反转
+	angle.pitch = math.Clamp(angle.pitch + y / 50, -89, 89)
+	angle.yaw = angle.yaw - x / 50
+	angle.roll = angle.roll + lean_lerp * 0.5 + huy
 
 	if wep.IsResting and wep:IsResting() then
 		angle.roll = math.Clamp(angle.roll, -15, 15)
