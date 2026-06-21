@@ -820,7 +820,7 @@ hook.Add("EntityTakeDamage", "homigrad-damage", function(ent, dmgInfo)
 		if not org.isPly then
 			org.blood = org.blood - dmgBlood * 5
 		else
-			org.blood = org.blood - dmgBlood * 3
+			org.blood = org.blood - dmgBlood * 1
 		end
 		
 		local adrenalineMul = math.min(math.max(1 + org.adrenaline, 1), 1.2)

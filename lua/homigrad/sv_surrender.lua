@@ -51,9 +51,6 @@ hook.Add("EntityTakeDamage", "Surrender_BlockDamage", function(target, dmginfo)
     if not IsValid(target) or not target:IsPlayer() then return end
     if not surrenderedPlayers[target] then return end
 
-    -- 放行 NPC 守卫的处决攻击
-    if target.surrenderGuardAttack then return end
-
     local attacker = dmginfo:GetAttacker()
     if IsValid(attacker) and attacker:IsNPC() then
         return true -- 阻止伤害
@@ -73,26 +70,7 @@ local function ExecuteNPCGuardAttack(npc, ply)
     -- 攻击方向
     local attackDir = (ply:GetPos() - npc:GetPos()):GetNormalized()
 
-    -- 1. 立即造成伤害（让 organism 系统处理伤口/流血/shock）
-    local dmgInfo = DamageInfo()
-    dmgInfo:SetAttacker(npc)
-    dmgInfo:SetInflictor(npc)
-    dmgInfo:SetDamage(NPC_ATTACK_DAMAGE:GetFloat())
-    dmgInfo:SetDamageType(DMG_SLASH)
-    dmgInfo:SetDamageForce(attackDir * NPC_ATTACK_FORCE:GetFloat())
-    dmgInfo:SetDamagePosition(ply:GetPos() + Vector(0, 0, 40))
-
-    ply.surrenderGuardAttack = true
-    ply:TakeDamageInfo(dmgInfo)
-    ply.surrenderGuardAttack = nil
-
-    -- 立即标记，防止守卫定时器在倒地前继续设 enemy 导致 NPC 开火
-    ply.guardExecution = {
-        npc = npc,
-        attackedAt = CurTime()
-    }
-
-    -- 2. NPC 播放近战动画 + 挥击音效
+    -- NPC 播放近战动画 + 挥击音效（不造成伤害，避免 organism 提前倒地）
     npc:SetSchedule(SCHED_MELEE_ATTACK1)
     npc:EmitSound("weapons/slam/throw.wav", 75, math.random(95, 105))
 
@@ -103,6 +81,12 @@ local function ExecuteNPCGuardAttack(npc, ply)
 
         -- 强制布娃娃（no_freemove=true 防止爬走）
         hg.Fake(ply, nil, true)
+
+        -- 在 hg.Fake 之后才标记，防止 organism 自动起身立即触发处决
+        ply.guardExecution = {
+            npc = npc,
+            attackedAt = CurTime()
+        }
 
         -- 击退力（骨盆方向）
         if IsValid(ply.FakeRagdoll) then
@@ -208,7 +192,23 @@ local function ClearNPCEnemies(ply)
             end
 
             -- NPC 正在参与 sex，暂停守卫控制，避免和 corpsesex 冲突
-            if IsValid(npcGuard.fktg) or IsValid(npcGuard.rag) then return end
+            if IsValid(npcGuard.fktg) or IsValid(npcGuard.rag) then
+                npcGuard._wasInSex = true
+                return
+            end
+
+            -- 刚结束 sex，强制重建守卫状态（sex mod 可能清掉了 NPC 的 enemy/schedule）
+            if npcGuard._wasInSex then
+                npcGuard._wasInSex = nil
+                npcGuard:ClearEnemyMemory()
+                npcGuard:SetEnemy(NULL)
+                npcGuard:SetLastPosition(ply:GetPos())
+                npcGuard:SetNPCState(NPC_STATE_ALERT)
+                npcGuard:SetSchedule(SCHED_FORCED_GO_RUN)
+                wasRunning = true
+                wasClose = false
+                npcGuard.attackPrepared = nil
+            end
 
             npcGuard:SetMaxLookDistance(6000) -- 每 tick 恢复，防止外部 mod 修改
 
@@ -217,10 +217,11 @@ local function ClearNPCEnemies(ply)
             local dir = plyPos - npcPos
             local dist = dir:Length2D()
 
-            -- 处决跪地阶段 NPC 站远一点（150-200），普通守卫贴脸（90-130）
+            -- 处决跪地阶段 NPC 站远一点（150-200），普通守卫停在攻击范围内
             local isExecutionPhase = ply.guardExecution and ply.guardExecution.killAt
-            local closeThreshold = isExecutionPhase and 150 or 90
-            local farThreshold   = isExecutionPhase and 200 or 130
+            local attackRange = NPC_ATTACK_RANGE:GetFloat()
+            local closeThreshold = isExecutionPhase and 150 or math.max(25, attackRange - 10)
+            local farThreshold   = isExecutionPhase and 200 or math.max(35, attackRange + 10)
 
             -- 带滞后的远近判断
             if wasClose and dist > farThreshold then
@@ -272,14 +273,23 @@ local function ClearNPCEnemies(ply)
                 if NPC_ATTACK_ENABLED:GetBool() and not ply.guardExecution then
                     if not npcGuard.attackPrepared then
                         npcGuard.attackPrepared = CurTime() + NPC_ATTACK_DELAY:GetFloat()
+                        print("[Surrender] 守卫攻击倒计时: " .. NPC_ATTACK_DELAY:GetFloat() .. "秒后肘击")
                     elseif npcGuard.attackPrepared <= CurTime() then
+                        print("[Surrender] 攻击倒计时到期 dist=" .. dist .. " range=" .. NPC_ATTACK_RANGE:GetFloat() .. " FakeRagdoll=" .. tostring(IsValid(ply.FakeRagdoll)))
                         if IsValid(ply) and ply:Alive() and not IsValid(ply.FakeRagdoll) and dist < NPC_ATTACK_RANGE:GetFloat() then
                             ExecuteNPCGuardAttack(npcGuard, ply)
+                        else
+                            print("[Surrender] 攻击取消 - Alive=" .. tostring(ply:Alive()) .. " FakeRagdoll=" .. tostring(IsValid(ply.FakeRagdoll)) .. " distOk=" .. tostring(dist < NPC_ATTACK_RANGE:GetFloat()))
                         end
                         npcGuard.attackPrepared = nil
                     end
-                end
+			elseif ply.guardExecution then
+				if not npcGuard._skipLogged then
+					print("[Surrender] 跳过攻击 - 玩家已被处决")
+					npcGuard._skipLogged = true
+				end
             end
+        end
         end)
 
         print("[Surrender Debug] NPC: " .. nearestNPC:GetClass() .. " 走向玩家 " .. ply:Nick())
@@ -341,8 +351,22 @@ hook.Add("Fake Up", "Surrender_GuardForceKneel", function(ply, ragdoll)
         return
     end
 
+    -- 倒地不足 2 秒就起身 → organism 自动恢复，不是玩家主动起身，不触发处决
+    if execData.attackedAt and CurTime() - execData.attackedAt < 2 then
+        ply.guardExecution = nil
+        return
+    end
+
     -- 记录处决时间
     execData.killAt = CurTime() + NPC_EXECUTE_TIME:GetFloat()
+
+    -- 清理旧守卫 NPC 残留（_wasInSex、guardingPlayer 等），让 ClearNPCEnemies 重新选
+    -- if IsValid(execData.npc) then
+    --     execData.npc.guardingPlayer = nil
+    --     execData.npc._wasInSex = nil
+    --     execData.npc:ClearEnemyMemory()
+    --     execData.npc:SetMaxLookDistance(6000)
+    -- end
 
     -- 瞬间恢复敌意再压制：先 Restore 让 NPC 重新认识玩家，再立即 Clear 让它们变中立
     RestoreNPCEnemies(ply)
@@ -411,6 +435,12 @@ timer.Create("Surrender_StateCheck", 0.5, 0, function()
                     ply.guardExecution = nil
                     RestoreNPCEnemies(ply)
                 end
+                -- 无论是否布娃娃，清除 NPC 残留守卫标记（释放 NPC 给 sex mod）
+                for _, npc in ipairs(ents.FindByClass("npc_*")) do
+                    if IsValid(npc) and npc.guardingPlayer == ply then
+                        npc.guardingPlayer = nil
+                    end
+                end
                 print("[Surrender] " .. ply:Nick() .. " 取消投降，NPC 恢复攻击")
             end
         end
@@ -460,6 +490,77 @@ concommand.Add("surrender_npc_debug", function(ply)
     local enemyCount = 0
     for _ in pairs(originalEnemies) do enemyCount = enemyCount + 1 end
     ply:PrintMessage(HUD_PRINTCONSOLE, "记录的原始敌对 NPC 数: " .. enemyCount)
+end)
+
+-- 调试：查看周围 NPC 对玩家的敌意状态
+concommand.Add("surrender_npc_nearby", function(ply)
+    if not IsValid(ply) then return end
+    local plyPos = ply:GetPos()
+
+    -- 玩家自身状态
+    ply:PrintMessage(HUD_PRINTCONSOLE, "========== 玩家状态 ==========")
+    ply:PrintMessage(HUD_PRINTCONSOLE, "投降标记(surrenderedPlayers): " .. tostring(surrenderedPlayers[ply] or false))
+    ply:PrintMessage(HUD_PRINTCONSOLE, "NWBool Surrendering: " .. tostring(ply:GetNWBool("Surrendering", false)))
+    ply:PrintMessage(HUD_PRINTCONSOLE, "NWBool Kneeling: " .. tostring(ply:GetNWBool("Kneeling", false)))
+    ply:PrintMessage(HUD_PRINTCONSOLE, "guardExecution: " .. tostring(ply.guardExecution ~= nil))
+    if ply.guardExecution then
+        ply:PrintMessage(HUD_PRINTCONSOLE, "  攻击NPC: " .. tostring(IsValid(ply.guardExecution.npc) and ply.guardExecution.npc:GetClass() or "无效"))
+        ply:PrintMessage(HUD_PRINTCONSOLE, "  killAt: " .. tostring(ply.guardExecution.killAt and (ply.guardExecution.killAt - CurTime()) .. "秒后" or "无"))
+    end
+    ply:PrintMessage(HUD_PRINTCONSOLE, "bullseye: " .. tostring(IsValid(ply.bull) and "有效" or "无"))
+    ply:PrintMessage(HUD_PRINTCONSOLE, "FakeRagdoll: " .. tostring(IsValid(ply.FakeRagdoll) and "有效" or "无"))
+    ply:PrintMessage(HUD_PRINTCONSOLE, "守卫定时器存在: " .. tostring(timer.Exists("Surrender_GuardNPC" .. ply:UserID())))
+
+    ply:PrintMessage(HUD_PRINTCONSOLE, "")
+    ply:PrintMessage(HUD_PRINTCONSOLE, "========== 周围 NPC (250范围内) ==========")
+
+    local found = 0
+    for _, npc in ipairs(ents.FindByClass("npc_*")) do
+        if IsValid(npc) and npc:IsNPC() and npc:GetClass() ~= "npc_bullseye" then
+        local dist = npc:GetPos():Distance(plyPos)
+        if dist <= 250 then
+        found = found + 1
+
+        local enemy = npc:GetEnemy()
+        local enemyInfo = "无"
+        if enemy == ply then
+            enemyInfo = "= 玩家本人"
+        elseif IsValid(enemy) and enemy:GetClass() == "npc_bullseye" and enemy.ply == ply then
+            enemyInfo = "= 玩家的bullseye"
+        elseif IsValid(enemy) then
+            enemyInfo = "= " .. tostring(enemy) .. "(" .. enemy:GetClass() .. ")"
+        end
+
+        local relation = "?"
+        if npc.Disposition then
+            local disp = npc:Disposition(ply)
+            if disp == D_HT then relation = "敌对(D_HT)"
+            elseif disp == D_NU then relation = "中立(D_NU)"
+            elseif disp == D_LI then relation = "友好(D_LI)"
+            elseif disp == D_FR then relation = "畏惧(D_FR)"
+            else relation = "未知(" .. disp .. ")"
+            end
+        end
+
+        local isGuard = npc.guardingPlayer == ply
+        local inSex = IsValid(npc.fktg) or IsValid(npc.rag)
+        local state = npc:GetNPCState()
+        local stateNames = {[0]="NONE",[1]="IDLE",[2]="ALERT",[3]="COMBAT",[4]="SCRIPT",[5]="PLAYDEAD",[6]="DEAD"}
+        local sched = npc:GetCurrentSchedule()
+        local lookDist = npc:GetMaxLookDistance()
+
+        ply:PrintMessage(HUD_PRINTCONSOLE, string.format("[%d] %s 距离:%.0f 关系:%s 敌人:%s",
+            npc:EntIndex(), npc:GetClass(), dist, relation, enemyInfo))
+        ply:PrintMessage(HUD_PRINTCONSOLE, string.format("    状态:%s 日程:%d 视距:%d 守卫:%s sex中:%s",
+            stateNames[state] or state, sched, lookDist, tostring(isGuard), tostring(inSex)))
+        end -- dist <= 250
+        end -- IsValid NPC check
+    end
+
+    if found == 0 then
+        ply:PrintMessage(HUD_PRINTCONSOLE, "  (250范围内无NPC)")
+    end
+    ply:PrintMessage(HUD_PRINTCONSOLE, "共找到 " .. found .. " 个NPC")
 end)
 
 print("[Surrender NPC] NPC 投降反应系统已加载 - 监听 Surrendering/Kneeling 网络变量")
