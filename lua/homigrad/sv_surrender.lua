@@ -6,15 +6,21 @@
 ]]
 
 local surrenderedPlayers = {}
-local originalEnemies = {}  -- 记录NPC的原始敌人 {npc = {ply1, ply2, ...}}
+local originalEnemies    = {} -- 记录NPC的原始敌人 {npc = {ply1, ply2, ...}}
 
 -- NPC 守卫近战攻击配置
-local NPC_ATTACK_ENABLED  = CreateConVar("surrender_npc_attack", "1", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC是否近战攻击投降玩家 (0=仅守卫, 1=靠近后攻击)", 0, 1)
-local NPC_ATTACK_RANGE    = CreateConVar("surrender_npc_attack_range", "80", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC近战攻击触发距离", 30, 200)
-local NPC_ATTACK_DAMAGE   = CreateConVar("surrender_npc_attack_damage", "30", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC近战伤害值", 5, 100)
-local NPC_ATTACK_DELAY    = CreateConVar("surrender_npc_attack_delay", "2.0", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC靠近后等待秒数再攻击", 0, 10)
-local NPC_ATTACK_FORCE    = CreateConVar("surrender_npc_attack_force", "3000", FCVAR_ARCHIVE + FCVAR_NOTIFY, "布娃娃击退力度", 500, 10000)
-local NPC_EXECUTE_TIME    = CreateConVar("surrender_npc_execute_time", "8", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC处决起身后强制跪地等待秒数", 3, 30)
+local NPC_ATTACK_ENABLED = CreateConVar("surrender_npc_attack", "1", FCVAR_ARCHIVE + FCVAR_NOTIFY,
+    "NPC是否近战攻击投降玩家 (0=仅守卫, 1=靠近后攻击)", 0, 1)
+local NPC_ATTACK_RANGE   = CreateConVar("surrender_npc_attack_range", "80", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC近战攻击触发距离",
+    30, 200)
+local NPC_ATTACK_DAMAGE  = CreateConVar("surrender_npc_attack_damage", "30", FCVAR_ARCHIVE + FCVAR_NOTIFY, "NPC近战伤害值", 5,
+    100)
+local NPC_ATTACK_DELAY   = CreateConVar("surrender_npc_attack_delay", "2.0", FCVAR_ARCHIVE + FCVAR_NOTIFY,
+    "NPC靠近后等待秒数再攻击", 0, 10)
+local NPC_ATTACK_FORCE   = CreateConVar("surrender_npc_attack_force", "3000", FCVAR_ARCHIVE + FCVAR_NOTIFY, "布娃娃击退力度",
+    500, 10000)
+local NPC_EXECUTE_TIME   = CreateConVar("surrender_npc_execute_time", "8", FCVAR_ARCHIVE + FCVAR_NOTIFY,
+    "NPC处决起身后强制跪地等待秒数", 3, 30)
 
 util.AddNetworkString("hg_surrender_force_kneel")
 
@@ -98,7 +104,8 @@ local function ExecuteNPCGuardAttack(npc, ply)
         -- 倒地音效
         timer.Simple(0.2, function()
             if IsValid(ply) and IsValid(ply.FakeRagdoll) then
-                ply.FakeRagdoll:EmitSound("physics/flesh/flesh_impact_hard" .. math.random(6) .. ".wav", 75, math.random(95, 105))
+                ply.FakeRagdoll:EmitSound("physics/flesh/flesh_impact_hard" .. math.random(6) .. ".wav", 75,
+                    math.random(95, 105))
             end
         end)
     end)
@@ -188,12 +195,14 @@ local function ClearNPCEnemies(ply)
                     ply.guardExecution = nil
                 end
                 timer.Remove("Surrender_GuardNPC" .. ply:UserID())
+                print("[Surrender] 跳过攻击 - 已被sexmod控制1")
                 return
             end
 
             -- NPC 正在参与 sex，暂停守卫控制，避免和 corpsesex 冲突
             if IsValid(npcGuard.fktg) or IsValid(npcGuard.rag) then
                 npcGuard._wasInSex = true
+                print("[Surrender] 跳过攻击 - sex中 fktg=" .. tostring(npcGuard.fktg) .. " rag=" .. tostring(npcGuard.rag))
                 return
             end
 
@@ -212,16 +221,16 @@ local function ClearNPCEnemies(ply)
 
             npcGuard:SetMaxLookDistance(6000) -- 每 tick 恢复，防止外部 mod 修改
 
-            local npcPos = npcGuard:GetPos()
-            local plyPos = ply:GetPos()
-            local dir = plyPos - npcPos
-            local dist = dir:Length2D()
+            local npcPos           = npcGuard:GetPos()
+            local plyPos           = ply:GetPos()
+            local dir              = plyPos - npcPos
+            local dist             = dir:Length2D()
 
             -- 处决跪地阶段 NPC 站远一点（150-200），普通守卫停在攻击范围内
             local isExecutionPhase = ply.guardExecution and ply.guardExecution.killAt
-            local attackRange = NPC_ATTACK_RANGE:GetFloat()
-            local closeThreshold = isExecutionPhase and 150 or math.max(25, attackRange - 10)
-            local farThreshold   = isExecutionPhase and 200 or math.max(35, attackRange + 10)
+            local attackRange      = NPC_ATTACK_RANGE:GetFloat()
+            local closeThreshold   = isExecutionPhase and 150 or math.max(25, attackRange - 10)
+            local farThreshold     = isExecutionPhase and 200 or math.max(35, attackRange + 10)
 
             -- 带滞后的远近判断
             if wasClose and dist > farThreshold then
@@ -275,21 +284,27 @@ local function ClearNPCEnemies(ply)
                         npcGuard.attackPrepared = CurTime() + NPC_ATTACK_DELAY:GetFloat()
                         print("[Surrender] 守卫攻击倒计时: " .. NPC_ATTACK_DELAY:GetFloat() .. "秒后肘击")
                     elseif npcGuard.attackPrepared <= CurTime() then
-                        print("[Surrender] 攻击倒计时到期 dist=" .. dist .. " range=" .. NPC_ATTACK_RANGE:GetFloat() .. " FakeRagdoll=" .. tostring(IsValid(ply.FakeRagdoll)))
+                        print("[Surrender] 攻击倒计时到期 dist=" ..
+                        dist ..
+                        " range=" .. NPC_ATTACK_RANGE:GetFloat() .. " FakeRagdoll=" .. tostring(IsValid(ply.FakeRagdoll)))
                         if IsValid(ply) and ply:Alive() and not IsValid(ply.FakeRagdoll) and dist < NPC_ATTACK_RANGE:GetFloat() then
                             ExecuteNPCGuardAttack(npcGuard, ply)
                         else
-                            print("[Surrender] 攻击取消 - Alive=" .. tostring(ply:Alive()) .. " FakeRagdoll=" .. tostring(IsValid(ply.FakeRagdoll)) .. " distOk=" .. tostring(dist < NPC_ATTACK_RANGE:GetFloat()))
+                            print("[Surrender] 攻击取消 - Alive=" ..
+                            tostring(ply:Alive()) ..
+                            " FakeRagdoll=" ..
+                            tostring(IsValid(ply.FakeRagdoll)) ..
+                            " distOk=" .. tostring(dist < NPC_ATTACK_RANGE:GetFloat()))
                         end
                         npcGuard.attackPrepared = nil
                     end
-			elseif ply.guardExecution then
-				if not npcGuard._skipLogged then
-					print("[Surrender] 跳过攻击 - 玩家已被处决")
-					npcGuard._skipLogged = true
-				end
+                elseif ply.guardExecution then
+                    if not npcGuard._skipLogged then
+                        print("[Surrender] 跳过攻击 - 玩家已被处决")
+                        npcGuard._skipLogged = true
+                    end
+                end
             end
-        end
         end)
 
         print("[Surrender Debug] NPC: " .. nearestNPC:GetClass() .. " 走向玩家 " .. ply:Nick())
@@ -466,9 +481,15 @@ hook.Add("PlayerDisconnected", "Surrender_Cleanup", function(ply)
 end)
 
 hook.Add("PlayerDeath", "Surrender_OnDeath", function(ply)
+    -- 标记该玩家所有布娃娃为已用，防止 sex mod 把 NPC 重新分配过去
+    for _, rag in ipairs(ents.FindByClass("prop_ragdoll")) do
+        if IsValid(rag) and rag:GetNWEntity("ply") == ply then
+            rag.raped = true
+        end
+    end
     -- 先恢复 NPC 敌意（D_NU → D_HT），再清理状态
-    RestoreNPCEnemies(ply)
     timer.Remove("Surrender_GuardNPC" .. ply:UserID())
+    RestoreNPCEnemies(ply)
     surrenderedPlayers[ply] = nil
     ply.guardExecution = nil
 end)
@@ -504,8 +525,11 @@ concommand.Add("surrender_npc_nearby", function(ply)
     ply:PrintMessage(HUD_PRINTCONSOLE, "NWBool Kneeling: " .. tostring(ply:GetNWBool("Kneeling", false)))
     ply:PrintMessage(HUD_PRINTCONSOLE, "guardExecution: " .. tostring(ply.guardExecution ~= nil))
     if ply.guardExecution then
-        ply:PrintMessage(HUD_PRINTCONSOLE, "  攻击NPC: " .. tostring(IsValid(ply.guardExecution.npc) and ply.guardExecution.npc:GetClass() or "无效"))
-        ply:PrintMessage(HUD_PRINTCONSOLE, "  killAt: " .. tostring(ply.guardExecution.killAt and (ply.guardExecution.killAt - CurTime()) .. "秒后" or "无"))
+        ply:PrintMessage(HUD_PRINTCONSOLE,
+            "  攻击NPC: " .. tostring(IsValid(ply.guardExecution.npc) and ply.guardExecution.npc:GetClass() or "无效"))
+        ply:PrintMessage(HUD_PRINTCONSOLE,
+            "  killAt: " ..
+            tostring(ply.guardExecution.killAt and (ply.guardExecution.killAt - CurTime()) .. "秒后" or "无"))
     end
     ply:PrintMessage(HUD_PRINTCONSOLE, "bullseye: " .. tostring(IsValid(ply.bull) and "有效" or "无"))
     ply:PrintMessage(HUD_PRINTCONSOLE, "FakeRagdoll: " .. tostring(IsValid(ply.FakeRagdoll) and "有效" or "无"))
@@ -517,43 +541,49 @@ concommand.Add("surrender_npc_nearby", function(ply)
     local found = 0
     for _, npc in ipairs(ents.FindByClass("npc_*")) do
         if IsValid(npc) and npc:IsNPC() and npc:GetClass() ~= "npc_bullseye" then
-        local dist = npc:GetPos():Distance(plyPos)
-        if dist <= 250 then
-        found = found + 1
+            local dist = npc:GetPos():Distance(plyPos)
+            if dist <= 250 then
+                found = found + 1
 
-        local enemy = npc:GetEnemy()
-        local enemyInfo = "无"
-        if enemy == ply then
-            enemyInfo = "= 玩家本人"
-        elseif IsValid(enemy) and enemy:GetClass() == "npc_bullseye" and enemy.ply == ply then
-            enemyInfo = "= 玩家的bullseye"
-        elseif IsValid(enemy) then
-            enemyInfo = "= " .. tostring(enemy) .. "(" .. enemy:GetClass() .. ")"
-        end
+                local enemy = npc:GetEnemy()
+                local enemyInfo = "无"
+                if enemy == ply then
+                    enemyInfo = "= 玩家本人"
+                elseif IsValid(enemy) and enemy:GetClass() == "npc_bullseye" and enemy.ply == ply then
+                    enemyInfo = "= 玩家的bullseye"
+                elseif IsValid(enemy) then
+                    enemyInfo = "= " .. tostring(enemy) .. "(" .. enemy:GetClass() .. ")"
+                end
 
-        local relation = "?"
-        if npc.Disposition then
-            local disp = npc:Disposition(ply)
-            if disp == D_HT then relation = "敌对(D_HT)"
-            elseif disp == D_NU then relation = "中立(D_NU)"
-            elseif disp == D_LI then relation = "友好(D_LI)"
-            elseif disp == D_FR then relation = "畏惧(D_FR)"
-            else relation = "未知(" .. disp .. ")"
-            end
-        end
+                local relation = "?"
+                if npc.Disposition then
+                    local disp = npc:Disposition(ply)
+                    if disp == D_HT then
+                        relation = "敌对(D_HT)"
+                    elseif disp == D_NU then
+                        relation = "中立(D_NU)"
+                    elseif disp == D_LI then
+                        relation = "友好(D_LI)"
+                    elseif disp == D_FR then
+                        relation = "畏惧(D_FR)"
+                    else
+                        relation = "未知(" .. disp .. ")"
+                    end
+                end
 
-        local isGuard = npc.guardingPlayer == ply
-        local inSex = IsValid(npc.fktg) or IsValid(npc.rag)
-        local state = npc:GetNPCState()
-        local stateNames = {[0]="NONE",[1]="IDLE",[2]="ALERT",[3]="COMBAT",[4]="SCRIPT",[5]="PLAYDEAD",[6]="DEAD"}
-        local sched = npc:GetCurrentSchedule()
-        local lookDist = npc:GetMaxLookDistance()
+                local isGuard = npc.guardingPlayer == ply
+                local inSex = IsValid(npc.fktg) or IsValid(npc.rag)
+                local state = npc:GetNPCState()
+                local stateNames = { [0] = "NONE", [1] = "IDLE", [2] = "ALERT", [3] = "COMBAT", [4] = "SCRIPT", [5] =
+                "PLAYDEAD", [6] = "DEAD" }
+                local sched = npc:GetCurrentSchedule()
+                local lookDist = npc:GetMaxLookDistance()
 
-        ply:PrintMessage(HUD_PRINTCONSOLE, string.format("[%d] %s 距离:%.0f 关系:%s 敌人:%s",
-            npc:EntIndex(), npc:GetClass(), dist, relation, enemyInfo))
-        ply:PrintMessage(HUD_PRINTCONSOLE, string.format("    状态:%s 日程:%d 视距:%d 守卫:%s sex中:%s",
-            stateNames[state] or state, sched, lookDist, tostring(isGuard), tostring(inSex)))
-        end -- dist <= 250
+                ply:PrintMessage(HUD_PRINTCONSOLE, string.format("[%d] %s 距离:%.0f 关系:%s 敌人:%s",
+                    npc:EntIndex(), npc:GetClass(), dist, relation, enemyInfo))
+                ply:PrintMessage(HUD_PRINTCONSOLE, string.format("    状态:%s 日程:%d 视距:%d 守卫:%s sex中:%s",
+                    stateNames[state] or state, sched, lookDist, tostring(isGuard), tostring(inSex)))
+            end -- dist <= 250
         end -- IsValid NPC check
     end
 
